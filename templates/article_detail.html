@@ -1,0 +1,177 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+{% load time_filter %}
+<link href="/static/css/article_detail.css" rel="stylesheet">
+<script src="/static/js/article_detail.js"></script>
+
+<script>
+$(function() {
+  $("#btn-block").click(function() {
+    var comment = $("#id_commentext").val()
+    if (comment!=""){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          comment: comment, 
+          articleid: {{article.id}}
+          },
+          });
+    $.ajax({
+        url: "{% url 'articlecomment' %}",
+        type: "post",
+        dataType: 'json',
+          success: function(data) {
+            $(".freshcomment").prepend(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div>'
+              )
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });
+    $('.successlist').fadeIn("slow").fadeOut(3000);
+    }
+    else
+    $(this).parent().next().fadeIn("slow").fadeOut(3000);
+  })
+})
+</script>
+
+
+<script>
+$(function() {
+  $(".btn-reply").click(function() {
+    var comment = $(this).prev(".form-control").val()
+    if (comment!=""){
+    name = $(this).parent().parent().parent().children('.author-name').text();
+    precomment = $(this).parent().parent().parent().children('.pl-content').text();
+    parenttext = "回复@"+name+"发表的："+precomment
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          comment: comment, 
+          articleid: {{article.id}},
+          parenttext: parenttext,
+          },
+          });
+    $.ajax({
+        url: "{% url 'commentcomment' %}",
+        type: "post",
+        dataType: 'json',
+          success: function(data) {
+            $(".freshcomment").prepend(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+data.parenttext+'</div><div class="pl-content">'+data.text+'</div>'
+              )
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });
+    $('.successlist').fadeIn("slow").fadeOut(3000);
+    }
+    else
+    $(this).parent().parent().next().fadeIn("slow").fadeOut(3000);
+  })
+})
+</script>
+{% endblock %}
+
+
+ {% block content %}
+<div class="container">
+<div class="col-xs-1">
+<ul id="sidebar">
+  <li>
+	<a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{article.title}}">
+	<i class="weiboshare">
+	</i>
+	</a>
+  </li>
+  <li>
+  <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{article.title}}">
+  <i class="weichatshare">
+  </i>
+  </a>
+  </li>
+  <li> 
+	<a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{article.title}}">
+	<i class="qqzoneshare">
+	</i>
+	</a> 
+  </li>
+</ul>
+</div>
+
+<div class="col-xs-8">
+<div id="article">
+ <h1 class="t-h1">{{article.title}}</h1>
+
+<div class="article-author">
+                <span class="author-name">{{article.writer}}</span>
+                <i class="icon icon-line"></i>
+                <span class="article-time">{{article.timestamp|date:"Y-m-d H:i"}}</span>
+                <span class="article-share">阅读:{{article.readers}}</span>
+                <span class="article-pl">评论:8</span>
+<!--                 <span class="article-pl">收藏</span> -->
+            </div>
+
+<div class="article-img-box">
+<img src="{{article.get_image_url}}" >
+</div>
+
+<div class="article-content-wrap">
+     <p>{{article.content}}</p>
+</div>
+
+<div class="comment-form">
+     <span class="span-mark-author">发表评论</span>
+      <div class="author-info">
+        {{user}}
+      </div>
+<!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
+    <div class="form-comment">
+          {{form}}
+      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+    </div>
+    <div class="errorlist" style="text-align: center;">评论不能为空</div>
+
+<div class="successlist" style="text-align: center;">评论发表成功</div>
+
+<div class="freshcomment">
+<!-- <div class="comment"><span class="author-name">shen</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">回复@shen发表的：1</div><div class="pl-content">阿斯顿父</div> -->
+
+</div>
+{% for item in comment %}
+    <div class="comment">
+      <span class="author-name">{{item.user}}</span>
+
+      <span class="author-time">
+      {{item.timestamp|timesince}}
+      </span>
+
+      {% if item.is_child %}
+      <div class="blockquote">{{item.parenttext}}</div>
+      {% endif %}
+
+      <div class="pl-content">{{item.text}}</div>
+
+      <div class="pl-box-btm">
+              <div class="btn-dp">
+                <i class="icon-dp"></i>
+                我要点评
+                </div>
+                <div class="form-comment-reply" id="{{item.id}}">
+                    {{form}}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              </div>
+      </div>
+      <div class="errorlist" style="text-align: center;">评论不能为空</div>
+    </div>
+{% endfor %}
+
+    </div><!-- class="comment-form" -->
+     </div><!-- <div id="article"> -->
+     </div>
+<div class="col-xs-3">
+</div>
+</div><!-- <div class="container"> -->
+ {% endblock %}
+ 

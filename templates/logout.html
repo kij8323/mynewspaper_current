@@ -1,0 +1,41 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+<link href="/static/css/loggin.css" rel="stylesheet">
+{% endblock %}
+
+
+ {% block content %}
+
+
+
+ <div class="container">
+  <div class="container-loggin">
+  <form class="form-signin" role="form" method='POST' action='{{ action_url }}'>{% csrf_token %}
+  <h2 class="form-signin-heading">{{ submit_btn }}</h2>
+
+  <div class="form-label">
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" 
+      {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  {{form}}
+  </div>
+
+  <div class="checkbox">
+  <label>
+  <input type="checkbox" value="remember-me"> 记住我的登录状态
+  </label>
+  </div>
+
+  <input class='btn btn-lg btn-primary btn-block' type='submit' value='{{ submit_btn }}'/>
+  </form>
+  </div>
+  </div>
+ {% endblock %}
+ 

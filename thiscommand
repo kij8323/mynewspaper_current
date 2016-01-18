@@ -1,0 +1,66 @@
+virtualenv paperproject
+source ./bin/activate
+pip install Django==1.8
+
+
+mysql -h localhost -u root -p
+sudo service mysql restart
+
+python manage.py migrate
+username:shen
+password:123456
+python manage.py collectstatic
+
+python manage.py runserver 8080
+
+
+python manage.py makemigrations article
+python manage.py sqlmigrate article 0001
+python manage.py migrate
+
+python manage.py makemigrations 
+python manage.py migrate 
+
+pip install  django-simple-captcha -i http://pypi.douban.com/simple/
+
+pip install Pillow
+ALTER TABLE article_article CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE article_category CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE article_relation  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE accounts_myuser  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE accounts_userprofile   CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE accounts_userconecction   CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE topic_topic CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE topic_group CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE comment_comment CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+我的帐号
+我的评论
+我的消阅读
+收藏
+你怎么看？
+请提交您的看法
+引用@ 发表的：
+回复
+发送评论
+刷新评论
+：
+<script>
+$(function() {
+  $(".btn-reply").click(function() {
+    if (comment!=""){
+    var comment = $(this).prev(".form-control").val()
+    name = $(this).parent().parent().parent().children('.author-name').text();
+    precomment = $(this).parent().parent().parent().children('.pl-content').text();
+    parenttext = "回复@"+name+"发表的："+precomment
+    test = $("#id_commentext").val()
+    $("#id_commentext").val(test+parenttext)
+    }
+  })
+})
+</script>
+评论发表成功
+评论不能为空
+
+
+评论发表成功

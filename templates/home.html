@@ -1,0 +1,128 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+<link href="/static/css/home.css" rel="stylesheet">
+<script src="/static/js/home.js"></script>
+{% endblock %}
+
+ {% block content %}
+    <div class="container container-home">
+
+      <div class="row">
+        <div class="col-md-8  leftcontainer">
+<!--         <div class="row"> -->
+          <div id="carousel-example-generic" class="col-md-12 carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                    <a href="#"><img src="/static/images/IMG_1764.jpg">
+                      <div class="carousel-caption">
+                        <h3>xxx</h3>
+                        <p>xxx</p>
+                    </a>
+                    </div>
+                  </div>
+                    <div class="item">
+                    <a href="#"><img src="/static/images/IMG_1764.jpg">
+                      <div class="carousel-caption">
+                        <h3>xxx</h3>
+                        <p>xxx</p>
+                    </a>
+                    </div>
+                  </div>
+                   <div class="item">
+                    <a href="#"><img src="/static/images/1450158490822251.jpg">
+                      <div class="carousel-caption">
+                        <h3>xxx</h3>
+                        <p>xxx</p>
+                    </a>
+                    </div>
+                  </div>
+                </div>
+<!--                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> 
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a> -->
+              </div><!-- id="carousel-example-generic" class="carousel slide" data-ride="carousel" -->
+             <!--  </div> --><!-- <div class="row"> -->
+
+<!--       <div class="row">   -->  
+          <a href="#">
+          <div class="col-md-6 leftblock"
+               style='background-image: url(/static/images/IMG_1764.jpg);'>         
+            <h3>当页面缩小,当页面缩小当页面缩小当页面缩小当页面缩小</h3> 
+          </div>      
+          </a>
+          
+          <a href="#">
+          <div class="col-md-6 leftblock1 pull-right"
+               style='background-image: url(/static/images/IMG_1764.jpg);'>         
+            <h3>当页面缩小,当页面缩小当页面缩小当页面缩小当页面缩小</h3> 
+          </div>      
+          </a>
+
+
+
+{% for item in queryset %}
+
+          <div class="col-md-12 newsblock" id="{{item.blockid}}">
+          <div class="col-md-4 leftimgblock">
+          <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}" style="width: 220px; height:124px;"></a>
+          </div> 
+          <div class="col-md-8 rightwordblock">
+          <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+          <span class="writer">{{item.writer}}</span> 
+          <span class="posttime">{{item.timestamp|date:"Y-m-d H:i"}}</span> 
+
+          <a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="weiboshare">
+          </i>
+          </a>
+
+          <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="weichatshare">
+          </i>
+          </a>
+
+          <a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="qqzoneshare">
+          </i>
+          </a>          
+
+          <p class="associatetitle">{{item.associatetitle}}</p>
+          </div> 
+          </div> <!-- newsblock -->
+{% endfor %}
+
+        </div><!-- class="col-md-8 leftcontainer" -->
+      <!-- </div> --><!-- <div class="row">  -->  
+
+
+        <div class="col-md-4 ">
+          <div class="row" style="margin-left: 15px;">
+          <h3 class="bg-primary">热议话题</h3>
+          <a href="#">
+          <div class="col-md-12 rightblock" 
+               style='background-image: url(/static/images/IMG_1764.jpg);'> 
+            <h3>当页面缩小,当页面缩小当页面缩小当页面缩小当页面缩小</h3>
+          </div>
+          </a>
+
+
+</div> <!-- <div class="row" style="margin-left: 15px;">   -->       
+
+        </div><!-- class="col-md-4" -->
+
+
+      </div><!-- row -->
+
+    </div> <!-- /container -->
+ {% endblock %}
+ 

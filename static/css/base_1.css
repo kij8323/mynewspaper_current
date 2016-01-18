@@ -1,0 +1,23 @@
+.navbar, .navbar-default, .navbar-static-to{
+	margin-bottom: 0px;
+	background-color: #FFFFFF;
+
+}
+.container{
+	width: 90% !important;
+	/* width: 1200px !important;*/
+}
+
+.dropdown{
+	display:none;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: black;
+	font-size:18px;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover  {
+color: #FFF;
+background-color: #449d44;
+}
