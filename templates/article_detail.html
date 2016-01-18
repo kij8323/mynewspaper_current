@@ -29,6 +29,7 @@ $(function() {
           }
     });
     $('.successlist').fadeIn("slow").fadeOut(3000);
+    $("#id_commentext").val("")
     }
     else
     $(this).parent().next().fadeIn("slow").fadeOut(3000);
@@ -66,6 +67,7 @@ $(function() {
           }
     });
     $('.successlist').fadeIn("slow").fadeOut(3000);
+    $(this).prev(".form-control").val("")
     }
     else
     $(this).parent().parent().next().fadeIn("slow").fadeOut(3000);
