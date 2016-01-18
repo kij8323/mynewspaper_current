@@ -40,8 +40,8 @@ touch README
 git init
 git add .
 git commit -m 'code changed '
-git remote add paper https://github.com/kij8323/mynewspaper.git
-git push paper master -f
+git remote add paper1 https://github.com/kij8323/mynewspaper_current.git
+git push paper1 master -f
 
 
 从远端下载到本地
@@ -58,7 +58,7 @@ git clone https://github.com/kij8323/mynewspaper.git
 回复
 发送评论
 刷新评论
-：
+：1
 <script>
 $(function() {
   $(".btn-reply").click(function() {
