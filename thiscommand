@@ -34,6 +34,17 @@ ALTER TABLE topic_topic CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE topic_group CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE comment_comment CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
+
+
+touch README
+git init
+git add .
+git commit -m 'code changed '
+git push test master -f
+git remote add test https://github.com/kij8323/mynewspaper.git
+git clone https://github.com/kij8323/mynewspaper.git
+
+
 我的帐号
 我的评论
 我的消阅读
