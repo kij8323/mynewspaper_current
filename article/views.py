@@ -70,10 +70,12 @@ def commentcomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text, parenttext=parenttext)
 			c.save()
+			print c.id
 			data = {
 			"user": user.username,
 			"text": text,
 			"parenttext": parenttext,
+			"commentid":c.id,
 			}
 			json_data = json.dumps(data)
 			return HttpResponse(json_data, content_type='application/json')

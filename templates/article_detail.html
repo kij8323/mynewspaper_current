@@ -6,7 +6,7 @@
 
 <script>
 $(function() {
-  $("#btn-block").click(function() {
+  $("body").on("click", '#btn-block', function(){
     var comment = $("#id_commentext").val()
     if (comment!=""){
     $.ajaxSetup({
@@ -21,13 +21,14 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div>'
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
               )
           },
           error: function(data) { 
               alert("Got an error dude");
-          }
+          } 
     });
+    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
     $('.successlist').fadeIn("slow").fadeOut(3000);
     $("#id_commentext").val("")
     }
@@ -40,7 +41,7 @@ $(function() {
 
 <script>
 $(function() {
-  $(".btn-reply").click(function() {
+ $("body").on("click", '.btn-reply', function(){
     var comment = $(this).prev(".form-control").val()
     if (comment!=""){
     name = $(this).parent().parent().parent().children('.author-name').text();
@@ -59,13 +60,14 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+data.parenttext+'</div><div class="pl-content">'+data.text+'</div>'
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+data.parenttext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
               )
           },
           error: function(data) { 
               alert("Got an error dude");
           }
     });
+    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
     $('.successlist').fadeIn("slow").fadeOut(3000);
     $(this).prev(".form-control").val("")
     }
@@ -138,7 +140,6 @@ $(function() {
 <div class="successlist" style="text-align: center;">评论发表成功</div>
 
 <div class="freshcomment">
-<!-- <div class="comment"><span class="author-name">shen</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">回复@shen发表的：1</div><div class="pl-content">阿斯顿父</div> -->
 
 </div>
 {% for item in comment %}

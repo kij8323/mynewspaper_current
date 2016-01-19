@@ -5,8 +5,16 @@
 	margin-top: 30px;
 }
 
-.carousel-control.right{
-	background-image: !important;
+.carousel-control{
+	width: 0;
+}
+
+.glyphicon-chevron-right{
+	margin-right: 0px;
+}
+
+.glyphicon-chevron-left{
+	margin-left: 0px;
 }
 
 .carousel{

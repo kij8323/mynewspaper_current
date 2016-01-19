@@ -21,10 +21,15 @@ $(document).ready(function(){
 });
 
 
-$(function(){
+/*$(function(){
   $('.btn-dp').click(function(){
     $(this).next(".form-comment-reply").fadeToggle();
   })
 });
+*/
 
-
+$(function(){
+  $("body").on("click", '.btn-dp', function(){
+    $(this).next(".form-comment-reply").fadeToggle();
+  });
+})

@@ -58,23 +58,14 @@ git clone https://github.com/kij8323/mynewspaper.git
 回复
 发送评论
 刷新评论
-：1
-<script>
-$(function() {
-  $(".btn-reply").click(function() {
-    if (comment!=""){
-    var comment = $(this).prev(".form-control").val()
-    name = $(this).parent().parent().parent().children('.author-name').text();
-    precomment = $(this).parent().parent().parent().children('.pl-content').text();
-    parenttext = "回复@"+name+"发表的："+precomment
-    test = $("#id_commentext").val()
-    $("#id_commentext").val(test+parenttext)
-    }
-  })
-})
-</script>
-评论发表成功
-评论不能为空
 
 
-评论发表成功
+
+
+
+<div class="comment"><span class="author-name">shen</span><span class="author-time">20&nbsp;hours, 7&nbsp;minutes</span><div class="blockquote">回复@shen发表的：1111111111</div><div class="pl-content">222</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="172"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea>
+                <button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button>
+              </div>
+      </div>
+      <div class="errorlist" style="text-align: center;">评论不能为空</div>
+    </div>
