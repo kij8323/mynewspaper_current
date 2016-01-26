@@ -10,6 +10,9 @@ import traceback
 import types  
 import json
 from django.http import HttpResponse
+from notifications.signals import notify
+from accounts.models import MyUser
+
 def article_detail(request, article_id):
 	try:
 		article = Article.objects.get(pk=article_id)
@@ -45,36 +48,43 @@ def articlecomment(request):
 			data = {
 			"user": user.username,
 			"text": text,
+			"commentid": c.id
 			}
 			json_data = json.dumps(data)
 			return HttpResponse(json_data, content_type='application/json')
 		except:
 			traceback.print_exc()
 			raise Http404(traceback)
-
 	else:
 		raise Http404
 
 #ajax，发送评论的评论,post
 def commentcomment(request):
 	if request.is_ajax() and request.method == 'POST':
+		print 'commentcomment'
 		text = request.POST.get('comment')
 		articleid = request.POST.get('articleid')
-		parenttext = request.POST.get('parenttext')
+		#parenttext = request.POST.get('parenttext')
+		preentid = request.POST.get('preentid')
 		article = Article.objects.get(pk=articleid)
 		comment = Comment.objects.filter(article=article)
-		print request.POST.get('comment')
-		print request.POST.get('articleid')
+		targetcomment = Comment.objects.get(pk=preentid)
+		print 'commentcomment'
+		print 'x'
+		print 'y'
+		print 'z'
 		user = request.user
 		print user
 		try:
-			c = Comment(user=user, article=article, text=text, parenttext=parenttext)
+			c = Comment(user=user, article=article, text=text, parent=targetcomment)
 			c.save()
-			print c.id
+			notify.send(sender=user, target_object=targetcomment, verb="@")
+			print 'z'
 			data = {
 			"user": user.username,
 			"text": text,
-			"parenttext": parenttext,
+			"parentcommentext": c.parent.text,
+			"parentcommentuser": str(c.parent.user),
 			"commentid":c.id,
 			}
 			json_data = json.dumps(data)

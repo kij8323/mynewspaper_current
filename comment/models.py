@@ -32,7 +32,7 @@ class Comment(models.Model):
 		return self.user.username
 
 	def is_child(self):
-		if self.parenttext is not None:
+		if self.parent is not None:
 			return True
 		else:
 			return False

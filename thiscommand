@@ -20,6 +20,7 @@ python manage.py migrate
 
 python manage.py makemigrations 
 python manage.py migrate 
+python manage.py migrate --fake
 
 pip install  django-simple-captcha -i http://pypi.douban.com/simple/
 
@@ -33,8 +34,9 @@ ALTER TABLE accounts_userconecction   CONVERT TO CHARACTER SET utf8 COLLATE utf8
 ALTER TABLE topic_topic CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE topic_group CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE comment_comment CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE notifications_notification  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
-
+python manage.py startapp notifications
 
 touch README
 git init
@@ -62,10 +64,3 @@ git clone https://github.com/kij8323/mynewspaper.git
 
 
 
-
-<div class="comment"><span class="author-name">shen</span><span class="author-time">20&nbsp;hours, 7&nbsp;minutes</span><div class="blockquote">回复@shen发表的：1111111111</div><div class="pl-content">222</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="172"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea>
-                <button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button>
-              </div>
-      </div>
-      <div class="errorlist" style="text-align: center;">评论不能为空</div>
-    </div>

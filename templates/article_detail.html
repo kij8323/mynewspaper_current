@@ -44,14 +44,16 @@ $(function() {
  $("body").on("click", '.btn-reply', function(){
     var comment = $(this).prev(".form-control").val()
     if (comment!=""){
-    name = $(this).parent().parent().parent().children('.author-name').text();
-    precomment = $(this).parent().parent().parent().children('.pl-content').text();
-    parenttext = "回复@"+name+"发表的："+precomment
+/*    name = $(this).parent().parent().parent().children('.author-name').text();
+    precomment = $(this).parent().parent().parent().children('.pl-content').text();*/
+    preentid = $(this).parent().attr("id");
+    /*parenttext = "回复@"+name+"发表的："+precomment*/
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           comment: comment, 
           articleid: {{article.id}},
-          parenttext: parenttext,
+          /*parenttext: parenttext,*/
+          preentid: preentid,
           },
           });
     $.ajax({
@@ -60,7 +62,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+data.parenttext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
               )
           },
           error: function(data) { 
@@ -151,7 +153,7 @@ $(function() {
       </span>
 
       {% if item.is_child %}
-      <div class="blockquote">{{item.parenttext}}</div>
+      <div class="blockquote">回复@{{item.parent.user}}发表的：{{item.parent.text}}</div>
       {% endif %}
 
       <div class="pl-content">{{item.text}}</div>
