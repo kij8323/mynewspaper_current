@@ -21,6 +21,7 @@ python manage.py migrate
 python manage.py makemigrations 
 python manage.py migrate 
 python manage.py migrate --fake
+
 pip install  django-simple-captcha -i http://pypi.douban.com/simple/
 
 pip install Pillow
@@ -59,7 +60,8 @@ git clone https://github.com/kij8323/mynewspaper.git
 回复
 发送评论
 刷新评论
-
-
+帐号信息
+点评
+@我
 
 

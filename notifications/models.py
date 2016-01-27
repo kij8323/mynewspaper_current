@@ -42,6 +42,7 @@ def new_notification(sender, **kwargs):
 	print "new_notification"
 	kwargs.pop('signal', None)
 	target_object = kwargs.pop("target_object")
+	text = kwargs.pop("text")
 	verb = kwargs.pop("verb")
 	sender_object = sender
 	recipient = target_object.user
@@ -50,6 +51,7 @@ def new_notification(sender, **kwargs):
 						sender_object=sender_object, 
 						recipient=recipient,
 						verb = verb,
+						text = text,
 						)
 		c.save()
 	except:

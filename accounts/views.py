@@ -4,6 +4,7 @@
 from django.shortcuts import render
 from .form import LoginForm, RegisterForm
 from .models import MyUser
+# from comment.models import Comment
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login, logout
@@ -131,12 +132,46 @@ def usernamemessage(request):
 		raise Http404
 
 
-def userdashboard(request, user_id):	
+def userdashboardinformations(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
-	return render(request, 'user_detail.html',  {'user': user})
+	return render(request, 'user_detailinformations.html',  {'user': user})
+
+def userdashboardcomments(request, user_id):	
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		comment = user.comment_set.all().filter(parent = None) 
+		context = {
+			'user': user,
+			"comment": comment,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_detailcomments.html',  context)
+
+def userdashboardnotifications(request, user_id):	
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		notifications = user.notifications.all()
+		print 'notifications'
+		print notifications
+		context = {
+			'user': user,
+			"notifications": notifications,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_detailnotifications.html',  context)
+
+def userdashboardcollections(request, user_id):	
+	try:
+		user = MyUser.objects.get(pk=user_id)
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_detailcollections.html',  {'user': user})
+
 
 def userdashboard_comment(request):	
 	print 'userdashboard_comment(request)'

@@ -78,7 +78,7 @@ def commentcomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text, parent=targetcomment)
 			c.save()
-			notify.send(sender=user, target_object=targetcomment, verb="@")
+			notify.send(sender=user, target_object=targetcomment, verb="@", text=text)
 			print 'z'
 			data = {
 			"user": user.username,
