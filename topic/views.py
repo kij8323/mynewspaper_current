@@ -6,9 +6,16 @@ from .models import Group, Topic
 def group_detail(request, group_id):
 	try:
 		group = Group.objects.get(pk=group_id)
+		topic = group.topic_set.all()
+		context = {
+			'group': group,
+			"topic": topic,
+			}
+		print "group_detail"
+		print topic
 	except group.DoesNotExist:
 		raise Http404("Does not exist")
-	return render(request, 'group_detail.html',  {'group': group})
+	return render(request, 'group_detail.html',  context)
 
 def topic_detail(request, topic_id):
 	try:
