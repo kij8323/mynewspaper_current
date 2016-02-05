@@ -175,7 +175,11 @@ bottom:20px
 }
 
 .writer, .associatetitle {
-	padding-left: 0px;
+	padding-left: 15px;
+}
+.usericon{
+	width: 25px;
+	height: 25px;
 }
 
 .weiboshare{
@@ -216,3 +220,4 @@ bottom:20px
 .rightwordblock a:hover {
 	color: #3ca5f6;
 }
+

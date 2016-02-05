@@ -3,7 +3,9 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 # from article.models import Article
 from django.core.urlresolvers import reverse
-# Create your models here.
+from django.forms import ModelForm
+from django.conf import settings
+
 class MyUserManager(BaseUserManager):
     def create_user(self, username=None, email=None, password=None):
         """
@@ -64,15 +66,20 @@ class MyUser(AbstractBaseUser):
 					verbose_name='Is Paid Member')
 	is_active = models.BooleanField(default=True)
 	is_admin = models.BooleanField(default=False)
+	icon = models.ImageField(upload_to='images', null=True, blank=True, default='images/78avatarbig.jpg')
 	#特殊查询功能
 	objects = MyUserManager()
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+	fakepassword = models.CharField(max_length=255,null=True, blank=True)
 	USERNAME_FIELD = 'username'
 	REQUIRED_FIELDS = ['email']
 
 
 	def __unicode__(self):
 	    return self.username
+
+	def get_image_url(self):
+		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.icon)
 
 	def get_full_name(self):
 	    # The user is identified by their email address
@@ -116,6 +123,20 @@ class UserProfile(models.Model):
 	def get_image_url(self):
 		return "%s%s" %(settings.STATIC_URL, self.image)
 
-# class UserConecction(models.Model):
-# 	user = models.ForeignKey("MyUser")
-# 	article = models.ForeignKey("article.Article")
+
+class MyUserEmailForm(ModelForm):
+    class Meta:
+        model = MyUser
+        fields = ['email']
+
+
+class MyUserIconForm(ModelForm):
+    class Meta:
+        model = MyUser
+        fields = ['icon']
+
+class MyUserPassWForm(ModelForm):
+    class Meta:
+        model = MyUser
+        fields = ['fakepassword']
+

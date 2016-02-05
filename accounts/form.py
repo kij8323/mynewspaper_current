@@ -14,7 +14,7 @@ class RegisterForm(forms.Form):
         error_messages={'required': '请输入用户名'})
     email = forms.EmailField(
         widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '邮箱地址'}),
-        error_messages={'required': '请输入邮箱地址'})
+        error_messages={'required': '请输入邮箱地址', 'invalid': '请输入正确的邮箱地址'})
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请输入5位以上密码'}),
         error_messages={'required': '请输入密码'})
@@ -39,12 +39,20 @@ class RegisterForm(forms.Form):
             raise 
 
     #验证密码有效性
-    def clean_password2(self):
+    def clean_password1(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
         #验证密码长度是否大于4
         if len(password1) <= 4:
-            raise forms.ValidationError("密码太短，应超过4位！")
+            raise forms.ValidationError("密码太短，应超过5位！")
+
+    #验证密码有效性
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        #验证密码长度是否大于4
+        # if len(password1) <= 4:
+        #     raise forms.ValidationError("密码太短，应超过5位！")
         #验证两次输入的密码是否相同
         password2 = self.cleaned_data.get("password2")
         if password1 != password2:

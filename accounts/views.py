@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from .form import LoginForm, RegisterForm
-from .models import MyUser
+from .models import MyUser, MyUserEmailForm, MyUserIconForm, MyUserPassWForm
 # from comment.models import Comment
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.core.urlresolvers import reverse
@@ -13,7 +13,7 @@ import json
 from django.http import HttpResponse
 from captcha.models import CaptchaStore
 from captcha.helpers import captcha_image_url
-
+from django.http import Http404 
 #登录页面
 def loggin(request):
 	form = LoginForm(request.POST or None)
@@ -97,37 +97,17 @@ def accountsview(request):
 			exists = MyUser.objects.get(username=username)
 			data = {
 				"message": '该用户名已被注册',
+				'classname': 'errorlist'
 			}
 			json_data = json.dumps(data)
-			request.session['user_message'] = '该用户名已被注册'
-			request.session['user_message_color'] = 'errorlist'
-			print request.session['user_message']
 			return HttpResponse(json_data, content_type='application/json')
         except MyUser.DoesNotExist:
 			data = {
 				"message": '恭喜，该用户名可注册！',
+				'classname': 'successlist'
 			}
 			json_data = json.dumps(data)
-			request.session['user_message'] = '恭喜，该用户名可注册！'
-			request.session['user_message_color'] = 'successlist'
-			print request.session['user_message']
 			return HttpResponse(json_data, content_type='application/json')
-	else:
-		raise Http404
-
-#ajax，验证用户名是否已被注册,get
-def usernamemessage(request):	
-	if request.is_ajax():
-		print 'get'
-		user_message = request.session['user_message']
-		classname = request.session['user_message_color']
-		data = {
-			"message": user_message,
-			"classname": classname,
-		}
-		json_data = json.dumps(data)
-		print 'post'
-		return HttpResponse(json_data, content_type='application/json')
 	else:
 		raise Http404
 
@@ -135,9 +115,35 @@ def usernamemessage(request):
 def userdashboardinformations(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
+		action_url = reverse("user_detailinformations", kwargs={"user_id": user_id})
+		if request.method == 'POST' and request.FILES.get('img', False):
+			image = request.FILES['img']
+			user.icon = image
+			user.save() 
+			return redirect(action_url)
+		if request.method == 'POST' and request.POST.get('email', False):
+			form1 = MyUserEmailForm(request.POST, instance=user)
+			if form1.is_valid():
+				form1.save() 
+				return redirect(action_url)
+			else:
+				return redirect(action_url)
+		if request.method == 'POST' and request.POST.get('password', False):
+			print request.POST.get('password')
+			password = request.POST.get('password')
+			user.set_password(password)
+			user.save()
+			return redirect(action_url)
+		else:
+			form = MyUserEmailForm()
+			context = {
+			"form": form,
+			"user": user,
+			#"action_url": action_url,
+			}
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
-	return render(request, 'user_detailinformations.html',  {'user': user})
+	return render(request, 'user_detailinformations.html',  context)
 
 def userdashboardcomments(request, user_id):	
 	try:
@@ -184,3 +190,26 @@ def userdashboard_comment(request):
 		return HttpResponse(json_data, content_type='application/json')
 	else:
 		raise Http404
+
+def test(request):	
+	if request.method == 'POST':
+		#x = request.POST['img']
+		image = request.FILES['img']
+		user = MyUser.objects.get(pk=26)
+		user.icon = image
+		user.save() 
+		#form = ImageUploadForm( request.POST, request.FILES )  
+		#print "testtestImageUploadForm"
+		#if form.is_valid():
+			# print "testtest"
+			# user = MyUser.objects.get(pk=26)
+			# user.icon = form.cleaned_data['image']  
+			# print "testtest"
+			# print user.icon 
+			# user.save() 
+			# return redirect("test")
+	# form = ImageUploadForm()
+	# context = {
+	# 	"form": form,
+	# 	}
+	return render(request, 'test.html')

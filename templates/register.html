@@ -34,34 +34,21 @@ $(function() {
         url: "{% url 'accountsview' %}",
         type: "post",
         dataType: 'json',
-    });
+        success: function(data) {
+          $("#test").html(data.message);
+          var classname_module = $("#test").attr("class");
+          $("#test").removeClass(classname_module)
+          $("#test").addClass(data.classname)
+        },
+        error: function(data) { 
+          alert("Got an error dude");
+          }
+  });
     }
   })
 })
 </script>
 
-<script>
-$(function() {
-  $("#id_username").blur(function() {
-    var x = $('#id_username').val()
-    if (x!=""){
-    $.ajax({
-        url: "{% url 'usernamemessage' %}",
-        type: "get",
-        success: function(data) {
-            $("#test").html(data.message);
-            var classname_module = $("#test").attr("class");
-            $("#test").removeClass(classname_module)
-            $("#test").addClass(data.classname)
-        },
-        error: function(data) { 
-            alert("Got an error dude");
-        }
-    });
-    }
-  })
-})
-</script>
 
 
 {% endblock %}
@@ -73,7 +60,7 @@ $(function() {
   {% csrf_token %}
   <img class='headimag' src="/static/images/logotree/logo_7.jpg">
   <div class="form-label">
-  <div id='test'  style='text-align: center;'></div>
+  <div id='test'></div>
   {{form}}
   </div>
   <input class='btn btn-lg btn-success btn-block' type='submit' value='{{ submit_btn }}'/>

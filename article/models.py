@@ -34,7 +34,7 @@ class Article(models.Model):
 		return self.title
 
 	def get_image_url(self):
-		return "%s%s" %(settings.STATIC_URL, self.image)
+		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.image)
 
 	def blockid(self):
 		blockid = "block"+str(self.id)
@@ -50,7 +50,7 @@ class Category(models.Model):
 	description = models.TextField(max_length=5000, null=True, blank=True)
 	introduction = models.TextField(max_length=5000, null=True, blank=True)
 	#类别图标
-	image = models.ImageField(upload_to='static/images/', null=True, blank=True)
+	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	#image_detail = models.ImageField(upload_to='static/images/', null=True, blank=True)
 	#类别生成时间
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
@@ -59,8 +59,13 @@ class Category(models.Model):
 	#自定义查询
 	#objects = CategoryManager()
 	relations = models.ManyToManyField(Article, through='Relation')
+
 	def __unicode__(self):
 		return self.title
+		
+	def get_image_url(self):
+		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.image)
+
 
 class Relation(models.Model):
 	category = models.ForeignKey(Category)

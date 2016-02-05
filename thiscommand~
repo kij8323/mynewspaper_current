@@ -23,6 +23,10 @@ python manage.py migrate
 python manage.py migrate --fake
 
 pip install  django-simple-captcha -i http://pypi.douban.com/simple/
+pip install django-ckeditor
+python manage.py  collectstatic --clear
+
+
 
 pip install Pillow
 ALTER TABLE article_article CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -50,6 +54,7 @@ git push paper1 master -f
 git clone https://github.com/kij8323/mynewspaper.git
 
 
+修改头像设置
 我的帐号
 我的评论
 我的消阅读
@@ -65,5 +70,9 @@ git clone https://github.com/kij8323/mynewspaper.git
 @我
 私信
 收藏的文章
-
+您输入的信息有误，请重新输入。
+请选择图片
+验证输入图片
+验证email地址
+验证密码
 

@@ -44,6 +44,8 @@ INSTALLED_APPS = (
     'topic',
     'comment',
     'notifications',
+    'ckeditor',
+    'ckeditor_uploader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -107,21 +109,19 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
 )
-#STATIC_ROOT = "/var/www/example.com/static/"
 
-# STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
 
-# STATICFILES_DIRS = (
-#     ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
-#     ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
-#     ('images',os.path.join(STATIC_ROOT,'images').replace('\\','/') ),
-#     ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ),
-# )
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, "templates"),
+)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")

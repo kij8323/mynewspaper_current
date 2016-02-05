@@ -1,6 +1,8 @@
 #coding=utf-8
 from django.db import models
 from accounts.models import MyUser
+from ckeditor.fields import RichTextField
+from django.forms import ModelForm
 # Create your models here.
 class Group(models.Model):
 	#文章名称
@@ -40,7 +42,7 @@ class Topic(models.Model):
 	#作者
 	writer = models.ForeignKey(MyUser)
 	#文章内容
-	content = models.TextField(max_length=5000, null=True, blank=True)
+	content = RichTextField(max_length=5000, null=True, blank=True)
 	#文章地址
 	url_address = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
@@ -60,3 +62,11 @@ class Topic(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('topic_detail', kwargs={"topic_id": self.id})
+
+
+
+
+class TopicForm(ModelForm):
+    class Meta:
+        model = Topic
+        fields = ['content', 'title']

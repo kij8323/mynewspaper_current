@@ -48,9 +48,55 @@ body{
 }
 
 .dashboard{
-	height: 300px;
-	width: 100%;
+/*	height: 300px;
+	width: 100%;*/
 	background-color: white;
 	/*border-radius: 6px;*/
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 15px;
+}
 
+.iconline{
+	padding: 15px;
+	border-bottom: solid 1px #efefef;
+}
+
+.lastline{
+	padding: 15px;
+}
+
+.icon{
+	width: 60px;
+	height: 60px;
+	margin-left: -25px;
+}
+
+.lefticon{
+	padding-top: 15px;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.emailline{
+	padding-left: 0px;
+}
+
+h4 span {
+color: #178fe6;
+}
+
+#erroricon {
+	padding-left: 0px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	width: 30%;
+	display:none;
+	margin-left: auto;
+	margin-right: auto;
 }
