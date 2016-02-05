@@ -3,6 +3,7 @@ from django.db import models
 from django.conf import settings
 from accounts.models import MyUser
 from django.core.urlresolvers import reverse
+from ckeditor.fields import RichTextField
 # Create your models here.
 class Article(models.Model):
 	#文章名称
@@ -14,7 +15,7 @@ class Article(models.Model):
 	# #文章更新时间
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
 	#文章内容
-	content = models.TextField(max_length=5000, null=True, blank=True)
+	content = RichTextField(max_length=5000, null=True, blank=True)
 	#作者
 	writer = models.ForeignKey(MyUser)
 	#转载

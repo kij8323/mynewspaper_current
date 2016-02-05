@@ -1,4 +1,5 @@
 {% extends "base_1.html" %}
+{% load ckeditor_filter %}
 {% block HeadDoc %}
 {% endblock %}
 
@@ -10,7 +11,7 @@
 
  {% for item in topic %}
  {{item.title}}<br>
- {{item.content}}<br>
+ {{item.content|safe}}<br>
  {% endfor %}
 </div><!-- class="col-xs-8" -->
 
