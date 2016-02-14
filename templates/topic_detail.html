@@ -1,12 +1,86 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
+{% load staticfiles %}
+<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
+<script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
+<script>
+/*$(document).ready(function(){
+  $("form").submit(function(e){
+  	var input = editor.getData();
+    if (input == "")
+    {
+    return false;
+    }
+    else
+    {
+    alert(input);
+    return false;
+    }
+  });
+});*/
+</script>
+
+<script>
+$(function() {
+  $("body").on("click", '#btn-block', function(){
+    var comment = editor.getData();
+    if (comment!=""){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          comment: comment, 
+          topicid: {{topic.id}}
+          },
+          });
+    $.ajax({
+        url: "{% url 'topicomment' %}",
+        type: "post",
+        dataType: 'json',
+          success: function(data) {
+          	alert("ok");
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          } 
+    });
+    }
+  })
+})
+</script>
+
 {% endblock %}
 
 
  {% block content %}
 
  {{topic.title}}
- {{topic.content}}
+ {{topic.content|safe}}
+<!-- <form action="" method="post" id='test' >
+	{% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit"/>
+</form> -->
+
+<form>
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+    </textarea>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+       editor = CKEDITOR.replace( 'editor1' , {
+		    language: 'zh-cn',
+		    toolbar: [[ '-', 'Bold', 'Italic', 'Format', 'Smiley','paragraph', 'Image' ]],
+		    width: '700',
+		});
+    </script>
+    <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+</form>
+
+{% for item in comment %}
+    <div class="comment">
+      <div class="pl-content">{{item.text|safe}}</div>
+    </div>
+{% endfor %}
 
  {% endblock %}
  

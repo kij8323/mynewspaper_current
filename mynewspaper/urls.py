@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^group/(?P<group_id>[0-9]+)/$', 'topic.views.group_detail', name='group_detail'),
     url(r'^topic/(?P<topic_id>[0-9]+)/$', 'topic.views.topic_detail', name='topic_detail'),
     url(r'^topic/newtopic/$', 'topic.views.newtopic', name='newtopic'),
+    url(r'^topic/topicomment/$', 'topic.views.topicomment', name='topicomment'),
 
 
 

@@ -154,6 +154,8 @@ font-size: 16px;
 	border: 0;
 }
 
+
+
 .btn-block{
 	margin-bottom: 30px;
 	margin-top: 20px;
@@ -188,6 +190,10 @@ font-size: 16px;
 
 .form-comment-reply{
 	display: none;
+}
+
+.form-comment-reply .form-control{
+	height: 54px;
 }
 
 .blockquote{

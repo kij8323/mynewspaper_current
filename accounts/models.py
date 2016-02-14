@@ -79,7 +79,7 @@ class MyUser(AbstractBaseUser):
 	    return self.username
 
 	def get_image_url(self):
-		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.icon)
+		return "%s%s" %(settings.MEDIA_URL, self.icon)
 
 	def get_full_name(self):
 	    # The user is identified by their email address

@@ -53,7 +53,10 @@ git push paper1 master -f
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
+    {{ form.media }}
+    {{ form.as_p }}
 
+ckeditor上传本地图片
 修改头像设置
 我的帐号
 我的评论
@@ -75,4 +78,49 @@ git clone https://github.com/kij8323/mynewspaper.git
 验证输入图片
 验证email地址
 验证密码
+请输入正确的邮箱地址
+富文本编辑框设置
+请输入标题
+您输入的话题内容有误
+请改正
+
+
+
+
+
+
+{% block content %}
+
+ {{topic.title}}
+ {{topic.content|safe}}
+<!-- <form action="" method="post" id='test' >
+	{% csrf_token %}
+    {{ form.media }}
+    {{ form.as_p }}
+    <input type="submit"/>
+</form> -->
+
+<form>
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+    </textarea>
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+       editor = CKEDITOR.replace( 'editor1' , {
+		    language: 'zh-cn',
+		    toolbar: [[ '-', 'Bold', 'Italic', 'Format', 'Smiley','paragraph', 'Image' ]],
+		    width: '700',
+		});
+    </script>
+    <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+</form>
+
+{% for item in comment %}
+    <div class="comment">
+      <div class="pl-content">{{item.text|safe}}</div>
+    </div>
+{% endfor %}
+
+ {% endblock %}
+ 
 

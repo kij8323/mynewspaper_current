@@ -1,5 +1,24 @@
 {% extends "base_1.html" %}
-
+{% block HeadDoc %}
+<link href="/static/css/newtopic.css" rel="stylesheet">
+<script>/*验证输入图片*/
+$(document).ready(function(){
+  $("form").submit(function(e){
+    var input_title = $("#id_title").val()
+    if (input_title == "")
+    {
+    $('#erroricon_title').fadeIn("slow").fadeOut(3000);
+    return false;
+    }
+    else
+    {
+    alert("ok");
+    return true;
+    }
+  });
+});
+</script>
+{% endblock %}
 
  {% block content %}
 <!-- <form class="form-email"  method='POST'  action=''>
@@ -8,6 +27,17 @@
 <input type="submit" value="Submit" />
 </form> -->
 <div class="container">
+	<div id="erroricon_title" style="text-align: center;">请输入标题</div>
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" 
+      {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+  
 <form action="" method="post">
 	{% csrf_token %}
     {{ myform.media }}

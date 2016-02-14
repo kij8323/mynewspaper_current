@@ -3,6 +3,8 @@ from django.db import models
 from accounts.models import MyUser
 from article.models import Article
 from topic.models import Topic
+from ckeditor.fields import RichTextField
+from django.forms import ModelForm
 # Create your models here.
 class Comment(models.Model):
 	#发表评论用户
@@ -13,7 +15,7 @@ class Comment(models.Model):
 	article = models.ForeignKey(Article, null=True, blank=True)
 	topic = models.ForeignKey(Topic, null=True, blank=True)
 	#评论内容
-	text = models.TextField()
+	text = RichTextField(max_length=5000, null=True, blank=True)
 	#评论发表时间
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	#评论修改时间
@@ -36,3 +38,12 @@ class Comment(models.Model):
 			return True
 		else:
 			return False
+
+
+
+#text = RichTextField(max_length=5000, null=True, blank=True)
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']

@@ -8,7 +8,7 @@ from django import forms
 class CommentForm(forms.Form):
     commentext = forms.CharField(
         widget=forms.Textarea(attrs={'class': 'form-control', 
-                                    'placeholder': '你怎么看？',
+                                    'placeholder': '',
                                     'rows':"8"}),
         error_messages={'required': '请提交您的看法'})
 

@@ -2,6 +2,7 @@
 from django.db import models
 from accounts.models import MyUser
 from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.forms import ModelForm
 # Create your models here.
 class Group(models.Model):
@@ -42,12 +43,13 @@ class Topic(models.Model):
 	#作者
 	writer = models.ForeignKey(MyUser)
 	#文章内容
-	content = RichTextField(max_length=5000, null=True, blank=True)
+	content = RichTextUploadingField(max_length=5000)
 	#文章地址
 	url_address = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	group = models.ForeignKey(Group)
+	readers = models.IntegerField(default=0)
 	#自定义查询语句
 	#objects = ArticleManager()
 	def __unicode__(self):

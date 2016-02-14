@@ -1,3 +1,6 @@
+#coding=utf-8
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Django settings for mynewspaper project.
 
@@ -117,12 +120,19 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, "templates"),
 )
 
-MEDIA_URL = '/media/'
+MEDIA_URL = '/static/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "static", "media")
 
+#CKEDITOR 富文本编辑框设置
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_ALLOW_NONIMAGE_FILES = False
+CKEDITOR_CONFIGS = {
+    'default': {
+        #'toolbar': 'Basic',
+    },
+}
