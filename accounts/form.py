@@ -38,23 +38,30 @@ class RegisterForm(forms.Form):
             print "raise"
             raise 
 
-    #验证密码有效性
-    def clean_password1(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        #验证密码长度是否大于4
-        if len(password1) <= 4:
-            raise forms.ValidationError("密码太短，应超过5位！")
+    # #验证密码有效性
+    # def clean_password1(self):
+    #     # Check that the two password entries match
+    #     password1 = self.cleaned_data.get("password1")
+    #     print password1
+    #     print "test1"
+    #     #验证密码长度是否大于4
+    #     if len(password1) <= 4:
+    #         raise forms.ValidationError("密码太短，应超过5位！")
 
     #验证密码有效性
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
+        if len(password1) <= 4:
+            raise forms.ValidationError("密码太短，应超过5位！")
         #验证密码长度是否大于4
         # if len(password1) <= 4:
         #     raise forms.ValidationError("密码太短，应超过5位！")
         #验证两次输入的密码是否相同
         password2 = self.cleaned_data.get("password2")
+        print "test2"
+        print password1
+        print password2
         if password1 != password2:
             raise forms.ValidationError("两次输入密码不相同，请核对!")
         return password2

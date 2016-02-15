@@ -31,7 +31,7 @@ class Notification(models.Model):
 		context = {
 			"sender": self.sender_object,
 			"verb": self.verb,
-			"target": self.target_object,
+			"target": self.target_object.text,
 			"text": self.text,
 			"recipient": self.recipient
 		}

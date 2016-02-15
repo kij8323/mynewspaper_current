@@ -5,11 +5,12 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 from .models import Group, Topic, TopicForm
 from django.contrib import messages
-from comment.models import CommentForm
+from article.form import CommentForm
 from comment.models import Comment
 import json
 from django.http import HttpResponse
 import traceback 
+from notifications.signals import notify
 # from .forms import TopicForm
 
 # Create your views here.
@@ -98,17 +99,22 @@ def topicomment(request):
 		raise Http404
 
 #ajax，发送评论的评论,post
-def commentcomment(request):
+def topcommentcomment(request):
 	if request.is_ajax() and request.method == 'POST':
 		print 'commentcomment'
 		text = request.POST.get('comment')
+		print 'text'
 		topicid = request.POST.get('topicid')
+		print 'topicid'
 		#parenttext = request.POST.get('parenttext')
 		preentid = request.POST.get('preentid')
-		topic = topic.objects.get(pk=topicid)
+		print 'preentid'
+		topic = Topic.objects.get(pk=topicid)
+		print 'topic'
 		comment = Comment.objects.filter(topic=topic)
+		print 'comment'
 		targetcomment = Comment.objects.get(pk=preentid)
-		print 'commentcomment'
+		print 'targetcomment'
 		print 'x'
 		print 'y'
 		print 'z'

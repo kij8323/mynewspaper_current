@@ -42,7 +42,7 @@ $(function() {
 
     <div class="dashboard">
       {% for item in notifications %}
-      {{item.text}}
+      {{item.sender_object}}在评论中@了你{{item.text}}<br>
       {% endfor %}
       </div>
 </div><!-- class="col-md-10" -->

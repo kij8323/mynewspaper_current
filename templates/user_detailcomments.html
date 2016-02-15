@@ -42,7 +42,7 @@ $(function() {
 
     <div class="dashboard">
       {% for item in comment %}
-      {{item.text}}
+      {{item.text|safe}}<br>
       {% endfor %}
       </div>
 </div><!-- class="col-md-10" -->

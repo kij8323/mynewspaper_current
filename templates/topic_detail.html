@@ -1,6 +1,8 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
 {% load staticfiles %}
+<link href="/static/css/article_detail.css" rel="stylesheet">
+<script src="/static/js/article_detail.js"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 <script>
@@ -36,13 +38,60 @@ $(function() {
         type: "post",
         dataType: 'json',
           success: function(data) {
-          	alert("ok");
+            $(".freshcomment").prepend(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              )
           },
           error: function(data) { 
               alert("Got an error dude");
           } 
     });
+    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
+    $('.successlist').fadeIn("slow").fadeOut(3000);
+    editor.setData('');
     }
+    else
+    $(this).parent().next().fadeIn("slow").fadeOut(3000);
+  })
+})
+</script>
+
+<script>
+$(function() {
+ $("body").on("click", '.btn-reply', function(){
+    var comment = $(this).prev(".form-control").val()
+    if (comment!=""){
+/*    name = $(this).parent().parent().parent().children('.author-name').text();
+    precomment = $(this).parent().parent().parent().children('.pl-content').text();*/
+    preentid = $(this).parent().attr("id");
+    /*parenttext = "回复@"+name+"发表的："+precomment*/
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          comment: comment, 
+          topicid: {{topic.id}},
+          /*parenttext: parenttext,*/
+          preentid: preentid,
+          },
+          });
+    $.ajax({
+        url: "{% url 'topcommentcomment' %}",
+        type: "post",
+        dataType: 'json',
+          success: function(data) {
+            $(".freshcomment").prepend(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              )
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });
+    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
+    $('.successlist').fadeIn("slow").fadeOut(3000);
+    $(this).prev(".form-control").val("")
+    }
+    else
+    $(this).parent().parent().next().fadeIn("slow").fadeOut(3000);
   })
 })
 </script>
@@ -51,36 +100,112 @@ $(function() {
 
 
  {% block content %}
+<div class="container">
+<div class="col-xs-1">
+<ul id="sidebar">
+  <li>
+	<a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{topic.title}}">
+	<i class="weiboshare">
+	</i>
+	</a>
+  </li>
+  <li>
+  <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{topic.title}}">
+  <i class="weichatshare">
+  </i>
+  </a>
+  </li>
+  <li> 
+	<a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{topic.title}}">
+	<i class="qqzoneshare">
+	</i>
+	</a> 
+  </li>
+</ul>
+</div>
 
- {{topic.title}}
- {{topic.content|safe}}
-<!-- <form action="" method="post" id='test' >
-	{% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit"/>
-</form> -->
+<div class="col-xs-8">
+<div id="topic">
+ <h1 class="t-h1">{{topic.title}}</h1>
 
-<form>
-    <textarea name="editor1" id="editor1" rows="10" cols="80">
+<div class="topic-author">
+                <span class="author-name">{{topic.writer}}</span>
+                <i class="icon icon-line"></i>
+                <span class="topic-time">{{topic.timestamp|date:"Y-m-d H:i"}}</span>
+                <span class="topic-share">阅读:{{topic.readers}}</span>
+                <span class="topic-pl">评论:8</span>
+<!--                 <span class="topic-pl">收藏</span> -->
+            </div>
+
+<div class="topic-img-box">
+</div>
+
+<div class="topic-content-wrap">
+     <p>{{topic.content|safe}}</p>
+</div>
+
+<div class="comment-form">
+     <span class="span-mark-author">发表评论</span>
+      <div class="author-info">
+        {{user}}
+      </div>
+<!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
+    <div class="form-comment">
+
+              <textarea name="editor1" id="editor1" rows="10" cols="80">
     </textarea>
     <script>
         // Replace the <textarea id="editor1"> with a CKEditor
         // instance, using default configuration.
        editor = CKEDITOR.replace( 'editor1' , {
-		    language: 'zh-cn',
-		    toolbar: [[ '-', 'Bold', 'Italic', 'Format', 'Smiley','paragraph', 'Image' ]],
-		    width: '700',
-		});
+        language: 'zh-cn',
+        toolbar: [[ '-', 'Bold', 'Italic', 'Format', 'Smiley','paragraph', ]],
+        width: '700',
+    });
     </script>
-    <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
-</form>
 
+      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+    </div>
+    <div class="errorlist" style="text-align: center;">评论不能为空</div>
+
+<div class="successlist" style="text-align: center;">评论发表成功</div>
+
+<div class="freshcomment">
+
+</div>
 {% for item in comment %}
     <div class="comment">
+      <span class="author-name">{{item.user}}</span>
+
+      <span class="author-time">
+      {{item.timestamp|timesince}}
+      </span>
+
+      {% if item.is_child %}
+      <div class="blockquote">回复@{{item.parent.user}}发表的：{{item.parent.text|safe}}</div>
+      {% endif %}
+
       <div class="pl-content">{{item.text|safe}}</div>
+
+      <div class="pl-box-btm">
+              <div class="btn-dp">
+                <i class="icon-dp"></i>
+                我要点评
+                </div>
+                <div class="form-comment-reply" id="{{item.id}}">
+                    {{form}}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              </div>
+      </div>
+      <div class="errorlist" style="text-align: center;">评论不能为空</div>
     </div>
 {% endfor %}
 
+    </div><!-- class="comment-form" -->
+     </div><!-- <div id="topic"> -->
+     </div>
+<div class="col-xs-3">
+</div>
+</div><!-- <div class="container"> -->
  {% endblock %}
  
