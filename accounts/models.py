@@ -99,6 +99,9 @@ class MyUser(AbstractBaseUser):
 	    # Simplest possible answer: Yes, always
 	    return True
 
+	def get_absolute_url(self):
+		return reverse('user_detailinformations', kwargs={"user_id": self.id})
+		
 	@property
 	def is_staff(self):
 	    "Is the user a member of staff?"

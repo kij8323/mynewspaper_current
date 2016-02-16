@@ -268,3 +268,37 @@ height: 80px
 color: #A19F9F;
 }
 
+#hotarticle{
+	background-color:  #fafafa;
+/*	height: 200px;*/
+	width: 100%;
+	padding: 30px;
+	padding-top: 15px;
+	text-align: center;
+	margin-top: 30px;
+}
+
+a:link{
+	text-decoration: none;
+}
+
+a{
+	color: black;
+}
+#rightimg{
+	margin-top: 30px
+}
+#rightitle{
+	margin-top: 15px
+}
+
+.span-mark {
+display: inline-block;
+background-color: #67CA87;
+position: absolute;
+z-index: 1;
+height: 20px;
+line-height: 20px;
+margin: -30px -50px 0;
+width: 4px;
+}

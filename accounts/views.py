@@ -29,7 +29,7 @@ def loggin(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			login(request, user)
-			if request.session['lastpage']:
+			if request.session.get('lastpage', False):
 				return redirect(request.session['lastpage'])
 			else:
 				return redirect('home')

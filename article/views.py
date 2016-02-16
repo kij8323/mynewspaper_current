@@ -27,6 +27,7 @@ def article_detail(request, article_id):
 	except Article.DoesNotExist:
 		raise Http404("Article does not exist")
 	article.readers += 1
+	hotarticle = Article.objects.order_by('-readers')[:5]
 	article.save()
 	user = request.user
 	comment = Comment.objects.filter(article=article)
@@ -42,6 +43,7 @@ def article_detail(request, article_id):
 		'numofcomment': numofcomment,
 		'numwriter': numwriter,
 		'numreaders': numreaders,
+		'hotarticle': hotarticle,
 	}
 	return render(request, 'article_detail.html',  context)
 

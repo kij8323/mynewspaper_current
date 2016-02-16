@@ -209,14 +209,40 @@ $(function() {
 
 <div class="col-xs-3">
 <div id='userpro'>
-<img class="center-block img-circle usericon" src="{{user.get_image_url}}" >
-<h4>{{user.username}}</h4>
+<a href="{{article.writer.get_absolute_url}}">
+<img class="center-block img-circle usericon" src="{{article.writer.get_image_url}}" >
+</a>
+<a href="{{article.writer.get_absolute_url}}">
+<h4>{{article.writer}}</h4>
+</a>
 <div id='userpro1'>
-  文章总数:{{numwriter}} 
+  文章总数:{{numwriter}}
   <i class="icon icon-line"></i>
   总阅读量:{{numreaders}}
 </div><!-- <div id='userpro1'> -->
 </div><!-- <div id='userpro'> -->
+
+<div id='hotarticle'>
+  <div class="pull-left" style="margin-bottom: 30px;">
+  <h4><b>热文</b></h4>
+  <span class="span-mark"></span>
+  </div>
+
+{% for item in hotarticle %}
+<div id="rightimg">
+<a href="{{item.get_absolute_url}}">
+<img src="{{item.get_image_url}}" style="width: 220px; height:124px;">
+</a>
+</div>
+<div id="rightitle">
+<a href="{{item.get_absolute_url}}">
+{{item.title}}
+</a>
+</div>
+
+{% endfor %}
+</div>
+
 </div><!-- <div class="col-xs-3"> -->
 
 </div><!-- <div class="container"> -->
