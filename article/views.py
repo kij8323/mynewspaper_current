@@ -16,18 +16,32 @@ from accounts.models import MyUser
 def article_detail(request, article_id):
 	try:
 		article = Article.objects.get(pk=article_id)
+		numofcomment = article.comment_set.count()
+		numwriter = article.writer.article_set.count()
+		numreaders = 0
+		for x in article.writer.article_set.all():
+			numreaders = x.readers + numreaders
+		print numreaders
+		print 'numwriter'
+		print numwriter
 	except Article.DoesNotExist:
 		raise Http404("Article does not exist")
 	article.readers += 1
 	article.save()
 	user = request.user
 	comment = Comment.objects.filter(article=article)
+	request.session['lastpage'] = request.get_full_path()
+	print 'request.session'
+	print request.session['lastpage']
 	context = {
 		'article':article,
 		'user':user,
 		"form": CommentForm,
 		"submit_btn": "发表",
 		"comment": comment,
+		'numofcomment': numofcomment,
+		'numwriter': numwriter,
+		'numreaders': numreaders,
 	}
 	return render(request, 'article_detail.html',  context)
 

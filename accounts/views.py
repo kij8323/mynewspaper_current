@@ -29,9 +29,10 @@ def loggin(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			login(request, user)
-			if next_url is not None:
-				return HttpResponseRedirect(next_url)
-			return redirect("home")
+			if request.session['lastpage']:
+				return redirect(request.session['lastpage'])
+			else:
+				return redirect('home')
 		else:
 			messages.error(request, '用户名与密码不匹配，请重新输入！')
 	context = {

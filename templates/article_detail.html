@@ -116,9 +116,9 @@ $(function() {
 <div class="article-author">
                 <span class="author-name">{{article.writer}}</span>
                 <i class="icon icon-line"></i>
-                <span class="article-time">{{article.timestamp|date:"Y-m-d H:i"}}</span>
+                <span class="article-time">{{article.timestamp}}</span>
                 <span class="article-share">阅读:{{article.readers}}</span>
-                <span class="article-pl">评论:8</span>
+                <span class="article-pl">评论:{{numofcomment}}</span>
 <!--                 <span class="article-pl">收藏</span> -->
             </div>
 
@@ -138,7 +138,8 @@ $(function() {
 <!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
     <div class="form-comment">
 
-              <textarea name="editor1" id="editor1" rows="10" cols="80">
+{% if user.is_authenticated %}
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
     </textarea>
     <script>
         // Replace the <textarea id="editor1"> with a CKEditor
@@ -149,13 +150,23 @@ $(function() {
         width: '700',
     });
     </script>
+{% else %}
+<div class="authboard">
+<div class="authboardword">
+<h4>请<a href="{% url 'loggin' %}">登录</a>后参与评论</h4>
+</div>
+</div>
+{% endif %} 
 
+{% if user.is_authenticated %}
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+{% else %}
+      <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block'>发表</button>
+{% endif %}  
     </div>
     <div class="errorlist" style="text-align: center;">评论不能为空</div>
 
 <div class="successlist" style="text-align: center;">评论发表成功</div>
-
 <div class="freshcomment">
 
 </div>
@@ -164,7 +175,7 @@ $(function() {
       <span class="author-name">{{item.user}}</span>
 
       <span class="author-time">
-      {{item.timestamp|timesince}}
+      {{item.timestamp}}
       </span>
 
       {% if item.is_child %}
@@ -180,7 +191,11 @@ $(function() {
                 </div>
                 <div class="form-comment-reply" id="{{item.id}}">
                     {{form}}
+              {% if user.is_authenticated %}
                 <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              {% else %}
+                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>    
+              {% endif %}   
               </div>
       </div>
       <div class="errorlist" style="text-align: center;">评论不能为空</div>
@@ -190,8 +205,20 @@ $(function() {
     </div><!-- class="comment-form" -->
      </div><!-- <div id="article"> -->
      </div>
+
+
 <div class="col-xs-3">
-</div>
+<div id='userpro'>
+<img class="center-block img-circle usericon" src="{{user.get_image_url}}" >
+<h4>{{user.username}}</h4>
+<div id='userpro1'>
+  文章总数:{{numwriter}} 
+  <i class="icon icon-line"></i>
+  总阅读量:{{numreaders}}
+</div><!-- <div id='userpro1'> -->
+</div><!-- <div id='userpro'> -->
+</div><!-- <div class="col-xs-3"> -->
+
 </div><!-- <div class="container"> -->
  {% endblock %}
  

@@ -59,7 +59,7 @@ git clone https://github.com/kij8323/mynewspaper.git
 ckeditor上传本地图片
 修改头像设置
 我的帐号
-我的评论
+我的评论月
 我的消阅读
 收藏
 你怎么看？
@@ -84,8 +84,8 @@ ckeditor上传本地图片
 您输入的话题内容有误
 请改正
 
-
-
+登录
+前
 
 
 
@@ -123,4 +123,34 @@ ckeditor上传本地图片
 
  {% endblock %}
  在评论中@了你
+              {% if user.is_authenticated %}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              {% else %}
+                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >x</button>    
+              {% endif %}   
 
+
+
+
+      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+
+
+
+<div class="authboard">请
+
+</div>
+
+
+.authboard{
+	width: 700px;
+	height: 200px;
+	background-color:  #fafafa;
+	border: 1px solid #f0f0f0;
+	color: #bbb;
+	text-align: center;
+}
+文章数
+.authboardword{
+margin-top: 80px
+总阅读量
+}

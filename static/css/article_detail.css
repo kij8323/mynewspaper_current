@@ -233,3 +233,38 @@ font-size: 16px;
 	margin-left: auto;
 	margin-right: auto;
 }
+.authboard{
+	width: 700px;
+	height: 200px;
+	background-color:  #fafafa;
+	border: 1px solid #f0f0f0;
+	color: #bbb;
+	text-align: center;
+}
+
+.authboardword{
+margin-top: 80px
+
+}
+
+.form-control {
+height: 80px
+}
+
+#userpro{
+	background-color:  #fafafa;
+	height: 200px;
+	width: 100%;
+	padding: 30px;
+	text-align: center;
+}
+
+.usericon{
+	width: 80px;
+	height: 80px;
+}
+
+#userpro1{
+color: #A19F9F;
+}
+
