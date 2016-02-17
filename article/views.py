@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import Http404
-from .models import Article
+from .models import Article, Category, Relation
 from .form import CommentForm
 from comment.models import Comment
 import traceback  
@@ -18,6 +18,7 @@ def article_detail(request, article_id):
 		article = Article.objects.get(pk=article_id)
 		numofcomment = article.comment_set.count()
 		numwriter = article.writer.article_set.count()
+		category = Category.objects.all()
 		numreaders = 0
 		for x in article.writer.article_set.all():
 			numreaders = x.readers + numreaders
@@ -31,6 +32,11 @@ def article_detail(request, article_id):
 	article.save()
 	user = request.user
 	comment = Comment.objects.filter(article=article)
+	if len(comment)>5:
+		moercomment = True
+	else:
+		moercomment = False
+	comment = comment[:5]
 	request.session['lastpage'] = request.get_full_path()
 	print 'request.session'
 	print request.session['lastpage']
@@ -44,8 +50,25 @@ def article_detail(request, article_id):
 		'numwriter': numwriter,
 		'numreaders': numreaders,
 		'hotarticle': hotarticle,
+		'category': category,
+		'moercomment': moercomment,
 	}
 	return render(request, 'article_detail.html',  context)
+
+
+
+
+def category_detail(request, category_id):
+	try:
+		category = Category.objects.get(pk=category_id)
+		x = Relation.objects.filter(category=category)
+	except Category.DoesNotExist:
+		raise Http404("Category does not exist")
+	context = {
+		'x': x,
+	}
+	return render(request, 'category_detail.html',  context)
+
 
 #ajax，发送评论,post
 def articlecomment(request):
@@ -111,3 +134,7 @@ def commentcomment(request):
 
 	else:
 		raise Http404
+
+
+def morecomment(request):
+	print 'x'

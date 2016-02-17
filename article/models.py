@@ -60,7 +60,7 @@ class Category(models.Model):
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	#自定义查询
 	#objects = CategoryManager()
-	relations = models.ManyToManyField(Article, through='Relation')
+	relations = models.ManyToManyField(Article, through='Relation', through_fields=('category', 'article'),)
 
 	def __unicode__(self):
 		return self.title
@@ -68,6 +68,8 @@ class Category(models.Model):
 	def get_image_url(self):
 		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.image)
 
+	def get_absolute_url(self):
+		return reverse('category_detail', kwargs={"category_id": self.id})
 
 class Relation(models.Model):
 	category = models.ForeignKey(Category)

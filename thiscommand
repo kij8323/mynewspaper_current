@@ -48,7 +48,8 @@ git add .
 git commit -m 'code changed '
 git remote add paper1 https://github.com/kij8323/mynewspaper_current.git
 git push paper1 master -f
-
+shenanping2008@Hotmail.com
+012ssskkk
 
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
@@ -88,7 +89,7 @@ ckeditor上传本地图片
 前
 
 
-
+热门关键字
 {% block content %}
 
  {{topic.title}}
@@ -153,4 +154,20 @@ ckeditor上传本地图片
 .authboardword{
 margin-top: 80px
 总阅读量
+点击加载更多
+
+    <div id='rightcategory'>
+  {% for item in category %}
+  <div class='search-tag'>
+    <a href="{{item.get_absolute_url}}">
+      {{item.title}}
+    </a>
+    </div>
+  {% endfor %}
+   </div>
+
+
 }
+
+
+加载更多

@@ -81,6 +81,32 @@ $(function() {
   })
 })
 </script>
+
+
+
+<script>
+$(function() {
+ $("body").on("click", '#morecomment-btn-block', function(){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          },
+          });
+    $.ajax({
+        url: "{% url 'morecomment' %}",
+        type: "post",
+        dataType: 'json',
+          success: function(data) {
+            alert("ok");
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });           
+  })
+})
+</script>
+
+
 {% endblock %}
 
 
@@ -202,6 +228,15 @@ $(function() {
     </div>
 {% endfor %}
 
+
+
+{% if moercomment %}
+ <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-success btn-block' >点击加载更多</button> 
+{% else %}
+{% endif %}  
+
+
+
     </div><!-- class="comment-form" -->
      </div><!-- <div id="article"> -->
      </div>
@@ -222,16 +257,30 @@ $(function() {
 </div><!-- <div id='userpro1'> -->
 </div><!-- <div id='userpro'> -->
 
+<div id='hotcategory'>
+  <div class="pull-left">
+  <h4><b>热门关键字</b></h4>
+  </div>
+    <div id='rightcategory'>
+  {% for item in category %}
+  <div class='search-tag'>
+    <a href="{{item.get_absolute_url}}">
+      {{item.title}}
+    </a>
+    </div>
+  {% endfor %}
+   </div>
+</div>
+
+
 <div id='hotarticle'>
   <div class="pull-left" style="margin-bottom: 30px;">
   <h4><b>热文</b></h4>
-  <span class="span-mark"></span>
   </div>
-
 {% for item in hotarticle %}
 <div id="rightimg">
 <a href="{{item.get_absolute_url}}">
-<img src="{{item.get_image_url}}" style="width: 220px; height:124px;">
+<img src="{{item.get_image_url}}" style="width: 215px; height:124px;">
 </a>
 </div>
 <div id="rightitle">
@@ -239,9 +288,10 @@ $(function() {
 {{item.title}}
 </a>
 </div>
-
 {% endfor %}
 </div>
+
+
 
 </div><!-- <div class="col-xs-3"> -->
 

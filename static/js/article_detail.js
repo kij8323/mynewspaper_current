@@ -18,6 +18,14 @@ $(document).ready(function(){
   $(".qqzoneshare").mouseleave(function(){
       $(this).css("background-color","#fafafa");
   });
+  $(".search-tag").mouseenter(function(){
+      $(this).css("background-color","#449d44");
+      $(this).children("a").css("color","#fff");
+  });
+  $(".search-tag").mouseleave(function(){
+      $(this).css("background-color","#CCF4D9");
+      $(this).children("a").css("color","#449d44");
+  });
 });
 
 

@@ -48,6 +48,8 @@ urlpatterns = [
 
     url(r'^articlecomment/$', 'article.views.articlecomment', name='articlecomment'),
     url(r'^commentcomment/$', 'article.views.commentcomment', name='commentcomment'),
+    url(r'^morecomment/$', 'article.views.morecomment', name='morecomment'),
+    url(r'^category/(?P<category_id>[0-9]+)/$', 'article.views.category_detail', name='category_detail'),
     #ajax，验证用户名是否已被注册,get
     #url(r'^usernamemessage/$', 'accounts.views.usernamemessage', name='usernamemessage'),
         #具体文章页面
