@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from django.http import Http404
-from .models import Article, Category, Relation
+from .models import Article, Category, Relation, Collection
 from .form import CommentForm
 from comment.models import Comment
 import traceback  
@@ -12,6 +12,7 @@ import json
 from django.http import HttpResponse
 from notifications.signals import notify
 from accounts.models import MyUser
+
 
 def article_detail(request, article_id):
 	try:
@@ -31,15 +32,20 @@ def article_detail(request, article_id):
 	hotarticle = Article.objects.order_by('-readers')[:5]
 	article.save()
 	user = request.user
+	collection = Collection.objects.filter(article=article, user=user.id)
+	print type(collection)
+	if collection: 
+		collection = '已收藏'
+	else:
+		collection = '收藏'
 	comment = Comment.objects.filter(article=article)
-	if len(comment)>5:
+	if comment.count() > 5:
 		moercomment = True
 	else:
 		moercomment = False
 	comment = comment[:5]
 	request.session['lastpage'] = request.get_full_path()
-	print 'request.session'
-	print request.session['lastpage']
+	thisrelationtag = Relation.objects.filter(article=article)
 	context = {
 		'article':article,
 		'user':user,
@@ -52,6 +58,8 @@ def article_detail(request, article_id):
 		'hotarticle': hotarticle,
 		'category': category,
 		'moercomment': moercomment,
+		'collection' : collection,
+		'thisrelationtag' : thisrelationtag,
 	}
 	return render(request, 'article_detail.html',  context)
 
@@ -137,4 +145,73 @@ def commentcomment(request):
 
 
 def morecomment(request):
-	print 'x'
+	try:
+		articleid = request.POST.get('articleid')
+		article = Article.objects.get(pk=articleid)
+		comment = Comment.objects.filter(article=article)
+		print 'morecomment'
+	except Article.DoesNotExist:
+		raise Http404("Article does not exist")
+	if request.is_ajax():
+		request.session['commentlen'] = request.POST.get('commentlen')
+	if comment.count() == int(request.session['commentlen']):
+		loadcompleted = '已全部加载完成'
+	else:
+		loadcompleted = '点击加载更多'
+	print comment.count()
+	print request.session['commentlen']
+	print 'morecomment'
+	data = {
+		'loadcompleted' : loadcompleted
+	}
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
+
+def collection(request):
+	print 'collection'
+	try:
+		articleid = request.POST.get('articleid')
+		article = Article.objects.get(pk=articleid)
+		user = request.user
+	except Article.DoesNotExist:
+		raise Http404("Article does not exist")
+	collection = Collection.objects.filter(article=article, user=user)
+	print type(collection)
+	if collection: 
+		collection.delete()
+		collecicon = '收藏'
+	else:
+		c = Collection(user=user, article=article)
+		c.save()
+		collecicon = '已收藏'
+	data = {
+	 'collecicon': collecicon,
+	}
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
+
+
+def commentpage(request, article_id):
+	try:
+		article = Article.objects.get(pk=article_id)
+		comment = Comment.objects.filter(article=article)
+	except Article.DoesNotExist:
+		raise Http404("Article does not exist")
+	print 'test'
+	if request.session.get('commentlen', False):
+		commentlen = request.session['commentlen']
+	print 'test'
+	print commentlen
+	commentlen = int(commentlen)
+	comment = comment[commentlen:commentlen+5]
+	context = {
+		"comment": comment,
+	}
+	return render(request, 'commentpage.html',  context)
+
+
+def test(request):
+	context = {
+		'x': 'x',
+	}
+	return render(request, 'test.html',  context)

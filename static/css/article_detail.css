@@ -65,6 +65,37 @@ body{
 	height: 60px;
 	width: 60px;
 	background-color: #fafafa;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.totopsctoll{
+	margin-top: 15px;
+	background-position: -180px 11px;
+	background-image: url(/static/images/sharebackground.png);
+	display: inline-block;
+	height: 60px;
+	width: 60px;
+	background-color: #fafafa;
+	color: #bbb;
+	text-align: center;
+	cursor: pointer;
+}
+
+.articlecollection{
+	margin-top: 15px;
+	display: inline-block;
+	height: 60px;
+	width: 60px;
+	background-color: #fafafa;
+	color: #bbb;
+	text-align: center;
+	border-bottom: 1px solid #f0f0f0;
+	cursor: pointer;
+}
+
+.commentusericon{
+	width: 50px;
+	height: 50px;
 }
 
 #article{
@@ -119,7 +150,7 @@ font-size: 16px;
 
 .comment-form{
 	border-top: 1px solid #f0f0f0;
-	margin-top: 90px;
+	margin-top: 160px;
 	margin-bottom: 50px;
 }
 
@@ -292,16 +323,6 @@ a{
 	margin-top: 15px
 }
 
-/*.span-mark {
-display: inline-block;
-background-color: #67CA87;
-position: absolute;
-z-index: 1;
-height: 20px;
-line-height: 20px;
-margin: -30px -50px 0;
-width: 4px;
-}*/
 
 #hotcategory{
 	background-color:  #fafafa;
@@ -314,18 +335,8 @@ width: 4px;
 	margin-top: 30px;
 }
 
-/*.span-mark-tag {
-	display: inline-block;
-	background-color: #67CA87;
-	position: absolute;
-	z-index: 1;
-	height: 20px;
-	line-height: 20px;
-	margin: -30px -80px 0;
-	width: 4px;
-}*/
 
-#rightcategory{
+.rightcategory{
 	width: 100%;
 	margin-top: 50px;
 }
@@ -342,8 +353,41 @@ width: 4px;
 	float: left;
 	margin: 0 10px 10px 0;
 	background-color: #CCF4D9;
-	padding: 0 15px;
+	padding: 0 10px;
 	cursor: pointer;	
 	color: #333;
 	font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
 }
+
+#morecomment-btn-block{
+	width: 100%;
+	color: #bbb;
+	border: 1px solid #f0f0f0;
+/*background-color: white;*/
+}
+
+#catetag{
+	margin-top: 80px;
+}
+
+
+
+/*
+.modal-open {
+overflow: auto;
+padding: 0 !important;
+}
+
+.modal.msg-popup .modal-dialog {
+width: 300px !important;
+margin: 30px auto 60px;
+}
+
+.modal.msg-popup .modal-body {
+	color: #449d44;
+	background-color: #CCF4D9;
+}
+
+.modal.msg-popup .modal-content {
+border: none;
+}*/

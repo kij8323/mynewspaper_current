@@ -1,0 +1,43 @@
+
+
+{% for item in comment %}
+    <div class="comment">
+      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>
+      <a href="{{item.user.get_absolute_url}}">
+      <span class="author-name">{{item.user}}</span>
+      </a>
+
+      <span class="author-time">
+      {{item.timestamp}}
+      </span>
+
+      {% if item.is_child %}
+      <div class="blockquote">回复@{{item.parent.user}}发表的：{{item.parent.text|safe}}</div>
+      {% endif %}
+
+      <div class="pl-content">{{item.text|safe}}</div>
+
+      <div class="pl-box-btm">
+              <div class="btn-dp">
+                <i class="icon-dp"></i>
+                我要点评
+                </div>
+                <div class="form-comment-reply" id="{{item.id}}">
+                  
+                <label for="id_commentext">Commentext:</label>
+                <textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="" rows="8"></textarea>
+
+              {% if user.is_authenticated %}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              {% else %}
+                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>    
+              {% endif %}   
+              </div>
+      </div>
+      <div class="errorlist" style="text-align: center;">评论不能为空</div>
+    </div>
+{% endfor %}
+<!-- 
+<div class='morecomment'>
+</div>
+ -->

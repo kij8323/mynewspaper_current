@@ -87,87 +87,51 @@ ckeditor上传本地图片
 
 登录
 前
+收藏
+已收藏
 
 
 热门关键字
-{% block content %}
+标签
 
- {{topic.title}}
- {{topic.content|safe}}
-<!-- <form action="" method="post" id='test' >
-	{% csrf_token %}
-    {{ form.media }}
-    {{ form.as_p }}
-    <input type="submit"/>
-</form> -->
+{% if user.is_authenticated %}
+      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
+{% else %}
+      <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block'>发表</button>
+{% endif %}  
 
-<form>
-    <textarea name="editor1" id="editor1" rows="10" cols="80">
-    </textarea>
-    <script>
-        // Replace the <textarea id="editor1"> with a CKEditor
-        // instance, using default configuration.
-       editor = CKEDITOR.replace( 'editor1' , {
-		    language: 'zh-cn',
-		    toolbar: [[ '-', 'Bold', 'Italic', 'Format', 'Smiley','paragraph', 'Image' ]],
-		    width: '700',
-		});
-    </script>
-    <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
-</form>
 
-{% for item in comment %}
-    <div class="comment">
-      <div class="pl-content">{{item.text|safe}}</div>
-    </div>
-{% endfor %}
 
- {% endblock %}
- 在评论中@了你
               {% if user.is_authenticated %}
                 <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
               {% else %}
-                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >x</button>    
-              {% endif %}   
+                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>    
+              {% endif %}  
+
+
+游客
 
 
 
+    $.messager.popup("评论发表成功!");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#449d44',
+        "background-color":"#CCF4D9",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
 
-      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
-
-
-
-<div class="authboard">请
-
-</div>
-
-
-.authboard{
-	width: 700px;
-	height: 200px;
-	background-color:  #fafafa;
-	border: 1px solid #f0f0f0;
-	color: #bbb;
-	text-align: center;
-}
-文章数
-.authboardword{
-margin-top: 80px
-总阅读量
-点击加载更多
-
-    <div id='rightcategory'>
-  {% for item in category %}
-  <div class='search-tag'>
-    <a href="{{item.get_absolute_url}}">
-      {{item.title}}
-    </a>
-    </div>
-  {% endfor %}
-   </div>
-
-
-}
-
-
+请先登录
+回复文章
+评论回复
 加载更多
+收藏文章

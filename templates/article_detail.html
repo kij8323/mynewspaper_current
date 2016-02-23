@@ -7,7 +7,7 @@
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 
-<script>
+<script>/*回复文章*/
 $(function() {
   $("body").on("click", '#btn-block', function(){
     var comment = editor.getData();
@@ -24,7 +24,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
               )
           },
           error: function(data) { 
@@ -32,17 +32,49 @@ $(function() {
           } 
     });
     $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
-    $('.successlist').fadeIn("slow").fadeOut(3000);
+    /*$('.successlist').fadeIn("slow").fadeOut(3000);*/
+    $.messager.popup("评论发表成功!");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#449d44',
+        "background-color":"#CCF4D9",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
     editor.setData('');
     }
-    else
-    $(this).parent().next().fadeIn("slow").fadeOut(3000);
+    else{
+    $.messager.popup("请输入评论！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
+    }
   })
 })
 </script>
 
 
-<script>
+<script>/*评论回复*/
 $(function() {
  $("body").on("click", '.btn-reply', function(){
     var comment = $(this).prev(".form-control").val()
@@ -65,7 +97,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
               )
           },
           error: function(data) { 
@@ -73,39 +105,151 @@ $(function() {
           }
     });
     $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
-    $('.successlist').fadeIn("slow").fadeOut(3000);
+    /*$('.successlist').fadeIn("slow").fadeOut(3000);*/
+    $.messager.popup("评论发表成功!");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#449d44',
+        "background-color":"#CCF4D9",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
     $(this).prev(".form-control").val("")
     }
-    else
-    $(this).parent().parent().next().fadeIn("slow").fadeOut(3000);
+    else{
+    $.messager.popup("请输入评论！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
+    }
   })
 })
 </script>
 
 
 
-<script>
+<script>/*加载更多*/
 $(function() {
+  var cur_page_num = 1;
  $("body").on("click", '#morecomment-btn-block', function(){
+    var $elements = $('.comment');
+    var commentlen = $elements.length;
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+           commentlen: commentlen,
+           articleid: {{article.id}},
           },
           });
     $.ajax({
         url: "{% url 'morecomment' %}",
         type: "post",
-        dataType: 'json',
-          success: function(data) {
-            alert("ok");
+        success: function(data) {
+        cur_page_num=cur_page_num+1;          
+        /*alert(cur_page_num); */          
+        var newnode=document.createElement("div");             
+        newnode.setAttribute("class", "container-fluid grid");            
+        newnode.setAttribute("id","new"+String(cur_page_num));           
+        document.getElementById("morecomment").appendChild(newnode);           
+        $('#new'+String(cur_page_num)).load('{% url 'commentpage' article.id %}');
+        $('#morecomment-btn-block').html(data.loadcompleted)
           },
           error: function(data) { 
               alert("Got an error dude");
           }
-    });           
+    });
   })
 })
 </script>
 
+<script>/*收藏文章*/
+$(function() {
+ $("body").on("click", '.articlecollection', function(){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          articleid: {{article.id}},
+          },
+          });
+    $.ajax({
+        url: "{% url 'collection' %}",
+        type: "post",
+        success: function(data) {
+          $('.articlecollection h5').html(data.collecicon)
+          },
+          error: function(data) { 
+            $.messager.popup("请先登录！");
+            $(".modal.msg-popup .modal-body").css({
+                'color': '#a94442',
+                "background-color":"#f2dede",
+                });
+            $(".modal-open").css({
+                'overflow': 'auto',
+                'padding':' 0 !important',
+                });
+            $(".modal.msg-popup .modal-dialog").css({
+                'width': '300px !important',
+                'margin': '30px auto 60px',
+                });
+            $(".modal.msg-popup .modal-content").css({
+                'border': 'none',
+                });
+          }
+    });
+  })
+})
+</script>
+
+<script>/*回到页面顶端*/
+$(function(){ 
+  $(window).scroll(function() {   
+    if($(window).scrollTop() >= 100){
+      $('.totopsctoll').fadeIn(300); 
+    }else{    
+      $('.totopsctoll').fadeOut(300);    
+    }  
+  });
+  $('.totopsctoll').click(function(){
+  $('html,body').animate({scrollTop: '0px'}, 800);}); 
+});
+</script>
+
+<script>
+/*$(function(){ 
+  $(window).scroll(function() {   
+    x=document.getElementById("hotarticle").offsetTop;
+    y=$(window).scrollTop()
+    scrollTop = x-y
+    console.log(x-y);
+    if(scrollTop <= 100){;
+      $("#hotarticle").css({'position':'fixed',
+      'top':'0px',}); 
+    }
+    else{
+      $("#hotarticle").css({'position':'static'}); 
+      
+    }
+  });
+});*/
+</script>
 
 {% endblock %}
 
@@ -132,6 +276,18 @@ $(function() {
 	</i>
 	</a> 
   </li>
+
+  <li> 
+  <i class="articlecollection">
+    <h5 style='margin-top: 20px;'>{{collection}}</h5>
+  </i>
+  </li>
+
+  <li> 
+  <i class="totopsctoll">
+  </i>
+  </li>
+
 </ul>
 </div>
 
@@ -156,10 +312,31 @@ $(function() {
      <p>{{article.content|safe}}</p>
 </div>
 
+
+
+<div id="catetag">
+  <div class="pull-left ">
+  <h5 style='font-weight:bold;'>关键字&nbsp:&nbsp&nbsp</h5>
+  </div>
+  {% for item in thisrelationtag %}
+  <div class="search-tag img-rounded">
+  <a href="{{item.category.get_absolute_url}}">
+  {{item.category.title}}
+  </a>
+  </div>
+  {%endfor%}
+</div>
+
+
+
 <div class="comment-form">
      <span class="span-mark-author">发表评论</span>
       <div class="author-info">
-        {{user}}
+      {% if user.is_authenticated %}
+        {{user}}:
+      {% else %}
+      游客:
+      {% endif %} 
       </div>
 <!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
     <div class="form-comment">
@@ -184,11 +361,9 @@ $(function() {
 </div>
 {% endif %} 
 
-{% if user.is_authenticated %}
+
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
-{% else %}
-      <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block'>发表</button>
-{% endif %}  
+
     </div>
     <div class="errorlist" style="text-align: center;">评论不能为空</div>
 
@@ -198,7 +373,11 @@ $(function() {
 </div>
 {% for item in comment %}
     <div class="comment">
+
+      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>
+      <a href="{{item.user.get_absolute_url}}">
       <span class="author-name">{{item.user}}</span>
+      </a>
 
       <span class="author-time">
       {{item.timestamp}}
@@ -217,11 +396,8 @@ $(function() {
                 </div>
                 <div class="form-comment-reply" id="{{item.id}}">
                     {{form}}
-              {% if user.is_authenticated %}
-                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
-              {% else %}
-                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>    
-              {% endif %}   
+
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button> 
               </div>
       </div>
       <div class="errorlist" style="text-align: center;">评论不能为空</div>
@@ -229,13 +405,12 @@ $(function() {
 {% endfor %}
 
 
-
+<div id='morecomment'>
+</div>
 {% if moercomment %}
- <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-success btn-block' >点击加载更多</button> 
+ <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
 {% else %}
 {% endif %}  
-
-
 
     </div><!-- class="comment-form" -->
      </div><!-- <div id="article"> -->
@@ -243,6 +418,7 @@ $(function() {
 
 
 <div class="col-xs-3">
+
 <div id='userpro'>
 <a href="{{article.writer.get_absolute_url}}">
 <img class="center-block img-circle usericon" src="{{article.writer.get_image_url}}" >
@@ -261,9 +437,9 @@ $(function() {
   <div class="pull-left">
   <h4><b>热门关键字</b></h4>
   </div>
-    <div id='rightcategory'>
+    <div class='rightcategory'>
   {% for item in category %}
-  <div class='search-tag'>
+  <div class='search-tag img-rounded'>
     <a href="{{item.get_absolute_url}}">
       {{item.title}}
     </a>

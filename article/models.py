@@ -27,6 +27,7 @@ class Article(models.Model):
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	#自定义查询语句
 	#objects = ArticleManager()
+	#collections = models.ManyToManyField(MyUser, through='Collection', through_fields=('user', 'article'),related_name='ArticleCollection')
 
 	readers = models.IntegerField(default=0)
 	# shares = models.IntegerField(default=0)
@@ -73,4 +74,8 @@ class Category(models.Model):
 
 class Relation(models.Model):
 	category = models.ForeignKey(Category)
+	article = models.ForeignKey(Article)
+
+class Collection(models.Model):
+	user = models.ForeignKey(MyUser)
 	article = models.ForeignKey(Article)

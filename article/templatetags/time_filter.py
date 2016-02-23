@@ -47,3 +47,7 @@ def time_chinese_month(value):
 @register.filter
 def time_chinese_months(value): 
     return value.replace('months', u'月前');
+
+@register.filter
+def AnonymousUser(value): 
+    return value.replace('AnonymousUser', u'游客');

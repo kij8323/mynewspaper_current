@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^$', 'mainpage.views.home', name='home'),
 
 
-    url(r'^user/test/', 'accounts.views.test', name='test'),
+    # url(r'^test/', 'article.views.test', name='test'),
     #登录页面
     url(r'^user/loggin/', 'accounts.views.loggin', name='loggin'),
     #注册页面
@@ -54,4 +54,9 @@ urlpatterns = [
     #url(r'^usernamemessage/$', 'accounts.views.usernamemessage', name='usernamemessage'),
         #具体文章页面
     url(r'^article/(?P<article_id>[0-9]+)/$', 'article.views.article_detail', name='article_detail'),
+    url(r'^article/commentpage/(?P<article_id>[0-9]+)/$', 'article.views.commentpage', name='commentpage'),
+    url(r'^article/collection/$', 'article.views.collection', name='collection'),
+    url(r'^article/test/$', 'article.views.test', name='test'),
+
+
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
