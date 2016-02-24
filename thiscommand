@@ -26,8 +26,8 @@ pip install  django-simple-captcha -i http://pypi.douban.com/simple/
 pip install django-ckeditor
 python manage.py  collectstatic --clear
 
-
-
+收藏
+赞
 pip install Pillow
 ALTER TABLE article_article CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE article_category CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -84,51 +84,14 @@ ckeditor上传本地图片
 请输入标题
 您输入的话题内容有误
 请改正
-
-登录
+点赞
+登录点衰
 前
 收藏
 已收藏
 
 
-热门关键字
-标签
 
-{% if user.is_authenticated %}
-      <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
-{% else %}
-      <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block'>发表</button>
-{% endif %}  
-
-
-
-              {% if user.is_authenticated %}
-                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
-              {% else %}
-                <button  id="unauth-btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>    
-              {% endif %}  
-
-
-游客
-
-
-
-    $.messager.popup("评论发表成功!");
-    $(".modal.msg-popup .modal-body").css({
-        'color': '#449d44',
-        "background-color":"#CCF4D9",
-        });
-    $(".modal-open").css({
-        'overflow': 'auto',
-        'padding':' 0 !important',
-        });
-    $(".modal.msg-popup .modal-dialog").css({
-        'width': '300px !important',
-        'margin': '30px auto 60px',
-        });
-    $(".modal.msg-popup .modal-content").css({
-        'border': 'none',
-        });
 
 请先登录
 回复文章
@@ -136,3 +99,7 @@ ckeditor上传本地图片
 加载更多
 收藏文章
 回到页面顶端
+相关文章
+富文本框
+
+<div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike543">3</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike543">1</span></div>

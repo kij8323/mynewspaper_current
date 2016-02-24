@@ -24,7 +24,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -79,10 +79,7 @@ $(function() {
  $("body").on("click", '.btn-reply', function(){
     var comment = $(this).prev(".form-control").val()
     if (comment!=""){
-/*    name = $(this).parent().parent().parent().children('.author-name').text();
-    precomment = $(this).parent().parent().parent().children('.pl-content').text();*/
     preentid = $(this).parent().attr("id");
-    /*parenttext = "回复@"+name+"发表的："+precomment*/
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           comment: comment, 
@@ -97,7 +94,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -218,6 +215,54 @@ $(function() {
 })
 </script>
 
+<script>/*点赞*/
+$(function() {
+ $("body").on("click", '.icon-dp-positive', function(){
+    var preentid = $(this).parent().next().next().attr("id");
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          commentid: preentid,
+          },
+          });
+    $.ajax({
+        url: "{% url 'commentlike' %}",
+        type: "post",
+        success: function(data) {
+          /*$(this).next().html(data.commentlikecount)*/
+          /*alert(data.commentlikecount)*/
+          $('.commentuserlike'+preentid).html(data.commentlikecount)
+          },
+          error: function(data) { 
+            /*alert('Error')*/
+          }
+    });
+  })
+})
+</script>
+
+<script>/*点衰*/
+$(function() {
+ $("body").on("click", '.icon-dp-negtive', function(){
+    var preentid = $(this).parent().next().next().attr("id");
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          commentid: preentid,
+          },
+          });
+    $.ajax({
+        url: "{% url 'commentdislike' %}",
+        type: "post",
+        success: function(data) {
+          $('.commentuserdislike'+preentid).html(data.commentdislikecount)
+          },
+          error: function(data) { 
+            /*alert('Error')*/
+          }
+    });
+  })
+})
+</script>
+
 <script>/*回到页面顶端*/
 $(function(){ 
   $(window).scroll(function() {   
@@ -233,22 +278,42 @@ $(function(){
 </script>
 
 <script>
-/*$(function(){ 
-  $(window).scroll(function() {   
-    x=document.getElementById("hotarticle").offsetTop;
-    y=$(window).scrollTop()
-    scrollTop = x-y
-    console.log(x-y);
-    if(scrollTop <= 100){;
-      $("#hotarticle").css({'position':'fixed',
-      'top':'0px',}); 
-    }
-    else{
-      $("#hotarticle").css({'position':'static'}); 
-      
-    }
-  });
-});*/
+$.fn.smartFloat = function() { 
+    var position = function(element) { 
+        var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
+        var pos = element.css("position"); //当前元素距离页面document顶部的距离 
+        $(window).scroll(function() { //侦听滚动时 
+            var scrolls = $(this).scrollTop(); 
+            if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度 
+                if (window.XMLHttpRequest) { //如果不是ie6 
+                    element.css({ //设置css 
+                        position: "fixed", //固定定位,即不再跟随滚动 
+                        top: 0, //距离页面顶部为0 
+                      
+                    }).addClass("shadow"); //加上阴影样式.shadow 
+                } else { //如果是ie6 
+                    element.css({ 
+                        top: scrolls  //与页面顶部距离 
+                    });     
+                } 
+            }else { 
+                element.css({ //如果当前元素element未滚动到浏览器上边缘，则使用默认样式 
+                    position: pos, 
+                    top: top 
+                }).removeClass("shadow");//移除阴影样式.shadow 
+            } 
+        }); 
+    }; 
+    return $(this).each(function() { 
+        position($(this));                          
+    }); 
+}; 
+</script>
+
+<script>
+$(function(){ 
+    /*$("#hotarticle").smartFloat(); */
+}); 
 </script>
 
 {% endblock %}
@@ -301,6 +366,7 @@ $(function(){
                 <span class="article-time">{{article.timestamp}}</span>
                 <span class="article-share">阅读:{{article.readers}}</span>
                 <span class="article-pl">评论:{{numofcomment}}</span>
+                <span class="article-pl">收藏:{{usercollectioncount}}</span>
 <!--                 <span class="article-pl">收藏</span> -->
             </div>
 
@@ -365,21 +431,21 @@ $(function(){
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
 
     </div>
-    <div class="errorlist" style="text-align: center;">评论不能为空</div>
 
-<div class="successlist" style="text-align: center;">评论发表成功</div>
+
+
 <div class="freshcomment">
 
 </div>
 {% for item in comment %}
     <div class="comment">
 
-      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>
+      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
       <a href="{{item.user.get_absolute_url}}">
       <span class="author-name">{{item.user}}</span>
       </a>
 
-      <span class="author-time">
+      &nbsp&nbsp<span class="author-time">
       {{item.timestamp}}
       </span>
 
@@ -390,17 +456,28 @@ $(function(){
       <div class="pl-content">{{item.text|safe}}</div>
 
       <div class="pl-box-btm">
+
+                <div class="btn-dp pull-right">
+                <i class="icon-dp-positive"></i>
+                <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
+                
+                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{item.id}}'>{{item.dislike}}</span>
+                </div>
+
               <div class="btn-dp">
                 <i class="icon-dp"></i>
                 我要点评
                 </div>
+
+
                 <div class="form-comment-reply" id="{{item.id}}">
                     {{form}}
 
                 <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button> 
               </div>
       </div>
-      <div class="errorlist" style="text-align: center;">评论不能为空</div>
+
     </div>
 {% endfor %}
 
@@ -413,7 +490,14 @@ $(function(){
 {% endif %}  
 
     </div><!-- class="comment-form" -->
+    
+<!-- <div id='relationartical'>
+  <span class="span-mark-author">相关文章</span>
+</div> -->
+    
+
      </div><!-- <div id="article"> -->
+
      </div>
 
 
@@ -436,6 +520,7 @@ $(function(){
 <div id='hotcategory'>
   <div class="pull-left">
   <h4><b>热门关键字</b></h4>
+  <!-- <span class="span-mark-hotcategory"></span> -->
   </div>
     <div class='rightcategory'>
   {% for item in category %}
@@ -448,24 +533,25 @@ $(function(){
    </div>
 </div>
 
-
 <div id='hotarticle'>
-  <div class="pull-left" style="margin-bottom: 30px;">
+  <div class="pull-left" style="margin-bottom: 15px;">
   <h4><b>热文</b></h4>
+ <!--  <span class="span-mark-hotarticle"></span> -->
   </div>
 {% for item in hotarticle %}
-<div id="rightimg">
+<div class="rightimg">
 <a href="{{item.get_absolute_url}}">
 <img src="{{item.get_image_url}}" style="width: 215px; height:124px;">
 </a>
 </div>
-<div id="rightitle">
+<div class="rightitle">
 <a href="{{item.get_absolute_url}}">
 {{item.title}}
 </a>
 </div>
 {% endfor %}
 </div>
+
 
 
 

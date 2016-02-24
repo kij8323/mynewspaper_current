@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import Http404
 from .models import Article, Category, Relation, Collection
 from .form import CommentForm
-from comment.models import Comment
+from comment.models import Comment, CommentLike, CommentDisLike
 import traceback  
 import types  
 import json
@@ -46,6 +46,7 @@ def article_detail(request, article_id):
 	comment = comment[:5]
 	request.session['lastpage'] = request.get_full_path()
 	thisrelationtag = Relation.objects.filter(article=article)
+	usercollectioncount = Collection.objects.filter(article=article).count()
 	context = {
 		'article':article,
 		'user':user,
@@ -60,6 +61,7 @@ def article_detail(request, article_id):
 		'moercomment': moercomment,
 		'collection' : collection,
 		'thisrelationtag' : thisrelationtag,
+		'usercollectioncount' : usercollectioncount, 
 	}
 	return render(request, 'article_detail.html',  context)
 
@@ -190,6 +192,53 @@ def collection(request):
 	json_data = json.dumps(data)
 	return HttpResponse(json_data, content_type='application/json')
 
+def commentlike(request):
+	try:
+		commentid = request.POST.get('commentid')
+		comment = Comment.objects.get(pk=commentid)
+		user = request.user
+		print 'commentlike'
+	except Article.DoesNotExist:
+		raise Http404("Article does not exist")
+	commentlike = CommentLike.objects.filter(comment=comment, user=user)
+	print 'commentlike'
+	if commentlike: 
+		commentlike.delete()
+	else:
+		c = CommentLike(user=user, comment=comment)
+		c.save()
+	commentlikecount = CommentLike.objects.filter(comment=comment).count()
+	print 'commentlike'
+	data = {
+	 'commentlikecount': commentlikecount,
+	}
+	json_data = json.dumps(data)
+	print 'commentlike'
+	return HttpResponse(json_data, content_type='application/json')
+
+def commentdislike(request):
+	try:
+		commentid = request.POST.get('commentid')
+		comment = Comment.objects.get(pk=commentid)
+		user = request.user
+		print 'commentlike'
+	except Article.DoesNotExist:
+		raise Http404("Article does not exist")
+	commentdislike = CommentDisLike.objects.filter(comment=comment, user=user)
+	print 'commentlike'
+	if commentdislike: 
+		commentdislike.delete()
+	else:
+		c = CommentDisLike(user=user, comment=comment)
+		c.save()
+	commentdislikecount = CommentDisLike.objects.filter(comment=comment).count()
+	print 'commentlike'
+	data = {
+	 'commentdislikecount': commentdislikecount,
+	}
+	json_data = json.dumps(data)
+	print 'commentlike'
+	return HttpResponse(json_data, content_type='application/json')
 
 def commentpage(request, article_id):
 	try:

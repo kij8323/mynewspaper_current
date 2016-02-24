@@ -57,6 +57,8 @@ urlpatterns = [
     url(r'^article/commentpage/(?P<article_id>[0-9]+)/$', 'article.views.commentpage', name='commentpage'),
     url(r'^article/collection/$', 'article.views.collection', name='collection'),
     url(r'^article/test/$', 'article.views.test', name='test'),
+    url(r'^article/commentlike/$', 'article.views.commentlike', name='commentlike'),
+    url(r'^article/commentdislike/$', 'article.views.commentdislike', name='commentdislike'),
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

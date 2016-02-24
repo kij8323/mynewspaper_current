@@ -39,7 +39,11 @@ class Comment(models.Model):
 		else:
 			return False
 
+	def like(self):
+ 		return CommentLike.objects.filter(comment=self).count()
 
+	def dislike(self):
+ 		return CommentDisLike.objects.filter(comment=self).count()
 
 #text = RichTextField(max_length=5000, null=True, blank=True)
 
@@ -47,3 +51,11 @@ class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
+class CommentLike(models.Model):
+	user = models.ForeignKey(MyUser)
+	comment = models.ForeignKey(Comment)
+
+class CommentDisLike(models.Model):
+	user = models.ForeignKey(MyUser)
+	comment = models.ForeignKey(Comment)
