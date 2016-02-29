@@ -1,5 +1,5 @@
 .container{
-	width: 1170px;
+	width: 90%;
 }
 
 body{
@@ -300,15 +300,7 @@ height: 80px
 color: #A19F9F;
 }
 
-#hotarticle{
-	background-color:  #fafafa;
-/*	height: 200px;*/
-	width: 100%;
-	padding: 30px;
-	padding-top: 15px;
-	text-align: center;
-	margin-top: 30px;
-}
+
 
 a:link{
 	text-decoration: none;
@@ -318,30 +310,61 @@ a{
 	color: black;
 }
 .rightimg{
-	margin-top: 30px
+	padding: 30px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.rightimg img{
+	width: 100%;
+	height:124px;
+
 }
 .rightitle{
-	margin-top: 15px
+	margin-top: 15px;
+	text-align: center;
 }
 
+#relationartical{
+	margin-top: 120px;
+} 
 
-#hotcategory{
-	background-color:  #fafafa;
-	height: 215px;
+#relationartical img{
 	width: 100%;
-	padding: 30px;
-	padding-top: 15px;
-	padding-right: 15px;
-	text-align: center;
+	height:124px;
 	margin-top: 30px;
 }
 
-
-.rightcategory{
+#hotcategory{
+	background-color:  #fafafa;
 	width: 100%;
-	margin-top: 50px;
+	/*text-align: center;*/
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding-top:20px;
 }
 
+#hotarticle{
+	padding-top: 20px;
+	background-color:  #fafafa;
+/*	height: 200px;*/
+	width: 100%;
+	margin-top: 30px;
+
+}
+.rightcategory{
+	width: 100%;
+	padding: 30px;
+	padding-top: 20px;
+	overflow: hidden;
+	zoom: 1;
+}
+
+.rightcategory:after{
+	content: '';
+	display: block;
+	clear: both;
+	height: 0;
+}
 .search-tag a{
 	color: #449d44;
 	display: inline-block;
@@ -381,27 +404,27 @@ a{
 
 h4 b{
 	color: #9e9e9e;
+	padding: 30px;
 }
-/*.span-mark-hotarticle{
+.span-mark{
 	display: inline-block;
-	background-color: #f63756;
+	background-color: #67CA87;
 	position: absolute;
 	z-index: 1;
 	height: 20px;
 	line-height: 20px;
 	margin: -28px 0 0;
 	width: 4px;
-	margin-left: -50px;
 }
 
-.span-mark-hotcategory{
-	display: inline-block;
-	background-color: #f63756;
-	position: absolute;
-	z-index: 1;
-	height: 20px;
-	line-height: 20px;
-	margin: -28px 0 0;
-	width: 4px;
-	margin-left: -76px;
-}*/
+
+.relationblock .col-xs-4:last-child{
+	padding-right: 0px;
+	padding-left: 30px;
+}
+
+.relationblock .col-xs-4:first-child{
+	padding-right: 30px;
+	padding-left: 0px;
+}
+

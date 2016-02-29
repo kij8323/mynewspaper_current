@@ -34,8 +34,8 @@ urlpatterns = [
     url(r'^user/(?P<user_id>[0-9]+)/collections/$', 'accounts.views.userdashboardcollections', name='user_detailcollections'),
 
 
-
-
+    url(r'^group/index/$', 'topic.views.group_index', name='group_index'),
+    url(r'^group/all/$', 'topic.views.group_all', name='group_all'),
     url(r'^group/(?P<group_id>[0-9]+)/$', 'topic.views.group_detail', name='group_detail'),
     url(r'^topic/(?P<topic_id>[0-9]+)/$', 'topic.views.topic_detail', name='topic_detail'),
     url(r'^topic/newtopic/$', 'topic.views.newtopic', name='newtopic'),

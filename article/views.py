@@ -46,6 +46,11 @@ def article_detail(request, article_id):
 	comment = comment[:5]
 	request.session['lastpage'] = request.get_full_path()
 	thisrelationtag = Relation.objects.filter(article=article)
+	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article)
+	if thisrelationtagarticle.count()==0:
+		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article)
+	if thisrelationtagarticle.count()==0:
+		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article)
 	usercollectioncount = Collection.objects.filter(article=article).count()
 	context = {
 		'article':article,
@@ -61,6 +66,7 @@ def article_detail(request, article_id):
 		'moercomment': moercomment,
 		'collection' : collection,
 		'thisrelationtag' : thisrelationtag,
+		'thisrelationtagarticle': thisrelationtagarticle[0:3], 
 		'usercollectioncount' : usercollectioncount, 
 	}
 	return render(request, 'article_detail.html',  context)

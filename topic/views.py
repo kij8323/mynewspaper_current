@@ -11,9 +11,40 @@ import json
 from django.http import HttpResponse
 import traceback 
 from notifications.signals import notify
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from .forms import TopicForm
 
 # Create your views here.
+def group_all(request):
+	try:
+		group = Group.objects.all()
+		# topic = group.topic_set.all()
+	except group.DoesNotExist:
+		raise Http404("Does not exist")
+	paginator = Paginator(group, 5)
+	page = request.GET.get('page')
+	try:
+		contacts = paginator.page(page)
+	except PageNotAnInteger:
+	# If page is not an integer, deliver first page.
+		contacts = paginator.page(1)
+	except EmptyPage:
+	# If page is out of range (e.g. 9999), deliver last page of results.
+		contacts = paginator.page(paginator.num_pages)
+	context = {
+		# 'group': group,
+		'contacts': contacts,
+		# 'topic': topic,
+		}
+	return render(request, 'group_all.html',  context)
+
+def group_index(request):
+	topic = Topic.objects.order_by('-updated')
+	context = {
+		'topic': topic,
+		}
+	return render(request, 'group_index.html',  context)
+
 def group_detail(request, group_id):
 	try:
 		group = Group.objects.get(pk=group_id)

@@ -1,0 +1,55 @@
+{% extends "base_1.html" %}
+{% load ckeditor_filter %}
+{% block HeadDoc %}
+<link href="/static/css/home.css" rel="stylesheet">
+<script src="/static/js/home.js"></script>
+<link href="/static/css/group_all.css" rel="stylesheet">
+{% endblock %}
+
+
+ {% block content %}
+
+
+ <div class="container">
+ 	 <div class="container-group">
+
+ 	<div class='divideline'>
+ 	<span class="span-mark-author">所有话题组</span>
+ 	</div>
+{% for item in contacts %}
+
+          <div class="col-md-12 newsblock" id="{{item.blockid}}">
+          <div class="col-md-4 leftimgblock">
+          <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}" style="width: 220px; height:124px;"></a>
+          </div> 
+          <div class="col-md-8 rightwordblock">
+          <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
+          <span><img  class="img-circle usericon" src='{{item.founder.get_image_url}}'></span>
+          <span class="writer">{{item.founder}}</span> 
+          <span class="posttime">{{item.timestamp|date:"Y-m-d H:i"}}</span> 
+		<span class="coutopic">{{item.coutopic}}条话题</span>          
+
+          <p class="associatetitle" style='padding-left: 0px;'>{{item.associatetitle}}</p>
+          </div> 
+          </div> <!-- newsblock -->
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if contacts.has_previous %}
+            <a href="?page={{ contacts.previous_page_number }}">前一页</a>
+        {% endif %}
+
+        <span class="current">
+            第 {{ contacts.number }} 页, 共 {{ contacts.paginator.num_pages }} 页.
+        </span>
+
+        {% if contacts.has_next %}
+            <a href="?page={{ contacts.next_page_number }}">后一页</a>
+        {% endif %}
+    </span>
+</div><!-- <div class="pagination"> -->
+</div><!-- container-group -->
+  </div><!-- container -->
+ {% endblock %}
+ 

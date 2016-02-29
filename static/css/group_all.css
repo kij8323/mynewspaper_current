@@ -1,0 +1,30 @@
+.container-group{
+	margin-top: 50px;
+	width: 60%;
+	  display: block;
+	  margin-left: auto;
+	  margin-right: auto;
+}
+
+.span-mark-author {
+	border-bottom: 4px solid #67CA87;
+	color: #333;
+	margin-top:-28px;
+	height: 28px;
+	position: absolute;
+	font-size: 18px;
+}
+
+.divideline{
+	margin-bottom: 30px;
+	border-top: 1px solid #f0f0f0;
+}
+
+.pagination{
+
+	  margin-left: 40%;
+}
+
+.coutopic{
+	margin-left: 15px;
+}

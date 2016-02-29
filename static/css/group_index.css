@@ -1,0 +1,55 @@
+.groupindex{
+	margin-top: 50px;
+}
+
+.divideline{
+	border-bottom: 1px solid #f0f0f0;
+}
+
+.span-mark-author {
+	border-bottom: 4px solid #67CA87;
+	color: #333;
+	margin-top:-28px;
+	height: 28px;
+	position: absolute;
+	font-size: 20px;
+}
+
+
+.topic{
+	border-bottom: 1px solid #f0f0f0;
+	padding: 28px 0;
+}
+
+.topic a{
+	font-size: 16px;
+	color: #333;
+}
+
+.topic a:hover {
+color: #3ca5f6;
+}
+
+.topic a:link {
+text-decoration: none;
+}
+
+.topickinfor span{
+	font-size: 14px;
+	color: #999;
+	line-height: 24px;
+	margin-right: 15px;
+}
+
+.topickinfor{
+	margin-top: 5px;
+}
+
+.usericon{
+width: 34px;
+height: 34px;
+}
+
+.topickinfor a span{
+	color: #3ca5f6;
+}

@@ -24,7 +24,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+'</span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -94,7 +94,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+'</span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -490,10 +490,24 @@ $(function(){
 {% endif %}  
 
     </div><!-- class="comment-form" -->
-    
-<!-- <div id='relationartical'>
-  <span class="span-mark-author">相关文章</span>
-</div> -->
+
+<div id='relationartical'>
+  <span class="span-mark-author pull-left">相关文章</span>
+  <div class="relationblock">
+  {% for item in thisrelationtagarticle %}
+  <div class="col-xs-4">
+  <a href="{{item.article.get_absolute_url}}">
+  <img class='center-block' src="{{item.article.get_image_url}}" >
+  </a>
+  <div class="rightitle">
+  <a href="{{item.article.get_absolute_url}}">
+  {{item.article.title}}
+  </a>
+  </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
     
 
      </div><!-- <div id="article"> -->
@@ -520,34 +534,36 @@ $(function(){
 <div id='hotcategory'>
   <div class="pull-left">
   <h4><b>热门关键字</b></h4>
-  <!-- <span class="span-mark-hotcategory"></span> -->
+  <span class="span-mark"></span>
   </div>
     <div class='rightcategory'>
   {% for item in category %}
+
   <div class='search-tag img-rounded'>
     <a href="{{item.get_absolute_url}}">
       {{item.title}}
     </a>
     </div>
   {% endfor %}
+
    </div>
 </div>
 
 <div id='hotarticle'>
   <div class="pull-left" style="margin-bottom: 15px;">
   <h4><b>热文</b></h4>
- <!--  <span class="span-mark-hotarticle"></span> -->
+  <span class="span-mark"></span>
   </div>
 {% for item in hotarticle %}
 <div class="rightimg">
 <a href="{{item.get_absolute_url}}">
-<img src="{{item.get_image_url}}" style="width: 215px; height:124px;">
+<img src="{{item.get_image_url}}" >
 </a>
-</div>
 <div class="rightitle">
 <a href="{{item.get_absolute_url}}">
 {{item.title}}
 </a>
+</div>
 </div>
 {% endfor %}
 </div>

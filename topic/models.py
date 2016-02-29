@@ -4,6 +4,8 @@ from accounts.models import MyUser
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.forms import ModelForm
+from django.core.urlresolvers import reverse
+from django.conf import settings
 # Create your models here.
 class Group(models.Model):
 	#文章名称
@@ -14,8 +16,8 @@ class Group(models.Model):
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
 	#作者
 	founder = models.ForeignKey(MyUser)
-	#文章地址
-	url_address = models.CharField(max_length=500, null=True, blank=True)
+	#副标题
+	associatetitle = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	#自定义查询语句
@@ -24,7 +26,7 @@ class Group(models.Model):
 		return self.title
 
 	def get_image_url(self):
-		return "%s%s" %(settings.STATIC_URL, self.image)
+		return "%s%s" %(settings.MEDIA_URL, self.image)
 
 	def blockid(self):
 		blockid = "block"+str(self.id)
@@ -32,6 +34,9 @@ class Group(models.Model):
 
 	def get_absolute_url(self):
 		return reverse('group_detail', kwargs={"group_id": self.id})
+
+	def coutopic(self):
+		return self.topic_set.all().count()
 
 class Topic(models.Model):
 	#文章名称

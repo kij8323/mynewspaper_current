@@ -1,0 +1,39 @@
+{% extends "base_1.html" %}
+{% load time_filter %}
+{% block HeadDoc %}
+<link href="/static/css/group_index.css" rel="stylesheet">
+{% endblock %}
+
+
+ {% block content %}
+
+
+ <div class="container">
+  <div class="groupindex">
+  <div class='col-md-8 leftcontainer'>
+    <div class='divideline'>
+  <span class="span-mark-author">所有话题</span>
+  </div>
+    {% for item in topic%}
+    <div class='topic'>
+    <a href="{{item.get_absolute_url}}">{{item.title}}</a>
+    
+    <div class='topickinfor'>
+      <span style='margin-right:0px;'>作者:</span>
+      <a href="{{item.writer.get_absolute_url}}">
+    <span class='smallblock'>{{item.writer}}</span>
+    </a>
+    <span class='smallblock'>发表于:{{ item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|time_chinese_month|time_chinese_months|comma }}前</span>
+    <span class='smallblock'>来自:{{item.group}}</span>
+    <span class='smallblock'>x条评论</span>
+    </div>
+    </div>
+    {%endfor%}
+  </div>
+  <div class='col-md-4 rightcontainer'>
+    y
+  </div>
+  </div>
+</div><!-- container -->
+ {% endblock %}
+ 

@@ -91,7 +91,7 @@ ckeditor上传本地图片
 已收藏
 
 
-
+style="width: 215px; height:124px"
 
 请先登录
 回复文章
@@ -102,4 +102,13 @@ ckeditor上传本地图片
 相关文章
 富文本框
 
+<img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
+&nbsp&nbsp<span class="author-time">
+
+/*	content: '';
+	display: block;
+	clear: both;
+	height: 0;*/
+
+x条评论
 <div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike543">3</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike543">1</span></div>
