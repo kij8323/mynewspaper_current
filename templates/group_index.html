@@ -31,9 +31,29 @@
     {%endfor%}
   </div>
   <div class='col-md-4 rightcontainer'>
-    y
+    
+<div id='hotarticle'>
+  <div class="pull-left" style="margin-bottom: 15px;">
+  <h4><b>热文</b></h4>
+  <span class="span-mark"></span>
   </div>
-  </div>
+{% for item in hotarticle %}
+<div class="rightimg">
+<a href="{{item.get_absolute_url}}">
+<img src="{{item.get_image_url}}" >
+</a>
+<div class="rightitle">
+<a href="{{item.get_absolute_url}}">
+{{item.title}}
+</a>
+</div>
+</div>
+{% endfor %}
+</div>
+
+    
+  </div><!-- col-md-4 rightcontainer -->
+  </div><!-- groupindex -->
 </div><!-- container -->
  {% endblock %}
  

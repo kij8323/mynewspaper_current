@@ -40,6 +40,7 @@ def group_all(request):
 
 def group_index(request):
 	topic = Topic.objects.order_by('-updated')
+
 	context = {
 		'topic': topic,
 		}
@@ -64,8 +65,18 @@ def topic_detail(request, topic_id):
 		topic = Topic.objects.get(pk=topic_id)
 	except topic.DoesNotExist:
 		raise Http404("Does not exist")
-	comment = Comment.objects.filter(topic=topic)
+	comment = Comment.objects.filter(topic=topic).filter(parent=None).order_by('timestamp')
 	user = request.user
+	paginator = Paginator(comment, 5)
+	page = request.GET.get('page')
+	try:
+		contacts = paginator.page(page)
+	except PageNotAnInteger:
+	# If page is not an integer, deliver first page.
+		contacts = paginator.page(1)
+	except EmptyPage:
+	# If page is out of range (e.g. 9999), deliver last page of results.
+		contacts = paginator.page(paginator.num_pages)
 	topic.readers += 1
 	topic.save()
 	context = {
@@ -74,6 +85,7 @@ def topic_detail(request, topic_id):
 		"form": CommentForm,
 		"submit_btn": "发表",
 		"comment": comment,
+		'contacts': contacts,
 	}
 	return render(request, 'topic_detail.html',  context)
 

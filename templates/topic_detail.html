@@ -1,8 +1,8 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
 {% load staticfiles %}
-<link href="/static/css/article_detail.css" rel="stylesheet">
-<script src="/static/js/article_detail.js"></script>
+<link href="/static/css/topic_detail.css" rel="stylesheet">
+<script src="/static/js/topic_detail.js"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
 <script>
@@ -38,8 +38,8 @@ $(function() {
         type: "post",
         dataType: 'json',
           success: function(data) {
-            $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+            $(".freshcomment").append(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -78,8 +78,8 @@ $(function() {
         type: "post",
         dataType: 'json',
           success: function(data) {
-            $(".freshcomment").prepend(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div><div class="errorlist" style="text-align: center;">评论不能为空</div></div>'
+            $('.freshchildcomment'+preentid).append(
+              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp" style="margin-bottom: 15px;"><i class="icon-dp" ></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
           },
           error: function(data) { 
@@ -125,7 +125,7 @@ $(function() {
 </div>
 
 <div class="col-xs-8">
-<div id="topic">
+<div id="article">
  <h1 class="t-h1">{{topic.title}}</h1>
 
 <div class="topic-author">
@@ -143,6 +143,63 @@ $(function() {
 <div class="topic-content-wrap">
      <p>{{topic.content|safe}}</p>
 </div>
+
+
+{% for item in contacts %}
+    <div class="comment">
+      <span class="author-name">{{item.user}}</span>
+
+      <span class="author-time">
+      {{item.timestamp|timesince}}
+      </span>
+
+      <div class="pl-content">{{item.text|safe}}</div>
+
+      <div class="pl-box-btm">
+              <div class="btn-dp">
+                <i class="icon-dp"></i>
+                我要点评
+                </div>
+                <div class="form-comment-reply" id="{{item.id}}">
+
+                  {% for childitem in item.child_comment %}
+                  <span class="author-name">{{childitem.user}}</span>
+                  <div class="pl-content">{{childitem.text|safe}}</div>
+                  {% endfor %}
+                  
+                  <div class="freshchildcomment{{item.id}}">
+                  </div>
+                    {{form}}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              </div>
+      </div>
+    </div>
+{% endfor %}
+
+<div class="freshcomment">
+</div>
+
+<div class='paginationcontain'>
+<div class="pagination">
+    <span class="step-links">
+{% if contacts.has_previous %}
+        <a class='paginator' title='上一页' href='?page={{ contacts.previous_page_number }}'><span>&lt;</span></a>
+ {% endif %}
+ {% for page in contacts.paginator.page_range %}
+     {% if page = contacts.number %}
+         <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
+     {% else %}
+         <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+     {% endif %}
+ {% endfor %}
+ {% if contacts.has_next %}
+     <a class='paginator' title='下一页' href='?page={{ contacts.next_page_number }}'><span>&gt;</span></a>
+ {% endif %}
+    </span>
+</div><!-- <div class="pagination"> -->
+</div>
+
+
 
 <div class="comment-form">
      <span class="span-mark-author">发表评论</span>
@@ -166,40 +223,11 @@ $(function() {
 
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block' >发表</button>
     </div>
-    <div class="errorlist" style="text-align: center;">评论不能为空</div>
+  
 
-<div class="successlist" style="text-align: center;">评论发表成功</div>
 
-<div class="freshcomment">
 
-</div>
-{% for item in comment %}
-    <div class="comment">
-      <span class="author-name">{{item.user}}</span>
 
-      <span class="author-time">
-      {{item.timestamp|timesince}}
-      </span>
-
-      {% if item.is_child %}
-      <div class="blockquote">回复@{{item.parent.user}}发表的：{{item.parent.text|safe}}</div>
-      {% endif %}
-
-      <div class="pl-content">{{item.text|safe}}</div>
-
-      <div class="pl-box-btm">
-              <div class="btn-dp">
-                <i class="icon-dp"></i>
-                我要点评
-                </div>
-                <div class="form-comment-reply" id="{{item.id}}">
-                    {{form}}
-                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
-              </div>
-      </div>
-      <div class="errorlist" style="text-align: center;">评论不能为空</div>
-    </div>
-{% endfor %}
 
     </div><!-- class="comment-form" -->
      </div><!-- <div id="topic"> -->

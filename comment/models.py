@@ -33,6 +33,7 @@ class Comment(models.Model):
 	def __unicode__(self):
 		return self.user.username
 
+
 	def is_child(self):
 		if self.parent is not None:
 			return True
@@ -44,6 +45,10 @@ class Comment(models.Model):
 
 	def dislike(self):
  		return CommentDisLike.objects.filter(comment=self).count()
+
+	def child_comment(self):
+ 		return Comment.objects.filter(parent=self)
+
 
 #text = RichTextField(max_length=5000, null=True, blank=True)
 
