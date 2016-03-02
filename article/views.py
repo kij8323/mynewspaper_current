@@ -12,7 +12,9 @@ import json
 from django.http import HttpResponse
 from notifications.signals import notify
 from accounts.models import MyUser
+from notifications.atwho import atwho
 
+# def 
 
 def article_detail(request, article_id):
 	try:
@@ -100,6 +102,12 @@ def articlecomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text)
 			c.save()
+			userlist = atwho(text = text, sender = user, targetcomment = None)
+			for item in userlist:
+				print 'for item in userlist:'
+				atwhouser = MyUser.objects.get(username = item)
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"
+				text = text.replace('@'+item, test);
 			data = {
 			"user": user.username,
 			"text": text,
@@ -133,8 +141,13 @@ def commentcomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text, parent=targetcomment)
 			c.save()
-			notify.send(sender=user, target_object=targetcomment, verb="@", text=text)
+			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
 			print 'z'
+			for item in userlist:
+				print 'for item in userlist:'
+				atwhouser = MyUser.objects.get(username = item)
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"
+				text = text.replace('@'+item, test);
 			data = {
 			"user": user.username,
 			"text": text,

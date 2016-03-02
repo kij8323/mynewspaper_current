@@ -6,21 +6,19 @@ from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from .signals import notify
-
+from ckeditor.fields import RichTextField
+from comment.models import Comment
+from accounts.models import MyUser
+import traceback 
 # Create your models here.
 class Notification(models.Model):
 	#发送消息的对象
-	sender_content_type = models.ForeignKey(ContentType, related_name='nofity_sender')
-	sender_object_id = models.PositiveIntegerField()
-	sender_object = GenericForeignKey("sender_content_type", "sender_object_id")
+	sender_object = models.ForeignKey(MyUser)
 	verb = models.CharField(max_length=255)
 	#评论内容
-	text = models.TextField()
+	text = RichTextField(max_length=5000, null=True, blank=True)
 	#目标对象
-	target_content_type = models.ForeignKey(ContentType, related_name='notify_target', 
-		null=True, blank=True)
-	target_object_id = models.PositiveIntegerField(null=True, blank=True)
-	target_object = GenericForeignKey("target_content_type", "target_object_id")
+	target_object = models.ForeignKey(Comment, null=True, blank=True)
 	recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notifications')
 	#是否已读
 	read = models.BooleanField(default=False)
@@ -28,14 +26,23 @@ class Notification(models.Model):
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False)
 
 	def __unicode__(self):
-		context = {
-			"sender": self.sender_object,
-			"verb": self.verb,
-			"target": self.target_object.text,
-			"text": self.text,
-			"recipient": self.recipient
-		}
-		return "%(sender)s %(verb)s %(target)s %(recipient)s %(text)s" %context
+		if self.target_object:
+			context = {
+				"sender": self.sender_object,
+				"verb": self.verb,
+				"target": self.target_object.text,
+				"text": self.text,
+				"recipient": self.recipient
+			}
+			return "%(sender)s %(verb)s %(recipient)s %(target)s  %(text)s" %context
+		else:
+			context = {
+				"sender": self.sender_object,
+				"verb": self.verb,
+				"text": self.text,
+				"recipient": self.recipient
+			}
+			return "%(sender)s %(verb)s %(recipient)s  %(text)s" %context
 
 
 def new_notification(sender, **kwargs):
@@ -45,14 +52,22 @@ def new_notification(sender, **kwargs):
 	text = kwargs.pop("text")
 	verb = kwargs.pop("verb")
 	sender_object = sender
-	recipient = target_object.user
+	recipient = kwargs.pop("recipient")
 	try:
-		c = Notification(target_object=target_object, 
-						sender_object=sender_object, 
-						recipient=recipient,
-						verb = verb,
-						text = text,
-						)
+		if target_object: 
+			c = Notification(target_object=target_object, 
+							sender_object=sender_object, 
+							recipient=recipient,
+							verb = verb,
+							text = text,
+							)
+		else:
+			c = Notification(
+							sender_object=sender_object, 
+							recipient=recipient,
+							verb = verb,
+							text = text,
+							)
 		c.save()
 	except:
 		traceback.print_exc()

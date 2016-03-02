@@ -65,5 +65,8 @@ $(document).ready(function(){
 $(function(){
   $("body").on("click", '.btn-dp', function(){
     $(this).next(".form-comment-reply").fadeToggle();
+    x = $(this).parent().attr("id");
+   $(this).next().children('#id_commentext').focus()
+    $(this).next().children('#id_commentext').text("@"+x+' ')
   });
 })

@@ -4,6 +4,8 @@
 from django.shortcuts import render
 from .form import LoginForm, RegisterForm
 from .models import MyUser, MyUserEmailForm, MyUserIconForm, MyUserPassWForm
+
+from notifications.models import Notification
 # from comment.models import Comment
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from django.core.urlresolvers import reverse
@@ -161,7 +163,7 @@ def userdashboardcomments(request, user_id):
 def userdashboardnotifications(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
-		notifications = user.notifications.all()
+		notifications = Notification.objects.filter(recipient = user)
 		print 'notifications'
 		print notifications
 		context = {

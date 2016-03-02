@@ -3,9 +3,9 @@
 {% for item in comment %}
     <div class="comment">
       <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>
-      <a href="{{item.user.get_absolute_url}}">
-      <span class="author-name">{{item.user}}</span>
-      </a>
+      <span class="author-name"><a href="{{item.user.get_absolute_url}}">
+      {{item.user}}
+      </a></span>
 
       <span class="author-time">
       {{item.timestamp}}

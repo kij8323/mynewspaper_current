@@ -6,6 +6,8 @@ pip install Django==1.8
 mysql -h localhost -u root -p
 sudo service mysql restart
 
+delete from notifications_notification
+
 python manage.py migrate
 username:shen
 password:123456
@@ -110,5 +112,33 @@ style="width: 215px; height:124px"
 	clear: both;
 	height: 0;*/
 
-x条评论
-<div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike543">3</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike543">1</span></div>
+<span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
+
+
+
+
+ ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+'</span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"&nbsp发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+
+<div class="comment"><span><img class="img-circle commentusericon" src={{user.get_image_url}}></span>&nbsp;&nbsp;<span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span>
+
+
+
+
+class="pl-box-btm" id='{{item.user}}
+
+
+<a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
+

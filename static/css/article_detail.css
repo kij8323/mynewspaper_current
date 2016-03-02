@@ -307,8 +307,14 @@ a:link{
 }
 
 a{
+	color: #337ab7;
+}
+
+.rightimg a, .rightitle a{
 	color: black;
 }
+
+
 .rightimg{
 	padding: 30px;
 	border-bottom: 1px solid #f0f0f0;
@@ -388,6 +394,14 @@ a{
 	color: #bbb;
 	border: 1px solid #f0f0f0;
 /*background-color: white;*/
+}
+
+#morecomment{
+	padding: 0px;
+}
+
+.container-fluid {
+	padding: 0px;
 }
 
 #catetag{
