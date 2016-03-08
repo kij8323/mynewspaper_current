@@ -100,14 +100,16 @@ def articlecomment(request):
 		user = request.user
 		print user
 		try:
-			c = Comment(user=user, article=article, text=text)
-			c.save()
+			# c = Comment(user=user, article=article, text=text)
+			# c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = None)
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
-				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"
-				text = text.replace('@'+item, test);
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				text = text.replace('@'+item+' ', test);
+			c = Comment(user=user, article=article, text=text)
+			c.save()
 			data = {
 			"user": user.username,
 			"text": text,
@@ -139,15 +141,17 @@ def commentcomment(request):
 		user = request.user
 		print user
 		try:
-			c = Comment(user=user, article=article, text=text, parent=targetcomment)
-			c.save()
+			# c = Comment(user=user, article=article, text=text, parent=targetcomment)
+			# c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
 			print 'z'
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
-				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"
-				text = text.replace('@'+item, test);
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				text = text.replace('@'+item+' ', test);
+			c = Comment(user=user, article=article, text=text, parent=targetcomment)
+			c.save()
 			data = {
 			"user": user.username,
 			"text": text,

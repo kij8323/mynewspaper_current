@@ -125,20 +125,7 @@ style="width: 215px; height:124px"
 
 
 
+<div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time">0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child" style="color: rgb(60, 165, 246);"><i class="icon-childcomment" style="background-position: -250px -79px;"></i>回复</div></div></div>
 
 
-
-
-
-
-<div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+
-<div class="comment"><span><img class="img-circle commentusericon" src={{user.get_image_url}}></span>&nbsp;&nbsp;<span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span>
-
-
-
-
-class="pl-box-btm" id='{{item.user}}
-
-
-<a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
 

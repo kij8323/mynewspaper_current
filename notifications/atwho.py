@@ -10,9 +10,12 @@ def atwho(text, sender, targetcomment):
 	results =  pattern.findall(commmentdecode) 
 	userlist = []
 	for item in results:
-		user = MyUser.objects.get(username = item.encode('utf8'))
+		user = MyUser.objects.filter(username = item.encode('utf8'))
 		if user:
+			user = MyUser.objects.get(username = item.encode('utf8'))
 			notify.send(sender=sender, target_object=targetcomment, recipient = user, verb="@", text=text)
 			userlist.append(item.encode('utf8'))
+	print 'atwho'
 	print userlist
+	print 'atwho'
 	return userlist

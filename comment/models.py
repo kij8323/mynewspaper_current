@@ -47,8 +47,10 @@ class Comment(models.Model):
  		return CommentDisLike.objects.filter(comment=self).count()
 
 	def child_comment(self):
- 		return Comment.objects.filter(parent=self)
+ 		return Comment.objects.filter(parent=self).order_by('timestamp')
 
+	def child_commentcount(self):
+ 		return Comment.objects.filter(parent=self).count()
 
 #text = RichTextField(max_length=5000, null=True, blank=True)
 

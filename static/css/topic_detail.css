@@ -94,8 +94,20 @@ body{
 }
 
 .commentusericon{
-	width: 50px;
-	height: 50px;
+	width: 25px;
+	height: 25px;
+	border-radius: 3px;
+	background-color: #eee;
+	float: left;
+	margin: 4px 1em 0 0;
+}
+
+a:link{
+	text-decoration: none;
+}
+
+a{
+	color: #337ab7;
 }
 
 #article{
@@ -211,8 +223,9 @@ font-size: 16px;
 	color: #bbb;
 	cursor: pointer;
 	width: 88px;
+	vertical-align: middle;
+	margin-left: 15px;
 	}
-
 
 
 .icon-dp{
@@ -221,7 +234,7 @@ font-size: 16px;
 	height: 20px;
 	width: 20px;
 	background-repeat: no-repeat;
-	vertical-align: text-bottom;
+	vertical-align: middle;
 	background-position: -170px -173px;
 }
 
@@ -250,7 +263,8 @@ font-size: 16px;
 .form-comment-reply{
 	display: none;
 	border: 1px solid #f0f0f0;
-	padding: 15px;
+	padding-left: 1em;
+	padding-right: 1em;
 	border-radius: 5px;
 	margin-top: 10px;
 }
@@ -307,13 +321,7 @@ color: #A19F9F;
 
 
 
-a:link{
-	text-decoration: none;
-}
 
-a{
-	color: black;
-}
 .rightimg{
 	padding: 30px;
 	border-bottom: 1px solid #f0f0f0;
@@ -401,8 +409,9 @@ a{
 
 
 .pl-content{
-	margin-top: 15px;
-	margin-bottom: 15px;
+/*	margin-top: 15px;
+	margin-bottom: 15px;*/
+
 }
 
 .author-time{
@@ -456,7 +465,7 @@ h4 b{
 	border: none;
 	padding: 6px 0;
 	/*border-radius: 10px;*/
-	background: rgba(0,0,0,.2);
+	/*background: rgba(0,0,0,.2);*/
 }
 
 .paginator_current{
@@ -465,7 +474,7 @@ h4 b{
 	margin-left: -1px;
 	line-height: 27px;
 	color: #fff;
-	background-color: #2f99ea;
+	background-color:  #67CA87;
 	margin-right: 10px;
 	border-radius: 0;
 	height: 36px;
@@ -473,5 +482,50 @@ h4 b{
 	border: none;
 	padding: 6px 0;
 	/*border-radius: 10px;*/
-	background: #67CA87;
+	/*background: #67CA87;*/
 }
+
+.childcomment{
+	border-bottom: 1px solid #f0f0f0;
+	padding: .9em 0;
+}
+
+.rightchildcomment, .rightcomment{
+	overflow: hidden;
+}
+
+.btn-dp-child {
+	color: #bbb;
+	cursor: pointer;
+	width: 88px;
+	}
+
+.icon-childcomment{
+	background-image: url(/static/images/sprites-1.9.2.4c54885a.png);
+	display: inline-block;
+	height: 11px;
+	width: 11px;
+	background-repeat: no-repeat;
+	background-position: -250px -92px;
+	margin-right: 5px;
+	vertical-align: -1px;
+}
+
+.icon-dp-checkbox{
+	background-image: url(/static/images/sprites-1.9.2.4c54885a.png);
+	display: inline-block;
+	height: 11px;
+	width: 11px;
+	background-repeat: no-repeat;
+	background-position: -28px -22px;
+	/*margin-right: 5px;*/
+	vertical-align: -1px;
+}
+
+.btn-dp-reply{
+	color: #bbb;
+	cursor: pointer;
+	width: 88px;
+	vertical-align: middle;
+}
+

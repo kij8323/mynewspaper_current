@@ -1,6 +1,7 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
 {% load staticfiles %}
+{% load time_filter %}
 <link href="/static/css/topic_detail.css" rel="stylesheet">
 <script src="/static/js/topic_detail.js"></script>
 <script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
@@ -79,14 +80,14 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $('.freshchildcomment'+preentid).append(
-              ' <div class="comment"><span class="author-name">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp" style="margin-bottom: 15px;"><i class="icon-dp" ></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
+              ' <div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time"> 0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child"><i class="icon-childcomment"></i>回复</div></div></div>'
               )
           },
           error: function(data) { 
               alert("Got an error dude");
           }
     });
-    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
+    /*$('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);*/
     $('.successlist').fadeIn("slow").fadeOut(3000);
     $(this).prev(".form-control").val("")
     }
@@ -147,31 +148,50 @@ $(function() {
 
 {% for item in contacts %}
     <div class="comment">
-      <span class="author-name">{{item.user}}</span>
+      <img  class="commentusericon" src='{{item.user.get_image_url}}'>
+      <div class='rightcomment'>
+      <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
 
       <span class="author-time">
-      {{item.timestamp|timesince}}
+      {{item.timestamp|date:"Y-m-d H:i"}}
       </span>
 
       <div class="pl-content">{{item.text|safe}}</div>
 
-      <div class="pl-box-btm">
-              <div class="btn-dp">
+      <div class="pl-box-btm" id = '{{item.user}}'>
+                <span class="btn-dp-reply">
                 <i class="icon-dp"></i>
-                我要点评
-                </div>
+                回复
+                </span>
+
+              <span class="btn-dp">
+                <i class="icon-dp-checkbox"></i>
+                {{item.child_commentcount}}条点评
+                </span>
                 <div class="form-comment-reply" id="{{item.id}}">
 
                   {% for childitem in item.child_comment %}
-                  <span class="author-name">{{childitem.user}}</span>
+                  <div class = 'childcomment'>
+                    <img  class="commentusericon" src='{{childitem.user.get_image_url}}'>
+                  <div class = 'rightchildcomment' id = '{{childitem.user}}'>
+                  <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{childitem.user}}</a></span>
+                  <span class="author-time">
+                  {{childitem.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma }}前 :
+                   </span>
                   <div class="pl-content">{{childitem.text|safe}}</div>
+                  <div class="btn-dp-child">
+                    <i class="icon-childcomment"></i>回复
+                  </div>
+                  </div><!-- rightchildcomment -->
+                  </div>
                   {% endfor %}
                   
-                  <div class="freshchildcomment{{item.id}}">
+                  <div class="freshchildcomment{{item.id}}" style='margin-top : 1em;'>
                   </div>
                     {{form}}
                 <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
               </div>
+      </div>
       </div>
     </div>
 {% endfor %}

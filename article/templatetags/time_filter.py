@@ -68,17 +68,21 @@ def AtWhoUser(value):
     pattern = re.compile(u'@([\u4e00-\u9fa5\w\-]+)')  
     results =  pattern.findall(commmentdecode) 
     userlist = []
+    print 'for item in userlist:'
+    print 'for item in userlist:'
     for item in results:
-        user = MyUser.objects.get(username = item.encode('utf8'))
+        user = MyUser.objects.filter(username = item.encode('utf8'))
         if user:
             #notify.send(sender=sender, target_object=targetcomment, recipient = user, verb="@", text=text)
             userlist.append(item.encode('utf8'))
+        else:
+            pass
     for item in userlist:
         print 'for item in userlist:'
         atwhouser = MyUser.objects.get(username = item)
         print 'for item in userlist:'
-        test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"
+        test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
         print 'for item in userlist:'
-        value = value.replace('@'+item, test);
+        value = value.replace('@'+item+' ', test);
         print 'for item in userlist:'
     return value

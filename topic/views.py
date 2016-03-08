@@ -7,11 +7,13 @@ from .models import Group, Topic, TopicForm
 from django.contrib import messages
 from article.form import CommentForm
 from comment.models import Comment
+from accounts.models import MyUser
 import json
 from django.http import HttpResponse
 import traceback 
 from notifications.signals import notify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from notifications.atwho import atwho
 # from .forms import TopicForm
 
 # Create your views here.
@@ -124,6 +126,14 @@ def topicomment(request):
 		user = request.user
 		print user
 		try:
+			# c = Comment(user=user, topic=topic, text=text)
+			# c.save()
+			userlist = atwho(text = text, sender = user, targetcomment = None)
+			for item in userlist:
+				print 'for item in userlist:'
+				atwhouser = MyUser.objects.get(username = item)
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				text = text.replace('@'+item+' ', test);
 			c = Comment(user=user, topic=topic, text=text)
 			c.save()
 			data = {
@@ -144,29 +154,24 @@ def topicomment(request):
 #ajax，发送评论的评论,post
 def topcommentcomment(request):
 	if request.is_ajax() and request.method == 'POST':
-		print 'commentcomment'
 		text = request.POST.get('comment')
-		print 'text'
 		topicid = request.POST.get('topicid')
-		print 'topicid'
 		#parenttext = request.POST.get('parenttext')
 		preentid = request.POST.get('preentid')
-		print 'preentid'
 		topic = Topic.objects.get(pk=topicid)
-		print 'topic'
 		comment = Comment.objects.filter(topic=topic)
-		print 'comment'
 		targetcomment = Comment.objects.get(pk=preentid)
-		print 'targetcomment'
-		print 'x'
-		print 'y'
-		print 'z'
 		user = request.user
 		print user
 		try:
+			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
+			for item in userlist:
+				print 'for item in userlist:'
+				atwhouser = MyUser.objects.get(username = item)
+				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				text = text.replace('@'+item+' ', test);
 			c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
 			c.save()
-			notify.send(sender=user, target_object=targetcomment, verb="@", text=text)
 			print 'z'
 			data = {
 			"user": user.username,
