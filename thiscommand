@@ -127,5 +127,21 @@ style="width: 215px; height:124px"
 
 <div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time">0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child" style="color: rgb(60, 165, 246);"><i class="icon-childcomment" style="background-position: -250px -79px;"></i>回复</div></div></div>
 
+收起点评
 
+$(function(){
+  $("body").on("click", '.btn-dp', function(){
+    var node = $(this).next(".form-comment-reply")
+    commnetcount = node.children('.childcomment').length
+    $(this).next(".form-comment-reply").fadeToggle(function(){
+      var display = node.css("display");
+      if (display == 'none'){
+        $(this).parent().children('.btn-dp').html('<i class="icon-dp-checkbox"></i>'+commnetcount+'条点评')
+      }
+      else {
+        $(this).parent().children('.btn-dp').html('收起点评')
+      }
+    });
+  });
+})
 

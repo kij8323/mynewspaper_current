@@ -94,7 +94,17 @@ $(document).ready(function(){
 
 $(function(){
   $("body").on("click", '.btn-dp', function(){
-    $(this).next(".form-comment-reply").fadeToggle();
+    var node = $(this).next(".form-comment-reply")
+    commnetcount = node.children('.childcomment').length
+    $(this).next(".form-comment-reply").fadeToggle(function(){
+      var display = node.css("display");
+      if (display == 'none'){
+        $(this).parent().children('.btn-dp').html('<i class="icon-dp-checkbox"></i>'+commnetcount+'条点评')
+      }
+      else {
+        $(this).parent().children('.btn-dp').html('收起点评')
+      }
+    });
   });
 })
 
@@ -103,7 +113,6 @@ $(function(){
     $(this).next().next(".form-comment-reply").fadeToggle();
     x = $(this).parent().attr("id");
     $(this).next().next('.form-comment-reply').children('#id_commentext').focus()
-    /*$(this).next().next('.form-comment-reply').children('#id_commentext').text("@"+x+' ')*/
   });
 })
 
@@ -115,6 +124,3 @@ $(function(){
   });
 })
 
-/*    x = $(this).parent().attr("id");
-   $(this).next().children('#id_commentext').focus()
-    $(this).next().children('#id_commentext').text("@"+x+' ')*/

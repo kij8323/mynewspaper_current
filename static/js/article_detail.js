@@ -72,9 +72,17 @@ $(document).ready(function(){
 
 $(function(){
   $("body").on("click", '.btn-dp', function(){
-    $(this).next(".form-comment-reply").fadeToggle();
+    var node = $(this).next(".form-comment-reply")
+    $(this).next(".form-comment-reply").fadeToggle(function(){
+      var display = node.css("display");
+      if (display == 'none'){
+        $(this).parent().children('.btn-dp').html('<i class="icon-dp" style="background-position: -170px -173px;"></i>我要点评')
+      }
+      else {
+        $(this).parent().children('.btn-dp').html('取消')
+      }
+    });
     x = $(this).parent().attr("id");
    $(this).next().children('#id_commentext').focus().text("@"+x+' ')
-    /*$(this).next().children('#id_commentext').text("@"+x+' ')*/
   });
 })
