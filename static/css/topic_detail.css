@@ -81,7 +81,9 @@ body{
 	cursor: pointer;
 }
 
-.articlecollection{
+.replyleftframe{
+	background-image: url(/static/images/sharebackground.png);
+	background-position: -181px -259px;
 	margin-top: 15px;
 	display: inline-block;
 	height: 60px;
@@ -91,7 +93,14 @@ body{
 	text-align: center;
 	border-bottom: 1px solid #f0f0f0;
 	cursor: pointer;
+
 }
+
+.btn-dp-right {
+	color: #bbb;
+	cursor: pointer;
+	width: 88px;
+	}
 
 .commentusericon{
 	width: 25px;
@@ -498,6 +507,7 @@ h4 b{
 	color: #bbb;
 	cursor: pointer;
 	width: 88px;
+	float: left;
 	}
 
 .icon-childcomment{

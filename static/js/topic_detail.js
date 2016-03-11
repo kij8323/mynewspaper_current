@@ -32,11 +32,11 @@ $(document).ready(function(){
   $("#morecomment-btn-block").mouseleave(function(){
       $(this).css("background-color","white");
   });
- $(".articlecollection").mouseenter(function(){
+ $(".replyleftframe").mouseenter(function(){
       $(this).css("background-color","#3ca5f6");
       $(this).css("color","white");
   });
-  $(".articlecollection").mouseleave(function(){
+  $(".replyleftframe").mouseleave(function(){
       $(this).css("background-color","#fafafa");
       $(this).css("color","#bbb");
   });
@@ -91,7 +91,7 @@ $(document).ready(function(){
 });
 
 
-
+/*收起点评*/
 $(function(){
   $("body").on("click", '.btn-dp', function(){
     var node = $(this).next(".form-comment-reply")
@@ -108,6 +108,8 @@ $(function(){
   });
 })
 
+
+/*回复评论按钮*/
 $(function(){
   $("body").on("click", '.btn-dp-reply', function(){
     $(this).next().next(".form-comment-reply").fadeToggle();
@@ -116,6 +118,8 @@ $(function(){
   });
 })
 
+
+/*回复评论的评论按钮*/
 $(function(){
   $("body").on("click", '.btn-dp-child', function(){
     x = $(this).parent().attr("id");

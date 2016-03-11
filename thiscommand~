@@ -104,44 +104,7 @@ style="width: 215px; height:124px"
 相关文章
 富文本框
 
-<img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
-&nbsp&nbsp<span class="author-time">
 
-/*	content: '';
-	display: block;
-	clear: both;
-	height: 0;*/
+子评论点赞
 
-<span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
-
-
-
-
- ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}>&nbsp&nbsp'+data.user+'</span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"&nbsp发表的："+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm"><div class="btn-dp pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
-
-
-
-
-
-
-
-<div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time">0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child" style="color: rgb(60, 165, 246);"><i class="icon-childcomment" style="background-position: -250px -79px;"></i>回复</div></div></div>
-
-收起点评
-
-$(function(){
-  $("body").on("click", '.btn-dp', function(){
-    var node = $(this).next(".form-comment-reply")
-    commnetcount = node.children('.childcomment').length
-    $(this).next(".form-comment-reply").fadeToggle(function(){
-      var display = node.css("display");
-      if (display == 'none'){
-        $(this).parent().children('.btn-dp').html('<i class="icon-dp-checkbox"></i>'+commnetcount+'条点评')
-      }
-      else {
-        $(this).parent().children('.btn-dp').html('收起点评')
-      }
-    });
-  });
-})
 

@@ -75,8 +75,6 @@ def AtWhoUser(value):
         if user:
             #notify.send(sender=sender, target_object=targetcomment, recipient = user, verb="@", text=text)
             userlist.append(item.encode('utf8'))
-        else:
-            pass
     for item in userlist:
         print 'for item in userlist:'
         atwhouser = MyUser.objects.get(username = item)

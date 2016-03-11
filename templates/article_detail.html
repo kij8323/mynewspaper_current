@@ -280,7 +280,7 @@ $(function(){
 });
 </script>
 
-<script>
+<script>/*板块固定滚动,板块内不能含有图片*/
 $.fn.smartFloat = function() { 
     var position = function(element) { 
         var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
@@ -453,14 +453,14 @@ $(function(){
       </span>
 
       {% if item.is_child %}
-      <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|safe}}</div>
+      <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
       {% endif %}
 
-      <div class="pl-content">{{item.text|safe}}</div>
+      <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
 
       <div class="pl-box-btm" id='{{item.user}}'>
 
-                <div class="btn-dp pull-right">
+                <div class="btn-dp-right pull-right">
                 <i class="icon-dp-positive"></i>
                 <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
                 

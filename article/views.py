@@ -100,16 +100,16 @@ def articlecomment(request):
 		user = request.user
 		print user
 		try:
-			# c = Comment(user=user, article=article, text=text)
-			# c.save()
+			c = Comment(user=user, article=article, text=text)
+			c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = None)
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);
-			c = Comment(user=user, article=article, text=text)
-			c.save()
+			# c = Comment(user=user, article=article, text=text)
+			# c.save()
 			data = {
 			"user": user.username,
 			"text": text,
@@ -141,8 +141,8 @@ def commentcomment(request):
 		user = request.user
 		print user
 		try:
-			# c = Comment(user=user, article=article, text=text, parent=targetcomment)
-			# c.save()
+			c = Comment(user=user, article=article, text=text, parent=targetcomment)
+			c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
 			print 'z'
 			for item in userlist:
@@ -150,8 +150,8 @@ def commentcomment(request):
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);
-			c = Comment(user=user, article=article, text=text, parent=targetcomment)
-			c.save()
+			# c = Comment(user=user, article=article, text=text, parent=targetcomment)
+			# c.save()
 			data = {
 			"user": user.username,
 			"text": text,
@@ -220,7 +220,7 @@ def commentlike(request):
 		commentid = request.POST.get('commentid')
 		comment = Comment.objects.get(pk=commentid)
 		user = request.user
-		print 'commentlike'
+		print 'commentlikecommentlike'
 	except Article.DoesNotExist:
 		raise Http404("Article does not exist")
 	commentlike = CommentLike.objects.filter(comment=comment, user=user)
@@ -232,6 +232,7 @@ def commentlike(request):
 		c.save()
 	commentlikecount = CommentLike.objects.filter(comment=comment).count()
 	print 'commentlike'
+	print commentlikecount
 	data = {
 	 'commentlikecount': commentlikecount,
 	}
@@ -255,7 +256,7 @@ def commentdislike(request):
 		c = CommentDisLike(user=user, comment=comment)
 		c.save()
 	commentdislikecount = CommentDisLike.objects.filter(comment=comment).count()
-	print 'commentlike'
+	print commentdislikecount
 	data = {
 	 'commentdislikecount': commentdislikecount,
 	}

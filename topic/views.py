@@ -13,7 +13,7 @@ from django.http import HttpResponse
 import traceback 
 from notifications.signals import notify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from notifications.atwho import atwho
+from notifications.atwho import atwho, atwhononoti
 # from .forms import TopicForm
 
 # Create your views here.
@@ -126,16 +126,16 @@ def topicomment(request):
 		user = request.user
 		print user
 		try:
-			# c = Comment(user=user, topic=topic, text=text)
-			# c.save()
+			c = Comment(user=user, topic=topic, text=text)
+			c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = None)
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);
-			c = Comment(user=user, topic=topic, text=text)
-			c.save()
+			# c = Comment(user=user, topic=topic, text=text)
+			# c.save()
 			data = {
 			"user": user.username,
 			"text": text,
@@ -164,14 +164,16 @@ def topcommentcomment(request):
 		user = request.user
 		print user
 		try:
+			c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
+			c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);
-			c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
-			c.save()
+			# c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
+			# c.save()
 			print 'z'
 			data = {
 			"user": user.username,
@@ -186,5 +188,20 @@ def topcommentcomment(request):
 			traceback.print_exc()
 			raise Http404(traceback)
 
+	else:
+		raise Http404
+
+def atwhoidentify(request):
+	if request.is_ajax():
+		text = request.POST.get('comment')
+		print text
+		userlist = atwhononoti(text)
+		print 'userlist'
+		print userlist
+		data = {
+			"userlist": userlist,
+			}
+		json_data = json.dumps(data)
+		return HttpResponse(json_data, content_type='application/json')
 	else:
 		raise Http404
