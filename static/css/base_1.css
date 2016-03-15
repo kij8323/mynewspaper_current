@@ -21,3 +21,8 @@
 color: #FFF;
 background-color: #449d44;
 }
+
+body {
+color: #333;
+font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
+}

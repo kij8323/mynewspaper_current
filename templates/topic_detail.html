@@ -362,17 +362,29 @@ $(function(){
 
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block replayscrollposition' >发表</button>
     </div>
-  
-
-
-
-
-
     </div><!-- class="comment-form" -->
      </div><!-- <div id="topic"> -->
      </div>
+
 <div class="col-xs-3">
+<div id='hotarticle'>
+  <div class="pull-left" >
+  <h4><b>最新话题</b></h4>
+  <span class="span-mark"></span>
+  </div>
+<div class="rightnewtpic">
+{% for item in newtopic %}
+<div class="rightitle">
+<a href="{{item.get_absolute_url}}">
+{{item.title}}
+</a>
+({{item.comment_set.count}}回复)
 </div>
+{% endfor %}
+</div><!-- <div class="rightnewtpic"> -->
+</div>
+
+</div><!-- <div class="col-xs-3"> -->
 </div><!-- <div class="container"> -->
  {% endblock %}
  

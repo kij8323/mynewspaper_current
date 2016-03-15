@@ -53,6 +53,8 @@ git push paper1 master -f
 shenanping2008@Hotmail.com
 012ssskkk
 
+最新话题
+回复
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
@@ -131,3 +133,4 @@ items = chain(articles1, users)
 前三个回复是最热回复
 后面按时间顺序排序
 去除重复项
+分页

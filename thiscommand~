@@ -53,6 +53,8 @@ git push paper1 master -f
 shenanping2008@Hotmail.com
 012ssskkk
 
+热门话题
+
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
@@ -122,10 +124,13 @@ style="width: 215px; height:124px"
 子评论点赞
 
 
-
+楼
 评论排序：comment添加一个属性记录亮了的数量，从而排序
 topic右列
 威信分享功能
 from itertools import chain
 items = chain(articles1, users)
-
+前三个回复是最热回复
+后面按时间顺序排序
+去除重复项
+分页

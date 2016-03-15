@@ -75,6 +75,7 @@ def topic_detail(request, topic_id):
 	comment = Comment.objects.filter(topic=topic).filter(parent=None).order_by('timestamp')
 	# 前三个回复是最热回复
 	commentorderbyreaders = Comment.objects.filter(topic=topic).filter(parent=None).order_by('-readers')[0:3]
+	newtopic = Topic.objects.filter(group=topic.group).order_by('timestamp')[0:3]
 	count = comment.count()
 	user = request.user
 	#去除重复项
@@ -101,6 +102,7 @@ def topic_detail(request, topic_id):
 		"comment": comment,
 		'contacts': contacts,
 		"count": count,
+		"newtopic": newtopic,
 	}
 	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)
