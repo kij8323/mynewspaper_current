@@ -14,6 +14,8 @@ import traceback
 from notifications.signals import notify
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from notifications.atwho import atwho, atwhononoti
+from django.views.decorators.cache import cache_page
+from itertools import chain
 # from .forms import TopicForm
 
 # Create your views here.
@@ -58,17 +60,27 @@ def group_detail(request, group_id):
 			}
 		print "group_detail"
 		print topic
-	except group.DoesNotExist:
+	except Group.DoesNotExist:
 		raise Http404("Does not exist")
 	return render(request, 'group_detail.html',  context)
 
+
+# @cache_page(60 * 15)
 def topic_detail(request, topic_id):
 	try:
 		topic = Topic.objects.get(pk=topic_id)
-	except topic.DoesNotExist:
+	except Topic.DoesNotExist:
 		raise Http404("Does not exist")
+	# 按时间顺序排序
 	comment = Comment.objects.filter(topic=topic).filter(parent=None).order_by('timestamp')
+	# 前三个回复是最热回复
+	commentorderbyreaders = Comment.objects.filter(topic=topic).filter(parent=None).order_by('-readers')[0:3]
+	count = comment.count()
 	user = request.user
+	#去除重复项
+	comment = list(chain(commentorderbyreaders, comment))
+	comment = sorted(set(comment), key=comment.index) 
+	# 分页
 	paginator = Paginator(comment, 5)
 	page = request.GET.get('page')
 	try:
@@ -88,7 +100,9 @@ def topic_detail(request, topic_id):
 		"submit_btn": "发表",
 		"comment": comment,
 		'contacts': contacts,
+		"count": count,
 	}
+	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)
 
 def newtopic(request):
@@ -130,7 +144,6 @@ def topicomment(request):
 			c.save()
 			userlist = atwho(text = text, sender = user, targetcomment = None)
 			for item in userlist:
-				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);
@@ -166,9 +179,10 @@ def topcommentcomment(request):
 		try:
 			c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
 			c.save()
+			targetcomment.readers = targetcomment.readers + 1
+			targetcomment.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
 			for item in userlist:
-				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
 				text = text.replace('@'+item+' ', test);

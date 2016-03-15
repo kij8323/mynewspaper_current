@@ -59,6 +59,20 @@ git clone https://github.com/kij8323/mynewspaper.git
     {{ form.media }}
     {{ form.as_p }}
 
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script "text/javascript"> 
+var jiathis_config = { 
+  title: "{{article.title}}",  
+} 
+</script> 
+  <li>
+  <a class="jiathis_button_weixin" href='javascript:void(0);'>
+  <i class="weichatshare">
+  </i>
+  </a>
+  </li>
+
+
 ckeditor上传本地图片
 修改头像设置
 我的帐号
@@ -103,8 +117,17 @@ style="width: 215px; height:124px"
 回到页面顶端
 相关文章
 富文本框
-
+楼
 
 子评论点赞
 
 
+楼
+评论排序：comment添加一个属性记录亮了的数量，从而排序
+topic右列
+威信分享功能
+from itertools import chain
+items = chain(articles1, users)
+前三个回复是最热回复
+后面按时间顺序排序
+去除重复项

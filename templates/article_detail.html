@@ -327,23 +327,27 @@ $(function(){
 <div class="col-xs-1">
 <ul id="sidebar">
   <li>
-	<a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{article.title}}">
+	<a href="http://www.jiathis.com/send/?webid=tsina&url={{sharelink}}&title={{article.title}}">
 	<i class="weiboshare">
 	</i>
 	</a>
   </li>
+
   <li>
-  <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{article.title}}">
+  <a  href="http://www.jiathis.com/send/?webid=weixin&url={{sharelink}}&title={{article.title}}">
   <i class="weichatshare">
   </i>
   </a>
   </li>
+
+
   <li> 
-	<a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{article.title}}">
+	<a href="http://www.jiathis.com/send/?webid=qzone&url={{sharelink}}&title={{article.title}}">
 	<i class="qqzoneshare">
 	</i>
 	</a> 
   </li>
+
 
   <li> 
   <i class="articlecollection">
@@ -357,9 +361,60 @@ $(function(){
   </li>
 
 </ul>
+
+<!-- <ul id="sidebar">
+  <li>
+  <a href="http://www.jiathis.com/send/?webid=tsina&url={{sharelink}}&title={{article.title}}">
+  <i class="weiboshare">
+  </i>
+  </a>
+  </li>
+
+
+
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+<script "text/javascript"> 
+var jiathis_config = { 
+  title: "{{article.title}}",  
+} 
+</script> 
+  <li>
+  <a class="jiathis_button_weixin" href='javascript:void(0);'>
+  <i class="weichatshare">
+  </i>
+  </a>
+  </li>
+
+
+  <li> 
+  <a href="http://www.jiathis.com/send/?webid=qzone&url={{sharelink}}&title={{article.title}}">
+  <i class="qqzoneshare">
+  </i>
+  </a> 
+  </li>
+
+
+  <li> 
+  <i class="articlecollection">
+    <h5 style='margin-top: 20px;'>{{collection}}</h5>
+  </i>
+  </li>
+
+  <li> 
+  <i class="totopsctoll">
+  </i>
+  </li>
+
+</ul> -->
+
 </div>
 
+
+
+
 <div class="col-xs-8">
+
+
 <div id="article">
  <h1 class="t-h1">{{article.title}}</h1>
 

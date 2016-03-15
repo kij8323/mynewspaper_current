@@ -26,6 +26,8 @@ class Comment(models.Model):
 	reponse = models.CharField(max_length=255, null=True, blank=True)
 	
 	parenttext = models.TextField(null=True, blank=True)
+	
+	readers = models.IntegerField(default=0)
 
 	class Meta:
 		ordering = ['-timestamp']
@@ -40,6 +42,7 @@ class Comment(models.Model):
 		else:
 			return False
 
+	@property
 	def like(self):
  		return CommentLike.objects.filter(comment=self).count()
 

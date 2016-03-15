@@ -47,6 +47,9 @@ def article_detail(request, article_id):
 		moercomment = False
 	comment = comment[:5]
 	request.session['lastpage'] = request.get_full_path()
+	#print request.path﻿﻿
+	sharelink = request.get_host()+request.get_full_path()
+	print sharelink
 	thisrelationtag = Relation.objects.filter(article=article)
 	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article)
 	if thisrelationtagarticle.count()==0:
@@ -70,6 +73,7 @@ def article_detail(request, article_id):
 		'thisrelationtag' : thisrelationtag,
 		'thisrelationtagarticle': thisrelationtagarticle[0:3], 
 		'usercollectioncount' : usercollectioncount, 
+		'sharelink': sharelink,
 	}
 	return render(request, 'article_detail.html',  context)
 
@@ -227,7 +231,11 @@ def commentlike(request):
 	print 'commentlike'
 	if commentlike: 
 		commentlike.delete()
+		comment.readers = comment.readers - 1
+		comment.save()
 	else:
+		comment.readers = comment.readers + 1
+		comment.save()
 		c = CommentLike(user=user, comment=comment)
 		c.save()
 	commentlikecount = CommentLike.objects.filter(comment=comment).count()
@@ -252,7 +260,11 @@ def commentdislike(request):
 	print 'commentlike'
 	if commentdislike: 
 		commentdislike.delete()
+		comment.readers = comment.readers - 1
+		comment.save()
 	else:
+		comment.readers = comment.readers + 1
+		comment.save()
 		c = CommentDisLike(user=user, comment=comment)
 		c.save()
 	commentdislikecount = CommentDisLike.objects.filter(comment=comment).count()

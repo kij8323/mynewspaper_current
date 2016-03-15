@@ -425,6 +425,10 @@ color: #A19F9F;
 
 .author-time{
 	color: #bbb;
+	margin-left: 15px;
+}
+.whichfloor{
+	color: #bbb;
 }
 
 h4 b{
@@ -539,3 +543,7 @@ h4 b{
 	vertical-align: middle;
 }
 
+
+.hotcomment{
+margin-top: 5px
+}

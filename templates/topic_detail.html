@@ -100,7 +100,7 @@ $(function(){
 <script>/*点赞*/
 $(function() {
  $("body").on("click", '.icon-dp-positive', function(){
-    var preentid = $(this).parent().next().next().next().attr("id");
+    var preentid = $(this).parent().attr("id");
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           commentid: preentid,
@@ -126,7 +126,7 @@ $(function() {
 <script>/*点衰*/
 $(function() {
  $("body").on("click", '.icon-dp-negtive', function(){
-    var preentid = $(this).parent().next().next().next().attr("id");
+    var preentid = $(this).parent().attr("id");
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           commentid: preentid,
@@ -224,19 +224,19 @@ $(function(){
 <div id="article">
  <h1 class="t-h1">{{topic.title}}</h1>
 
-<div class="topic-author">
+<div class="article-author">
                 <span class="author-name">{{topic.writer}}</span>
                 <i class="icon icon-line"></i>
-                <span class="topic-time">{{topic.timestamp|date:"Y-m-d H:i"}}</span>
-                <span class="topic-share">阅读:{{topic.readers}}</span>
-                <span class="topic-pl">评论:8</span>
+                <span class="article-time">{{topic.timestamp|date:"Y-m-d H:i"}}</span>
+                <span class="article-share">阅读:{{topic.readers}}</span>
+                <span class="article-pl">评论:{{count}}</span>
 <!--                 <span class="topic-pl">收藏</span> -->
             </div>
 
-<div class="topic-img-box">
+<div class="article-img-box">
 </div>
 
-<div class="topic-content-wrap">
+<div class="article-content-wrap">
      <p>{{topic.content|safe}}</p>
 </div>
 
@@ -248,14 +248,18 @@ $(function(){
       <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
 
       <span class="author-time">
-      {{item.timestamp|date:"Y-m-d H:i"}}
+      {{item.timestamp}}
       </span>
+
+      <!-- <span class="whichfloor pull-right">
+      {{ forloop.counter }}楼
+      </span> -->
 
       <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
 
       <div class="pl-box-btm" id = '{{item.user}}'>
 
-                <div class="btn-dp-right pull-right">
+                <div class="btn-dp-right pull-right" id="{{item.id}}">
                 <i class="icon-dp-positive"></i>
                 <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
                 
@@ -280,7 +284,7 @@ $(function(){
                   <div class = 'rightchildcomment' id = '{{childitem.user}}'>
                   <span class="author-name"><a href="{{childitems.user.get_absolute_url}}">{{childitem.user}}</a></span>
                   <span class="author-time">
-                  {{childitem.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma }}前 :
+                  {{childitem.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前 :
                    </span>
                   <div class="pl-content">{{childitem.text|AtWhoUser|safe}}</div>
                   <div class="btn-dp-child">
@@ -288,11 +292,11 @@ $(function(){
                     </div>
 
             <span class="btn-dp-right pull-right" id="{{childitem.id}}">
-                <i class="icon-dp-positive-child"></i>
-                <span class='commentuserlike{{item.id}}'>{{childitem.like}}</span>
+                <i class="icon-dp-positive"></i>
+                <span class='commentuserlike{{childitem.id}}'>{{childitem.like}}</span>
                 
-                &nbsp&nbsp&nbsp<i class="icon-dp-negtive-child"></i>
-                <span class='commentuserdislike{{item.id}}'>{{childitem.dislike}}</span>
+                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{childitem.id}}'>{{childitem.dislike}}</span>
                 </span>
 
 
@@ -308,7 +312,7 @@ $(function(){
               </div>
       </div>
       </div>
-    </div>
+    </div><!-- comment -->
 {% endfor %}
 
 <div class="freshcomment">
