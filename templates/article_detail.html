@@ -31,7 +31,7 @@ $(function() {
               alert("Got an error dude");
           } 
     });
-    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
+    $('html,body').animate({scrollTop:$('.freshcomment').offset().top}, 100);
     /*$('.successlist').fadeIn("slow").fadeOut(3000);*/
     $.messager.popup("评论发表成功!");
     $(".modal.msg-popup .modal-body").css({
@@ -104,7 +104,7 @@ $(function() {
               alert("Got an error dude");
           }
     });
-    $('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);
+    $('html,body').animate({scrollTop:$('.freshcomment').offset().top}, 100);
     /*$('.successlist').fadeIn("slow").fadeOut(3000);*/
     $.messager.popup("评论发表成功!");
     $(".modal.msg-popup .modal-body").css({
@@ -492,10 +492,83 @@ var jiathis_config = {
 
 
 
-<div class="freshcomment">
+<!-- <div class="freshcomment">
 
+</div> -->
+
+
+<!--                             热门回复                         -->
+{% if commentorderbyreaders %}
+<span class="span-mark-hotcomment">热门回复</span>
+{% for item in commentorderbyreaders %}
+
+<!-- {% if forloop.counter = 1 %}
+<div id='hotboader'>
+  <span class="span-mark-hotcomment">热门回复</span>
+{% endif %} -->
+
+<!-- {% if forloop.counter = 4 %}
+</div>
+ <div id='test' ></div>
+  <span class="span-mark-hotcomment">最新回复</span>
+{% endif %} -->
+
+
+    <div class="comment">
+
+      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
+      
+      <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
+      
+
+      &nbsp&nbsp<span class="author-time">
+      {{item.timestamp}}
+      </span>
+
+      {% if item.is_child %}
+      <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
+      {% endif %}
+
+      <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
+
+      <div class="pl-box-btm" id='{{item.user}}'>
+
+                <div class="btn-dp-right pull-right">
+                <i class="icon-dp-positive"></i>
+                <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
+                
+                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{item.id}}'>{{item.dislike}}</span>
+                </div>
+
+              <div class="btn-dp">
+                <i class="icon-dp"></i>
+                我要点评
+                </div>
+                <div class="form-comment-reply" id="{{item.id}}">
+                    {{form}}
+
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button> 
+              </div>
+      </div>
+    </div>
+
+    {% if forloop.last %}
+    <div id='dividedline'>
+    </div>
+    {% endif %}
+{% endfor %}
+{% endif %}
+<!--                             热门回复                         -->
+
+
+
+<!--                            最新回复                         -->
+ <span class="span-mark-hotcomment">最新回复</span>
+ <div class="freshcomment">
 </div>
 {% for item in comment %}
+
     <div class="comment">
 
       <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
@@ -535,9 +608,14 @@ var jiathis_config = {
                 <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button> 
               </div>
       </div>
-
     </div>
+        {% if forloop.last %}
+    <div id='dividedline'>
+    </div>
+    {% endif %}
 {% endfor %}
+<!--                            最新回复                         -->
+
 
 
 <div id='morecomment'>

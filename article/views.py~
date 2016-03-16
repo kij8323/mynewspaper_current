@@ -50,8 +50,7 @@ def article_detail(request, article_id):
 	else:
 		collection = '收藏'
 	#文章回复按热度排序
-	commentorderbyreaders = Comment.objects.filter(article=article).filter(readers__gt=3).order_by('-readers')[0:3]
-	commentorderbyreaderscount = commentorderbyreaders.count()
+	commentorderbyreaders = Comment.objects.filter(article=article).order_by('-readers')[0:3]
 	#文章回复按时间
 	comment = Comment.objects.filter(article=article).order_by('-timestamp')
 	#文章回复数大于5才有更多回复按钮
@@ -60,8 +59,8 @@ def article_detail(request, article_id):
 	else:
 		moercomment = False#链接最热回复和按时间排序的回复
 	#链接热度排序和时间排序回复
-	# comment = list(chain(commentorderbyreaders, comment))
-	# comment = sorted(set(comment), key=comment.index) 
+	comment = list(chain(commentorderbyreaders, comment))
+	comment = sorted(set(comment), key=comment.index) 
 	#显示头5个回复
 	comment = comment[:5]
 	#把本页地址装入session
@@ -71,14 +70,13 @@ def article_detail(request, article_id):
 	print sharelink
 	#文章属于哪些类别
 	thisrelationtag = Relation.objects.filter(article=article)
-	print thisrelationtag[0].category
 	#同属与一类的其他文章
 	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article)
 	if thisrelationtagarticle.count()==0:
 		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article)
 	if thisrelationtagarticle.count()==0:
 		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article)
-	#文章被多少人收藏过
+	
 	usercollectioncount = Collection.objects.filter(article=article).count()
 	context = {
 		'article':article,
@@ -97,7 +95,6 @@ def article_detail(request, article_id):
 		'thisrelationtagarticle': thisrelationtagarticle[0:3], 
 		'usercollectioncount' : usercollectioncount, 
 		'sharelink': sharelink,
-		"commentorderbyreaders": commentorderbyreaders,
 	}
 	return render(request, 'article_detail.html',  context)
 

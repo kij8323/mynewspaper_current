@@ -181,6 +181,45 @@ $(function(){
 })*/
 </script>
 
+<script>/*板块固定滚动,板块内width要定长*/
+$.fn.smartFloat = function() { 
+    var position = function(element) { 
+        var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
+        var pos = element.css("position"); //当前元素距离页面document顶部的距离 
+        $(window).scroll(function() { //侦听滚动时 
+            var scrolls = $(this).scrollTop(); 
+            if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度 
+                if (window.XMLHttpRequest) { //如果不是ie6 
+                    element.css({ //设置css 
+                        position: "fixed", //固定定位,即不再跟随滚动 
+                        top: 0, //距离页面顶部为0 
+                      
+                    }).addClass("shadow"); //加上阴影样式.shadow 
+                } else { //如果是ie6 
+                    element.css({ 
+                        top: scrolls  //与页面顶部距离 
+                    });     
+                } 
+            }else { 
+                element.css({ //如果当前元素element未滚动到浏览器上边缘，则使用默认样式 
+                    position: pos, 
+                    top: top 
+                }).removeClass("shadow");//移除阴影样式.shadow 
+            } 
+        }); 
+    }; 
+    return $(this).each(function() { 
+        position($(this));                          
+    }); 
+}; 
+</script>
+
+<script>
+$(function(){ 
+    $("#rightstableblock").smartFloat(); 
+}); 
+</script>
+
 {% endblock %}
 
 
@@ -242,6 +281,19 @@ $(function(){
 
 
 {% for item in contacts %}
+
+{% if commentorderbyreaders %}
+{% if forloop.counter = 1 %}
+<div id='hotboader'>
+  <div id='hotboadertitle'>热门回复</div>
+{% endif %}
+
+{% if forloop.counter = commentorderbyreaderscount %}
+</div>
+{% endif %}
+{% endif %}
+
+
     <div class="comment">
       <img  class="commentusericon" src='{{item.user.get_image_url}}'>
       <div class='rightcomment'>
@@ -251,9 +303,7 @@ $(function(){
       {{item.timestamp}}
       </span>
 
-      <!-- <span class="whichfloor pull-right">
-      {{ forloop.counter }}楼
-      </span> -->
+      
 
       <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
 
@@ -343,12 +393,17 @@ $(function(){
 <div class="comment-form">
      <span class="span-mark-author">发表评论</span>
       <div class="author-info">
-        {{user}}
+      {% if user.is_authenticated %}
+        {{user}}:
+      {% else %}
+      游客:
+      {% endif %} 
       </div>
 <!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
     <div class="form-comment">
 
-              <textarea name="editor1" id="editor1" rows="10" cols="80">
+{% if user.is_authenticated %}
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
     </textarea>
     <script>
         // Replace the <textarea id="editor1"> with a CKEditor
@@ -359,6 +414,13 @@ $(function(){
         width: '700',
     });
     </script>
+{% else %}
+<div class="authboard">
+<div class="authboardword">
+<h4>请<a href="{% url 'loggin' %}">登录</a>后参与评论</h4>
+</div>
+</div>
+{% endif %} 
 
       <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block replayscrollposition' >发表</button>
     </div>
@@ -367,9 +429,11 @@ $(function(){
      </div>
 
 <div class="col-xs-3">
+
+<div id='rightstableblock'>
 <div id='hotarticle'>
   <div class="pull-left" >
-  <h4><b>最新话题</b></h4>
+  <h4><b>{{group.title}}最新话题</b></h4>
   <span class="span-mark"></span>
   </div>
 <div class="rightnewtpic">
@@ -384,6 +448,24 @@ $(function(){
 </div><!-- <div class="rightnewtpic"> -->
 </div>
 
+<div id='hotarticle'>
+  <div class="pull-left" >
+  <h4><b>{{group.title}}热门话题</b></h4>
+  <span class="span-mark"></span>
+  </div>
+<div class="rightnewtpic">
+{% for item in hottopic %}
+<div class="rightitle">
+<a href="{{item.get_absolute_url}}">
+{{item.title}}
+</a>
+({{item.comment_set.count}}回复)
+</div>
+{% endfor %}
+</div><!-- <div class="rightnewtpic"> -->
+</div>
+
+</div><!-- <div id='rightstableblock'> -->
 </div><!-- <div class="col-xs-3"> -->
 </div><!-- <div class="container"> -->
  {% endblock %}

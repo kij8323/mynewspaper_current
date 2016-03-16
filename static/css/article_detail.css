@@ -163,6 +163,21 @@ font-size: 16px;
 	font-size: 18px;
 }
 
+.span-mark-hotcomment{
+	border-bottom: 4px solid #67CA87;
+	color: #333;
+	margin-top:3px;
+	height: 28px;
+	position: absolute;
+	font-size: 18px;
+}
+
+#dividedline{
+	border-top:1px solid #f0f0f0;
+	margin-bottom: 30px;
+	margin-top: 30px
+}
+
 .author-info{
 	margin-top: 30px;
 	margin-bottom: 30px;
@@ -445,6 +460,8 @@ h4 b{
 	padding-right: 30px;
 	padding-left: 0px;
 }
+
+
 
 a:hover{
 	color: #337ab7;
