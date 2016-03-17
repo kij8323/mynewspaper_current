@@ -154,6 +154,8 @@ $(function(){
 });
 </script>
 
+
+
 <script>
 /*$(function() {
  $("body").on('input propertychange', '.form-control', function() {
@@ -280,20 +282,11 @@ $(function(){
 </div>
 
 
-{% for item in contacts %}
-
-{% if commentorderbyreaders %}
-{% if forloop.counter = 1 %}
+<!--                             热门回复                         -->
+{% if ifhotcomment and commentorderbyreaders %}
 <div id='hotboader'>
-  <div id='hotboadertitle'>热门回复</div>
-{% endif %}
-
-{% if forloop.counter = commentorderbyreaderscount %}
-</div>
-{% endif %}
-{% endif %}
-
-
+    <div id='hotboadertitle'>热门回复</div>
+{% for item in commentorderbyreaders %}
     <div class="comment">
       <img  class="commentusericon" src='{{item.user.get_image_url}}'>
       <div class='rightcomment'>
@@ -364,6 +357,87 @@ $(function(){
       </div>
     </div><!-- comment -->
 {% endfor %}
+    </div>
+{% endif %}
+<!--                             热门回复                         -->
+
+
+<!--                            最新回复                         -->
+{% for item in contacts %}
+    <div class="comment">
+      <img  class="commentusericon" src='{{item.user.get_image_url}}'>
+      <div class='rightcomment'>
+      <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
+
+      <span class="author-time">
+      {{item.timestamp}}
+      </span>
+
+      <span class="author-floor pull-right">
+      {{forloop.counter|pageaculate:page}}楼
+      </span>
+
+      <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
+
+      <div class="pl-box-btm" id = '{{item.user}}'>
+
+                <div class="btn-dp-right pull-right" id="{{item.id}}">
+                <i class="icon-dp-positive"></i>
+                <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
+                
+                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{item.id}}'>{{item.dislike}}</span>
+                </div>
+
+                <span class="btn-dp-reply">
+                <i class="icon-dp"></i>
+                回复
+                </span>
+
+              <span class="btn-dp">
+                <i class="icon-dp-checkbox"></i>
+                {{item.child_commentcount}}条点评
+                </span>
+                <div class="form-comment-reply" id="{{item.id}}">
+
+                  {% for childitem in item.child_comment %}
+                  <div class = 'childcomment'>
+                    <img  class="commentusericon" src='{{childitem.user.get_image_url}}'>
+                  <div class = 'rightchildcomment' id = '{{childitem.user}}'>
+                  <span class="author-name"><a href="{{childitems.user.get_absolute_url}}">{{childitem.user}}</a></span>
+                  <span class="author-time">
+                  {{childitem.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前 :
+                   </span>
+                  <div class="pl-content">{{childitem.text|AtWhoUser|safe}}</div>
+                  <div class="btn-dp-child">
+                    <i class="icon-childcomment"></i>回复
+                    </div>
+
+            <span class="btn-dp-right pull-right" id="{{childitem.id}}">
+                <i class="icon-dp-positive"></i>
+                <span class='commentuserlike{{childitem.id}}'>{{childitem.like}}</span>
+                
+                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{childitem.id}}'>{{childitem.dislike}}</span>
+                </span>
+
+
+                 
+                  </div><!-- rightchildcomment -->
+                  </div>
+                  {% endfor %}
+                  
+                  <div class="freshchildcomment{{item.id}}" style='margin-top : 1em;'>
+                  </div>
+                    {{form}}
+                <button  id="btn-block" type="button" class='btn btn-lg btn-success btn-block btn-reply' >发表</button>
+              </div>
+      </div>
+      </div>
+    </div><!-- comment -->
+{% endfor %}
+<!--                            最新回复                         -->
+
 
 <div class="freshcomment">
 </div>

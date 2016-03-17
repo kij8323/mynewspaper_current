@@ -120,30 +120,27 @@ style="width: 215px; height:124px"
 相关文章
 富文本框
 楼
+话题组
+组长：
+
+<div class="rightchildcomment" id="shen">
+                  <span class="author-name"><a href="">shen</a></span>
+                  <span class="author-time">
+                  5&nbsp;分钟前 :
+                   </span>
+                  <div class="pl-content">1</div>
+                  <div class="btn-dp-child" style="color: rgb(187, 187, 187);">
+                    <i class="icon-childcomment" style="background-position: -250px -92px;"></i>回复
+                    </div>
+
+            <span class="btn-dp-right pull-right" id="1038">
+                <i class="icon-dp-positive"></i>
+                <span class="commentuserlike1038">0</span>
+                
+                &nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive"></i>
+                <span class="commentuserdislike1038">0</span>
+                </span>
 
 
-热门回复
-子评论点赞
-热门话题
-计算话题总回复数
-楼
-评论排序：comment添加一个属性记录亮了的数量，从而排序
-topic右列
-威信分享功能
-from itertools import chain
-items = chain(articles1, users)
-前三个回复是最热回复
-后面按时间顺序排序
-去除重复项
-热门回复
-最新
-链接最热回复和按时间排序的回复
-
-热门回复
-板块内width要定长
-最新话题
-最热话题
-热门回复数量+1
-如果页数大于1则不显示最热回复外围绿框
-ajax插入位置
-分页
+                 
+                  </div>

@@ -1,6 +1,7 @@
 {% extends "base_1.html" %}
 {% load ckeditor_filter %}
 {% block HeadDoc %}
+<link href="/static/css/group_detail.css" rel="stylesheet">
 {% endblock %}
 
 
@@ -8,15 +9,30 @@
 <div class="container">
 <div class="col-xs-8">
 	
- {{group.title}}<br>
-
+ <div class="group-name">
+ 	{{group.title}}
+ </div>
+ <div class="group-associatetitle">
+ {{group.associatetitle}}
+   <div class="group-founder">组长：
+   	<a href="{{group.founder.get_absolute_url}}">
+   	 <img  class="commentusericon" src='{{group.founder.get_image_url}}'>
+   	 </a>
+  <a href="{{group.founder.get_absolute_url}}">
+  	{{group.founder}}
+  </a>
+</div><!-- <div class="group-founder"> -->
+  </div><!-- <div class="group-associatetitle"> -->
  {% for item in topic %}
  {{item.title}}<br>
- {{item.content|safe}}<br>
  {% endfor %}
 </div><!-- class="col-xs-8" -->
 
-<div class="col-xs-2">
+<div class="col-xs-4">
+话题组<br>
+ {% for item in groupall %}
+ {{item.title}}<br>
+ {% endfor %}
 </div><!-- class="col-xs-2" -->
 
 </div><!-- class="container" -->

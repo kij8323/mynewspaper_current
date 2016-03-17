@@ -53,13 +53,13 @@ def group_index(request):
 def group_detail(request, group_id):
 	try:
 		group = Group.objects.get(pk=group_id)
+		groupall = Group.objects.all()
 		topic = group.topic_set.all()
 		context = {
 			'group': group,
 			'topic': topic,
+			'groupall': groupall,
 			}
-		print "group_detail"
-		print topic
 	except Group.DoesNotExist:
 		raise Http404("Does not exist")
 	return render(request, 'group_detail.html',  context)
@@ -76,16 +76,11 @@ def topic_detail(request, topic_id):
 	comment = Comment.objects.filter(topic=topic).filter(parent=None).order_by('timestamp')
 	# 前三个回复是最热回复
 	commentorderbyreaders = Comment.objects.filter(topic=topic).filter(parent=None).filter(readers__gt=3).order_by('-readers')[0:3]
-	#热门回复数量+1
-	commentorderbyreaderscount = commentorderbyreaders.count()+1
 	#最新话题
 	newtopic = Topic.objects.filter(group=topic.group).order_by('-timestamp')[0:3]
 	#最热话题
 	hottopic = Topic.objects.filter(group=topic.group).order_by('-readers')[0:3]
 	user = request.user
-	#链接最热回复和按时间排序的回复
-	comment = list(chain(commentorderbyreaders, comment))
-	#comment = sorted(set(comment), key=comment.index) 
 	# 分页
 	paginator = Paginator(comment, 5)
 	page = request.GET.get('page')
@@ -99,10 +94,14 @@ def topic_detail(request, topic_id):
 		contacts = paginator.page(paginator.num_pages)
 	topic.readers += 1
 	topic.save()
-	#如果页数大于1则不显示最热回复外围绿框
+	#如果页数大于1则不显示最热回复
+	ifhotcomment = True;
 	if page:
-		if int(page) > 1:
-			commentorderbyreaders = None;
+		page = int(page)
+		if page > 1:
+			ifhotcomment = None;
+	else:
+		page = 1;
 	context = {
 		'topic':topic,
 		'user':user,
@@ -115,7 +114,8 @@ def topic_detail(request, topic_id):
 		"group": topic.group,
 		"hottopic": hottopic,
 		"commentorderbyreaders":commentorderbyreaders,#热门回复
-		"commentorderbyreaderscount":commentorderbyreaderscount ,
+		"ifhotcomment": ifhotcomment,
+		'page': page,
 	}
 	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)

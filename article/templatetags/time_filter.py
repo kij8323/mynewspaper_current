@@ -9,6 +9,10 @@ from accounts.models import MyUser
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
+#楼层计算器
+@register.filter
+def pageaculate(value, arg): 
+    return value + (arg-1)*5;
 
 @register.filter
 def time_chinese_week(value): 
