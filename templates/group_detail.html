@@ -1,13 +1,56 @@
 {% extends "base_1.html" %}
 {% load ckeditor_filter %}
+{% load time_filter %}
 {% block HeadDoc %}
 <link href="/static/css/group_detail.css" rel="stylesheet">
+<script src="/static/js/topic_detail.js"></script>
+
+
+<script>/*板块固定滚动,板块内width要定长*/
+$.fn.smartFloat = function() { 
+    var position = function(element) { 
+        var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
+        var pos = element.css("position"); //当前元素距离页面document顶部的距离 
+        $(window).scroll(function() { //侦听滚动时 
+            var scrolls = $(this).scrollTop(); 
+            if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度 
+                if (window.XMLHttpRequest) { //如果不是ie6 
+                    element.css({ //设置css 
+                        position: "fixed", //固定定位,即不再跟随滚动 
+                        top: 0, //距离页面顶部为0 
+                      
+                    }).addClass("shadow"); //加上阴影样式.shadow 
+                } else { //如果是ie6 
+                    element.css({ 
+                        top: scrolls  //与页面顶部距离 
+                    });     
+                } 
+            }else { 
+                element.css({ //如果当前元素element未滚动到浏览器上边缘，则使用默认样式 
+                    position: pos, 
+                    top: top 
+                }).removeClass("shadow");//移除阴影样式.shadow 
+            } 
+        }); 
+    }; 
+    return $(this).each(function() { 
+        position($(this));                          
+    }); 
+}; 
+</script>
+
+<script>
+$(function(){ 
+    $("#rightstableblock").smartFloat(); 
+}); 
+</script>
+
 {% endblock %}
 
 
  {% block content %}
 <div class="container">
-<div class="col-xs-8">
+<div class="col-xs-9">
 	
  <div class="group-name">
  	{{group.title}}
@@ -15,25 +58,103 @@
  <div class="group-associatetitle">
  {{group.associatetitle}}
    <div class="group-founder">组长：
-   	<a href="{{group.founder.get_absolute_url}}">
+   	<!-- <a href="{{group.founder.get_absolute_url}}">
    	 <img  class="commentusericon" src='{{group.founder.get_image_url}}'>
-   	 </a>
+   	 </a> -->
   <a href="{{group.founder.get_absolute_url}}">
   	{{group.founder}}
   </a>
 </div><!-- <div class="group-founder"> -->
   </div><!-- <div class="group-associatetitle"> -->
+
+
+ <div class="group-list-block">
+ 	<span class="span-mark-author">话题</span>
+ 	<a  href="{% url 'newtopic' %}" class='btn btn-lg btn-success btn-block pull-right' >发新话题</button>
+ 	</a>
  {% for item in topic %}
- {{item.title}}<br>
+ <div class="group-list">
+ <a href="{{item.get_absolute_url}}">
+ {{item.title}}
+ </a>
+ <div class="group-information">
+ <span class='group-informatio-blank'>
+ 	<a href="{{item.writer.get_absolute_url}}">
+ <img  class="commentusericon" src='{{item.writer.get_image_url}}'>
+  </a>
+ <a href="{{item.writer.get_absolute_url}}">
+{{item.writer}}
+ </a>
+ </span>
+
+ <span class='group-informatio-blank'>
+ {{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
+ <span class='group-informatio-blank'>
+回复数:{{item.comment_set.count}}
+</span>
+
+
+{%  if item.comment_set.count %}
+ <span class='group-informatio-blank'>
+最新回复:
+{{item.lastcommentime.user}}
+</span>
+{{item.lastcommentime.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+{% endif %}
+
+
+</div>
+</div>
  {% endfor %}
+ </div> <!-- <div class="group-list-block"> -->
+
+<div class='paginationcontain'>
+<div class="pagination">
+    <span class="step-links">
+{% if topic.has_previous %}
+        <a class='paginator' title='上一页' href='?page={{ topic.previous_page_number }}'><span>&lt;</span></a>
+ {% endif %}
+ {% for page in topic.paginator.page_range %}
+     {% if page = topic.number %}
+         <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
+     {% else %}
+         <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+     {% endif %}
+ {% endfor %}
+ {% if topic.has_next %}
+     <a class='paginator' title='下一页' href='?page={{ topic.next_page_number }}'><span>&gt;</span></a>
+ {% endif %}
+    </span>
+</div><!-- <div class="pagination"> -->
+</div>
+
+
 </div><!-- class="col-xs-8" -->
 
-<div class="col-xs-4">
-话题组<br>
+<div class="col-xs-3">
+<div id='rightstableblock'>
+<div id='hotarticle'>
+  <div class="pull-left" >
+  <h4><b>话题组</b></h4>
+  <span class="span-mark"></span>
+  </div>
+<div class="rightnewtpic">
  {% for item in groupall %}
- {{item.title}}<br>
+ <div class="rightitle">
+ 	<a href="{{item.get_absolute_url}}">
+ {{item.title}}
+ </a>
+ ({{item.topicount}}则话题)
+ </div>
  {% endfor %}
-</div><!-- class="col-xs-2" -->
+ </div><!-- <div class="rightnewtpic"> -->
+ </div><!-- <div id='hotarticle'> -->
+</div><!-- <div id='rightstableblock'> -->
+
+
+
+</div><!-- class="col-xs-4" -->
 
 </div><!-- class="container" -->
  {% endblock %}

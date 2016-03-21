@@ -46,10 +46,7 @@ $(function() {
  $("body").on("click", '.btn-reply', function(){
     var comment = $(this).prev(".form-control").val()
     if (comment!=""){
-/*    name = $(this).parent().parent().parent().children('.author-name').text();
-    precomment = $(this).parent().parent().parent().children('.pl-content').text();*/
     preentid = $(this).parent().attr("id");
-    /*parenttext = "回复@"+name+"发表的："+precomment*/
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           comment: comment, 
@@ -520,7 +517,7 @@ $(function(){
 </div>
 {% endfor %}
 </div><!-- <div class="rightnewtpic"> -->
-</div>
+</div><!-- <div id='hotarticle'> -->
 
 <div id='hotarticle'>
   <div class="pull-left" >

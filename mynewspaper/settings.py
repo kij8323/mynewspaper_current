@@ -133,6 +133,7 @@ CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 CKEDITOR_CONFIGS = {
     'default': {
+        'language': 'zh-cn',
         #'toolbar': 'Basic',
     },
 }

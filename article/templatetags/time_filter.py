@@ -15,6 +15,10 @@ def pageaculate(value, arg):
     return value + (arg-1)*5;
 
 @register.filter
+def time_blank_n(value): 
+    return value.replace('&nbsp;', '');
+
+@register.filter
 def time_chinese_week(value): 
     return value.replace('week', u'星期');
 

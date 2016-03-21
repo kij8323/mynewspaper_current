@@ -16,6 +16,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from notifications.atwho import atwho, atwhononoti
 from django.views.decorators.cache import cache_page
 from itertools import chain
+from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 # from .forms import TopicForm
 
 # Create your views here.
@@ -53,11 +55,23 @@ def group_index(request):
 def group_detail(request, group_id):
 	try:
 		group = Group.objects.get(pk=group_id)
-		groupall = Group.objects.all()
-		topic = group.topic_set.all()
+		groupall = Group.objects.all().order_by("-topicount")
+		topic = group.topic_set.all().order_by("-updated")
+		# 分页
+		paginator = Paginator(topic, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		request.session['lastpage'] = request.get_full_path()
 		context = {
 			'group': group,
-			'topic': topic,
+			'topic': contacts,
 			'groupall': groupall,
 			}
 	except Group.DoesNotExist:
@@ -102,6 +116,7 @@ def topic_detail(request, topic_id):
 			ifhotcomment = None;
 	else:
 		page = 1;
+	request.session['lastpage'] = request.get_full_path()
 	context = {
 		'topic':topic,
 		'user':user,
@@ -120,6 +135,7 @@ def topic_detail(request, topic_id):
 	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)
 
+@login_required(login_url='/user/loggin/')
 def newtopic(request):
 	if request.method == 'POST':
 		form = TopicForm(request.POST)
@@ -157,6 +173,8 @@ def topicomment(request):
 		try:
 			c = Comment(user=user, topic=topic, text=text)
 			c.save()
+			topic.updated = timezone.now()
+			topic.save()
 			userlist = atwho(text = text, sender = user, targetcomment = None)
 			for item in userlist:
 				atwhouser = MyUser.objects.get(username = item)
@@ -194,6 +212,8 @@ def topcommentcomment(request):
 		try:
 			c = Comment(user=user, topic=topic, text=text, parent=targetcomment)
 			c.save()
+			topic.updated = timezone.now()
+			topic.save()
 			targetcomment.readers = targetcomment.readers + 1
 			targetcomment.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)

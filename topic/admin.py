@@ -14,3 +14,4 @@ class TopicAdmin(admin.ModelAdmin):
 
 admin.site.register(Group, GroupAdmin)
 admin.site.register(Topic, TopicAdmin)
+

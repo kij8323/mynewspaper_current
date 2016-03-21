@@ -6,6 +6,8 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.forms import ModelForm
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import pre_save, post_delete
 # Create your models here.
 class Group(models.Model):
 	#文章名称
@@ -20,8 +22,8 @@ class Group(models.Model):
 	associatetitle = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
-	#自定义查询语句
-	#objects = ArticleManager()
+	topicount = models.IntegerField(default=0)
+
 	def __unicode__(self):
 		return self.title
 
@@ -35,8 +37,7 @@ class Group(models.Model):
 	def get_absolute_url(self):
 		return reverse('group_detail', kwargs={"group_id": self.id})
 
-	def coutopic(self):
-		return self.topic_set.all().count()
+
 
 class Topic(models.Model):
 	#文章名称
@@ -44,7 +45,7 @@ class Topic(models.Model):
 	#文章上传时间
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
 	#文章更新时间
-	updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
+	updated = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
 	#作者
 	writer = models.ForeignKey(MyUser)
 	#文章内容
@@ -70,6 +71,14 @@ class Topic(models.Model):
 	def get_absolute_url(self):
 		return reverse('topic_detail', kwargs={"topic_id": self.id})
 
+	def lastcommentime(self):
+		return self.comment_set.all()[0:1].get()
+
+
+		# return self.comment_set.all().order_by('-timestamp')[1]
+		
+	def test(self):
+		return self.comment_set.all()
 
 
 
@@ -78,3 +87,18 @@ class TopicForm(ModelForm):
     class Meta:
         model = Topic
         fields = ['content', 'title']
+
+@receiver(pre_save, sender=Topic)
+def addtopicount(sender, **kwargs):
+    topic = kwargs.pop("instance")
+    group = Group.objects.get(id =topic.group.id)
+    group.topicount += 1
+    group.save()
+
+
+@receiver(post_delete, sender=Topic)
+def subtopicount(sender, **kwargs):
+    topic = kwargs.pop("instance")
+    group = Group.objects.get(id =topic.group.id)
+    group.topicount -= 1
+    group.save()

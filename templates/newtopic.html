@@ -5,15 +5,41 @@
 $(document).ready(function(){
   $("form").submit(function(e){
     var input_title = $("#id_title").val()
+
+    var x = CKEDITOR.instances.id_content.getData()
+    alert(x)
     if (input_title == "")
     {
-    $('#erroricon_title').fadeIn("slow").fadeOut(3000);
+    $.messager.popup("请输入评论！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+/*    $(".modal.msg-popup").css({
+        'top': 'auto',
+        });*/
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
+    return false;
+    }
+    else if(input_title == "1")
+    {
+    alert("testok");
     return false;
     }
     else
     {
     alert("ok");
-    return true;
+    return false;
     }
   });
 });
