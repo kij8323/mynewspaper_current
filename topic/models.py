@@ -1,4 +1,6 @@
 #coding=utf-8
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.db import models
 from accounts.models import MyUser
 from ckeditor.fields import RichTextField
@@ -8,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_delete
+from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 class Group(models.Model):
 	#文章名称
@@ -86,7 +89,11 @@ class Topic(models.Model):
 class TopicForm(ModelForm):
     class Meta:
         model = Topic
-        fields = ['content', 'title']
+        fields = ['title', 'content']
+        labels = {
+            'title': _('标题'),
+            'content': _('内容'),
+        }
 
 @receiver(pre_save, sender=Topic)
 def addtopicount(sender, **kwargs):

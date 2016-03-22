@@ -51,7 +51,11 @@ $(function(){
  {% block content %}
 <div class="container">
 <div class="col-xs-9">
-	
+
+  <ul class="breadcrumbs">
+            <li><a href="{% url 'group_all' %}">话题组</a></li>
+        </ul>
+
  <div class="group-name">
  	{{group.title}}
  </div>

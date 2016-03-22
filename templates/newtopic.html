@@ -5,12 +5,10 @@
 $(document).ready(function(){
   $("form").submit(function(e){
     var input_title = $("#id_title").val()
-
-    var x = CKEDITOR.instances.id_content.getData()
-    alert(x)
+    var input_content = CKEDITOR.instances.id_content.getData()
     if (input_title == "")
     {
-    $.messager.popup("请输入评论！");
+    $.messager.popup("标题不能为空！");
     $(".modal.msg-popup .modal-body").css({
         'color': '#a94442',
         "background-color":"#f2dede",
@@ -23,23 +21,34 @@ $(document).ready(function(){
         'width': '300px !important',
         'margin': '30px auto 60px',
         });
-/*    $(".modal.msg-popup").css({
-        'top': 'auto',
-        });*/
     $(".modal.msg-popup .modal-content").css({
         'border': 'none',
         });
     return false;
     }
-    else if(input_title == "1")
+    else if(input_content == "")
     {
-    alert("testok");
+    $.messager.popup("内容不能为空！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });
+    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });
     return false;
     }
     else
     {
-    alert("ok");
-    return false;
+    return true;
     }
   });
 });
@@ -47,12 +56,15 @@ $(document).ready(function(){
 {% endblock %}
 
  {% block content %}
-<!-- <form class="form-email"  method='POST'  action=''>
-        {% csrf_token %}
-        {{form}}
-<input type="submit" value="Submit" />
-</form> -->
+
 <div class="container">
+<div class="center-warp">
+{% if group %}
+<ul class="breadcrumbs">
+            <li><a href="{% url 'group_all' %}">话题组</a><span> &gt; </span></li>
+            <li><a href="{{ group.get_absolute_url }}">{{ group.title }}</a><span> &gt; </span></li>
+            <li>提交话题</li>
+        </ul>
 	<div id="erroricon_title" style="text-align: center;">请输入标题</div>
 
   {% if messages %}
@@ -68,8 +80,16 @@ $(document).ready(function(){
 	{% csrf_token %}
     {{ myform.media }}
     {{ myform.as_p }}
-    <input type="submit"/>
+    <input type="submit"  value="提交" class='btn btn-lg btn-success btn-block'/>
 </form>
+
+{% else %}
+<ul class="breadcrumbs">
+            <li>无效的链接，请从上一级链接.<span> &gt; </span></li>
+        </ul>
+{% endif %}
+
+</div><!-- <div class="center-warp"> -->
 </div><!-- class="container" -->
  {% endblock %}
  

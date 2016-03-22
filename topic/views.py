@@ -68,6 +68,7 @@ def group_detail(request, group_id):
 		except EmptyPage:
 		# If page is out of range (e.g. 9999), deliver last page of results.
 			contacts = paginator.page(paginator.num_pages)
+		request.session['group'] = group.title
 		request.session['lastpage'] = request.get_full_path()
 		context = {
 			'group': group,
@@ -137,6 +138,9 @@ def topic_detail(request, topic_id):
 
 @login_required(login_url='/user/loggin/')
 def newtopic(request):
+	grouptitle = request.session.get('group', False)
+	group = Group.objects.get(title = grouptitle)
+	# group = False
 	if request.method == 'POST':
 		form = TopicForm(request.POST)
 		if form.is_valid():
@@ -146,9 +150,9 @@ def newtopic(request):
 			new_topic.content = content
 			new_topic.title = title
 			new_topic.writer = request.user
-			new_topic.group = Group.objects.get(pk=1)
+			new_topic.group = group
 			new_topic.save()
-			return redirect('newtopic')
+			return redirect(request.session['lastpage'])
 		else:
 			messages.error(request, '您输入的话题内容有误,请改正！')
 			return redirect("newtopic")
@@ -156,6 +160,7 @@ def newtopic(request):
 		print  request.user
 		context = {
 			'myform': TopicForm,
+			'group': group,
 			}
 	return render(request, 'newtopic.html',  context)
 

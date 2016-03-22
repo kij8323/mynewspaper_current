@@ -30,3 +30,103 @@
 	margin-right: auto;
 	text-align: center;
 }
+
+p:first-of-type
+{
+	position: relative;
+	width: 100%;
+	height: 75px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+p:first-of-type
+{
+	position: relative;
+	width: 100%;
+	height: 75px;
+	border-bottom: 1px solid #f0f0f0;
+}
+
+p:nth-of-type(2)
+{
+	border: none;
+	height: auto;
+	position: relative;
+	width: 100%;
+	height: 75px;
+}
+
+label{
+	position: absolute;
+	width: 105px;
+	font-size: 16px;
+	bottom: 0;
+	font-weight: 400;
+	display: inline-block;
+	max-width: 100%;
+	margin-bottom: 5px;
+	cursor: default;
+}
+
+#id_title{
+	width: 800px;
+	position: absolute;
+	float: left;
+	border-bottom: 1px solid #f0f0f0;
+	margin-left: 110px;
+	bottom: 4px;
+	border: none!important;
+	box-shadow: none!important;
+	font-size: 16px;
+	outline: 0;
+}
+
+.django-ckeditor-widget{
+	position: relative;
+	margin-left: 76px;
+	margin-top: -50px;
+	top: 20px;
+	display: inline-block;
+}
+
+.center-warp{
+	width: 910px;
+	margin: 0 auto;
+}
+
+
+
+input[type=submit].btn-block {
+	width: 148px;
+	border-radius: 0;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+
+ul{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.breadcrumbs li {
+	float: left;
+	font-size: 18px;
+	color: #bbb;
+}
+
+.breadcrumbs{
+	display: inline-block;
+}
+
+
+a{
+	color:#bbb;
+}
+
+a:link{
+	text-decoration: none;
+}
+a:hover{
+	color: #337ab7;
+}

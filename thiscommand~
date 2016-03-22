@@ -136,5 +136,8 @@ style="width: 215px; height:124px"
  {{item1.timestamp}}
  {% endfor %}
 发新话题
-
-话题组内话题数量
+提交
+标题不能为空
+内容不能为空
+无效的链接，请从上一级链接.
+标题
