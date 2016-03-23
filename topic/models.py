@@ -95,12 +95,12 @@ class TopicForm(ModelForm):
             'content': _('内容'),
         }
 
-@receiver(pre_save, sender=Topic)
-def addtopicount(sender, **kwargs):
-    topic = kwargs.pop("instance")
-    group = Group.objects.get(id =topic.group.id)
-    group.topicount += 1
-    group.save()
+# @receiver(pre_save, sender=Topic)
+# def addtopicount(sender, **kwargs):
+#     topic = kwargs.pop("instance")
+#     group = Group.objects.get(id =topic.group.id)
+#     group.topicount += 1
+#     group.save()
 
 
 @receiver(post_delete, sender=Topic)

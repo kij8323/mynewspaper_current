@@ -1,14 +1,61 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
+<link href="/static/css/test.css" rel="stylesheet">
 <script>
-$(document).ready(function(){
-$.messager.popup("This is message!");
+$(function() {
+  $("body").on("click", '#morecomment-btn-block', function(){
+  	    $.messager.popup("标题不能为空！");
+/*    $(".modal-open").css({
+        'overflow': 'auto',
+        'padding':' 0 !important',
+        });
+    $(".modal.msg-popup").css({
+        'top': 'auto',
+        });
+    $(".modal.msg-popup .modal-dialog").css({
+        'width': '300px !important',
+        'margin': '30px auto 60px',
+        });*/
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+/*    $(".modal.msg-popup .modal-content").css({
+        'border': 'none',
+        });*/
+  
 
-});
+
+  	  })
+})
 </script>
 {% endblock %}
 
+ {% block content %}
+<div class="container">
+<div class="center-warp">
+
+
+ <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
+
+
+  
+<form action="" method="post">
+	{% csrf_token %}
+    {{ myform.media }}
+    {{ myform.as_p }}
+    <input type="submit"  value="提交" class='btn btn-lg btn-success btn-block'/>
+</form>
+
+<h1>点击加载更多</h1>
+<h1>点击加载更多</h1>
+<h1>点击加载更多</h1>
+<h1>点击加载更多</h1>
+<h1>点击加载更多</h1>
+</div><!-- <div class="center-warp"> -->
+</div><!-- class="container" -->
 
 
 
+{% endblock %}
 

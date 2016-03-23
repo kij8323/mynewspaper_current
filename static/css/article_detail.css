@@ -389,8 +389,10 @@ a{
 	width: 100%;
 	color: #bbb;
 	border: 1px solid #f0f0f0;
+	outline:none;
 /*background-color: white;*/
 }
+
 
 #morecomment{
 	padding: 0px;
@@ -438,6 +440,28 @@ h4 b{
 	padding-left: 0px;
 }
 
+.modal-open {
+	overflow: auto;
+	padding: 0 !important;
+}
+
+.modal.msg-popup {
+	top: auto;
+}
+
+.modal.msg-popup .modal-dialog {
+	width: 300px !important;
+	margin: 30px auto 100px;
+}
+
+/* .modal.msg-popup .modal-body {
+background-color: #f2dede;
+color: #fff;
+}*/
+
+.modal.msg-popup .modal-content {
+	border: none;
+}
 
 
 a:hover{

@@ -30,3 +30,7 @@ font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中�
 .navbar, .navbar-default, .navbar-static-top{
 	margin-bottom: 30px;
 }
+
+div{
+	word-break:break-all;
+}

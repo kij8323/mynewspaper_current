@@ -22,27 +22,33 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def group_all(request):
-	try:
-		group = Group.objects.all()
-		# topic = group.topic_set.all()
-	except group.DoesNotExist:
-		raise Http404("Does not exist")
-	paginator = Paginator(group, 5)
-	page = request.GET.get('page')
-	try:
-		contacts = paginator.page(page)
-	except PageNotAnInteger:
-	# If page is not an integer, deliver first page.
-		contacts = paginator.page(1)
-	except EmptyPage:
-	# If page is out of range (e.g. 9999), deliver last page of results.
-		contacts = paginator.page(paginator.num_pages)
+	group = Group.objects.all().order_by("-topicount")
+	topic = Topic.objects.all().order_by("-readers")[0:10]
 	context = {
-		# 'group': group,
-		'contacts': contacts,
-		# 'topic': topic,
+		'group': group,
+		'topic': topic,
 		}
 	return render(request, 'group_all.html',  context)
+
+def moretopic(request):
+	if request.is_ajax():
+		request.session['grouplen'] = request.POST.get('grouplen')
+		print request.session['grouplen']
+	data = {
+	}
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
+
+def groupage(request):
+	if request.session.get('grouplen', False):
+		grouplen = request.session['grouplen']
+	topic = Topic.objects.all().order_by("-readers")
+	grouplen = int(grouplen)
+	topic = topic[grouplen:grouplen+5]
+	context = {
+		"topic": topic,
+	}
+	return render(request, 'groupage.html',  context)
 
 def group_index(request):
 	topic = Topic.objects.order_by('-updated')
@@ -152,6 +158,8 @@ def newtopic(request):
 			new_topic.writer = request.user
 			new_topic.group = group
 			new_topic.save()
+			group.topicount += 1
+			group.save()
 			return redirect(request.session['lastpage'])
 		else:
 			messages.error(request, '您输入的话题内容有误,请改正！')

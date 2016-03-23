@@ -42,8 +42,8 @@ urlpatterns = [
     url(r'^topic/topicomment/$', 'topic.views.topicomment', name='topicomment'),
     url(r'^topic/topcommentcomment/$', 'topic.views.topcommentcomment', name='topcommentcomment'),
     url(r'^topic/atwhoidentify/$', 'topic.views.atwhoidentify', name='atwhoidentify'),
-
-
+    url(r'^topic/moretopic/$', 'topic.views.moretopic', name='moretopic'),
+    url(r'^topic/groupage/$', 'topic.views.groupage', name='groupage'),
 
 
 

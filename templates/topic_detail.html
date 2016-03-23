@@ -32,11 +32,20 @@ $(function() {
           } 
     });
     $('html,body').animate({scrollTop:$('.freshcomment').offset().top}, 100);
-    $('.successlist').fadeIn("slow").fadeOut(3000);
+    $.messager.popup("评论发表成功!");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#449d44',
+        "background-color":"#CCF4D9",
+        });
     editor.setData('');
     }
-    else
-    $(this).parent().next().fadeIn("slow").fadeOut(3000);
+    else{
+    $.messager.popup("请输入评论！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+  }
   })
 })
 </script>
@@ -69,11 +78,20 @@ $(function() {
           }
     });
     /*$('html,body').animate({scrollTop:$('#btn-block').offset().top}, 100);*/
-    $('.successlist').fadeIn("slow").fadeOut(3000);
+    $.messager.popup("评论发表成功!");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#449d44',
+        "background-color":"#CCF4D9",
+        });
     $(this).prev(".form-control").val("")
     }
-    else
-    $(this).parent().parent().next().fadeIn("slow").fadeOut(3000);
+    else{
+    $.messager.popup("请输入评论！");
+    $(".modal.msg-popup .modal-body").css({
+        'color': '#a94442',
+        "background-color":"#f2dede",
+        });
+  }
   })
 })
 </script>
@@ -269,7 +287,10 @@ $(function(){
  <h1 class="t-h1">{{topic.title}}</h1>
 
 <div class="article-author">
-                <span class="author-name">{{topic.writer}}</span>
+                <a href="{{topic.writer.get_absolute_url}}">
+               <img  class="commentusericon1" src='{{topic.writer.get_image_url}}'>
+                </a>
+                <span class="author-name"><a href = "{{topic.writer.get_absolute_url}}">{{topic.writer}}</a></span>
                 <i class="icon icon-line"></i>
                 <span class="article-time">{{topic.timestamp|date:"Y-m-d H:i"}}</span>
                 <span class="article-share">阅读:{{topic.readers}}</span>

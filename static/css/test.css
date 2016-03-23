@@ -1,3 +1,12 @@
+
+/*p:first-of-type
+{
+	position: relative;
+	width: 100%;
+	height: 75px;
+	border-bottom: 1px solid #f0f0f0;
+}
+*/
 #erroricon_title {
 	padding-left: 0px;
 	color: #a94442;
@@ -31,21 +40,6 @@
 	text-align: center;
 }
 
-p:first-of-type
-{
-	position: relative;
-	width: 100%;
-	height: 75px;
-	border-bottom: 1px solid #f0f0f0;
-}
-
-p:first-of-type
-{
-	position: relative;
-	width: 100%;
-	height: 75px;
-	border-bottom: 1px solid #f0f0f0;
-}
 
 p:nth-of-type(2)
 {
@@ -120,29 +114,6 @@ ul{
 }
 
 
-.modal-open {
-	overflow: auto;
-	padding: 0 !important;
-}
-
-.modal.msg-popup {
-	top: auto;
-}
-
-.modal.msg-popup .modal-dialog {
-	width: 300px !important;
-	margin: 30px auto 100px;
-}
-
-/* .modal.msg-popup .modal-body {
-background-color: #f2dede;
-color: #fff;
-}*/
-
-.modal.msg-popup .modal-content {
-	border: none;
-}
-
 a{
 	color:#bbb;
 }
@@ -153,3 +124,26 @@ a:link{
 a:hover{
 	color: #337ab7;
 }
+
+  .modal-open {
+        overflow: auto;
+        padding: 0 !important;
+      }
+
+      .modal.msg-popup {
+        top: auto;
+      }
+
+      .modal.msg-popup .modal-dialog {
+        width: 300px !important;
+        margin: 30px auto 100px;
+      }
+
+     /* .modal.msg-popup .modal-body {
+        background-color: #f2dede;
+        color: #fff;
+      }*/
+
+      .modal.msg-popup .modal-content {
+        border: none;
+      }

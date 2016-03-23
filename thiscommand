@@ -79,11 +79,12 @@ var jiathis_config = {
   </a>
   </li>
 
-
+热门话题
 ckeditor上传本地图片
 修改头像设置
 我的帐号
 我的评论月
+完成
 我的消阅读
 收藏
 你怎么看？
@@ -142,3 +143,9 @@ style="width: 215px; height:124px"
 无效的链接，请从上一级链接.
 提交话题
 标题
+
+
+
+        $('#new'+String(cur_page_num)).load('{% url 'commentpage' topic.id %}');
+        $('#morecomment-btn-block').html(data.loadcompleted)
+

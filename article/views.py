@@ -213,9 +213,6 @@ def morecomment(request):
 		loadcompleted = '已全部加载完成'
 	else:
 		loadcompleted = '点击加载更多'
-	print comment.count()
-	print request.session['commentlen']
-	print 'morecomment'
 	data = {
 		'loadcompleted' : loadcompleted
 	}
@@ -321,8 +318,11 @@ def commentpage(request, article_id):
 	return render(request, 'commentpage.html',  context)
 
 
+
+from topic.models import Group, Topic, TopicForm
 def test(request):
 	context = {
 		'x': 'x',
+		'myform': TopicForm,
 	}
 	return render(request, 'test.html',  context)

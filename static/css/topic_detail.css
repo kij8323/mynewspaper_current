@@ -1,4 +1,26 @@
 
+.modal-open {
+	overflow: auto;
+	padding: 0 !important;
+}
+
+.modal.msg-popup {
+	top: auto;
+}
+
+.modal.msg-popup .modal-dialog {
+	width: 300px !important;
+	margin: 30px auto 100px;
+}
+
+/* .modal.msg-popup .modal-body {
+background-color: #f2dede;
+color: #fff;
+}*/
+
+.modal.msg-popup .modal-content {
+	border: none;
+}
 
 #sidebar{
 	position:fixed;
@@ -107,6 +129,15 @@ ul{
 	background-color: #eee;
 	float: left;
 	margin: 4px 1em 0 0;
+}
+.commentusericon1{
+	width: 25px;
+	height: 25px;
+	border-radius: 3px;
+	background-color: #eee;
+	margin-right: 5px;
+	/*margin: 4px 1em 0 0;*/
+	vertical-align: middle;
 }
 
 a:link{
@@ -581,6 +612,9 @@ margin-top: 5px
 	font-size: 16px;
 	margin-bottom: -25px
 }
+
+
+
 a:hover{
 	color: #337ab7;
 }

@@ -1,0 +1,43 @@
+ {% block HeadDoc %}
+{% load time_filter %}
+{% endblock %}
+{% for item in topic %}
+ <div class="group-list">
+ <a href="{{item.get_absolute_url}}">
+ {{item.title}}
+ </a>
+ <div class="group-information">
+ <span class='group-informatio-blank'>
+  <a href="{{item.writer.get_absolute_url}}">
+ <img  class="commentusericon" src='{{item.writer.get_image_url}}'>
+  </a>
+ <a href="{{item.writer.get_absolute_url}}">
+{{item.writer}}
+ </a>
+ </span>
+
+ <span class='group-informatio-blank'>
+ {{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
+ <span class='group-informatio-blank'>
+回复数:{{item.comment_set.count}}
+</span>
+
+
+{%  if item.comment_set.count %}
+ <span class='group-informatio-blank'>
+最新回复:
+{{item.lastcommentime.user}}
+</span>
+{{item.lastcommentime.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+{% endif %}
+
+ <span class='group-informatio-blank pull-right'>
+  <a href="{{item.group.get_absolute_url}}">
+  {{item.group}}
+</a>
+</span>
+
+</div>
+</div>
+ {% endfor %}

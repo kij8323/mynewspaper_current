@@ -38,17 +38,6 @@ $(function() {
         'color': '#449d44',
         "background-color":"#CCF4D9",
         });
-    $(".modal-open").css({
-        'overflow': 'auto',
-        'padding':' 0 !important',
-        });
-    $(".modal.msg-popup .modal-dialog").css({
-        'width': '300px !important',
-        'margin': '30px auto 60px',
-        });
-    $(".modal.msg-popup .modal-content").css({
-        'border': 'none',
-        });
     editor.setData('');
     }
     else{
@@ -56,20 +45,6 @@ $(function() {
     $(".modal.msg-popup .modal-body").css({
         'color': '#a94442',
         "background-color":"#f2dede",
-        });
-    $(".modal-open").css({
-        'overflow': 'auto',
-        'padding':' 0 !important',
-        });
-    $(".modal.msg-popup .modal-dialog").css({
-        'width': '300px !important',
-        'margin': '30px auto 60px',
-        });
-/*    $(".modal.msg-popup").css({
-        'top': 'auto',
-        });*/
-    $(".modal.msg-popup .modal-content").css({
-        'border': 'none',
         });
     }
   })
@@ -111,17 +86,6 @@ $(function() {
         'color': '#449d44',
         "background-color":"#CCF4D9",
         });
-    $(".modal-open").css({
-        'overflow': 'auto',
-        'padding':' 0 !important',
-        });
-    $(".modal.msg-popup .modal-dialog").css({
-        'width': '300px !important',
-        'margin': '30px auto 60px',
-        });
-    $(".modal.msg-popup .modal-content").css({
-        'border': 'none',
-        });
     $(this).prev(".form-control").val("")
     }
     else{
@@ -129,17 +93,6 @@ $(function() {
     $(".modal.msg-popup .modal-body").css({
         'color': '#a94442',
         "background-color":"#f2dede",
-        });
-    $(".modal-open").css({
-        'overflow': 'auto',
-        'padding':' 0 !important',
-        });
-    $(".modal.msg-popup .modal-dialog").css({
-        'width': '300px !important',
-        'margin': '30px auto 60px',
-        });
-    $(".modal.msg-popup .modal-content").css({
-        'border': 'none',
         });
     }
   })
@@ -201,18 +154,6 @@ $(function() {
                 'color': '#a94442',
                 "background-color":"#f2dede",
                 });
-            $(".modal-open").css({
-                'overflow': 'auto',
-                'padding':' 0 !important',
-                });
-            $(".modal.msg-popup .modal-dialog").css({
-                'width': '300px !important',
-                'margin': '30px auto 60px',
-                });
-            $(".modal.msg-popup .modal-content").css({
-                'border': 'none',
-                });
-          }
     });
   })
 })
@@ -600,10 +541,6 @@ var jiathis_config = {
               </div>
       </div>
     </div>
-        {% if forloop.last %}
-    <div id='dividedline'>
-    </div>
-    {% endif %}
 {% endfor %}
 <!--                            最新回复                         -->
 
@@ -611,6 +548,9 @@ var jiathis_config = {
 
 <div id='morecomment'>
 </div>
+    <div id='dividedline'>
+    </div>
+
 {% if moercomment %}
  <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
 {% else %}
