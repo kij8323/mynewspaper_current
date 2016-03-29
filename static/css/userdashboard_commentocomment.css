@@ -1,0 +1,126 @@
+body{
+	background-color: #f0f4fb;
+}
+.container-user{
+	margin-top: 30px;
+/*	width: 1194px;*/
+}
+
+.leftblock{
+	/*border-radius: 6px;*/
+	background-color: white;
+	margin-right: -26px;
+	font-size: 18px;
+/*	width: 167px;*/
+}
+.rightblock{
+/*	border-radius: 6px;*/
+	background-color: white;
+	margin-bottom: 3px;
+	font-size: 18px;
+	/*padding-left: 15px;*/
+/*	width: 965px;*/
+}
+
+.presentation2, .presentation3, .presentation4{
+/*	background-color: #f0f4fb;*/
+	/*margin-top: 0px;*/
+	margin-bottom: -3px;
+}
+
+.presentation1 a, .presentation3 a, .presentation4 a,.presentationw1 a{
+/*	background-color: #f0f4fb;*/
+	color: #555;
+}
+
+
+.presentation2 a, .presentationw2 a{
+	color: black;
+}
+
+.presentation2{
+	border-color: #ddd;
+	border-left: 2px solid #67CA87;
+	margin-bottom: -3px;
+/*	border-top-radius: 6px;*/
+}
+
+.presentationw2{
+	border-bottom: 2px solid #67CA87;
+}
+
+.dashboard{
+	/*height: 300px;*/
+	width: 100%;
+	background-color: white;
+	padding: 0 30px;
+	/*border-radius: 6px;*/
+
+}
+
+.paginationcontain{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.paginator{
+	position: relative;
+	float: left;
+	margin-left: -1px;
+	line-height: 27px;
+	color: #333;
+	background-color: #f5f5f5;
+	margin-right: 10px;
+	border-radius: 0;
+	height: 36px;
+	width: 36px;
+	border: none;
+	padding: 6px 0;
+	/*border-radius: 10px;*/
+	/*background: rgba(0,0,0,.2);*/
+}
+
+.paginator_current{
+	position: relative;
+	float: left;
+	margin-left: -1px;
+	line-height: 27px;
+	color: #fff;
+	background-color:  #67CA87;
+	margin-right: 10px;
+	border-radius: 0;
+	height: 36px;
+	width: 36px;
+	border: none;
+	padding: 6px 0;
+	/*border-radius: 10px;*/
+	/*background: #67CA87;*/
+}
+
+.commentlist{
+	padding: 25px 0;
+	border-bottom: 1px solid #F0F0F0;
+}
+
+.commentinfo{
+	color: #bbb;
+margin-top: 10px;
+}
+
+.comment-article{
+	margin-left: 20px;
+}
+
+.targetcomment{
+	border-left-width: 2px;
+	background-color: #fafafa;
+	margin: 15px 0 18px;
+	padding: 20px 30px;
+}
+
+.grayword{
+	color: #bbb;
+}
+a:link{
+	text-decoration: none;
+}

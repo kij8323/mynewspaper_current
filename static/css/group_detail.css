@@ -75,7 +75,7 @@ ul{
 }
 
 .group-information{
-	margin: 10px 0 -5px;
+	margin: 0px 0 -5px;
 	font-size: 14px;
 	color: #999;
 	line-height: 24px;
@@ -90,7 +90,9 @@ ul{
 }
 
 #rightstableblock{
-	width: 200.5px;
+	width: 268.5px;
+	max-height: 100%;
+	overflow:auto; 
 }
 
 #hotarticle{
@@ -107,7 +109,23 @@ h4 b{
 	padding: 30px;
 }
 
+.mod-thumb{
+	width: 78px;
+	height: 42px;
+	position: absolute;
+	overflow: hidden;
+}
 
+.mod-thumb img{
+	vertical-align: middle;
+	width: 100%;
+	height: 100%;
+}
+
+.project-content{
+	margin-left: 98px;
+	font-size: 16px;
+}
 
 .rightitle{
 	border-bottom: 1px solid #f0f0f0;
@@ -115,6 +133,7 @@ h4 b{
 	color: #333;
 	font-size: 14px;
 }
+
 .rightnewtpic{
 	width: 100%;
 	/*zoom: 1;*/

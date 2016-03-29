@@ -145,12 +145,19 @@ $(function(){
   </div>
 <div class="rightnewtpic">
  {% for item in groupall %}
- <div class="rightitle">
+  <div class="rightitle">
+      <a href="{{item.get_absolute_url}}">
+ <div class='mod-thumb'><img src="{{item.get_image_url}}"></div>
+  </a>
+ <div class="project-content">
  	<a href="{{item.get_absolute_url}}">
  {{item.title}}
  </a>
+  <div class='group-information'>
  ({{item.topicount}}则话题)
- </div>
+  </div><!--   <div class='group-information'> -->
+ </div> <!-- <div class="project-content"> -->
+ </div><!-- <div class="rightitle"> -->
  {% endfor %}
  </div><!-- <div class="rightnewtpic"> -->
  </div><!-- <div id='hotarticle'> -->

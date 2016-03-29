@@ -10,12 +10,16 @@ body{
 	/*border-radius: 6px;*/
 	background-color: white;
 	margin-right: -26px;
+	font-size: 18px;
+	/*color: #555;*/
 /*	width: 167px;*/
 }
 .rightblock{
 /*	border-radius: 6px;*/
 	background-color: white;
 	margin-bottom: 3px;
+	font-size: 18px;
+	/*color: #555;*/
 	/*padding-left: 15px;*/
 /*	width: 965px;*/
 }
@@ -67,15 +71,13 @@ body{
 }
 
 .icon{
-	width: 60px;
-	height: 60px;
+	width: 40px;
+	height: 40px;
 	margin-left: -25px;
 }
 
 .lefticon{
-	padding-top: 15px;
-	padding-left: 0px;
-	padding-right: 0px;
+	padding: 0px;
 }
 
 .emailline{
@@ -83,10 +85,11 @@ body{
 }
 
 h4 span {
-color: #178fe6;
+
 }
 
-#erroricon {
+#erroricon, #erroriconpassword, #erroriconrepassword, #erroriconwrongpassword,
+#erroriconemail, #erroriconwrongemail, #erroriconprivcycomment{
 	padding-left: 0px;
 	color: #a94442;
 	background-color: #f2dede;
@@ -100,3 +103,55 @@ color: #178fe6;
 	margin-left: auto;
 	margin-right: auto;
 }
+
+#successiconprivcycomment{
+	padding-left: 0px;
+	color: #449d44;
+	background-color: #CCF4D9;
+	border-color: #CCF4D9;
+	border-radius: 4px;
+	margin-bottom: 15px;
+	padding-top: 2%;
+	padding-bottom: 2%;
+	width: 30%;
+	display:none;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form-control{
+	width: 170px;
+}
+
+label {
+
+font-weight: 500;
+}
+
+#privcycommentform form .form-control{
+	display: block;
+width: 100%;
+padding: 6px 12px;
+font-size: 14px;
+line-height: 1.42857143;
+color: #555;
+background-color: #fff;
+background-image: none;
+border: 1px solid #ccc;
+border-radius: 4px;
+margin-top: 10px;
+margin-bottom: 20px;
+}
+
+#privcycommentform form textarea{
+	height: 200px;
+}
+
+.btn-messages{
+	font-size: 16px;
+	border-radius: 0;
+}
+
+#iconinputcover h5{
+	margin-bottom: 0px;chrome://settings/
+}chrome://settings/chrome://settings/chrome://settings/chrome://settings/chrome://settings/

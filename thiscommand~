@@ -29,10 +29,6 @@ pip install  django-simple-captcha -i http://pypi.douban.com/simple/
 pip install django-ckeditor
 python manage.py  collectstatic --clear
 
-收藏
-赞
-话题
-则话题
 pip install Pillow
 ALTER TABLE article_article CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE article_category CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -58,94 +54,12 @@ git push paper1 master -f
 shenanping2008@Hotmail.com
 012ssskkk
 
-最新话题
-回复
+
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
-    {{ form.media }}
-    {{ form.as_p }}
-
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
-<script "text/javascript"> 
-var jiathis_config = { 
-  title: "{{article.title}}",  
-} 
-</script> 
-  <li>
-  <a class="jiathis_button_weixin" href='javascript:void(0);'>
-  <i class="weichatshare">
-  </i>
-  </a>
-  </li>
-
-热门话题
-ckeditor上传本地图片
-修改头像设置
-我的帐号
-我的评论月
-完成
-我的消阅读
-收藏
-你怎么看？
-请提交您的看法
-引用@ 发表的：
-回复
-发送评论
-刷新评论
-帐号信息
-点评
-@我
-私信
-收藏的文章
-您输入的信息有误，请重新输入。
-请选择图片
-验证输入图片
-验证email地址
-验证密码
-请输入正确的邮箱地址
-富文本编辑框设置
-请输入标题
-您输入的话题内容有误
-请改正
-点赞
-登录点衰
-前
-收藏
-已收藏
-
-
-style="width: 215px; height:124px"
-
-请先登录
-回复文章
-评论回复
-加载更多
-收藏文章
-回到页面顶端
-相关文章
-富文本框
-楼
-话题组
-组长：
-作者
-发表于：
-回复：
-回复数
-最新回复
-  {% for item1 in item.lastcommentime %}
- {{item1.timestamp}}
- {% endfor %}
-发新话题
-提交
-标题不能为空
-内容不能为空
-无效的链接，请从上一级链接.
-提交话题
-标题
 
 
 
-        $('#new'+String(cur_page_num)).load('{% url 'commentpage' topic.id %}');
-        $('#morecomment-btn-block').html(data.loadcompleted)
+
 

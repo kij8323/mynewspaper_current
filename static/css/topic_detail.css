@@ -13,6 +13,9 @@
 	margin: 30px auto 100px;
 }
 
+.grayword{
+	color: #999
+}
 /* .modal.msg-popup .modal-body {
 background-color: #f2dede;
 color: #fff;
@@ -195,6 +198,11 @@ margin: 0 15px 0 0;
 	line-height: 30px;
 	margin-top: 25px;
 	margin-bottom: 40px;
+}
+
+.article-content-wrap img{
+	max-width: 100%;
+	max-height: 600px;
 }
 
 .article-content-wrap p {
@@ -404,14 +412,15 @@ color: #A19F9F;
 #hotarticle{
 	padding-top: 20px;
 	background-color:  #fafafa;
-/*	height: 200px;*/
 	width: 100%;
-	margin-top: 30px;
-
+	margin-top: 30px; 
+	max-height: 280px;
 }
 
 #rightstableblock{
 	width: 268.5px;
+	max-height: 100%;
+	overflow:auto;  
 }
 
 .rightcategory{

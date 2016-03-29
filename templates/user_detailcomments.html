@@ -1,23 +1,7 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
 <link href="/static/css/user_detailcomments.css" rel="stylesheet">
-<script>/*ajax我的评论*/
-$(function() {
-  $(".presentation2").click(function() {
-    $.ajax({
-        url: "{% url 'userdashboard_comment' %}",
-        type: "get",
-        success: function(data) {
-            $(".dashboard").html(data.test);
-        },
-        error: function(data) { 
-            alert("Got an error dude");
-        }
-    });
-
-  })
-})
-</script>
+<script src="/static/js/topic_detail.js"></script>
 {% endblock %}
 
 
@@ -27,26 +11,60 @@ $(function() {
 
   <div class="col-xs-2">
   <ul class="nav nav-pills nav-stacked leftblock">
-      <li class="presentation1" role="presentation"><a href="{% url 'user_detailinformations' user.id%}">我的帐号</a></li>
-      <li class="presentation2" role="presentation"><a href="{% url 'user_detailcomments' user.id%}">我的评论</a></li>
-      <li class="presentation3" role="presentation"><a href="{% url 'user_detailnotifications' user.id%}">我的消息</a></li>
-      <li class="presentation4" role="presentation"><a href="{% url 'user_detailcollections' user.id%}">我的收藏</a></li>
+      <li class="presentation1" role="presentation"><a href="{% url 'user_detailinformations' user.id%}">{{hostname}}信息</a></li>
+      <li class="presentation2" role="presentation"><a href="{% url 'user_detailcomments' user.id%}">{{hostname}}评论</a></li>
+      <li class="presentation3" role="presentation"><a href="{% url 'user_detailnotifications' user.id%}">{{hostname}}消息</a></li>
+      <li class="presentation4" role="presentation"><a href="{% url 'user_detailcollections' user.id%}">{{hostname}}收藏</a></li>
     </ul>
 </div><!-- class="col-md-2" -->
   <div class="col-xs-10">
   <ul class="nav nav-pills rightblock">
-      <li class="presentationw1" role="presentation"><a href="#">评论</a></li>
-      <li class="presentationw2" role="presentation"><a href="#">点评</a></li>
-      <li class="presentationw3" role="presentation"><a href="#"></a></li>
+      <li class="presentationw1" role="presentation"><a href="{% url 'user_detailcomments' user.id%}">评论</a></li>
+      <li class="presentationw2" role="presentation"><a href="{% url 'userdashboard_commentocomment' user.id %}">点评</a></li>
     </ul>
 
     <div class="dashboard">
       {% for item in comment %}
-      {{item.text|safe}}<br>
-      {% endfor %}
+      <div class = 'commentlist'>
+      {{item.text|safe}}
+       <div class = 'commentinfo'>
+      {{item.timestamp}}
+      <span class="comment-article">
+        {% if item.article %}
+        来自文章：<a href="{{item.article.get_absolute_url}}">{{item.article.title}}
+        </a>
+        {% else %}
+        来自话题：<a href="{{item.topic.get_absolute_url}}">{{item.topic.title}}
+        </a>
+        {% endif %}
+      </span>
       </div>
-</div><!-- class="col-md-10" -->
+      </div>
+      {% endfor %}
+      <!-- </div> -->
 
+<div class='paginationcontain'>
+<div class="pagination">
+    <span class="step-links">
+{% if comment.has_previous %}
+        <a class='paginator' title='上一页' href='?page={{ comment.previous_page_number }}'><span>&lt;</span></a>
+ {% endif %}
+ {% for page in comment.paginator.page_range %}
+     {% if page = comment.number %}
+         <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
+     {% else %}
+         <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+     {% endif %}
+ {% endfor %}
+ {% if comment.has_next %}
+     <a class='paginator' title='下一页' href='?page={{ comment.next_page_number }}'><span>&gt;</span></a>
+ {% endif %}
+    </span>
+</div><!-- <div class="pagination"> -->
+</div><!-- <div class='paginationcontain'> -->
+</div><!-- <div class="dashboard">
+ -->
+</div><!-- class="col-md-10" -->
 </div><!-- class="container-user" -->
 </div><!-- class="container" -->
  {% endblock %}

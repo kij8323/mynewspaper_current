@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render
 from .form import LoginForm, RegisterForm
-from .models import MyUser, MyUserEmailForm, MyUserIconForm, MyUserPassWForm
+from .models import MyUser, MyUserIconForm
 
 from notifications.models import Notification
 # from comment.models import Comment
@@ -15,7 +15,9 @@ import json
 from django.http import HttpResponse
 from captcha.models import CaptchaStore
 from captcha.helpers import captcha_image_url
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404 
+from notifications.signals import notify
 #登录页面
 def loggin(request):
 	form = LoginForm(request.POST or None)
@@ -118,30 +120,43 @@ def accountsview(request):
 def userdashboardinformations(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
 		action_url = reverse("user_detailinformations", kwargs={"user_id": user_id})
 		if request.method == 'POST' and request.FILES.get('img', False):
 			image = request.FILES['img']
 			user.icon = image
 			user.save() 
 			return redirect(action_url)
-		if request.method == 'POST' and request.POST.get('email', False):
-			form1 = MyUserEmailForm(request.POST, instance=user)
-			if form1.is_valid():
-				form1.save() 
-				return redirect(action_url)
-			else:
-				return redirect(action_url)
+		if request.method == 'POST' and request.POST.get('emailaddress', False):
+			emailaddress = request.POST.get('emailaddress')
+			user.email = emailaddress
+			user.save()
+			return redirect(action_url)
 		if request.method == 'POST' and request.POST.get('password', False):
 			print request.POST.get('password')
 			password = request.POST.get('password')
 			user.set_password(password)
 			user.save()
 			return redirect(action_url)
+		if request.method == 'POST' and request.POST.get('privcycomment', False):
+			text = request.POST.get('privcycomment')
+			try:
+				# c = Comment(user=user, is_privcycomment=True, text=text)
+				notify.send(sender=sender, target_object=None, recipient = user, verb="_@_", text=text)
+			except:
+				traceback.print_exc()
+			return redirect(action_url)
 		else:
-			form = MyUserEmailForm()
 			context = {
-			"form": form,
 			"user": user,
+			'host': host,
+			'hostname': hostname,
 			#"action_url": action_url,
 			}
 	except MyUser.DoesNotExist:
@@ -151,10 +166,31 @@ def userdashboardinformations(request, user_id):
 def userdashboardcomments(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		user = MyUser.objects.get(pk=user_id)
 		comment = user.comment_set.all().filter(parent = None) 
+		# 分页
+		paginator = Paginator(comment, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+
 		context = {
 			'user': user,
-			"comment": comment,
+			"comment": contacts,
+			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
@@ -193,6 +229,38 @@ def userdashboard_comment(request):
 		return HttpResponse(json_data, content_type='application/json')
 	else:
 		raise Http404
+
+#loadajax
+def userdashboard_commentocomment(request, user_id):	
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		if user == request.user:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	comment = user.comment_set.all().exclude(parent = None) 
+	# 分页
+	paginator = Paginator(comment, 10)
+	page = request.GET.get('page')
+	try:
+		contacts = paginator.page(page)
+	except PageNotAnInteger:
+	# If page is not an integer, deliver first page.
+		contacts = paginator.page(1)
+	except EmptyPage:
+	# If page is out of range (e.g. 9999), deliver last page of results.
+		contacts = paginator.page(paginator.num_pages)
+	context = {
+		"comment": contacts,
+		'hostname': hostname,
+		'user': user,
+	}
+	return render(request, 'userdashboard_commentocomment.html',  context)
+
 
 def test(request):	
 	if request.method == 'POST':

@@ -125,6 +125,11 @@ display: block;
 font-size: 16px;
 }
 
+.article-content-wrap img {
+	max-width: 100%;
+	max-height: 600px;
+}
+
 .comment-form{
 	border-top: 1px solid #f0f0f0;
 	margin-top: 160px;

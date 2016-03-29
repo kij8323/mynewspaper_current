@@ -20,6 +20,7 @@ class Comment(models.Model):
 	updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 	#评论修改时间
 	timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+	is_privcycomment = models.BooleanField(default=False)
 	#自定义查询
 	# objects = CommentManager()
 	#回复的评论用户

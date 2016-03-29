@@ -5,6 +5,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.core.urlresolvers import reverse
 from django.forms import ModelForm
 from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 class MyUserManager(BaseUserManager):
     def create_user(self, username=None, email=None, password=None):
@@ -127,10 +128,13 @@ class UserProfile(models.Model):
 		return "%s%s" %(settings.STATIC_URL, self.image)
 
 
-class MyUserEmailForm(ModelForm):
-    class Meta:
-        model = MyUser
-        fields = ['email']
+# class MyUserEmailForm(ModelForm):
+#     class Meta:
+#         model = MyUser
+#         fields = ['email']
+#         labels = {
+#         'email': _('邮箱地址'),
+#     	}
 
 
 class MyUserIconForm(ModelForm):
@@ -138,8 +142,8 @@ class MyUserIconForm(ModelForm):
         model = MyUser
         fields = ['icon']
 
-class MyUserPassWForm(ModelForm):
-    class Meta:
-        model = MyUser
-        fields = ['fakepassword']
+# class MyUserPassWForm(ModelForm):
+#     class Meta:
+#         model = MyUser
+#         fields = ['fakepassword']
 
