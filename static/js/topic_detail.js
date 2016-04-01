@@ -88,6 +88,22 @@ $(document).ready(function(){
       $(this).children().css("background-position","-170px -173px");
       $(this).css("color","#bbb");
   });  
+ $(".articlecollection").mouseenter(function(){
+      $(this).css("background-color","#3ca5f6");
+      $(this).css("color","white");
+  });
+  $(".articlecollection").mouseleave(function(){
+      $(this).css("background-color","#fafafa");
+      $(this).css("color","#bbb");
+  });
+
+ $(".icon-delete").mouseenter(function(){
+      $(this).css("background-position","-280px -434px");
+  });
+  $(".icon-delete").mouseleave(function(){
+      $(this).css("background-position","-231px -434px");
+  });
+  
 });
 
 

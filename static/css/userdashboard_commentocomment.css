@@ -12,6 +12,8 @@ body{
 	margin-right: -26px;
 	font-size: 18px;
 /*	width: 167px;*/
+	padding: 10px 0px;
+	border-radius: 5px;
 }
 .rightblock{
 /*	border-radius: 6px;*/
@@ -20,6 +22,8 @@ body{
 	font-size: 18px;
 	/*padding-left: 15px;*/
 /*	width: 965px;*/
+	padding: 0px 10px;
+	border-radius: 5px;
 }
 
 .presentation2, .presentation3, .presentation4{
@@ -28,15 +32,20 @@ body{
 	margin-bottom: -3px;
 }
 
-.presentation1 a, .presentation3 a, .presentation4 a,.presentationw1 a{
+.glyphicon{
+	margin-right: 10px;
+/*vertical-align: middle;*/
+}
+
+.presentation2 a .glyphicon{
+	color: #67CA87;
+}
+
+.presentation1 a, .presentationw1 a, .presentation5 a,.presentation2 a, .presentation3 a, .presentation4 a,.presentationw2 a, .presentationw3 a{
 /*	background-color: #f0f4fb;*/
 	color: #555;
 }
 
-
-.presentation2 a, .presentationw2 a{
-	color: black;
-}
 
 .presentation2{
 	border-color: #ddd;
@@ -60,7 +69,7 @@ body{
 
 .paginationcontain{
 	text-align: center;
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 }
 
 .paginator{
@@ -124,3 +133,5 @@ margin-top: 10px;
 a:link{
 	text-decoration: none;
 }
+
+

@@ -1,6 +1,6 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
-<link href="/static/css/user_detailnotifications.css" rel="stylesheet">
+<link href="/static/css/user_privcynotifications.css" rel="stylesheet">
 <script src="/static/js/topic_detail.js"></script>
 <script>/*ajax我的评论*/
 $(function() {
@@ -49,21 +49,12 @@ $(function() {
     <div class="dashboard">
       {% for item in notifications %}
       <div class = 'commentlist'>
-      <a href="{{item.sender_object.get_absolute_url}}">{{item.sender_object.username}}</a>在评论中@了你:
+      <a href="{{item.sender_object.get_absolute_url}}">{{item.sender_object.username}}</a>给你发送了私信:
       <div class='targetcomment'>
         {{item.text|safe}}
         </div>
       <div class = 'commentinfo'>
         {{item.timestamp}}
-      <span class="comment-article">
-        {% if item.target_article %}
-        来自文章：<a href="{{item.target_article.get_absolute_url}}">{{item.target_article.title}}
-        </a>
-        {% else %}
-        来自话题：<a href="{{item.target_topic.get_absolute_url}}">{{item.target_topic.title}}
-        </a>
-        {% endif %}
-      </span>
       </div><!-- <div class = 'commentinfo'> -->
       </div><!-- <div class = 'commentlist'> -->
       {% endfor %}

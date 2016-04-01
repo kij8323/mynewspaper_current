@@ -18,6 +18,10 @@ from captcha.helpers import captcha_image_url
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404 
 from notifications.signals import notify
+from topic.models import CollectionTopic, Topic
+from article.models import Collection, Article
+from comment.models import Comment
+from notifications.models import Notification
 #登录页面
 def loggin(request):
 	form = LoginForm(request.POST or None)
@@ -116,7 +120,7 @@ def accountsview(request):
 	else:
 		raise Http404
 
-
+#我的信息
 def userdashboardinformations(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -163,6 +167,7 @@ def userdashboardinformations(request, user_id):
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_detailinformations.html',  context)
 
+#我的评论
 def userdashboardcomments(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -191,46 +196,147 @@ def userdashboardcomments(request, user_id):
 			'user': user,
 			"comment": contacts,
 			'hostname': hostname,
+			'host': host,
 			}
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_detailcomments.html',  context)
 
+#我的信息
 def userdashboardnotifications(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
-		notifications = Notification.objects.filter(recipient = user)
-		print 'notifications'
-		print notifications
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		notifications = Notification.objects.filter(recipient = user).filter(verb = '@').order_by("-timestamp")
+		# 分页
+		paginator = Paginator(notifications, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
 		context = {
 			'user': user,
-			"notifications": notifications,
+			"notifications": contacts,
+			'host': host,
+			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_detailnotifications.html',  context)
 
+#我的信息-私信
+def privcynotifications(request, user_id):
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		notifications = Notification.objects.filter(recipient = user).filter(verb = '_@_').order_by("-timestamp")
+		# 分页
+		paginator = Paginator(notifications, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		context = {
+			'user': user,
+			"notifications": contacts,
+			'host': host,
+			'hostname': hostname,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_privcynotifications.html',  context)
+
+#我的收藏
 def userdashboardcollections(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		collection = Collection.objects.filter(user = user)
+		# 分页
+		paginator = Paginator(collection, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		context = {
+			'collection' : contacts,
+			'host': host,
+			'user': user,
+			'hostname': hostname,
+			}
 	except MyUser.DoesNotExist:
 		raise Http404("MyUser does not exist")
-	return render(request, 'user_detailcollections.html',  {'user': user})
+	return render(request, 'user_detailcollections.html',  context)
+
+#我的收藏-话题
+def userdashboardcollectionstopic(request, user_id):	
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		collection = CollectionTopic.objects.filter(user = user)
+		# 分页
+		paginator = Paginator(collection, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		context = {
+			'collection' : contacts,
+			'host': host,
+			'user': user,
+			'hostname': hostname,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_userdashboardcollectionstopic.html',  context)
 
 
-def userdashboard_comment(request):	
-	print 'userdashboard_comment(request)'
-	if request.is_ajax():
-		print 'userdashboard_comment(request)'
-		data = {
-			"test": 'test',
-		}
-		json_data = json.dumps(data)
-		return HttpResponse(json_data, content_type='application/json')
-	else:
-		raise Http404
 
-#loadajax
+#我的评论-点评
 def userdashboard_commentocomment(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -258,9 +364,111 @@ def userdashboard_commentocomment(request, user_id):
 		"comment": contacts,
 		'hostname': hostname,
 		'user': user,
+		'host': host,
 	}
 	return render(request, 'userdashboard_commentocomment.html',  context)
 
+#我的文章
+def userdashboardarticle(request, user_id):
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		article = Article.objects.filter(writer = user).order_by("-timestamp")
+		print article.count()
+		# 分页
+		paginator = Paginator(article, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		context = {
+			'article' : contacts,
+			'host': host,
+			'user': user,
+			'hostname': hostname,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_userdashboardarticle.html',  context)
+
+#我的文章-话题
+def userdashboardarticletopic(request, user_id):
+	try:
+		user = MyUser.objects.get(pk=user_id)
+		sender = request.user
+		if user == sender:
+			host = True
+			hostname = '我的'
+		else:
+			host = False
+			hostname = '他的'
+		topic = Topic.objects.filter(writer = user).order_by("-timestamp")
+		# 分页
+		paginator = Paginator(topic, 10)
+		page = request.GET.get('page')
+		try:
+			contacts = paginator.page(page)
+		except PageNotAnInteger:
+		# If page is not an integer, deliver first page.
+			contacts = paginator.page(1)
+		except EmptyPage:
+		# If page is out of range (e.g. 9999), deliver last page of results.
+			contacts = paginator.page(paginator.num_pages)
+		context = {
+			'topic' : contacts,
+			'host': host,
+			'user': user,
+			'hostname': hostname,
+			}
+	except MyUser.DoesNotExist:
+		raise Http404("MyUser does not exist")
+	return render(request, 'user_userdashboardarticletopic.html',  context)
+
+
+#ajax删除信息
+def deleteinfo(request):
+	try:
+		instancetable = {
+			'Comment':Comment,
+			'Notification':Notification,
+			'Collection': Collection,
+			'CollectionTopic': CollectionTopic,
+		}
+		instanceid = request.POST.get('instanceid')
+		instancetype = request.POST.get('instancetype')
+		instace = instancetable.get(instancetype).objects.get(pk=instanceid)
+		instace.delete()
+		print 'deleteinfo'
+		data = {
+			"test": 'test',
+		}
+		json_data = json.dumps(data)
+	except:
+		traceback.print_exc()
+	return HttpResponse(json_data, content_type='application/json')
+
+def userdashboard_comment(request):	
+	print 'userdashboard_comment(request)'
+	if request.is_ajax():
+		print 'userdashboard_comment(request)'
+		data = {
+			"test": 'test',
+		}
+		json_data = json.dumps(data)
+		return HttpResponse(json_data, content_type='application/json')
+	else:
+		raise Http404
 
 def test(request):	
 	if request.method == 'POST':

@@ -10,6 +10,7 @@ from django.core.urlresolvers import reverse
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_save, post_delete
+from accounts.models import MyUser
 from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 class Group(models.Model):
@@ -101,6 +102,10 @@ class TopicForm(ModelForm):
 #     group = Group.objects.get(id =topic.group.id)
 #     group.topicount += 1
 #     group.save()
+
+class CollectionTopic(models.Model):
+	user = models.ForeignKey(MyUser)
+	topic = models.ForeignKey(Topic)
 
 
 @receiver(post_delete, sender=Topic)

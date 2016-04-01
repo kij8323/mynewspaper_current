@@ -4,7 +4,7 @@ from accounts.models import MyUser
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
 
-def atwho(text, sender, targetcomment):
+def atwho(text, sender, targetcomment, targetarticle, targetopic):
 	commmentdecode = text.decode("utf8")
 	pattern = re.compile(u'@([\u4e00-\u9fa5\w\-]+)')  
 	results =  pattern.findall(commmentdecode) 
@@ -13,7 +13,10 @@ def atwho(text, sender, targetcomment):
 		user = MyUser.objects.filter(username = item.encode('utf8'))
 		if user:
 			user = MyUser.objects.get(username = item.encode('utf8'))
-			notify.send(sender=sender, target_object=targetcomment, recipient = user, verb="@", text=text)
+			notify.send(sender=sender, target_object=targetcomment
+					, recipient = user, verb="@"
+					, text=text, target_article = targetarticle
+					, target_topic = targetopic)
 			userlist.append(item.encode('utf8'))
 	return userlist
 

@@ -130,7 +130,9 @@ def articlecomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text)
 			c.save()
-			userlist = atwho(text = text, sender = user, targetcomment = None)
+			userlist = atwho(text = text, sender = user
+							, targetcomment = None, targetarticle = article
+							, targetopic = None)
 			for item in userlist:
 				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
@@ -173,7 +175,8 @@ def commentcomment(request):
 			c.save()
 			targetcomment.readers = targetcomment.readers + 1
 			targetcomment.save()
-			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
+			userlist = atwho(text = text, sender = user, targetcomment = targetcomment
+							, targetarticle = article, targetopic = None )
 			print 'z'
 			for item in userlist:
 				print 'for item in userlist:'

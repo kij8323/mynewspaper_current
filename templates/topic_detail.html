@@ -171,6 +171,32 @@ $(function(){
 
 
 
+<script>/*收藏topic*/
+$(function() {
+ $("body").on("click", '.articlecollection', function(){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          topicid: {{topic.id}},
+          },
+          });
+    $.ajax({
+        url: "{% url 'collectiontopic' %}",
+        type: "post",
+        success: function(data) {
+          $('.articlecollection h5').html(data.collecicon)
+          },
+          error: function(data) { 
+            $.messager.popup("请先登录！");
+            $(".modal.msg-popup .modal-body").css({
+                'color': '#a94442',
+                "background-color":"#f2dede",
+                });
+            },
+        });
+  })
+})
+</script>
+
 <script>
 /*$(function() {
  $("body").on('input propertychange', '.form-control', function() {
@@ -261,6 +287,12 @@ $(function(){
 	<i class="qqzoneshare">
 	</i>
 	</a> 
+  </li>
+
+  <li> 
+  <i class="articlecollection">
+    <h5 style='margin-top: 20px;'>{{collection}}</h5>
+  </i>
   </li>
 
   <li> 

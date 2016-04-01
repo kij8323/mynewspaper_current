@@ -9,6 +9,8 @@ from .signals import notify
 from ckeditor.fields import RichTextField
 from comment.models import Comment
 from accounts.models import MyUser
+from article.models import Article
+from topic.models import Topic
 import traceback 
 # Create your models here.
 class Notification(models.Model):
@@ -17,6 +19,8 @@ class Notification(models.Model):
 	verb = models.CharField(max_length=255)
 	#评论内容
 	text = RichTextField(max_length=5000, null=True, blank=True)
+	target_article = models.ForeignKey(Article, null=True, blank=True)
+	target_topic = models.ForeignKey(Topic, null=True, blank=True)
 	#目标对象
 	target_object = models.ForeignKey(Comment, null=True, blank=True)
 	recipient = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='notifications')
@@ -48,27 +52,27 @@ class Notification(models.Model):
 def new_notification(sender, **kwargs):
 	print "new_notification"
 	kwargs.pop('signal', None)
-	target_object = kwargs.pop("target_object")
+	target_object = kwargs.pop("target_object", None)
 	text = kwargs.pop("text")
 	verb = kwargs.pop("verb")
 	sender_object = sender
 	recipient = kwargs.pop("recipient")
+	target_article = kwargs.pop("target_article", None)
+	print 'new_notification'
+	print target_article
+	target_topic = kwargs.pop("target_topic", None)
+	print target_topic
 	try:
-		if target_object: 
-			c = Notification(target_object=target_object, 
-							sender_object=sender_object, 
-							recipient=recipient,
-							verb = verb,
-							text = text,
-							)
-		else:
-			c = Notification(
-							sender_object=sender_object, 
-							recipient=recipient,
-							verb = verb,
-							text = text,
-							)
+		c = Notification(target_object=target_object, 
+						sender_object=sender_object, 
+						target_topic=target_topic,
+						target_article = target_article,
+						recipient=recipient,
+						verb = verb,
+						text = text,
+						)
 		c.save()
+		print 'success'
 	except:
 		traceback.print_exc()
 

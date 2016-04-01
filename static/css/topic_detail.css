@@ -91,6 +91,18 @@ ul{
 	border-bottom: 1px solid #f0f0f0;
 }
 
+.articlecollection{
+	margin-top: 15px;
+	display: inline-block;
+	height: 60px;
+	width: 60px;
+	background-color: #fafafa;
+	color: #bbb;
+	text-align: center;
+	border-bottom: 1px solid #f0f0f0;
+	cursor: pointer;
+}
+
 .totopsctoll{
 	margin-top: 15px;
 	background-position: -180px 11px;

@@ -45,6 +45,15 @@ $(function(){
 }); 
 </script>
 
+<script>/*去除&nbsp;*/
+$(function(){ 
+    $('.group-informatio-blank').each(function() {
+      var $this = $(this);
+      $this.html($this.html().replace(/&nbsp;/g, ''));
+    })
+}); 
+</script>
+
 {% endblock %}
 
 
@@ -92,7 +101,9 @@ $(function(){
  </span>
 
  <span class='group-informatio-blank'>
+
  {{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+
 </span>
  <span class='group-informatio-blank'>
 回复数:{{item.comment_set.count}}
@@ -104,7 +115,10 @@ $(function(){
 最新回复:
 {{item.lastcommentime.user}}
 </span>
+
+ <span class='group-informatio-blank'>
 {{item.lastcommentime.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
 {% endif %}
 
 

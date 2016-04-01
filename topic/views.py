@@ -3,7 +3,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, redirect
 from django.http import Http404
-from .models import Group, Topic, TopicForm
+from .models import Group, Topic, TopicForm, CollectionTopic
 from django.contrib import messages
 from article.form import CommentForm
 from comment.models import Comment
@@ -101,7 +101,15 @@ def topic_detail(request, topic_id):
 	newtopic = Topic.objects.filter(group=topic.group).order_by('-timestamp')[0:3]
 	#最热话题
 	hottopic = Topic.objects.filter(group=topic.group).order_by('-readers')[0:3]
+	#当前读者对象
 	user = request.user
+	#读者是否收藏该文章
+	collection = CollectionTopic.objects.filter(topic=topic, user=user.id)
+	print type(collection)
+	if collection: 
+		collection = '已收藏'
+	else:
+		collection = '收藏'
 	# 分页
 	paginator = Paginator(comment, 5)
 	page = request.GET.get('page')
@@ -138,6 +146,7 @@ def topic_detail(request, topic_id):
 		"commentorderbyreaders":commentorderbyreaders,#热门回复
 		"ifhotcomment": ifhotcomment,
 		'page': page,
+		'collection': collection,
 	}
 	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)
@@ -188,7 +197,8 @@ def topicomment(request):
 			c.save()
 			topic.updated = timezone.now()
 			topic.save()
-			userlist = atwho(text = text, sender = user, targetcomment = None)
+			userlist = atwho(text = text, sender = user, targetcomment = None
+							, targetarticle = None, targetopic = topic)
 			for item in userlist:
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
@@ -229,7 +239,8 @@ def topcommentcomment(request):
 			topic.save()
 			targetcomment.readers = targetcomment.readers + 1
 			targetcomment.save()
-			userlist = atwho(text = text, sender = user, targetcomment = targetcomment)
+			userlist = atwho(text = text, sender = user, targetcomment = targetcomment
+							, targetarticle = None, targetopic = topic)
 			for item in userlist:
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
@@ -253,6 +264,31 @@ def topcommentcomment(request):
 	else:
 		raise Http404
 
+def collectiontopic(request):
+	print 'collection'
+	try:
+		topicid = request.POST.get('topicid')
+		topic = Topic.objects.get(pk=topicid)
+		user = request.user
+	except Topic.DoesNotExist:
+		raise Http404("Topic does not exist")
+	collection = CollectionTopic.objects.filter(topic=topic, user=user)
+	print type(collection)
+	if collection: 
+		collection.delete()
+		collecicon = '收藏'
+	else:
+		c = CollectionTopic(user=user, topic=topic)
+		c.save()
+		collecicon = '已收藏'
+	data = {
+	 'collecicon': collecicon,
+	}
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
+
+
+#ajax，fortest
 def atwhoidentify(request):
 	if request.is_ajax():
 		text = request.POST.get('comment')

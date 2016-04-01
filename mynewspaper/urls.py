@@ -31,8 +31,13 @@ urlpatterns = [
     url(r'^user/(?P<user_id>[0-9]+)/informations/$', 'accounts.views.userdashboardinformations', name='user_detailinformations'),
     url(r'^user/(?P<user_id>[0-9]+)/comments/$', 'accounts.views.userdashboardcomments', name='user_detailcomments'),
     url(r'^user/(?P<user_id>[0-9]+)/notifications/$', 'accounts.views.userdashboardnotifications', name='user_detailnotifications'),
+    url(r'^user/(?P<user_id>[0-9]+)/privcynotifications/$', 'accounts.views.privcynotifications', name='user_privcynotifications'),
     url(r'^user/(?P<user_id>[0-9]+)/collections/$', 'accounts.views.userdashboardcollections', name='user_detailcollections'),
+    url(r'^user/(?P<user_id>[0-9]+)/collectionstopic/$', 'accounts.views.userdashboardcollectionstopic', name='user_detailcollectionstopic'),
+    url(r'^user/(?P<user_id>[0-9]+)/article/$', 'accounts.views.userdashboardarticle', name='user_userdashboardarticle'),
+    url(r'^user/(?P<user_id>[0-9]+)/articletopic/$', 'accounts.views.userdashboardarticletopic', name='user_userdashboardarticletopic'),
     url(r'^user/(?P<user_id>[0-9]+)/userdashboard_commentocomment/$', 'accounts.views.userdashboard_commentocomment', name='userdashboard_commentocomment'),
+    url(r'^user/deleteinfo/$', 'accounts.views.deleteinfo', name='deleteinfo'),
 
 
     url(r'^group/index/$', 'topic.views.group_index', name='group_index'),
@@ -45,7 +50,7 @@ urlpatterns = [
     url(r'^topic/atwhoidentify/$', 'topic.views.atwhoidentify', name='atwhoidentify'),
     url(r'^topic/moretopic/$', 'topic.views.moretopic', name='moretopic'),
     url(r'^topic/groupage/$', 'topic.views.groupage', name='groupage'),
-
+    url(r'^topic/collectiontopic/$', 'topic.views.collectiontopic', name='collectiontopic'),
 
 
     url(r'^articlecomment/$', 'article.views.articlecomment', name='articlecomment'),

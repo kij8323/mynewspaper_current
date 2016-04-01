@@ -11,6 +11,7 @@ body{
 	background-color: white;
 	margin-right: -26px;
 	font-size: 18px;
+/*	width: 167px;*/
 	padding: 10px 0px;
 	border-radius: 5px;
 }
@@ -19,6 +20,8 @@ body{
 	background-color: white;
 	margin-bottom: 3px;
 	font-size: 18px;
+	/*padding-left: 15px;*/
+/*	width: 965px;*/
 	padding: 0px 10px;
 	border-radius: 5px;
 }
@@ -29,16 +32,28 @@ body{
 	margin-bottom: -3px;
 }
 
+.glyphicon{
+	margin-right: 10px;
+/*vertical-align: middle;*/
+}
 
+.presentation3 a .glyphicon{
+	color: #67CA87;
+}
 
-.presentation4{
+.presentation1 a, .presentationw1 a, .presentation5 a,.presentation2 a, .presentation3 a, .presentation4 a,.presentationw2 a, .presentationw3 a{
+/*	background-color: #f0f4fb;*/
+	color: #555;
+}
+
+.presentation3{
 	border-color: #ddd;
 	border-left: 2px solid #67CA87;
 	margin-bottom: -3px;
 /*	border-top-radius: 6px;*/
 }
 
-.presentationw1{
+.presentationw2{
 	border-bottom: 2px solid #67CA87;
 }
 
@@ -46,8 +61,6 @@ body{
 	width: 100%;
 	background-color: white;
 	padding: 0 30px;
-	/*border-radius: 6px;*/
-
 }
 
 .commentlist{
@@ -55,39 +68,21 @@ body{
 	border-bottom: 1px solid #F0F0F0;
 }
 
-.commentlist img{
-	width: 150px;
-	height: 85px;
+.targetcomment{
+	border-left-width: 2px;
+	background-color: #fafafa;
+	margin: 15px 0 18px;
+	padding: 20px 30px;
 }
 
 .commentinfo{
 	color: #bbb;
-	margin-top: 10px;
+margin-top: 10px;
 }
 
-.icon-reply{
-	background-position: -67px -1px;
-	display: inline-block;
-	background-image: url(/static/images/sharebackground.png);
-	width: 20px;
-	height: 20px;
-	background-repeat: no-repeat;
-	vertical-align: text-bottom;
-	margin-right: 3px;
+.comment-article{
+	margin-left: 20px;
 }
-
-.icon-collection{
-	background-position: -106px -3px;
-	display: inline-block;
-	background-image: url(/static/images/sharebackground.png);
-	width: 20px;
-	height: 20px;
-	background-repeat: no-repeat;
-	vertical-align: text-bottom;
-	margin-left: 10px;
-	margin-right: 3px;
-}
-
 .paginationcontain{
 	text-align: center;
 	/*margin-top: 30px;*/
@@ -127,28 +122,7 @@ body{
 	/*background: #67CA87;*/
 }
 
-.glyphicon{
-	margin-right: 10px;
-/*vertical-align: middle;*/
-}
 
-.presentation4 a .glyphicon{
-	color: #67CA87;
-}
-
-.presentation1 a, .presentationw1 a, .presentation5 a,.presentation2 a, .presentation3 a, .presentation4 a,.presentationw2 a, .presentationw3 a{
-/*	background-color: #f0f4fb;*/
-	color: #555;
-}
-
-.commentlist a{
-	color: black;
-}
-
-.commentlist a:link{
+a:link{
 	text-decoration: none;
-}
-
-.commentlist a:hover{
-	color: #337ab7;
 }

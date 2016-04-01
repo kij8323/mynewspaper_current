@@ -1,24 +1,8 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
-<link href="/static/css/user_detailnotifications.css" rel="stylesheet">
+<link href="/static/css/user_userdashboardarticle.css" rel="stylesheet">
 <script src="/static/js/topic_detail.js"></script>
-<script>/*ajax我的评论*/
-$(function() {
-  $(".presentation2").click(function() {
-    $.ajax({
-        url: "{% url 'userdashboard_comment' %}",
-        type: "get",
-        success: function(data) {
-            $(".dashboard").html(data.test);
-        },
-        error: function(data) { 
-            alert("Got an error dude");
-        }
-    });
 
-  })
-})
-</script>
 {% endblock %}
 
 
@@ -40,57 +24,61 @@ $(function() {
 </div><!-- class="col-md-2" -->
   <div class="col-xs-10">
   <ul class="nav nav-pills rightblock">
-      <li class="presentationw1" role="presentation"><a href="{% url 'user_detailnotifications' user.id %}">@我</a></li>
-      <li class="presentationw2" role="presentation"><a href="{% url 'user_privcynotifications' user.id %}">私信</a></li>
+      <li class="presentationw1" role="presentation"><a href="{% url 'user_userdashboardarticle' user.id %}">文章</a></li>
+      <li class="presentationw2" role="presentation"><a href="{% url 'user_userdashboardarticletopic' user.id %}">话题</a></li>
       <li class="presentationw3" role="presentation"><a href="#"></a></li>
     </ul>
 
-{% if host %}
-    <div class="dashboard">
-      {% for item in notifications %}
-      <div class = 'commentlist'>
-      <a href="{{item.sender_object.get_absolute_url}}">{{item.sender_object.username}}</a>在评论中@了你:
-      <div class='targetcomment'>
-        {{item.text|safe}}
+
+    <div class="dashboard col-xs-12">
+      {% for item in article %}
+       <div class = 'commentlist col-xs-12'>
+
+        <div class = 'col-xs-3'>
+          <a href="{{item.get_absolute_url}}">
+        <img src="{{ item.get_image_url}}">
+        </a>
         </div>
+
+        <a href="{{item.get_absolute_url}}">
+              {{ item.title }}
+        </a>
+
+    <div class = 'commentinfo'>
+      <i class="icon-reply"></i>{{item.comment_set.count}}
+      <i class="icon-collection"></i>{{item.collection_set.count}}
+  </div>
+
       <div class = 'commentinfo'>
-        {{item.timestamp}}
-      <span class="comment-article">
-        {% if item.target_article %}
-        来自文章：<a href="{{item.target_article.get_absolute_url}}">{{item.target_article.title}}
-        </a>
-        {% else %}
-        来自话题：<a href="{{item.target_topic.get_absolute_url}}">{{item.target_topic.title}}
-        </a>
-        {% endif %}
-      </span>
-      </div><!-- <div class = 'commentinfo'> -->
-      </div><!-- <div class = 'commentlist'> -->
+      {{item.timestamp}}
+      </div>
+
+       </div><!-- <div class = 'commentlist'> -->
       {% endfor %}
 
       <div class='paginationcontain'>
       <div class="pagination">
           <span class="step-links">
-      {% if notifications.has_previous %}
-              <a class='paginator' title='上一页' href='?page={{ notifications.previous_page_number }}'><span>&lt;</span></a>
+      {% if article.has_previous %}
+              <a class='paginator' title='上一页' href='?page={{ article.previous_page_number }}'><span>&lt;</span></a>
        {% endif %}
-       {% for page in notifications.paginator.page_range %}
-           {% if page = notifications.number %}
+       {% for page in article.paginator.page_range %}
+           {% if page = article.number %}
                <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
            {% else %}
                <a class='paginator' href='?page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
            {% endif %}
        {% endfor %}
-       {% if notifications.has_next %}
-           <a class='paginator' title='下一页' href='?page={{ notifications.next_page_number }}'><span>&gt;</span></a>
+       {% if article.has_next %}
+           <a class='paginator' title='下一页' href='?page={{ article.next_page_number }}'><span>&gt;</span></a>
        {% endif %}
           </span>
       </div><!-- <div class="pagination"> -->
       </div><!-- <div class='paginationcontain'> -->
       </div><!-- <div class="dashboard"> -->
-{% endif %}
 
 </div><!-- class="col-md-10" -->
+
 </div><!-- class="container-user" -->
 </div><!-- class="container" -->
  {% endblock %}

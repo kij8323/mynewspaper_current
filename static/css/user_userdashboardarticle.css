@@ -29,9 +29,21 @@ body{
 	margin-bottom: -3px;
 }
 
+.glyphicon{
+	margin-right: 10px;
+/*vertical-align: middle;*/
+}
 
+.presentation5 a .glyphicon{
+	color: #67CA87;
+}
 
-.presentation4{
+.presentation1 a, .presentationw1 a, .presentation5 a,.presentation2 a, .presentation3 a, .presentation4 a,.presentationw2 a, .presentationw3 a{
+/*	background-color: #f0f4fb;*/
+	color: #555;
+}
+
+.presentation5{
 	border-color: #ddd;
 	border-left: 2px solid #67CA87;
 	margin-bottom: -3px;
@@ -127,19 +139,6 @@ body{
 	/*background: #67CA87;*/
 }
 
-.glyphicon{
-	margin-right: 10px;
-/*vertical-align: middle;*/
-}
-
-.presentation4 a .glyphicon{
-	color: #67CA87;
-}
-
-.presentation1 a, .presentationw1 a, .presentation5 a,.presentation2 a, .presentation3 a, .presentation4 a,.presentationw2 a, .presentationw3 a{
-/*	background-color: #f0f4fb;*/
-	color: #555;
-}
 
 .commentlist a{
 	color: black;
