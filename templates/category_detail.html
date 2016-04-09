@@ -1,13 +1,57 @@
 {% extends "base_1.html" %}
+{% load time_filter %}
 {% block HeadDoc %}
+<link href="/static/css/category_detail.css" rel="stylesheet">
+
+
+<script>/*去除&nbsp;*/
+$(function(){ 
+    $('.posttime').each(function() {
+      var $this = $(this);
+      $this.html($this.html().replace(/&nbsp;/g, ''));
+    })
+}); 
+</script>
 {% endblock %}
 
-
  {% block content %}
+    <div class="container container-home">
 
-{% for item in x %}
-{{item.article.title}}<br>
+      <div class="row">
+        <h4 class="categorytitle">{{categorytitle}}类</h4>
+        <div class="col-xs-8  leftcontainer">
+  <span class="span-mark-author">相关文章</span>
+
+
+{% for item in articlequery %}
+
+          <div class="col-xs-12 newsblock" id="{{item.article.blockid}}">
+          <div class="col-xs-4 leftimgblock">
+          <a href="{{item.article.get_absolute_url}}"><img src="{{item.article.get_image_url}}" style="width: 220px; height:124px;"></a>
+          </div> 
+          <div class="col-xs-8 rightwordblock">
+          <h3><a href="{{item.article.get_absolute_url}}">{{item.article.title}}</a></h3>
+          <span><img  class="img-circle usericon" src='{{item.article.writer.get_image_url}}'></span>
+          <span class="writer"><a href="{{item.article.writer.get_absolute_url}}">{{item.article.user}}{{item.article.writer}}</a></span> 
+          <span class="posttime">{{item.article.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前</span> 
+
+<i class="icon-reply"></i><span>{{item.article.comment_set.count}}  </span>   
+<i class="icon-collection"></i><span>{{item.article.collection_set.count}} </span> 
+
+          <p class="associatetitle" style='padding-left: 0px;'>{{item.article.associatetitle}}</p>
+          </div> 
+          </div> <!-- newsblock -->
 {% endfor %}
 
+        </div><!-- class="col-xs-8 leftcontainer" -->
+      <!-- </div> --><!-- <div class="row">  -->  
+
+
+
+
+
+      </div><!-- row -->
+
+    </div> <!-- /container -->
  {% endblock %}
  

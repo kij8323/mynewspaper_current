@@ -4,13 +4,14 @@
 
 }
 .container{
-	width: 90% !important;
+	/*width: 90% !important;*/
 	/* width: 1200px !important;*/
+
+	min-width: 1226px!important;
+	position: relative;
 }
 
-.dropdown{
-	display:none;
-}
+
 
 .navbar-default .navbar-nav>li>a {
 	color: black;
@@ -33,4 +34,134 @@ font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中�
 
 div{
 	word-break:break-all;
+}
+
+
+
+
+
+
+/*.search-tag a{
+	color: #449d44;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	line-height: 33px;
+}
+
+.search-tag a:link{
+	text-decoration: none;
+}
+
+
+.search-tag{
+	float: left;
+	margin: 0 10px 10px 0;
+	background-color: #CCF4D9;
+	padding: 0 10px;
+	cursor: pointer;	
+	color: #333;
+	font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
+}*/
+
+.category{
+	height: 70px;
+	width: 100%;
+	border-top: 1px solid;
+	display: none;
+	border-color: #e7e7e7;
+	z-index: 1000;
+	position: relative;
+	box-shadow: 0 2px 5px rgba(0,0,0,.15);
+	background-color: rgba(255,255,255,.97);
+	padding-left: 6%;
+	padding-right: 6%;
+	/*width: 90%;*/
+}
+
+.categoryline{
+	margin-top: 23px;
+}
+
+.categoryblock{
+	/*padding: 10px;*/
+	/*background-color: #CCF4D9;*/
+}
+
+.categoryblock a{
+	color: #449d44;
+	padding: 10px;
+	background-color: #CCF4D9;
+	border-radius: 6px;
+	margin-right: 20px;
+	font-size: 16px;
+}
+
+
+.categoryblock a:hover {
+	color: white;
+	text-decoration: none;
+	background-color: #449d44;
+}
+
+
+.dropdown-menu{
+	background-color: rgba(255, 255, 255, 0.95);
+	margin: 0;
+	padding: 0;
+}
+
+ .dropdown-menu>li>a:hover {
+	color: #449d44;
+	text-decoration: none;
+	background-color: #CCF4D9;
+}
+
+.channel-item{
+	position: relative;
+	width: 100%;
+	height: 36px;
+	line-height: 36px;
+	/*text-align: center;*/
+	font-size: 16px;
+	/*margin-bottom: 15px;*/
+}
+
+.channel-tag{
+	background-image: url(/static/images/newindex_z_eabf927.png);
+	display: inline-block;
+	line-height: 26px;
+	vertical-align: middle;
+	padding-left: 34px;
+}
+
+.news_hot{
+	background-position: -224px -122px;
+	background-repeat: no-repeat;
+}
+
+.footer{
+	padding: 15px 0;
+	text-align: center;
+	/*background-color: #f8f8f8;*/
+	position: relative;
+	z-index: 11;
+	font-size: 14px;
+	margin-top: 30px;
+}
+
+.footer a, .footer span {
+	line-height: 24px;
+	font-size: 12px;
+	color: #9e9e9e;
+	text-decoration: none;
+	margin-right: 15px;
+}
+
+.footer a:hover{
+	color: #3ca5f6;
+}
+
+.footer p{
+	margin: 0;
 }

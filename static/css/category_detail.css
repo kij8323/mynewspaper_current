@@ -1,8 +1,15 @@
 
 
+
 .container-home{
 	/*width: 90%;*/
 	margin-top: 30px;
+}
+
+.categorytitle{
+	margin-bottom: 60px;
+	margin-left: 15px;
+	color: #bbb;
 }
 
 .carousel-control{
@@ -36,9 +43,19 @@
 }
 
 .leftcontainer{
-/*padding-right: 0px;*/
+border-top: 1px solid #f0f0f0;
 }
 
+.span-mark-author {
+	border-bottom: 4px solid #67CA87;
+	color: #333;
+	margin-top:-28px;
+	height: 28px;
+	position: absolute;
+	font-size: 18px;
+	display: inline-block;
+	display:block;
+}
 .item a:link/*, .item a:visited, .item a:hover, .item a:active*/{
 	text-decoration: none;
 }
@@ -150,15 +167,8 @@ bottom:20px
 }
 
 .newsblock{
-	padding-left: 0px;
-	padding-bottom: 30px;
-	margin-bottom: 30px;
-	border-style: solid;
-	border-bottom-width: 1px;
-	border-color: #E4E2E2;;
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-left-width: 0px;
+	padding: 28px 0;
+	border-bottom: 1px solid #f0f0f0;
 	}
 
 .leftimgblock{

@@ -20,6 +20,17 @@
     <script src="/static/js/jquery.bootstrap.min.js"></script>
     <script src="/static/bootstrap-3.3.4-dist/js/ie10-viewport-bug-workaround.js"></script>
   
+<script type="text/javascript">
+$(function() {
+  $("body").on("click", '.categorybutton', function (event){
+    event.stopPropagation();  
+    $('.category').css("margin-bottom","-70px");
+    $('.category').fadeToggle();
+  })
+  $(document).click(function (event) { $('.category').fadeOut() }); 
+})
+</script>
+
   {% block HeadDoc %}
   {% endblock %}
 
@@ -42,21 +53,9 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class=""><a href="#">科技</a></li>
+            <li class="categorybutton"><a href="#">资讯<span class="caret"></span></a></li>
             <li><a href="#about">财经</a></li>
             <li><a href="#contact">话题</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="display: none;">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="../navbar/">登录</a></li>
@@ -65,10 +64,40 @@
           </ul>
         </div><!--/.nav-collapse -->
       </div>
+
+    <div class='category'>
+      <div class="categoryline ">
+      <span class="categoryblock">
+      <!-- <a href="{% url 'category_detail' 7 %}">热点</a> -->
+      <a href="{% url 'category_detail' 4 %}"><!-- 虚拟现实 -->VR</a>
+      <a href="{% url 'category_detail' 2 %}">手机</a>
+      <a href="{% url 'category_detail' 3 %}">智能硬件</a>
+      <a href="{% url 'category_detail' 6 %}">财经</a>
+      <a href="{% url 'category_detail' 5 %}">体育</a>
+      </span>
+      </div>
+    </div>
     </nav>
 
 
   {% block content %}
+  {% endblock %}
+
+  {% block footer %}
+
+  <div class="footer" id="information">
+        <p>
+
+            <a href="#" target="_blank">关于我们</a>
+            <a href="#" target="_blank">商务合作</a>
+          </p>
+        <p>
+            <span>Copyright © 2015-2016 梧桐树新闻 - 梧桐树投资</span>
+
+            <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备16001752号</a>
+          </p>
+
+    </div>
   {% endblock %}
 
 </body></html>

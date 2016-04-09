@@ -21,3 +21,8 @@
 .myModalbtn{
 	margin: 10px 20px;
 }
+
+
+li a:hover{
+	color: #67CA87;
+}

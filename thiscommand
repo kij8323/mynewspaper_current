@@ -143,52 +143,28 @@ user_detailcollectionstopic
 后续
 工作
 去除&nbsp;
+$(".dropdown-menu").css("width")
+商务合作
+
+资讯新闻
+
+
+ <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
 
 
 
-<link href="/static/css/userinfopub.css" rel="stylesheet">
+          <a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="weiboshare">
+          </i>
+          </a>
 
-<script>/*删除信息*/
-$(function() {
- $("body").on("click", '.icon-delete', function(){
-  instanceid = $(this).parent().parent().attr("id");
-  $.cookie("instanceid", instanceid);  
-  $('#myModal1').modal('show')
-  })
-})
-</script>
+          <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="weichatshare">
+          </i>
+          </a>
 
-<script>/*确认删除*/
-$(function() {
- $("body").on("click", '.confirmdelete', function(){
-  instanceid = $.cookie('instanceid')
-    $.ajaxSetup({
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
-          instancetype: 'Comment',
-          instanceid: instanceid,
-          },
-          });
-    $.ajax({
-        url: "{% url 'deleteinfo' %}",
-        type: "post",
-        dataType: 'json',
-        success: function(data) {
-          $('#'+instanceid).remove();
-          $.removeCookie('instanceid');
-          },
-          error: function(data) { 
-          $.removeCookie('instanceid');
-              $.messager.popup("发生错误请重新操作");
-              $(".modal.msg-popup .modal-body").css({
-                  'color': '#a94442',
-                  "background-color":"#f2dede",
-                  });
-               },
-          });
-  })
-})
-</script>
-
-id='{{item.id}}'
-
-<i class="icon-delete pull-right"></i>
+          <a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{item.title}}">
+          <i class="qqzoneshare">
+          </i>
+          </a>  
+	

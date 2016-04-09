@@ -107,11 +107,12 @@ def article_detail(request, article_id):
 def category_detail(request, category_id):
 	try:
 		category = Category.objects.get(pk=category_id)
-		x = Relation.objects.filter(category=category)
+		articlequery = Relation.objects.filter(category=category)
 	except Category.DoesNotExist:
 		raise Http404("Category does not exist")
 	context = {
-		'x': x,
+		'articlequery': articlequery,
+		'categorytitle': category.title,
 	}
 	return render(request, 'category_detail.html',  context)
 

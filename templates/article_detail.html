@@ -382,7 +382,7 @@ var jiathis_config = {
 
 <div id="catetag">
   <div class="pull-left ">
-  <h5 style='font-weight:bold;'>关键字&nbsp:&nbsp&nbsp</h5>
+  <h5 style='font-weight:bold;'>类别&nbsp:&nbsp&nbsp</h5>
   </div>
   {% for item in thisrelationtag %}
   <div class="search-tag img-rounded">
@@ -514,7 +514,7 @@ var jiathis_config = {
       </span>
 
       {% if item.is_child %}
-      <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
+      <div class="blockquote">回复<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
       {% endif %}
 
       <div class="pl-content">{{item.text|AtWhoUser|safe}}</div>
@@ -617,7 +617,7 @@ var jiathis_config = {
    </div>
 </div>
 
-<!-- <div id='hotarticle'>
+<div id='hotarticle'>
   <div class="pull-left" style="margin-bottom: 15px;">
   <h4><b>热文</b></h4>
   <span class="span-mark"></span>
@@ -634,7 +634,7 @@ var jiathis_config = {
 </div>
 </div>
 {% endfor %}
-</div> -->
+</div>
 
 
 

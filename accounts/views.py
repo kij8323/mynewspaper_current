@@ -444,6 +444,7 @@ def deleteinfo(request):
 			'Notification':Notification,
 			'Collection': Collection,
 			'CollectionTopic': CollectionTopic,
+			'Topic': Topic,
 		}
 		instanceid = request.POST.get('instanceid')
 		instancetype = request.POST.get('instancetype')
