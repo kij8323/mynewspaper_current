@@ -5,6 +5,9 @@ from accounts.models import MyUser
 from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
 # Create your models here.
 class Article(models.Model):
 	#文章名称
@@ -25,6 +28,8 @@ class Article(models.Model):
 	url_address = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
+	#是否为封面
+	cover = models.BooleanField(default=False)
 	#自定义查询语句
 	#objects = ArticleManager()
 	#collections = models.ManyToManyField(MyUser, through='Collection', through_fields=('user', 'article'),related_name='ArticleCollection')
@@ -61,13 +66,13 @@ class Category(models.Model):
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	#自定义查询
 	#objects = CategoryManager()
-	relations = models.ManyToManyField(Article, through='Relation', through_fields=('category', 'article'),)
+	relations = models.ManyToManyField(Article, through='Relation', )
 
 	def __unicode__(self):
 		return self.title
 		
 	def get_image_url(self):
-		return "%s%s%s" %(settings.STATIC_URL, settings.MEDIA_URL, self.image)
+		return "%s%s" %(settings.MEDIA_URL, self.image)
 
 	def get_absolute_url(self):
 		return reverse('category_detail', kwargs={"category_id": self.id})
@@ -75,7 +80,20 @@ class Category(models.Model):
 class Relation(models.Model):
 	category = models.ForeignKey(Category)
 	article = models.ForeignKey(Article)
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
 
 class Collection(models.Model):
 	user = models.ForeignKey(MyUser)
 	article = models.ForeignKey(Article)
+
+@receiver(post_save, sender=Article)
+def categoryofarticle(sender, **kwargs):
+    article = kwargs.pop("instance")
+    thisrelationtag = Relation.objects.filter(article=article)
+    if thisrelationtag:
+    	return;
+    else:
+	    category = Category.objects.get(id = 3)
+	    relation = Relation(article= article, category = category)
+	    relation.save()
+

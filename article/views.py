@@ -107,12 +107,14 @@ def article_detail(request, article_id):
 def category_detail(request, category_id):
 	try:
 		category = Category.objects.get(pk=category_id)
-		articlequery = Relation.objects.filter(category=category)
+		articlequery = Relation.objects.filter(category=category).order_by('-article_id')[0:5]
+		categoryquery = Category.objects.all
 	except Category.DoesNotExist:
 		raise Http404("Category does not exist")
 	context = {
 		'articlequery': articlequery,
 		'categorytitle': category.title,
+		'categoryquery': categoryquery,
 	}
 	return render(request, 'category_detail.html',  context)
 
@@ -321,6 +323,45 @@ def commentpage(request, article_id):
 	}
 	return render(request, 'commentpage.html',  context)
 
+
+def morearticleincat(request):
+	if request.is_ajax():
+		request.session['articlelen'] = request.POST.get('articlelen')
+		articlelen = int(request.session['articlelen'])
+		request.session['categorytitle'] = request.POST.get('categorytitle')
+		categorytitle = request.session['categorytitle']
+		category = Category.objects.get(title = categorytitle)
+		articlequery = Relation.objects.filter(category=category).order_by('-article_id')
+	if articlequery.count() == articlelen:
+		loadcompleted = '已全部加载完成'
+	else:
+		loadcompleted = '点击加载更多'
+		print request.session['articlelen']
+		print request.session['categorytitle']
+	data = {
+		"loadcompleted": loadcompleted,
+	}
+	json_data = json.dumps(data)
+	return HttpResponse(json_data, content_type='application/json')
+
+
+
+def articlepage(request):
+	if request.session.get('articlelen', False):
+		articlelen = request.session['articlelen']
+	if request.session.get('categorytitle', False):
+		categorytitle = request.session['categorytitle']
+		category = Category.objects.get(title = categorytitle)
+		articlequery = Relation.objects.filter(category=category).order_by('-article_id')
+	articlelen = int(articlelen)
+	articlequery = articlequery[articlelen:articlelen+5]
+	context = {
+		"articlequery": articlequery,
+	}
+	return render(request, 'articlepage.html',  context)
+
+def article_post(request):
+	return render(request, 'article_post.html')
 
 
 from topic.models import Group, Topic, TopicForm

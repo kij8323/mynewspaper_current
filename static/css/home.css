@@ -43,20 +43,21 @@
 	text-decoration: none;
 }
 
-/*.center-block{
-  width:350px;
-  height:250px;
-  margin-bottom: 20px;
-}*/
+
 
 .rightblock{
-	/*background-image: url(/static/images/IMG_1784.jpg);*/
-	height: 200px;
-	width: 100%;
-	background-size:100%;
-	margin-top: 0px;
-	margin-bottom: 30px;
+	text-align: center;
+	position:absolute; 
+	z-index:2; 
+	left:10px; 
+	top:10px;
+	color: white;
+	font-size: 18px;
+	font-weight: 400;
+	margin: 130px 30px 30px;
 }
+
+
 
 .leftblock{
 	/*background-image: url(/static/images/IMG_1784.jpg);*/
@@ -81,16 +82,15 @@
 
 
 .rightblock h3{
-/*text-align:center;
-margin-top: 50%;*/
-color: rgb(255, 255, 255);
-margin-right: 2px;
-position:absolute;
-bottom:20px
-
+	/*text-align:center;
+	margin-top: 50%;*/
+	text-align:center;
+	margin-top: 0px;
+	color: rgb(255, 255, 255);
+	margin-right: 2px;
 }
 
-.rightblock a:link/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
+a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	text-decoration: none;
 }
 
@@ -102,17 +102,20 @@ bottom:20px
 	width: 100%;
 }
 
+.disputetopic img{
+	height: 200px;
+	width: 100%;
+}
 
 
 
 .leftblock h3{
-/*text-align:center;
-margin-top: 50%;*/
-color: rgb(255, 255, 255);
-margin-right: 2px;
-position:absolute;
-bottom:20px
-
+	/*text-align:center;
+	margin-top: 50%;*/
+	color: rgb(255, 255, 255);
+	margin-right: 2px;
+	position:absolute;
+	bottom:20px
 }
 
 .leftblock a:link/*, .leftblock a:visited, .leftblock a:hover, .leftblock a:active*/{
@@ -122,13 +125,12 @@ bottom:20px
 
 
 .leftblock1 h3{
-/*text-align:center;
-margin-top: 50%;*/
-color: rgb(255, 255, 255);
-margin-right: 2px;
-position:absolute;
-bottom:20px
-
+	/*text-align:center;
+	margin-top: 50%;*/
+	color: rgb(255, 255, 255);
+	margin-right: 2px;
+	position:absolute;
+	bottom:20px
 }
 
 .leftblock1 a:link, .leftblock1 a:visited, .leftblock1 a:hover, .leftblock1 a:active{
@@ -137,22 +139,24 @@ bottom:20px
 
 .rightwordblock h3{
 	font-size: 18px;
-	color: black;
+	color: #333;
 	margin-top: 5px;
 }
+
 .rightwordblock p, .rightwordblock span{
 	font-size: 14px;
 	color: #999;
 	line-height: 24px;
 }
+
 .associatetitle{
 	margin-top: 10px;
 }
 
 .newsblock{
 	padding-left: 0px;
-	padding-bottom: 30px;
-	margin-bottom: 30px;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
 	border-style: solid;
 	border-bottom-width: 1px;
 	border-color: #E4E2E2;;
@@ -165,10 +169,7 @@ bottom:20px
 	padding-left: 0px;
 }
 
-/*.onmouseover{
-	margin-bottom: 30px;
-	margin-top: 20px;
-}*/
+
 
 .posttime{
 	margin-left: 15px;
@@ -209,7 +210,7 @@ bottom:20px
 }
 
 .rightwordblock a{
-	color: black;
+	color: #333;
 }
 
 .rightwordblock a:link {
@@ -223,3 +224,85 @@ bottom:20px
 .writer a{
 	color: #337ab7
 }
+
+
+.head{
+	/*color: #449d44;*/
+	border-bottom: 0px solid #ddd;
+	font-weight: 700;
+	font-size: 18px;
+	padding-left: 9px;
+	border-left: 4px solid #67CA87;
+	/*margin-top: 230px;*/
+	margin-left: 9px;
+	margin-bottom: 9px;
+	font-size: 18px;
+	font-weight: 700;
+	/*background-color: #CCF4D9;*/
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th{
+	border-top: 0px solid #ddd;
+	border-bottom: 0px solid #ddd;
+}
+
+.table>tbody>tr>td>a{
+	font-size: 14px;
+	overflow: hidden;
+	color: #444;
+	line-height: 1.5em;
+	display: block;
+	cursor: pointer;
+	padding-left: 12px;
+	position: relative;
+	text-decoration: none;
+}
+
+.hotopic>tbody>tr>td>a:before, .nicecomment>tbody>tr>td>a:before{
+	content: "";
+	display: inline-block;
+	width: 3px;
+	height: 3px;
+	background-color: #777;
+	margin-bottom: 3px;
+	position: absolute;
+	top: 8px;
+	left: 0;
+	color: #9e9e9e;
+}
+
+.table>tbody>tr>td>a>span{
+	margin-left: 9px;
+	color: #999;
+}
+
+
+.hotnews>tbody>tr>th{
+	width: 1px;
+	margin-right: 0px;
+	color: #9e9e9e;
+}
+
+.hotnews>tbody>tr>td>a{
+	padding: 0px;
+}
+
+.nicecomment>tbody>tr>td>span{
+	padding: 12px;
+	color: #9e9e9e;
+}
+
+.advertisment1, .advertisment2{
+	width: 100%;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+.advertisment1 a img, .advertisment2 a img{
+	width: 100%;
+	height: 100px;
+}
+/*
+.hotnews{
+	border: 1px solid #9e9e9e;
+}*/

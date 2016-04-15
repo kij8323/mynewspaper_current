@@ -8,8 +8,9 @@
 
 .categorytitle{
 	margin-bottom: 60px;
-	margin-left: 15px;
+	/*margin-left: 15px;*/
 	color: #bbb;
+	/*border-top: 1px solid #f0f0f0;*/
 }
 
 .carousel-control{
@@ -43,7 +44,7 @@
 }
 
 .leftcontainer{
-border-top: 1px solid #f0f0f0;
+/*border-top: 1px solid #f0f0f0;*/
 }
 
 .span-mark-author {
@@ -148,9 +149,11 @@ bottom:20px
 
 }
 
-.leftblock1 a:link, .leftblock1 a:visited, .leftblock1 a:hover, .leftblock1 a:active{
+/*.leftblock1 a:link, .leftblock1 a:visited, .leftblock1 a:hover, .leftblock1 a:active{
 	text-decoration: none;
-}
+}*/
+
+
 
 .rightwordblock h3{
 	font-size: 18px;
@@ -168,7 +171,8 @@ bottom:20px
 
 .newsblock{
 	padding: 28px 0;
-	border-bottom: 1px solid #f0f0f0;
+	/*border-bottom: 1px solid #f0f0f0;*/
+	border-top: 1px solid #f0f0f0;
 	}
 
 .leftimgblock{
@@ -218,7 +222,7 @@ bottom:20px
 	margin-right: 3px;
 }
 
-.rightwordblock a{
+/*.rightwordblock a{
 	color: black;
 }
 
@@ -228,8 +232,107 @@ bottom:20px
 
 .rightwordblock a:hover {
 	color: #3ca5f6;
-}
+}*/
 
 .writer a{
 	color: #337ab7
+}
+
+#rightstableblock{
+	width: 188.5px;
+	max-height: 100%;
+	overflow:auto; 
+	margin-left: 30px;
+}
+
+#hotarticle{
+	padding-top: 20px;
+	background-color:  #fafafa;
+/*	height: 200px;*/
+	width: 100%;
+	margin-top: 30px;
+
+}
+
+
+.rightitle{
+	border-top: 1px solid #f0f0f0;
+	padding: 15px 30px!important;
+	color: #333;
+	font-size: 14px;
+	vertical-align: middle;
+}
+.rightnewtpic{
+	width: 100%;
+	/*zoom: 1;*/
+	overflow: hidden;
+}
+
+.span-mark{
+	display: inline-block;
+	background-color: #67CA87;
+	position: absolute;
+	z-index: 1;
+	height: 20px;
+	line-height: 20px;
+	margin: -28px 0 0;
+	width: 4px;
+}
+
+.mod-thumb{
+	width: 32px;
+	height: 32px;
+	position: absolute;
+	overflow: visible;
+}
+
+.mod-thumb img{
+	vertical-align: middle;
+	width: 32px;
+	height: 32px;
+	margin-top: -5px
+}
+
+.project-content{
+	margin-left: 48px;
+	font-size: 16px;
+}
+
+
+#morecomment{
+	padding: 0px;
+}
+
+#morecomment-btn-block{
+	width: 100%;
+	color: #bbb;
+	border: 1px solid #f0f0f0;
+	outline:none;
+	margin-bottom: 50px;
+}
+
+.btn-block {
+/*	width: 148px;
+	margin-top: -45px;*/
+	border-radius: 0;
+}
+
+.container-fluid {
+	padding: 0px;
+}
+
+h4 b{
+	color: #9e9e9e;
+	padding: 30px;
+}
+
+a{
+	color:black;
+}
+
+a:link{
+	text-decoration: none;
+}
+a:hover{
+	color: #337ab7;
 }

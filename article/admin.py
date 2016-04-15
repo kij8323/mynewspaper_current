@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title','timestamp')
 
 class RelationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category','article')
+    list_display = ('id', 'category','article','timestamp')
 
 class CollectionAdmin(admin.ModelAdmin):
     list_display = ('id', 'user','article')

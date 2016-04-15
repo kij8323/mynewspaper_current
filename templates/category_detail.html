@@ -2,7 +2,42 @@
 {% load time_filter %}
 {% block HeadDoc %}
 <link href="/static/css/category_detail.css" rel="stylesheet">
+<script src="/static/js/topic_detail.js"></script>
 
+<script>/*加载更多*/
+$(function() {
+  var cur_page_num = 1;
+ $("body").on("click", '#morecomment-btn-block', function(){
+    var $elements = $('.newsblock');
+    var articlelen = $elements.length;
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+           articlelen: articlelen,
+           categorytitle: '{{categorytitle}}',
+          },
+          });
+
+    $.ajax({
+        url: "{% url 'morearticleincat' %}",
+        type: "post",
+        success: function(data) {
+        cur_page_num=cur_page_num+1;         
+        /*alert(cur_page_num);  */         
+        var newnode=document.createElement("div");             
+        newnode.setAttribute("class", "container-fluid grid");            
+        newnode.setAttribute("id","new"+String(cur_page_num));           
+        document.getElementById("morecomment").appendChild(newnode); 
+
+        $('#new'+String(cur_page_num)).load('{% url 'articlepage' %}');
+        $('#morecomment-btn-block').html(data.loadcompleted) 
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });
+  })
+})
+</script>
 
 <script>/*去除&nbsp;*/
 $(function(){ 
@@ -12,15 +47,56 @@ $(function(){
     })
 }); 
 </script>
+
+<script>/*板块固定滚动,板块内width要定长*/
+$.fn.smartFloat = function() { 
+    var position = function(element) { 
+        var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
+        var pos = element.css("position"); //当前元素距离页面document顶部的距离 
+        $(window).scroll(function() { //侦听滚动时 
+            var scrolls = $(this).scrollTop(); 
+            if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度 
+                if (window.XMLHttpRequest) { //如果不是ie6 
+                    element.css({ //设置css 
+                        position: "fixed", //固定定位,即不再跟随滚动 
+                        top: 0, //距离页面顶部为0 
+                      
+                    }).addClass("shadow"); //加上阴影样式.shadow 
+                } else { //如果是ie6 
+                    element.css({ 
+                        top: scrolls  //与页面顶部距离 
+                    });     
+                } 
+            }else { 
+                element.css({ //如果当前元素element未滚动到浏览器上边缘，则使用默认样式 
+                    position: pos, 
+                    top: top 
+                }).removeClass("shadow");//移除阴影样式.shadow 
+            } 
+        }); 
+    }; 
+    return $(this).each(function() { 
+        position($(this));                          
+    }); 
+}; 
+</script>
+
+<script>
+$(function(){ 
+    $("#rightstableblock").smartFloat(); 
+}); 
+</script>
+
 {% endblock %}
 
  {% block content %}
     <div class="container container-home">
 
       <div class="row">
-        <h4 class="categorytitle">{{categorytitle}}类</h4>
         <div class="col-xs-8  leftcontainer">
-  <span class="span-mark-author">相关文章</span>
+        <h4 class="categorytitle">{{categorytitle}}类</h4>
+        <!-- <div class="col-xs-8  leftcontainer"> -->
+  <span class="span-mark-author pull-left">相关文章</span>
 
 
 {% for item in articlequery %}
@@ -43,10 +119,41 @@ $(function(){
           </div> <!-- newsblock -->
 {% endfor %}
 
+<div id="morecomment">
+</div>
+
+ <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
+
         </div><!-- class="col-xs-8 leftcontainer" -->
       <!-- </div> --><!-- <div class="row">  -->  
 
+<div class="col-xs-3">
+<div id='rightstableblock'>
+<div id='hotarticle'>
+  <div class="pull-left" >
+  <h4><b>类别</b></h4>
+  <span class="span-mark"></span>
+  </div>
+<div class="rightnewtpic">
+ {% for item in categoryquery %}
+  <div class="rightitle">
 
+          <a href="{{item.get_absolute_url}}">
+ <div class='mod-thumb'>
+  <img src="{{item.get_image_url}}"></div>
+  </a>
+
+ <div class="project-content">
+  <a href="{{item.get_absolute_url}}">
+ {{item.title}}
+ </a>
+ </div> <!-- <div class="project-content"> -->
+ </div><!-- <div class="rightitle"> -->
+ {% endfor %}
+ </div><!-- <div class="rightnewtpic"> -->
+ </div><!-- <div id='hotarticle'> -->
+</div><!-- <div id='rightstableblock'> -->
+</div><!-- class="col-xs-4" -->
 
 
 

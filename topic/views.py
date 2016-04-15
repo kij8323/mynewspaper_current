@@ -18,12 +18,15 @@ from django.views.decorators.cache import cache_page
 from itertools import chain
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
+import datetime
+from datetime import timedelta
 # from .forms import TopicForm
 
 # Create your views here.
 def group_all(request):
 	group = Group.objects.all().order_by("-topicount")
-	topic = Topic.objects.all().order_by("-readers")[0:10]
+	#最近一个按热度排序; timestamp__gte=datetime.date.today(): 时间大于今天
+	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=30)).order_by("-readers")[0:10]
 	context = {
 		'group': group,
 		'topic': topic,
@@ -42,7 +45,7 @@ def moretopic(request):
 def groupage(request):
 	if request.session.get('grouplen', False):
 		grouplen = request.session['grouplen']
-	topic = Topic.objects.all().order_by("-readers")
+	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=30))
 	grouplen = int(grouplen)
 	topic = topic[grouplen:grouplen+5]
 	context = {
@@ -95,7 +98,7 @@ def topic_detail(request, topic_id):
 	count = Comment.objects.filter(topic=topic).count()
 	# 按时间顺序排序
 	comment = Comment.objects.filter(topic=topic).filter(parent=None).order_by('timestamp')
-	# 前三个回复是最热回复
+	# 前三个回复是最热回复;  readers__gt=3 = readers 大于3
 	commentorderbyreaders = Comment.objects.filter(topic=topic).filter(parent=None).filter(readers__gt=3).order_by('-readers')[0:3]
 	#最新话题
 	newtopic = Topic.objects.filter(group=topic.group).order_by('-timestamp')[0:3]

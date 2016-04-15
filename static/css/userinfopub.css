@@ -26,3 +26,7 @@
 li a:hover{
 	color: #67CA87;
 }
+
+.glyphicon-home, .glyphicon-pencil, .glyphicon-comment, .glyphicon-inbox, .glyphicon-paperclip{
+ 	margin-right: 10px;
+ }

@@ -27,7 +27,6 @@ def loggin(request):
 	form = LoginForm(request.POST or None)
 	next_url = request.GET.get('next')
 	action_url = reverse("loggin")
-	print "ajxax"
 	if form.is_valid():
 		human = True
 		print 'human = True'
@@ -37,6 +36,8 @@ def loggin(request):
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			login(request, user)
+			if request.POST.get('checkbox'):
+				request.session.set_expiry(1209600*2)
 			if request.session.get('lastpage', False):
 				return redirect(request.session['lastpage'])
 			else:
@@ -51,15 +52,23 @@ def loggin(request):
 	return render(request, 'loggin.html',  context)
 
 
+def userlogout(request):
+	logout(request)
+	if request.session.get('lastpage', False):
+		return redirect(request.session['lastpage'])
+	else:
+		return redirect('home')
+
+
 #注册页面
 def register(request):
 	form = RegisterForm(request.POST or None)
 	action_url = reverse("register")
 	if form.is_valid():
 		human = True
-		username = form.cleaned_data['username']
-		email = form.cleaned_data['email']
-		password = form.cleaned_data['password2']
+		username = request.POST.get('username')
+		email = request.POST.get('email')
+		password = request.POST.get('password2')
 		new_user = MyUser()
 		new_user.username = username
 		new_user.email = email
@@ -106,14 +115,15 @@ def accountsview(request):
 			exists = MyUser.objects.get(username=username)
 			data = {
 				"message": '该用户名已被注册',
-				'classname': 'errorlist'
+				'classname': 'errorlist',
 			}
 			json_data = json.dumps(data)
 			return HttpResponse(json_data, content_type='application/json')
         except MyUser.DoesNotExist:
 			data = {
 				"message": '恭喜，该用户名可注册！',
-				'classname': 'successlist'
+				'classname': 'successlist',
+				'register': 'Ture'
 			}
 			json_data = json.dumps(data)
 			return HttpResponse(json_data, content_type='application/json')

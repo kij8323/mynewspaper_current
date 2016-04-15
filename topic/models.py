@@ -60,13 +60,15 @@ class Topic(models.Model):
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
 	group = models.ForeignKey(Group)
 	readers = models.IntegerField(default=0)
+	#是否为封面
+	cover = models.BooleanField(default=False)
 	#自定义查询语句
 	#objects = ArticleManager()
 	def __unicode__(self):
 		return self.title
 
 	def get_image_url(self):
-		return "%s%s" %(settings.STATIC_URL, self.image)
+		return "%s%s" %(settings.MEDIA_URL, self.image)
 
 	def blockid(self):
 		blockid = "block"+str(self.id)

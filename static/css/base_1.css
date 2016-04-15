@@ -3,12 +3,13 @@
 	background-color: #FFFFFF;
 
 }
-.container{
+.container, .navbar, .footer{
 	/*width: 90% !important;*/
 	/* width: 1200px !important;*/
 
-	min-width: 1226px!important;
+	/*min-width: 1226px!important;*/
 	position: relative;
+	min-width: 1000px!important;
 }
 
 
@@ -22,6 +23,7 @@
 color: #FFF;
 background-color: #449d44;
 }
+
 
 body {
 color: #333;
@@ -64,6 +66,26 @@ div{
 	font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
 }*/
 
+.navbar-brand{
+	padding: 0px;
+}
+
+.form-control{
+	height: 34px !important;
+}
+
+.baseusericon{
+	width: 33px;
+	height: 33px;
+	margin-right: 12px;
+	margin-top: -6px;
+}
+
+.basewebicon{
+	width: 51px;
+	height: 51px;
+	margin-right: 18px;
+}
 .category{
 	height: 70px;
 	width: 100%;
@@ -79,9 +101,38 @@ div{
 	/*width: 90%;*/
 }
 
+
+
+.dropdown-toggle{
+	display: none;
+}
+
+.dropdown-menu{
+	/*width: 50px !important;*/ 
+	text-align: center;
+}
+
+.dropdown-menu li a{
+	padding: 10px;
+}
+
+.userinfobutton{
+	/*padding: 0px 25px;*/
+	/*width: 300px;*/
+	text-align: center;
+	/*min-width: 88px;*/
+	height: 50px;
+}
+
 .categoryline{
 	margin-top: 23px;
 }
+
+.glyphicon-search{
+	color: #449d44;
+}
+
+
 
 .categoryblock{
 	/*padding: 10px;*/

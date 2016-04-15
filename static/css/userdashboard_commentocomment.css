@@ -2,7 +2,7 @@ body{
 	background-color: #f0f4fb;
 }
 .container-user{
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 /*	width: 1194px;*/
 }
 
@@ -32,10 +32,7 @@ body{
 	margin-bottom: -3px;
 }
 
-.glyphicon{
-	margin-right: 10px;
-/*vertical-align: middle;*/
-}
+
 
 .presentation2 a .glyphicon{
 	color: #67CA87;

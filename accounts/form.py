@@ -9,34 +9,34 @@ from captcha.fields import CaptchaField
 
 #注册表
 class RegisterForm(forms.Form):
-    username = forms.CharField(
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '用户名'}),
-        error_messages={'required': '请输入用户名'})
-    email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '邮箱地址'}),
-        error_messages={'required': '请输入邮箱地址', 'invalid': '请输入正确的邮箱地址'})
-    password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请输入5位以上密码'}),
-        error_messages={'required': '请输入密码'})
-    password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请再次输入密码'}),
-        error_messages={'required': '请再次输入密码'})
-    captcha = CaptchaField(error_messages={'required': '请输入验证码','invalid':'验证码错误' })
+    # username = forms.CharField(
+    #     widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': '用户名'}),
+    #     error_messages={'required': '请输入用户名'})
+    # email = forms.EmailField(
+    #     widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': '邮箱地址'}),
+    #     error_messages={'required': '请输入邮箱地址', 'invalid': '请输入正确的邮箱地址'})
+    # password1 = forms.CharField(
+    #     widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请输入5位以上密码'}),
+    #     error_messages={'required': '请输入密码'})
+    # password2 = forms.CharField(
+    #     widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': '请再次输入密码'}),
+    #     error_messages={'required': '请再次输入密码'})
+    captcha = CaptchaField(error_messages={'required': '请输入验证码!','invalid':'验证码错误!'})
     # captcha = CaptchaField(label='请输入下方验证码',)
     #验证用户名有效性
-    def clean_username(self):
-        username = self.cleaned_data.get("username")
-        print "test,..."
-        #验证用户名是否已经被注册
-        try:
-            exists = MyUser.objects.get(username=username)
-            raise forms.ValidationError("该用户名已被注册")
-        except MyUser.DoesNotExist:
-            return username
-        #验证用户名是否正常
-        except:
-            print "raise"
-            raise 
+    # def clean_username(self):
+    #     username = self.cleaned_data.get("username")
+    #     print "test,..."
+    #     #验证用户名是否已经被注册
+    #     try:
+    #         exists = MyUser.objects.get(username=username)
+    #         raise forms.ValidationError("该用户名已被注册")
+    #     except MyUser.DoesNotExist:
+    #         return username
+    #     #验证用户名是否正常
+    #     except:
+    #         print "raise"
+    #         raise 
 
     # #验证密码有效性
     # def clean_password1(self):
@@ -49,22 +49,22 @@ class RegisterForm(forms.Form):
     #         raise forms.ValidationError("密码太短，应超过5位！")
 
     #验证密码有效性
-    def clean_password2(self):
-        # Check that the two password entries match
-        password1 = self.cleaned_data.get("password1")
-        if len(password1) <= 4:
-            raise forms.ValidationError("密码太短，应超过5位！")
-        #验证密码长度是否大于4
-        # if len(password1) <= 4:
-        #     raise forms.ValidationError("密码太短，应超过5位！")
-        #验证两次输入的密码是否相同
-        password2 = self.cleaned_data.get("password2")
-        print "test2"
-        print password1
-        print password2
-        if password1 != password2:
-            raise forms.ValidationError("两次输入密码不相同，请核对!")
-        return password2
+    # def clean_password2(self):
+    #     # Check that the two password entries match
+    #     password1 = self.cleaned_data.get("password1")
+    #     if len(password1) <= 4:
+    #         raise forms.ValidationError("密码太短，应超过5位！")
+    #     #验证密码长度是否大于4
+    #     # if len(password1) <= 4:
+    #     #     raise forms.ValidationError("密码太短，应超过5位！")
+    #     #验证两次输入的密码是否相同
+    #     password2 = self.cleaned_data.get("password2")
+    #     print "test2"
+    #     print password1
+    #     print password2
+    #     if password1 != password2:
+    #         raise forms.ValidationError("两次输入密码不相同，请核对!")
+    #     return password2
 
 
 

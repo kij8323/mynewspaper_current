@@ -27,7 +27,22 @@ $(function(){
                   <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
                 </ol>
                 <div class="carousel-inner" role="listbox">
-                  <div class="item active">
+                  {% for item in coverarticle %}
+                  {% if forloop.first %}
+                 <div class="item active">
+                    {% else %}
+                    <div class="item">
+                    {% endif %}
+                    <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}">
+                      <div class="carousel-caption">
+                        <h3>{{item.title}}</h3>
+                        <p>{{item.associatetitle}}</p>
+                    </a>
+                    </div>
+                    </div>
+                    {% endfor %}
+
+<!--                   <div class="item active">
                     <a href="#"><img src="/static/images/IMG_1764.jpg">
                       <div class="carousel-caption">
                         <h3>xxx</h3>
@@ -50,7 +65,7 @@ $(function(){
                         <p>xxx</p>
                     </a>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
                 <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
                   <span class="glyphicon glyphicon-chevron-left" aria-hidden="true" style="margin-left: 0px;"></span>
@@ -84,7 +99,7 @@ $(function(){
 
           <div class="col-xs-12 newsblock" id="{{item.blockid}}">
           <div class="col-xs-4 leftimgblock">
-          <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}" style="width: 220px; height:124px;"></a>
+          <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}" style="width: 200px; height:104px;"></a>
           </div> 
           <div class="col-xs-8 rightwordblock">
           <h3><a href="{{item.get_absolute_url}}">{{item.title}}</a></h3>
@@ -105,15 +120,80 @@ $(function(){
 
 
         <div class="col-xs-4 ">
-          <div class="row" style="margin-left: 15px;">
-          <h3 class="bg-primary">热议话题</h3>
-          <a href="#">
-          <div class="col-xs-12 rightblock" 
-               style='background-image: url(/static/images/IMG_1764.jpg);'> 
-            <h3>当页面缩小,当页面缩小当页面缩小当页面缩小当页面缩小</h3>
+          <div  style="margin-left: 15px;">
+          <h3 class="bg-primary">争议话题</h3>
+          <div style="position:relative; margin-bottom:30px;">
+
+          <a class = 'disputetopic' href="{{covertopic.get_absolute_url}}">
+            <img src="{{covertopic.get_image_url}}">
+          <div class="rightblock"> 
+            {{covertopic.title}}
+       
           </div>
           </a>
 
+          </div>
+
+
+
+
+         <div class='head'>一周新闻排行</div>
+
+    <table class="table table-hover hotnews">
+      <tbody>
+{% for item in hotnews %}
+        <tr>
+          {% if forloop.counter > 3 %}
+          <th scope="row" style="color: #9e9e9e;">{{ forloop.counter }}</th>
+          {% else %}
+          <th scope="row" style="color: #ad0007;">{{ forloop.counter }}</th>
+          {% endif %}
+          <td><a href="{{item.get_absolute_url}}">{{item.title}}</a></td>
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
+
+
+ 
+
+<div class='advertisment1'>
+  <a href="http://www.underarmour.cn/">
+<img src="/static/media/images/ce7172a563ccffdad81cc76c48a10735.jpg" >
+</a>
+</div>
+
+         <div class='head'>热门话题</div>
+    <table class="table table-hover hotopic">
+      <tbody>
+{% for item in topicquery %}
+        <tr>
+          <td><a href="{{item.get_absolute_url}}">{{item.title}}<span>{{item.comment_set.count}}条回复</span></a></td>
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
+
+<div class='advertisment2'>
+  <a href="http://www.coca-cola.com.cn/">
+<img src="/static/media/images/1460628528987.png" >
+</a>
+</div>
+
+<div class='head'>精彩点评</div>
+    <table class="table table-hover nicecomment">
+      <tbody>
+{% for item in nicecomment %}
+        <tr>
+          {% if item.article %}
+          <td> <span>{{item.user}} 评 {{item.article.title}}</span><a href="{{item.article.get_absolute_url}}">{{item.text|safe}}</a></td>
+          {% else %}
+          <td> <span>{{item.user}} 评 {{item.topic.title}}</span><a href="{{item.topic.get_absolute_url}}">{{item.text|safe}}</a></td>
+          {% endif %}
+        </tr>
+{% endfor %}
+      </tbody>
+    </table>
 
 </div> <!-- <div class="row" style="margin-left: 15px;">   -->       
 

@@ -59,7 +59,7 @@ shenanping2008@Hotmail.com
 git clone https://github.com/kij8323/mynewspaper.git
 
 
-
+分类
 
 密码长度至少为6位
 {{item.text}}
@@ -71,68 +71,9 @@ from topic.models import Topic
 
 
 话题
-<script>/*收藏文章*/
-$(function() {
- $("body").on("click", '.articlecollection', function(){
-    $.ajaxSetup({
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
-          articleid: {{article.id}},
-          },
-          });
-    $.ajax({
-        url: "{% url 'collection' %}",
-        type: "post",
-        success: function(data) {
-          $('.articlecollection h5').html(data.collecicon)
-          },
-          error: function(data) { 
-            $.messager.popup("请先登录！");
-            $(".modal.msg-popup .modal-body").css({
-                'color': '#a94442',
-                "background-color":"#f2dede",
-                });
-    });
-  })
-})
-</script>
 
-user_detailcollectionstopic
 
-我的信息
-我的评论
-我的评论-点评
-我的收藏
-我的收藏-话题
-我的信息
-我的信息-私信
-组
-我的文章-话题
-我的文章
-删除功能
-优化页面
-文章
 
-    $.ajaxSetup({
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
-          articleid: {{article.id}},
-          preentid = $(this).parent().parent().attr("id");
-          alert(preentid)
-          },
-          });
-    $.ajax({
-        url: "{% url 'collection' %}",
-        type: "post",
-        success: function(data) {
-          $('.articlecollection h5').html(data.collecicon)
-          },
-          error: function(data) { 
-            $.messager.popup("请先登录！");
-            $(".modal.msg-popup .modal-body").css({
-                'color': '#a94442',
-                "background-color":"#f2dede",
-                });
-              },
-           });
 
 你确认要删除吗
 取消
@@ -148,23 +89,85 @@ $(".dropdown-menu").css("width")
 
 资讯新闻
 
+类别
+类文章
+相关文章
+加载
 
- <div class="blockquote">回复@<a href="{{item.parent.user.get_absolute_url}}">{{item.parent.user}}</a>发表的：</br>{{item.parent.text|AtWhoUser|safe}}</div>
+分类页面 加载更多
+
+ 在django中使用sphinx实现站内搜索
+
+1个月
+
+$("#content").keyup(function()
+
+ajax判断用户名是否已被注册
+用户名不能包含空格
+
+
+/*          if(username.indexOf(" ")!=-1){
+              $("#usernamenook").css("display", "none");
+              $("#usernameok").css("display", "none");
+              $("#usernamenilleg").css("display", "none");
+              $('#usernamenilleg').css("margin-right","-235px");
+              $('#usernamenilleg').css("margin-left","330px");
+              $('#usernamenilleg').css("margin-bottom","-32px");
+              $('#usernamenilleg').fadeIn("slow");
+          }*/
+注册显示信息函数
+
+处理注册页面
+用户名长度不能超过20个字符！
+Email地址格式是否正确！
+密码长度至少6位
+两次密码输入不同！
+请输入用户名！
+请输入邮箱地址！
+请输入密码！
+请确认密码！
+当所有cuserrorlist的css的display为none时，可以提交表单
 
 
 
-          <a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title={{item.title}}">
-          <i class="weiboshare">
-          </i>
-          </a>
+<ul id="menu1" class="dropdown-menu" aria-labelledby="drop4">
+          <li><a href="#">Action</a></li>
+          <li><a href="#">Another action</a></li>
+          <li><a href="#">Something else here</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#">Separated link</a></li>
+        </ul>
 
-          <a href="http://www.jiathis.com/send/?webid=weixin&url=http://www.urlurl.com&title={{item.title}}">
-          <i class="weichatshare">
-          </i>
-          </a>
 
-          <a href="http://www.jiathis.com/send/?webid=qzone&url=http://www.urlurl.com&title={{item.title}}">
-          <i class="qqzoneshare">
-          </i>
-          </a>  
-	
+我的消息
+我的收藏
+我的话题
+我的评论
+请将您的稿件发送至邮箱：shenanping2008@hotmail.com，梧桐树一旦录用，作者即可获得80元基础稿费。除基础稿费外，一旦您的投稿被我们评定为优秀稿件，梧桐树将一次性奖励作者1000～3500元额外优秀稿费。产出量较大的优秀作者可以成为梧桐树的独家自由撰稿人，我们会提供优厚的薪资，以及自由的工作环境。
+
+退出
+我们将在24小时之内回复您，的投稿的
+备注：不要软文，谢谢！
+
+增加话题在首页的版面
+24小时热文榜单
+最佳回复
+争议回复
+最近一个按热度排序
+热门话题
+人回复
+readers 大于3
+时间大于今天
+争议话题
+
+一周新闻排行
+
+style='background-image: url(/static/images/IMG_1764.jpg);'
+
+封面文章id
+精彩点评
+是否为封面
+	类别
+测试对手机的真的有用吗
+
+advertisment

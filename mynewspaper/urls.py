@@ -15,6 +15,7 @@ urlpatterns = [
     # url(r'^test/', 'article.views.test', name='test'),
     #登录页面
     url(r'^user/loggin/', 'accounts.views.loggin', name='loggin'),
+    url(r'^user/userlogout/', 'accounts.views.userlogout', name='userlogout'),
     #注册页面
     url(r'^user/register/', 'accounts.views.register', name='register'),
     #登出页面
@@ -57,6 +58,8 @@ urlpatterns = [
     url(r'^commentcomment/$', 'article.views.commentcomment', name='commentcomment'),
     url(r'^morecomment/$', 'article.views.morecomment', name='morecomment'),
     url(r'^category/(?P<category_id>[0-9]+)/$', 'article.views.category_detail', name='category_detail'),
+    url(r'^category/morearticleincat/$', 'article.views.morearticleincat', name='morearticleincat'),
+    url(r'^category/articlepage/$', 'article.views.articlepage', name='articlepage'),
     #ajax，验证用户名是否已被注册,get
     #url(r'^usernamemessage/$', 'accounts.views.usernamemessage', name='usernamemessage'),
         #具体文章页面
@@ -66,6 +69,7 @@ urlpatterns = [
     url(r'^article/test/$', 'article.views.test', name='test'),
     url(r'^article/commentlike/$', 'article.views.commentlike', name='commentlike'),
     url(r'^article/commentdislike/$', 'article.views.commentdislike', name='commentdislike'),
+    url(r'^article/article_post/$', 'article.views.article_post', name='article_post'),
 
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
