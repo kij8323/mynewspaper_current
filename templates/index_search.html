@@ -1,0 +1,146 @@
+{% extends "base_1.html" %}
+{% load time_filter %}
+{% block HeadDoc %}
+<link href="/static/css/index_search.css" rel="stylesheet">
+<script src="/static/js/topic_detail.js"></script>
+
+
+<script language="javascript" charset='GB2312'>   
+function GetRequest() {   
+   var url = location.search; //获取url中"?"符后的字串 
+   url = decodeURI(url)   
+   var theRequest = new Object();   
+   if (url.indexOf("?") != -1) {   
+      var str = url.substr(1);   
+      strs = str.split("&");   
+      for(var i = 0; i < strs.length; i ++) {   
+         theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);   
+      }   
+   }   
+   return theRequest;   
+}   
+</script>  
+
+<script charset='GB2312'>
+$(document).ready(function(){
+var Request = new Object();
+Request = GetRequest();
+search_word = Request["search_word"];
+search_word = search_word.replace("+", " ")
+$("#search_word").val(search_word);
+});
+</script>
+
+
+<script>/*板块固定滚动,板块内width要定长*/
+$.fn.smartFloat = function() { 
+    var position = function(element) { 
+        var top = element.position().top; //当前元素对象element距离浏览器上边缘的距离 
+        var pos = element.css("position"); //当前元素距离页面document顶部的距离 
+        $(window).scroll(function() { //侦听滚动时 
+            var scrolls = $(this).scrollTop(); 
+            if (scrolls > top) { //如果滚动到页面超出了当前元素element的相对页面顶部的高度 
+                if (window.XMLHttpRequest) { //如果不是ie6 
+                    element.css({ //设置css 
+                        position: "fixed", //固定定位,即不再跟随滚动 
+                        top: 0, //距离页面顶部为0 
+                      
+                    }).addClass("shadow"); //加上阴影样式.shadow 
+                } else { //如果是ie6 
+                    element.css({ 
+                        top: scrolls  //与页面顶部距离 
+                    });     
+                } 
+            }else { 
+                element.css({ //如果当前元素element未滚动到浏览器上边缘，则使用默认样式 
+                    position: pos, 
+                    top: top 
+                }).removeClass("shadow");//移除阴影样式.shadow 
+            } 
+        }); 
+    }; 
+    return $(this).each(function() { 
+        position($(this));                          
+    }); 
+}; 
+</script>
+
+<script>
+/*$(function(){ 
+    $("#rightstableblock").smartFloat(); 
+}); */
+</script>
+
+{% endblock %}
+
+ {% block content %}
+    <div class="container container-home">
+
+      <div class="row">
+        <div class="col-xs-7  leftcontainer">
+        <!-- <h4 class="categorytitle">test类</h4> -->
+        <!-- <div class="col-xs-8  leftcontainer"> -->
+  <span class="span-mark-author pull-left">搜索结果</span>
+
+
+{% for item in articlequery %}
+
+          <div class="col-xs-12 newsblock" id="{{item.blockid}}">
+<!--           <div class="col-xs-4 leftimgblock">
+          <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}" style="width: 220px; height:124px;"></a>
+          </div>  -->
+          <div class="rightwordblock">
+          <h3><a href="{{item.get_absolute_url}}">{{item.title|highlight|safe}}</a></h3>
+          <span><img  class="img-circle usericon" src='{{item.writer.get_image_url}}'></span>
+          <span class="writer"><a href="{{item.writer.get_absolute_url}}">{{item.user}}{{item.writer}}</a></span> 
+          <span class="posttime">{{item.timestamp}}</span> 
+
+<i class="icon-reply"></i><span>{{item.comment_set.count}}  </span>   
+<i class="icon-collection"></i><span>{{item.collection_set.count}} </span> 
+
+          <p class="associatetitle" style='padding-left: 0px;'>{{item.content|search|highlight|safe}}</p>
+          </div> 
+          </div> <!-- newsblock -->
+{% endfor %}
+
+      <div class='paginationcontain'>
+      <div class="pagination">
+          <span class="step-links">
+      {% if articlequery.has_previous %}
+              <a class='paginator' title='上一页' href='?page={{ articlequery.previous_page_number }}'><span>&lt;</span></a>
+       {% endif %}
+       {% for page in articlequery.paginator.page_range %}
+           {% if page = articlequery.number %}
+               <a class='paginator_current' title='当前页:{{ page }}'><span>{{ page }}</span></a>
+           {% else %}
+               <a class='paginator' href='?search_word={{search_word}}&page={{ page }}' title='{{ page }}'><span>{{ page }}</span></a>
+           {% endif %}
+       {% endfor %}
+       {% if articlequery.has_next %}
+           <a class='paginator' title='下一页' href='?search_word={{search_word}}&page={{ articlequery.next_page_number }}'><span>&gt;</span></a>
+       {% endif %}
+          </span>
+      </div><!-- <div class="pagination"> -->
+      </div><!-- <div class='paginationcontain'> -->
+
+        </div><!-- class="col-xs-8 leftcontainer" -->
+      <!-- </div> --><!-- <div class="row">  -->  
+
+<div class="col-xs-4">
+<div id='rightstableblock'>
+<div class='advertisment1'>
+  <a href="https://www.tesla.cn/">
+<img src="/static/media/images/tesla.jpg" >
+</a>
+</div>
+
+</div><!-- <div id='rightstableblock'> -->
+</div><!-- class="col-xs-4" -->
+
+
+
+      </div><!-- row -->
+
+    </div> <!-- /container -->
+ {% endblock %}
+ 

@@ -24,7 +24,7 @@ from comment.models import Comment
 from notifications.models import Notification
 #登录页面
 def loggin(request):
-	form = LoginForm(request.POST or None)
+	form = LoginForm(request.GET or None)
 	next_url = request.GET.get('next')
 	action_url = reverse("loggin")
 	if form.is_valid():
@@ -85,9 +85,9 @@ def register(request):
 	return render(request, 'register.html',  context)
 	#return redirect("home")
 
-def logout_view(request):
-    logout(request)
-    return redirect(reverse('home'))
+# def logout_view(request):
+#     logout(request)
+#     return redirect(reverse('home'))
 
 #ajax，验证码刷新
 def captchaview(request):
@@ -168,7 +168,7 @@ def userdashboardinformations(request, user_id):
 			return redirect(action_url)
 		else:
 			context = {
-			"user": user,
+			"userofinfor": user,
 			'host': host,
 			'hostname': hostname,
 			#"action_url": action_url,
@@ -203,7 +203,7 @@ def userdashboardcomments(request, user_id):
 			contacts = paginator.page(paginator.num_pages)
 
 		context = {
-			'user': user,
+			'userofinfor': user,
 			"comment": contacts,
 			'hostname': hostname,
 			'host': host,
@@ -236,7 +236,7 @@ def userdashboardnotifications(request, user_id):
 		# If page is out of range (e.g. 9999), deliver last page of results.
 			contacts = paginator.page(paginator.num_pages)
 		context = {
-			'user': user,
+			'userofinfor': user,
 			"notifications": contacts,
 			'host': host,
 			'hostname': hostname,
@@ -269,7 +269,7 @@ def privcynotifications(request, user_id):
 		# If page is out of range (e.g. 9999), deliver last page of results.
 			contacts = paginator.page(paginator.num_pages)
 		context = {
-			'user': user,
+			'userofinfor': user,
 			"notifications": contacts,
 			'host': host,
 			'hostname': hostname,
@@ -304,7 +304,7 @@ def userdashboardcollections(request, user_id):
 		context = {
 			'collection' : contacts,
 			'host': host,
-			'user': user,
+			'userofinfor': user,
 			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:
@@ -337,7 +337,7 @@ def userdashboardcollectionstopic(request, user_id):
 		context = {
 			'collection' : contacts,
 			'host': host,
-			'user': user,
+			'userofinfor': user,
 			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:
@@ -373,7 +373,7 @@ def userdashboard_commentocomment(request, user_id):
 	context = {
 		"comment": contacts,
 		'hostname': hostname,
-		'user': user,
+		'userofinfor': user,
 		'host': host,
 	}
 	return render(request, 'userdashboard_commentocomment.html',  context)
@@ -405,7 +405,7 @@ def userdashboardarticle(request, user_id):
 		context = {
 			'article' : contacts,
 			'host': host,
-			'user': user,
+			'userofinfor': user,
 			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:
@@ -438,7 +438,7 @@ def userdashboardarticletopic(request, user_id):
 		context = {
 			'topic' : contacts,
 			'host': host,
-			'user': user,
+			'userofinfor': user,
 			'hostname': hostname,
 			}
 	except MyUser.DoesNotExist:

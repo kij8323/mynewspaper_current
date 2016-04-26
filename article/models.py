@@ -1,4 +1,6 @@
 #coding=utf-8
+#! /usr/bin/env python
+# -*- coding: utf-8 -*-
 from django.db import models
 from django.conf import settings
 from accounts.models import MyUser
@@ -7,6 +9,8 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import os
+from django.core.cache import cache
 
 # Create your models here.
 class Article(models.Model):
@@ -28,6 +32,8 @@ class Article(models.Model):
 	url_address = models.CharField(max_length=500, null=True, blank=True)
 	#文章图标
 	image = models.ImageField(upload_to='images/', null=True, blank=True)
+	#文章图标是否显示在文章内容中
+	images_show = models.BooleanField(default=False)
 	#是否为封面
 	cover = models.BooleanField(default=False)
 	#自定义查询语句
@@ -86,6 +92,7 @@ class Collection(models.Model):
 	user = models.ForeignKey(MyUser)
 	article = models.ForeignKey(Article)
 
+#每个文章实例生成，都会自动添加分类和重新建立引索
 @receiver(post_save, sender=Article)
 def categoryofarticle(sender, **kwargs):
     article = kwargs.pop("instance")
@@ -93,7 +100,11 @@ def categoryofarticle(sender, **kwargs):
     if thisrelationtag:
     	return;
     else:
-	    category = Category.objects.get(id = 3)
-	    relation = Relation(article= article, category = category)
-	    relation.save()
+		category = Category.objects.get(id = 3)
+		relation = Relation(article= article, category = category)
+		relation.save()
+		# cachekey = "article_readers_" + str(article.id)
+		# cache.set(cachekey, 0)
+		# cache.incr(cachekey)
+		# print cache.get(cachekey)
 

@@ -61,7 +61,7 @@ ul{
 }
 
 .group-list{
-	padding: 28px 0;
+	padding: 15px 0;
 	border-bottom: 1px solid #f0f0f0;
 }
 
@@ -83,7 +83,7 @@ ul{
 }
 
 .group-information{
-	margin: 0px 0 -5px;
+	margin: 15px 0 0 0;
 	font-size: 14px;
 	color: #999;
 	line-height: 24px;

@@ -3,6 +3,40 @@
 {% block HeadDoc %}
 <link href="/static/css/home.css" rel="stylesheet">
 <script src="/static/js/home.js"></script>
+<script src="/static/js/topic_detail.js"></script>
+
+<script>/*加载更多*/
+$(function() {
+  var cur_page_num = 1;
+ $("body").on("click", '#morecomment-btn-block', function(){
+    var $elements = $('.newsblock');
+    var homearticlelen = $elements.length;
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+           homearticlelen: homearticlelen,
+          },
+          });
+
+    $.ajax({
+        url: "{% url 'morearticlehome' %}",
+        type: "post",
+        success: function(data) {
+        cur_page_num=cur_page_num+1;         
+        /*alert(cur_page_num);  */         
+        var newnode=document.createElement("div");             
+        newnode.setAttribute("class", "container-fluid grid");            
+        newnode.setAttribute("id","new"+String(cur_page_num));           
+        document.getElementById("morecomment").appendChild(newnode); 
+        $('#new'+String(cur_page_num)).load('{% url 'articlepagehome' %}');
+        $('#morecomment-btn-block').html(data.loadcompleted) 
+          },
+          error: function(data) { 
+              alert("Got an error dude");
+          }
+    });
+  })
+})
+</script>
 
 <script>/*去除&nbsp;*/
 $(function(){ 
@@ -36,7 +70,7 @@ $(function(){
                     <a href="{{item.get_absolute_url}}"><img src="{{item.get_image_url}}">
                       <div class="carousel-caption">
                         <h3>{{item.title}}</h3>
-                        <p>{{item.associatetitle}}</p>
+                        <!-- <p>{{item.associatetitle}}</p> -->
                     </a>
                     </div>
                     </div>
@@ -107,13 +141,20 @@ $(function(){
           <span class="writer"><a href="{{item.writer.get_absolute_url}}">{{item.user}}{{item.writer}}</a></span> 
           <span class="posttime">{{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前</span> 
 
-<i class="icon-reply"></i><span>{{item.comment_set.count}}  </span>   
-<i class="icon-collection"></i><span>{{item.collection_set.count}} </span> 
+<i class="icon-reply"></i><span>{{item.id|Article_comment}}  </span>   
+<i class="icon-collection"></i><span>{{item.id|Article_collection}} </span> 
 
           <p class="associatetitle" style='padding-left: 0px;'>{{item.associatetitle}}</p>
           </div> 
           </div> <!-- newsblock -->
 {% endfor %}
+
+
+<div id="morecomment">
+</div>
+
+ <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
+
 
         </div><!-- class="col-xs-8 leftcontainer" -->
       <!-- </div> --><!-- <div class="row">  -->  
@@ -136,7 +177,7 @@ $(function(){
 
 
 
-
+<div class='hotnewsblock'>
          <div class='head'>一周新闻排行</div>
 
     <table class="table table-hover hotnews">
@@ -153,6 +194,7 @@ $(function(){
 {% endfor %}
       </tbody>
     </table>
+  </div><!-- class='headblock' -->
 
 
  
@@ -163,6 +205,7 @@ $(function(){
 </a>
 </div>
 
+<div class='hotopicblock'>
          <div class='head'>热门话题</div>
     <table class="table table-hover hotopic">
       <tbody>
@@ -173,6 +216,7 @@ $(function(){
 {% endfor %}
       </tbody>
     </table>
+</div>
 
 <div class='advertisment2'>
   <a href="http://www.coca-cola.com.cn/">
@@ -180,20 +224,22 @@ $(function(){
 </a>
 </div>
 
+<div class='nicecommentblock'>
 <div class='head'>精彩点评</div>
     <table class="table table-hover nicecomment">
       <tbody>
 {% for item in nicecomment %}
         <tr>
           {% if item.article %}
-          <td> <span>{{item.user}} 评 {{item.article.title}}</span><a href="{{item.article.get_absolute_url}}">{{item.text|safe}}</a></td>
+          <td><a href="{{item.article.get_absolute_url}}"><span>{{item.user}} 评 {{item.article.title}}</span><br>{{item.text|safe}}</a></td>
           {% else %}
-          <td> <span>{{item.user}} 评 {{item.topic.title}}</span><a href="{{item.topic.get_absolute_url}}">{{item.text|safe}}</a></td>
+          <td> <a href="{{item.topic.get_absolute_url}}"><span>{{item.user}} 评 {{item.topic.title}}</span><br>{{item.text|safe}}</a></td>
           {% endif %}
         </tr>
 {% endfor %}
       </tbody>
     </table>
+</div>
 
 </div> <!-- <div class="row" style="margin-left: 15px;">   -->       
 

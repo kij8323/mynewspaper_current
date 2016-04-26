@@ -156,7 +156,7 @@ font-size: 16px;
 
 #dividedline{
 	border-top:1px solid #f0f0f0;
-	margin-bottom: 30px;
+	margin-bottom: 15px;
 	margin-top: 30px
 }
 
@@ -199,7 +199,7 @@ font-size: 16px;
 .comment{
 	position: relative;
 	top: 30px;
-	padding: 30px 0;
+	padding: 15px 0;
 	border-top: 1px solid #f0f0f0;
 }
 
@@ -249,6 +249,7 @@ font-size: 16px;
 
 .form-comment-reply{
 	display: none;
+	margin-top: 8px;
 }
 
 .form-comment-reply .form-control{
@@ -286,10 +287,10 @@ height: 80px
 
 #userpro{
 	background-color:  #fafafa;
-	height: 200px;
 	width: 100%;
-	padding: 30px;
-	text-align: center;
+	padding-top: 30px;
+	/*padding: 0 30px 30px 30px;*/
+	/*text-align: center;*/
 }
 
 .usericon{
@@ -299,9 +300,24 @@ height: 80px
 
 #userpro1{
 color: #A19F9F;
+text-align: center;
+padding: 0px 30px 30px 30px;
+/*padding-top: 12px*/
 }
 
-
+.head{
+	/*color: #449d44;*/
+	border-bottom: 0px solid #ddd;
+	font-weight: 700;
+	font-size: 18px;
+	padding-left: 23px;
+	border-left: 4px solid #67CA87;
+	/*margin-top: 230px;*/
+	/*margin-left: 9px;*/
+	margin-bottom: 9px;
+	color: #9e9e9e;
+	/*background-color: #CCF4D9;*/
+}
 
 a:link{
 	text-decoration: none;
@@ -333,6 +349,7 @@ a{
 
 #relationartical{
 	margin-top: 120px;
+	border-top: 1px solid #f0f0f0;
 } 
 
 #relationartical img{

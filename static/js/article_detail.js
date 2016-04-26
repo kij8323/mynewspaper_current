@@ -74,4 +74,9 @@ $(document).ready(function(){
   });  
 });
 
-
+/*回复评论按钮*/
+$(function(){
+  $("body").on("click", '.btn-dp', function(){
+    $(this).next(".form-comment-reply").fadeToggle();
+  });
+})

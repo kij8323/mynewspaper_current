@@ -286,7 +286,7 @@ font-size: 16px;
 	cursor: pointer;
 	width: 88px;
 	vertical-align: middle;
-	margin-left: 15px;
+	/*margin-left: 15px;*/
 	}
 
 
@@ -424,15 +424,17 @@ color: #A19F9F;
 #hotarticle{
 	padding-top: 20px;
 	background-color:  #fafafa;
-	width: 100%;
+	/*width: 100%;*/
+	width: 268.5px;
 	margin-top: 30px; 
-	max-height: 280px;
+	overflow:auto;
+	/*max-height: 280px;*/
 }
 
 #rightstableblock{
 	width: 268.5px;
-	max-height: 100%;
-	overflow:auto;  
+	/*max-height: 100%;*/
+	/*overflow:auto;  */
 }
 
 .rightcategory{
@@ -638,4 +640,15 @@ margin-top: 5px
 
 a:hover{
 	color: #337ab7;
+}
+
+.advertisment1{
+	width: 100%;
+	height: 100px;
+	margin-bottom: 30px;
+}
+
+.advertisment1 a img{
+	width: 100%;
+	height: 100px;
 }

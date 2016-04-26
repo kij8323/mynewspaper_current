@@ -11,6 +11,8 @@
 $(function() {
   $("body").on("click", '#btn-block', function(){
     var comment = editor.getData();
+/*    commnetcount = $('.article-pl-count').text()
+    alert(parseInt(commnetcount)+1)*/
     if (comment!=""){
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
@@ -26,6 +28,8 @@ $(function() {
             $(".freshcomment").prepend(
               ' <div class="comment"><span><img class="img-circle commentusericon" src={{user.get_image_url}}></span>&nbsp;&nbsp;<span class="author-name"><a href={{user.get_absolute_url}}>'+data.user+'</a></span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm" id="'+data.user+'"><div class="btn-dp-right pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
+              commnetcount = $('.article-pl-count').text()
+              $('.article-pl-count').text(parseInt(commnetcount)+1)
           },
           error: function(data) { 
               alert("Got an error dude");
@@ -74,6 +78,8 @@ $(function() {
             $(".freshcomment").prepend(
               ' <div class="comment"><span><img class="img-circle commentusericon" src={{user.get_image_url}}></span>&nbsp;&nbsp;<span class="author-name"><a href={{user.get_absolute_url}}>'+data.user+'</a></span>&nbsp&nbsp<span class="author-time">&nbsp刚刚</span><div class="blockquote">'+"回复@"+data.parentcommentuser+"&nbsp发表的：</br>"+data.parentcommentext+'</div><div class="pl-content">'+data.text+'</div><div class="pl-box-btm" id="'+data.user+'"><div class="btn-dp-right pull-right"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span>&nbsp;&nbsp;&nbsp;<i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><div class="btn-dp"><i class="icon-dp"></i>我要点评</div><div class="form-comment-reply" id="'+data.commentid+'"><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="你怎么看？" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div>'
               )
+              commnetcount = $('.article-pl-count').text()
+              $('.article-pl-count').text(parseInt(commnetcount)+1)
           },
           error: function(data) { 
               alert("Got an error dude");
@@ -147,6 +153,8 @@ $(function() {
         type: "post",
         success: function(data) {
           $('.articlecollection h5').html(data.collecicon)
+          collectioncount = $('.article-coll-count').text()
+          $('.article-coll-count').text(parseInt(collectioncount)+data.collcount)
           },
           error: function(data) { 
             $.messager.popup("请先登录！");
@@ -364,15 +372,17 @@ var jiathis_config = {
                 <span class="author-name">{{article.writer}}</span>
                 <i class="icon icon-line"></i>
                 <span class="article-time">{{article.timestamp}}</span>
-                <span class="article-share">阅读:{{article.readers}}</span>
-                <span class="article-pl">评论:{{numofcomment}}</span>
-                <span class="article-pl">收藏:{{usercollectioncount}}</span>
+                <span class="article-share">阅读:{{article.id|Article_readers}}</span>
+                <span class="article-pl">评论:<span class="article-pl-count">{{article.id|Article_comment}}</span></span>
+                <span class="article-pl">收藏:<span class="article-coll-count">{{article.id|Article_collection}}</span></span>
 <!--                 <span class="article-pl">收藏</span> -->
             </div>
 
+{% if  article.images_show %}
 <div class="article-img-box">
 <img src="{{article.get_image_url}}" >
 </div>
+{% endif  %}
 
 <div class="article-content-wrap">
      <p>{{article.content|safe}}</p>
@@ -549,8 +559,17 @@ var jiathis_config = {
 
 <div id='morecomment'>
 </div>
+{% if comment %}
+{% else %}
+<style type="text/css">
+#dividedline{
+  margin-top: 60px;
+}
+</style>
+{% endif %}
     <div id='dividedline'>
     </div>
+
 
 {% if moercomment %}
  <button  id="morecomment-btn-block" type="button" class='btn btn-lg btn-default btn-block ' >点击加载更多</button> 
@@ -585,14 +604,17 @@ var jiathis_config = {
 
 <div class="col-xs-3">
 
+
 <div id='userpro'>
+  <div class='head' >作者</div>
+  <div id='userpro1'>
 <a href="{{article.writer.get_absolute_url}}">
 <img class="center-block img-circle usericon" src="{{article.writer.get_image_url}}" >
 </a>
 <a href="{{article.writer.get_absolute_url}}">
 <h4>{{article.writer}}</h4>
 </a>
-<div id='userpro1'>
+
   文章总数:{{numwriter}}
   <i class="icon icon-line"></i>
   总阅读量:{{numreaders}}

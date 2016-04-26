@@ -9,6 +9,12 @@
 	width: 0;
 }
 
+.carousel-caption {
+right: 5%;
+left: 5%;
+padding-bottom: 30px;
+}
+
 .glyphicon-chevron-right{
 	margin-right: 0px;
 }
@@ -49,12 +55,14 @@
 	text-align: center;
 	position:absolute; 
 	z-index:2; 
-	left:10px; 
-	top:10px;
+	/*top:8px;*/
+	bottom: 12px;
 	color: white;
 	font-size: 18px;
 	font-weight: 400;
-	margin: 130px 30px 30px;
+	/*margin-bottom: 50px;*/
+	width: 91%;
+	margin-left: 4.5%;
 }
 
 
@@ -157,12 +165,7 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	padding-left: 0px;
 	padding-bottom: 15px;
 	margin-bottom: 15px;
-	border-style: solid;
-	border-bottom-width: 1px;
-	border-color: #E4E2E2;;
-	border-top-width: 0px;
-	border-right-width: 0px;
-	border-left-width: 0px;
+	border-bottom: 1px solid #f0f0f0;
 	}
 
 .leftimgblock{
@@ -229,16 +232,11 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 .head{
 	/*color: #449d44;*/
 	border-bottom: 0px solid #ddd;
-	font-weight: 700;
+	font-weight: 620;
 	font-size: 18px;
-	padding-left: 9px;
+	padding-left: 12px;
 	border-left: 4px solid #67CA87;
-	/*margin-top: 230px;*/
-	margin-left: 9px;
 	margin-bottom: 9px;
-	font-size: 18px;
-	font-weight: 700;
-	/*background-color: #CCF4D9;*/
 }
 
 .table>tbody>tr>td, .table>tbody>tr>th{
@@ -276,6 +274,18 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	color: #999;
 }
 
+#morecomment-btn-block{
+	width: 100%;
+	color: #bbb;
+	border: 1px solid #f0f0f0;
+	outline:none;
+	margin-bottom: 50px;
+}
+
+.container-fluid {
+	padding: 0px;
+}
+
 
 .hotnews>tbody>tr>th{
 	width: 1px;
@@ -287,22 +297,33 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	padding: 0px;
 }
 
-.nicecomment>tbody>tr>td>span{
-	padding: 12px;
+.nicecomment>tbody>tr>td>a>span{
+	/*padding: 12px;*/
+	margin-left: 0px;
 	color: #9e9e9e;
 }
 
 .advertisment1, .advertisment2{
 	width: 100%;
-	height: 100px;
+	/*height: 130px;*/
 	margin-bottom: 30px;
 }
 
-.advertisment1 a img, .advertisment2 a img{
+.advertisment1 a img{
 	width: 100%;
-	height: 100px;
+	height: 130px;
 }
+
+.advertisment2 a img{
+	width: 100%;
+	height: 160px;
+}
+
 /*
 .hotnews{
 	border: 1px solid #9e9e9e;
 }*/
+.nicecommentblock, .hotopicblock, .hotnewsblock{
+	background-color: #fafafa;
+	padding-top: 12px; 
+}

@@ -70,8 +70,8 @@ div{
 	padding: 0px;
 }
 
-.form-control{
-	height: 34px !important;
+.input-group .form-control{
+	height: 34px;
 }
 
 .baseusericon{
@@ -101,6 +101,10 @@ div{
 	/*width: 90%;*/
 }
 
+/*.categorybutton{
+	border-bottom:2px solid #67CA87;
+	height: 50px;
+}*/
 
 
 .dropdown-toggle{
@@ -140,20 +144,20 @@ div{
 }
 
 .categoryblock a{
-	color: #449d44;
+	color: #333;
 	padding: 10px;
-	background-color: #CCF4D9;
+	/*background-color: #CCF4D9;*/
 	border-radius: 6px;
 	margin-right: 20px;
 	font-size: 16px;
 }
 
 
-.categoryblock a:hover {
+/*.categoryblock a:hover {
 	color: white;
 	text-decoration: none;
 	background-color: #449d44;
-}
+}*/
 
 
 .dropdown-menu{
@@ -162,7 +166,7 @@ div{
 	padding: 0;
 }
 
- .dropdown-menu>li>a:hover {
+ .dropdown-menu>li>a:hover, .categoryblock a:hover {
 	color: #449d44;
 	text-decoration: none;
 	background-color: #CCF4D9;

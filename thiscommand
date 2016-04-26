@@ -1,10 +1,11 @@
 virtualenv paperproject
-cd ~/Documents/paperproject/mynewspaper
+cd ~/Documents/paperproject
 source ./bin/activate
 pip install Django==1.8
 
 
-mysql -h localhost -u root -p
+mysql -h localhost -u root -p 
+mysql -u root -p
 sudo service mysql restart
 
 delete from notifications_notification
@@ -15,7 +16,9 @@ password:123456
 python manage.py collectstatic
 
 python manage.py runserver 8080
-
+/usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf 
+cd /home/shen/Downloads/redis-3.0.7/src
+./redis-server
 
 python manage.py makemigrations article
 python manage.py sqlmigrate article 0001
@@ -58,116 +61,139 @@ shenanping2008@Hotmail.com
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
+ab -c 10 -n 1000 http://127.0.0.1:8080
 
-分类
-
-密码长度至少为6位
-{{item.text}}
-from article.models import Article
-from topic.models import Topic
-给你发送了私信
-私信
-
+压力测试工具： siege
+sudo apt-get install siege  
+50个用户 重复100次 发送GET参数
+siege -c 50 -r 100 http://127.0.0.1:8080/
+siege -c 50 -t 1 http://127.0.0.1:8080/
+我们直接用50个并发，执行1分钟来试下效果吧
 
 
-话题
+how to Installing Sphinx
+sudo apt-get install mysql-client unixodbc libpq5
+sudo add-apt-repository ppa:builds/sphinxsearch-rel22
+sudo apt-get update
+sudo apt-get install sphinxsearch
+apt-get remove sphinxsearch
+sudo service sphinxsearch start
+cd  /etc/sphinxsearch
+sudo vi /etc/sphinxsearch/sphinx.conf
+cp sphinx.conf.sample sphinx.conf
+cp -dpR /var/lib/mysql/mysite /etc/sphinxsearch/mysite ######复制/迁移mysql数据库
+mysql datafolder  /var/lib/mysql  ###mysql数据默认路径
+/var/lib/mysql/mysite
+SELECT * FROM accounts_myuser;
+sudo /usr/bin/indexer -c /etc/sphinxsearch/sphinx.conf mysite --rotate #####建立引索
+sudo /usr/bin/searchd -c /etc/sphinxsearch/sphinx.conf 
+
+使用sphnix API 之前需要安装到cd /usr/share/sphinxsearch/api/libsphinxclient安装一遍
+sudo ./configure
+sudo make
+sudo make install
 
 
-
-
-你确认要删除吗
-取消
-发生错误请重新操作
-删除信息
-确认删除
-主页
-后续
-工作
-去除&nbsp;
-$(".dropdown-menu").css("width")
-商务合作
-
-资讯新闻
-
-类别
-类文章
-相关文章
-加载
-
-分类页面 加载更多
-
- 在django中使用sphinx实现站内搜索
-
-1个月
-
-$("#content").keyup(function()
-
-ajax判断用户名是否已被注册
-用户名不能包含空格
-
-
-/*          if(username.indexOf(" ")!=-1){
-              $("#usernamenook").css("display", "none");
-              $("#usernameok").css("display", "none");
-              $("#usernamenilleg").css("display", "none");
-              $('#usernamenilleg').css("margin-right","-235px");
-              $('#usernamenilleg').css("margin-left","330px");
-              $('#usernamenilleg').css("margin-bottom","-32px");
-              $('#usernamenilleg').fadeIn("slow");
-          }*/
-注册显示信息函数
-
-处理注册页面
-用户名长度不能超过20个字符！
-Email地址格式是否正确！
-密码长度至少6位
-两次密码输入不同！
-请输入用户名！
-请输入邮箱地址！
-请输入密码！
-请确认密码！
-当所有cuserrorlist的css的display为none时，可以提交表单
+sudo kill 5938  #####杀死进程
+ps -e  ####查看进程
 
 
 
-<ul id="menu1" class="dropdown-menu" aria-labelledby="drop4">
-          <li><a href="#">Action</a></li>
-          <li><a href="#">Another action</a></li>
-          <li><a href="#">Something else here</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Separated link</a></li>
-        </ul>
+SELECT * FROM accounts_myuser   WHERE MATCH('test');
+SELECT * FROM accounts_myuser  WHERE MATCH('test') OPTION ranker=id;
+
+sudo apt-get remove sphinxsearch
+sudo apt-get autoremove sphinxsearch
 
 
-我的消息
-我的收藏
-我的话题
-我的评论
-请将您的稿件发送至邮箱：shenanping2008@hotmail.com，梧桐树一旦录用，作者即可获得80元基础稿费。除基础稿费外，一旦您的投稿被我们评定为优秀稿件，梧桐树将一次性奖励作者1000～3500元额外优秀稿费。产出量较大的优秀作者可以成为梧桐树的独家自由撰稿人，我们会提供优厚的薪资，以及自由的工作环境。
+  1.下载的软件存放位置
+       /var/cache/apt/archives
 
-退出
-我们将在24小时之内回复您，的投稿的
-备注：不要软文，谢谢！
+     2.安装后软件默认位置
+     /usr/share
 
-增加话题在首页的版面
-24小时热文榜单
-最佳回复
-争议回复
-最近一个按热度排序
-热门话题
-人回复
-readers 大于3
-时间大于今天
-争议话题
+     3.可执行文件位置 
+     /usr/bin
 
-一周新闻排行
+     4.配置文件位置
+      /etc
 
-style='background-image: url(/static/images/IMG_1764.jpg);'
+     5.lib文件位置
+    /usr/lib
 
-封面文章id
-精彩点评
-是否为封面
-	类别
-测试对手机的真的有用吗
+安装coreseek前依赖
+sudo apt-get install libtool*
+sudo apt-get install automake --fix-missing #####sudo apt-get install automake
+cp -R /usr/share/sphinxsearch/. /usr/local/coreseek
+手机
 
-advertisment
+sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate ###建立引索
+/usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf  ###启动后台服务（必须开启）
+/usr/local/coreseek/bin/search -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf   Google服务今年无论如何都会回中国 ###搜索
+python /home/shen/Downloads/coreseek-4.1-beta/testpack/api/test.py 手机 ###搜索api
+
+备注：数据库更新后需要重新建立引索，在python中用os.system()无效，需要开一个终端，重新建立引索
+echo "123456" | sudo -S /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate  #自动输入密码
+
+
+ sql后缀文件导入msql数据库
+mysql -u root -p 012ssskkk < documents.sql
+
+redis:
+先安装redis，从redis官方下载 or sudo apt-get install redis-server
+pip install django-redis
+sudo pip install redis
+
+
+数据库优化：
+建立索引
+MyUser: username id 
+Comment：parent user id article topic readers
+Notification：recipient verb timestamp id sender_object 
+Collection：user id article
+Article: writer timestamp id title cover readers
+Topic: writer timestamp id group cover readers
+CollectionTopic:user topic id
+category: id title
+Relation:category  article id
+Group: id  founder
+
+
+继续要大量读写 也需大量查询
+readers
+
+redis存储信息：
+article 收藏的次数 readers
+topic 回复次数 readers
+comment 
+
+
+缓存的readers 增加1
+文章回复数量
+建立索引常用的规则如下： 
+
+1、表的主键、外键必须有索引； 
+2、数据量超过300的表应该有索引；
+3、经常与其他表进行连接的表，在连接字段上应该建立索引； 
+4、经常出现在Where子句中的字段，特别是大表的字段，应该建立索引；
+5、索引应该建在选择性高的字段上；
+6、索引应该建在小字段上，对于大的文本字段甚至超长字段，不要建索引；
+7、复合索引的建立需要进行仔细分析；尽量考虑用单字段索引代替： A、正确选择复合索引中的主列字段，一般是选择性较好的字段； B、复合索引的几个字段是否经常同时以AND方式出现在Where子句中？单字段查询是否极少甚至没有？如果是，则可以建立复合索引；否则考虑单字段索引； C、如果复合索引中包含的字段经常单独出现在Where子句中，则分解为多个单字段索引； D、如果复合索引所包含的字段超过3个，那么仔细考虑其必要性，考虑减少复合的字段； E、如果既有单字段索引，又有这几个字段上的复合索引，一般可以删除复合索引；
+8、频繁进行数据操作的表，不要建立太多的索引；
+9、删除无用的索引，避免对执行计划造成负面影响； 以上是一些普遍的建立索引时的判断依据。一言以蔽之，索引的建立必须慎重，对每个索引的必要性都应该经过仔细分析，要有建立的依据。因为太多的索引与不充分、不正确的索引对性能都毫无益处：在表上建立的每个索引都会增加存储开销，索引对于插入、删除、更新操作也会增加处理上的开销。另外，过多的复合索引，在有单字段索引的情况下，一般都是没有存在价值的；相反，还会降低数据增加删除时的性能，特别是对频繁更新的表来说，负面影响更大
+
+
+
+
+给他发信
+
+			cachekey = "article_comment_" + str(articleid)
+			if cache.get(cachekey):
+				cache.incr(cachekey)
+			else:
+				cache.set(cachekey, article.comment_set.count())
+
+
+
+文章总数 缓存 article_detaile
+

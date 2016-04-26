@@ -26,7 +26,7 @@ from datetime import timedelta
 def group_all(request):
 	group = Group.objects.all().order_by("-topicount")
 	#最近一个按热度排序; timestamp__gte=datetime.date.today(): 时间大于今天
-	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=30)).order_by("-readers")[0:10]
+	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=100)).order_by("-readers")[0:10]
 	context = {
 		'group': group,
 		'topic': topic,
@@ -45,7 +45,7 @@ def moretopic(request):
 def groupage(request):
 	if request.session.get('grouplen', False):
 		grouplen = request.session['grouplen']
-	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=30))
+	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=60))
 	grouplen = int(grouplen)
 	topic = topic[grouplen:grouplen+5]
 	context = {
@@ -103,7 +103,7 @@ def topic_detail(request, topic_id):
 	#最新话题
 	newtopic = Topic.objects.filter(group=topic.group).order_by('-timestamp')[0:3]
 	#最热话题
-	hottopic = Topic.objects.filter(group=topic.group).order_by('-readers')[0:3]
+	hottopic = Topic.objects.filter(group=topic.group).order_by('-readers')[0:5]
 	#当前读者对象
 	user = request.user
 	#读者是否收藏该文章

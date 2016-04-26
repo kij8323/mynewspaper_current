@@ -14,8 +14,9 @@ from notifications.signals import notify
 from accounts.models import MyUser
 from notifications.atwho import atwho
 from itertools import chain
-
-# def 
+import datetime
+from datetime import timedelta
+from django.core.cache import cache
 
 def article_detail(request, article_id):
 	try:
@@ -30,16 +31,20 @@ def article_detail(request, article_id):
 		numreaders = 0
 		for x in article.writer.article_set.all():
 			numreaders = x.readers + numreaders
-		print numreaders
-		print 'numwriter'
-		print numwriter
+
 	except Article.DoesNotExist:
 		raise Http404("Article does not exist")
 	#阅读数+1
 	article.readers += 1
-	#最热文章排序
-	hotarticle = Article.objects.order_by('-readers')[:5]
+	#一周内文章readers排序
+	hotarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=7)).order_by('-readers')[:5]
 	article.save()
+	#缓存的readers 增加1
+	cachekey = "article_readers_" + str(article_id)
+	if cache.get(cachekey):
+		cache.incr(cachekey)
+	else:
+		cache.set(cachekey, article.readers)
 	#当前读者对象
 	user = request.user
 	#读者是否收藏该文章
@@ -72,14 +77,14 @@ def article_detail(request, article_id):
 	#文章属于哪些类别
 	thisrelationtag = Relation.objects.filter(article=article)
 	print thisrelationtag[0].category
-	#同属与一类的其他文章
-	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article)
+	#统一类的按timestamp排序文章
+	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article).order_by('-timestamp')
 	if thisrelationtagarticle.count()==0:
-		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article)
+		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article).order_by('-timestamp')
 	if thisrelationtagarticle.count()==0:
-		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article)
+		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article).order_by('-timestamp')
 	#文章被多少人收藏过
-	usercollectioncount = Collection.objects.filter(article=article).count()
+	#usercollectioncount = Collection.objects.filter(article=article).count()
 	context = {
 		'article':article,
 		'user':user,
@@ -95,7 +100,7 @@ def article_detail(request, article_id):
 		'collection' : collection,
 		'thisrelationtag' : thisrelationtag,
 		'thisrelationtagarticle': thisrelationtagarticle[0:3], 
-		'usercollectioncount' : usercollectioncount, 
+		#'usercollectioncount' : usercollectioncount, 
 		'sharelink': sharelink,
 		"commentorderbyreaders": commentorderbyreaders,
 	}
@@ -133,6 +138,12 @@ def articlecomment(request):
 		try:
 			c = Comment(user=user, article=article, text=text)
 			c.save()
+			#文章回复数量 增加1
+			cachekey = "article_comment_" + str(articleid)
+			if cache.get(cachekey):
+				cache.incr(cachekey)
+			else:
+				cache.set(cachekey, article.comment_set.count())
 			userlist = atwho(text = text, sender = user
 							, targetcomment = None, targetarticle = article
 							, targetopic = None)
@@ -167,15 +178,16 @@ def commentcomment(request):
 		article = Article.objects.get(pk=articleid)
 		comment = Comment.objects.filter(article=article)
 		targetcomment = Comment.objects.get(pk=preentid)
-		print 'commentcomment'
-		print 'x'
-		print 'y'
-		print 'z'
 		user = request.user
-		print user
 		try:
 			c = Comment(user=user, article=article, text=text, parent=targetcomment)
 			c.save()
+			#文章回复数量 增加1
+			cachekey = "article_comment_" + str(articleid)
+			if cache.get(cachekey):
+				cache.incr(cachekey)
+			else:
+				cache.set(cachekey, article.comment_set.count())
 			targetcomment.readers = targetcomment.readers + 1
 			targetcomment.save()
 			userlist = atwho(text = text, sender = user, targetcomment = targetcomment
@@ -237,13 +249,26 @@ def collection(request):
 	print type(collection)
 	if collection: 
 		collection.delete()
+		collcount = -1
+		cachekey = "article_collection_" + str(articleid)
+		if cache.get(cachekey):
+			cache.decr(cachekey)
+		else:
+			cache.set(cachekey, article.collection_set.count())
 		collecicon = '收藏'
 	else:
 		c = Collection(user=user, article=article)
 		c.save()
+		collcount = 1
+		cachekey = "article_collection_" + str(articleid)
+		if cache.get(cachekey):
+			cache.incr(cachekey)
+		else:
+			cache.set(cachekey, article.collection_set.count())
 		collecicon = '已收藏'
 	data = {
 	 'collecicon': collecicon,
+	 'collcount': collcount,
 	}
 	json_data = json.dumps(data)
 	return HttpResponse(json_data, content_type='application/json')
