@@ -135,9 +135,9 @@ body{
 	/*background: #67CA87;*/
 }
 
-.comment-article{
+/*.comment-article{
 	margin-left: 20px;
-}
+}*/
 
 .commentlist a{
 	color: black;
@@ -153,4 +153,8 @@ body{
 
 .comment-article a{
 	color: #337ab7;
+}
+
+.group-informatio-blank{
+	margin-right: 20px
 }

@@ -211,7 +211,7 @@ $(function(){
       <tbody>
 {% for item in topicquery %}
         <tr>
-          <td><a href="{{item.get_absolute_url}}">{{item.title}}<span>{{item.comment_set.count}}条回复</span></a></td>
+          <td><a href="{{item.get_absolute_url}}">{{item.title}}<span>{{item.id|Topic_comment}}条回复</span></a></td>
         </tr>
 {% endfor %}
       </tbody>

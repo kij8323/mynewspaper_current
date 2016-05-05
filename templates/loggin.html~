@@ -1,0 +1,68 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+<link href="/static/css/loggin.css" rel="stylesheet">
+<script src="/static/js/loggin.js"></script>
+<!-- javascript不能使用django变量模板 -->
+<!-- 网页刷新后，将url中的“?search_word=手机+苹果”分割为“手机 苹果“显示在搜索栏内 -->
+<script>
+$(function() {
+  $("#freshcaptcha").click(function() {
+    $.ajax({
+        url: "{% url 'captchaview' %}",
+        type: "get",
+        success: function(data) {
+            $(".captcha").attr("src",data.acptchaimg);
+            $("#id_captcha_0").val(data.captchakey);
+        },
+        error: function(data) { 
+            alert("Got an error dude");
+        }
+    });
+
+  })
+})
+</script>
+{% endblock %}
+
+
+ {% block content %}
+
+
+
+ <div class="container">
+  <div class="container-loggin">
+  <form class="form-signin" role="form" method='get' autocomplete="off" action='{{ action_url }}'>
+    {% csrf_token %}
+
+  <img class="headimag" src="/static/images/logotree/logo_7.jpg">
+
+  <div class="form-label">
+
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" 
+      {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  {{form}}
+
+
+  </div>
+
+  <div class="checkbox">
+  <label>
+  <input type="checkbox" name='checkbox' value="remember-me"> 记住登录状态1个月
+  </label>
+  </div>
+
+  <input class='btn btn-lg btn-success btn-block' type='submit' value='{{ submit_btn }}'/>
+
+  <span>没有帐号？ <a href="">免费注册</a></span>
+  </form>
+  </div>
+  </div>
+ {% endblock %}
+ 

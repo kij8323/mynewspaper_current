@@ -33,6 +33,9 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 
 # Application definition
 
+
+
+
 INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.auth',
@@ -49,7 +52,10 @@ INSTALLED_APPS = (
     'notifications',
     'ckeditor',
     'ckeditor_uploader',
+    'djcelery',
 )
+
+
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -145,3 +151,11 @@ CKEDITOR_CONFIGS = {
         #'toolbar': 'Basic',
     },
 }
+
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379/0'
+
+CACHE_EXPIRETIME = 1209600 #redis缓存过期时间
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' #验证码样式，数学

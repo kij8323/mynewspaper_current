@@ -24,7 +24,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $(".freshcomment").append(
-              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}><div class="rightcomment">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm" id="'+data.user+'"><span class="btn-dp" style="color: rgb(187, 187, 187);"><i class="icon-dp-checkbox" style="background-position: -28px -22px;"></i> 添加点评</span><div class="form-comment-reply" id="'+data.commentid+'"><div class="freshchildcomment'+data.commentid+'" style="margin-top : 1em;"></div><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div></div>'
+              ' <div class="comment"><span class="author-name"><img  class="img-circle commentusericon" src={{user.get_image_url}}><div class="rightcomment">'+data.user+'</span><span class="author-time">&nbsp刚刚</span><div class="pl-content">'+data.text+'</div><div class="pl-box-btm" id="'+data.user+'"><div class="btn-dp-right pull-right" id="'+data.commentid+'"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span><i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></div><span class="btn-dp" style="color: rgb(187, 187, 187);"><i class="icon-dp-checkbox" style="background-position: -28px -22px;"></i> 添加点评</span><div class="form-comment-reply" id="'+data.commentid+'"><div class="freshchildcomment'+data.commentid+'" style="margin-top : 1em;"></div><label for="id_commentext">Commentext:</label><textarea class="form-control" cols="40" id="id_commentext" name="commentext" placeholder="" rows="8"></textarea><button id="btn-block" type="button" class="btn btn-lg btn-success btn-block btn-reply">发表</button></div></div></div></div>'
               )
               commnetcount = $('.article-pl-count').text()
               $('.article-pl-count').text(parseInt(commnetcount)+1)
@@ -72,7 +72,7 @@ $(function() {
         dataType: 'json',
           success: function(data) {
             $('.freshchildcomment'+preentid).append(
-              ' <div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time"> 0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child"><i class="icon-childcomment"></i>回复</div></div></div>'
+              ' <div class="childcomment"><img class="commentusericon" src={{user.get_image_url}}><div class="rightchildcomment" id="'+data.user+'"><span class="author-name"><a href={{user.get_absolute_url}}>shen</a></span><span class="author-time"> 0&nbsp;分钟前 :</span><div class="pl-content">'+data.text+'</div><div class="btn-dp-child"><i class="icon-childcomment"></i>回复</div><span class="btn-dp-right pull-right" id="'+data.commentid+'"><i class="icon-dp-positive" style="background-position: -220px -173px;"></i><span class="commentuserlike'+data.commentid+'">0</span><i class="icon-dp-negtive" style="background-position: -270px -171px;"></i><span class="commentuserdislike'+data.commentid+'">0</span></span></div></div>'
               )
               commnetcount = $('.article-pl-count').text()
               $('.article-pl-count').text(parseInt(commnetcount)+1)
@@ -120,6 +120,7 @@ $(function(){
 $(function() {
  $("body").on("click", '.icon-dp-positive', function(){
     var preentid = $(this).parent().attr("id");
+    like = parseInt($(this).next('.commentuserlike'+preentid).text())
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           commentid: preentid,
@@ -132,7 +133,7 @@ $(function() {
         
           /*$(this).next().html(data.commentlikecount)*/
           /*alert(data.commentlikecount)*/
-          $('.commentuserlike'+preentid).html(data.commentlikecount)
+          $('.commentuserlike'+preentid).html(like + data.commentlikecount)
           },
           error: function(data) { 
             /*alert('Error')*/
@@ -146,6 +147,7 @@ $(function() {
 $(function() {
  $("body").on("click", '.icon-dp-negtive', function(){
     var preentid = $(this).parent().attr("id");
+    dislike = parseInt($(this).next('.commentuserdislike'+preentid).text())
     $.ajaxSetup({
     data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
           commentid: preentid,
@@ -155,7 +157,7 @@ $(function() {
         url: "{% url 'commentdislike' %}",
         type: "post",
         success: function(data) {
-          $('.commentuserdislike'+preentid).html(data.commentdislikecount)
+          $('.commentuserdislike'+preentid).html(dislike + data.commentdislikecount)
           },
           error: function(data) { 
             /*alert('Error')*/
@@ -201,32 +203,6 @@ $(function() {
 })
 </script>
 
-<script>
-/*$(function() {
- $("body").on('input propertychange', '.form-control', function() {
-    var comment = $(this).val();
-    node = $(this)
-    $.ajaxSetup({
-    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
-          comment: comment, 
-          },
-          });
-    $.ajax({
-        url: "{% url 'atwhoidentify' %}",
-        type: "post",
-        dataType: 'json',
-          success: function(data) {
-            }
-            console.log(data.userlist)
-
-          },
-          error: function(data) { 
-              alert("Got an error dude");
-          }
-    });
-  })
-})*/
-</script>
 
 <script>/*板块固定滚动,板块内width要定长*/
 $.fn.smartFloat = function() { 
@@ -329,8 +305,8 @@ $(function(){
                 <span class="author-name"><a href = "{{topic.writer.get_absolute_url}}">{{topic.writer}}</a></span>
                 <i class="icon icon-line"></i>
                 <span class="article-time">{{topic.timestamp|date:"Y-m-d H:i"}}</span>
-                <span class="article-share">阅读:{{topic.readers}}</span>
-                <span class="article-pl">评论:<span class="article-pl-count">{{count}}</span></span>
+                <span class="article-share">阅读:{{topic.id|Topic_readers}}</span>
+                <span class="article-pl">评论:<span class="article-pl-count">{{topic.id|Topic_comment}}</span></span>
 <!--                 <span class="topic-pl">收藏</span> -->
             </div>
 
@@ -364,10 +340,9 @@ $(function(){
 
                 <div class="btn-dp-right pull-right" id="{{item.id}}">
                 <i class="icon-dp-positive"></i>
-                <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
-                
-                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
-                <span class='commentuserdislike{{item.id}}'>{{item.dislike}}</span>
+                <span class='commentuserlike{{item.id}}'>{{item.id|comment_like_count}}</span>
+                <i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{item.id}}'>{{item.id|comment_dislike_count}}</span>
                 </div>
 
              <!--    <span class="btn-dp-reply">
@@ -400,10 +375,10 @@ $(function(){
 
             <span class="btn-dp-right pull-right" id="{{childitem.id}}">
                 <i class="icon-dp-positive"></i>
-                <span class='commentuserlike{{childitem.id}}'>{{childitem.like}}</span>
+                <span class='commentuserlike{{childitem.id}}'>{{childitem.id|comment_like_count}}</span>
                 
-                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
-                <span class='commentuserdislike{{childitem.id}}'>{{childitem.dislike}}</span>
+                <i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{childitem.id}}'>{{childitem.id|comment_dislike_count}}</span>
                 </span>
 
 
@@ -447,10 +422,10 @@ $(function(){
 
                 <div class="btn-dp-right pull-right" id="{{item.id}}">
                 <i class="icon-dp-positive"></i>
-                <span class='commentuserlike{{item.id}}'>{{item.like}}</span>
+                <span class='commentuserlike{{item.id}}'>{{item.id|comment_like_count}}</span>
                 
-                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
-                <span class='commentuserdislike{{item.id}}'>{{item.dislike}}</span>
+                <i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{item.id}}'>{{item.id|comment_dislike_count}}</span>
                 </div>
 
                <!--  <span class="btn-dp-reply">
@@ -483,10 +458,10 @@ $(function(){
 
             <span class="btn-dp-right pull-right" id="{{childitem.id}}">
                 <i class="icon-dp-positive"></i>
-                <span class='commentuserlike{{childitem.id}}'>{{childitem.like}}</span>
+                <span class='commentuserlike{{childitem.id}}'>{{childitem.id|comment_like_count}}</span>
                 
-                &nbsp&nbsp&nbsp<i class="icon-dp-negtive"></i>
-                <span class='commentuserdislike{{childitem.id}}'>{{childitem.dislike}}</span>
+                <i class="icon-dp-negtive"></i>
+                <span class='commentuserdislike{{childitem.id}}'>{{childitem.id|comment_dislike_count}}</span>
                 </span>
 
 
@@ -609,7 +584,7 @@ $(function(){
 {{item.title}}
 </a>
 <span class='grayword'>
-({{item.comment_set.count}}回复)
+({{item.id|Topic_comment}}回复)
 </span>
 </div>
 {% endfor %}

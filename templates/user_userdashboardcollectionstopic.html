@@ -1,4 +1,5 @@
 {% extends "base_1.html" %}
+{% load time_filter %}
 {% block HeadDoc %}
 <link href="/static/css/user_userdashboardcollectionstopic.css" rel="stylesheet">
 <link href="/static/css/userinfopub.css" rel="stylesheet">
@@ -11,6 +12,15 @@ $(function() {
   $('#myModal1').modal('show')
   })
 })
+</script>
+
+<script>/*去除&nbsp;*/
+$(function(){ 
+    $('.group-informatio-blank').each(function() {
+      var $this = $(this);
+      $this.html($this.html().replace(/&nbsp;/g, ''));
+    })
+}); 
 </script>
 
 <script>/*确认删除*/
@@ -98,12 +108,26 @@ $(function() {
         </a>
 
     <div class = 'commentinfo'>
-      <i class="icon-reply"></i>{{item.topic.comment_set.count}}
-      <i class="icon-collection"></i>{{item.topic.collectiontopic_set.count}}
-  </div>
 
-      <div class = 'commentinfo'>
-      {{item.topic.timestamp}}  
+ <span class='group-informatio-blank'>
+ {{item.topic.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
+ <span class='group-informatio-blank'>
+回复数:{{item.topic.id|Topic_comment}}
+</span>
+
+
+{%  if item.topic.id|Topic_comment %}
+ <span class='group-informatio-blank'>
+最新回复:
+{{item.topic.lastcommentime.user}}
+</span>
+
+ <span class='group-informatio-blank'>
+{{item.topic.lastcommentime.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
+{% endif %} 
+
       <span class="comment-article">
         来自话题组：<a href="{{item.topic.group.get_absolute_url}}">{{item.topic.group.title}}</a>
         </span>

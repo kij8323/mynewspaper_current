@@ -12,20 +12,21 @@ from django.dispatch import receiver
 import os
 from django.core.cache import cache
 
-# Create your models here.
+# 文章
 class Article(models.Model):
+	id = models.AutoField(primary_key=True, db_index=True)
 	#文章名称
 	title = models.CharField(max_length=120)
 	associatetitle = models.CharField(max_length=120)
 	#文章上传时间
-	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True, db_index=True)
 	#timestamp = models.DateTimeField('date published')
 	# #文章更新时间
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
 	#文章内容
 	content = RichTextUploadingField(max_length=5000, null=True, blank=True)
 	#作者
-	writer = models.ForeignKey(MyUser)
+	writer = models.ForeignKey(MyUser, db_index=True)
 	#转载
 	fromner = models.TextField(max_length=500, null=True, blank=True)
 	#文章地址
@@ -35,14 +36,10 @@ class Article(models.Model):
 	#文章图标是否显示在文章内容中
 	images_show = models.BooleanField(default=False)
 	#是否为封面
-	cover = models.BooleanField(default=False)
-	#自定义查询语句
-	#objects = ArticleManager()
-	#collections = models.ManyToManyField(MyUser, through='Collection', through_fields=('user', 'article'),related_name='ArticleCollection')
+	cover = models.BooleanField(default=False, db_index=True)
+	#计算文章热度
+	readers = models.IntegerField(default=0, db_index=True)
 
-	readers = models.IntegerField(default=0)
-	# shares = models.IntegerField(default=0)
-	# collections = models.IntegerField(default=0)
 
 	def __unicode__(self):
 		return self.title
@@ -57,7 +54,9 @@ class Article(models.Model):
 	def get_absolute_url(self):
 		return reverse('article_detail', kwargs={"article_id": self.id})
 
+#分类
 class Category(models.Model):
+	id = models.AutoField(primary_key=True, db_index=True)
 	#类别名称
 	title = models.CharField(max_length=120)
 	#类别描述
@@ -71,7 +70,7 @@ class Category(models.Model):
 	#类别更新时间
 	updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 	#自定义查询
-	#objects = CategoryManager()
+	#类别通过relations表与文章多对多
 	relations = models.ManyToManyField(Article, through='Relation', )
 
 	def __unicode__(self):
@@ -83,26 +82,36 @@ class Category(models.Model):
 	def get_absolute_url(self):
 		return reverse('category_detail', kwargs={"category_id": self.id})
 
+#类别与文章的多对多关系表
 class Relation(models.Model):
-	category = models.ForeignKey(Category)
-	article = models.ForeignKey(Article)
-	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+	id = models.AutoField(primary_key=True, db_index=True)
+	category = models.ForeignKey(Category, db_index=True)
+	article = models.ForeignKey(Article, db_index=True)
+	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True, db_index=True)
 
+#用户与文章之间的多对多收藏关系
 class Collection(models.Model):
-	user = models.ForeignKey(MyUser)
-	article = models.ForeignKey(Article)
+	id = models.AutoField(primary_key=True, db_index=True)
+	user = models.ForeignKey(MyUser, db_index=True)
+	article = models.ForeignKey(Article, db_index=True)
 
-#每个文章实例生成，都会自动添加分类和重新建立引索
+#每个文章实例生成，都会自动添加分类到id=3的类别
 @receiver(post_save, sender=Article)
 def categoryofarticle(sender, **kwargs):
     article = kwargs.pop("instance")
     thisrelationtag = Relation.objects.filter(article=article)
-    if thisrelationtag:
+    if thisrelationtag: #如果文章已经被分类直接返回
     	return;
-    else:
+    else:	#如果文章未分类则直接分类
 		category = Category.objects.get(id = 3)
 		relation = Relation(article= article, category = category)
 		relation.save()
+		cachekey = "writer_articlecount_" + str(article.writer.id)
+		if cache.get(cachekey):
+			cache.incr(cachekey)
+		else:
+			numwriter = article.writer.article_set.count()
+			cache.set(cachekey, numwriter)
 		# cachekey = "article_readers_" + str(article.id)
 		# cache.set(cachekey, 0)
 		# cache.incr(cachekey)

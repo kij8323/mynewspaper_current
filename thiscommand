@@ -15,10 +15,16 @@ username:shen
 password:123456
 python manage.py collectstatic
 
-python manage.py runserver 8080
-/usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf 
+python manage.py runserver 8080 ###启动django自带服务器
+sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate ###更新搜索栏索引
+sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf  ###启动搜索栏后台服务
 cd /home/shen/Downloads/redis-3.0.7/src
-./redis-server
+./redis-server ###启动redis-server
+python manage.py celery worker --loglevel=info    ###启动celery
+
+cd /home/shen/Documents/paperproject/mynewspaper/article #备注：在virtualenv 内安装的需要在virtualenv 内启动celery-server
+celery -A celeryconf worker --loglevel=info
+
 
 python manage.py makemigrations article
 python manage.py sqlmigrate article 0001
@@ -144,6 +150,10 @@ redis:
 pip install django-redis
 sudo pip install redis
 
+ import redis
+redis的默认端口6379
+ r = redis.StrictRedis(host='localhost', port=6379, db=0)
+r.set('foo', 'bar')
 
 数据库优化：
 建立索引
@@ -168,6 +178,27 @@ topic 回复次数 readers
 comment 
 
 
+pip install  celery[redis] 
+pip install Celery
+pip install django-celery
+pip install celery-with-redis
+python manage.py celery worker --loglevel=info
+# python manage.py celery worker --loglevel=info
+app = Celery('celeryconf', broker='redis://localhost:6379/0')
+
+备注：
+注册的函数必须放在名为tasks.py的文件中
+I was able to get this working by refactoring so that the tasks were not class methods. I placed them in our tasks.py file and everything works fine. I haven't had time to research why this is the case, which I plan to do, but until then if anyone is having the same problem you'll have a quick fix available.
+
+
+
+将readers+1的操作放到celery中，加快网页的加载时间
+给readers加索引，
+继续把网站上与数字有关的，全部做一层redis
+
+
+
+
 缓存的readers 增加1
 文章回复数量
 建立索引常用的规则如下： 
@@ -183,17 +214,16 @@ comment
 9、删除无用的索引，避免对执行计划造成负面影响； 以上是一些普遍的建立索引时的判断依据。一言以蔽之，索引的建立必须慎重，对每个索引的必要性都应该经过仔细分析，要有建立的依据。因为太多的索引与不充分、不正确的索引对性能都毫无益处：在表上建立的每个索引都会增加存储开销，索引对于插入、删除、更新操作也会增加处理上的开销。另外，过多的复合索引，在有单字段索引的情况下，一般都是没有存在价值的；相反，还会降低数据增加删除时的性能，特别是对频繁更新的表来说，负面影响更大
 
 
+mysql查看索引命令：
+show index from topic_topic;
 
 
-给他发信
-
-			cachekey = "article_comment_" + str(articleid)
-			if cache.get(cachekey):
-				cache.incr(cachekey)
-			else:
-				cache.set(cachekey, article.comment_set.count())
+更改验证码形式
 
 
 
-文章总数 缓存 article_detaile
+注释并优化notifications
+验证码
+请输入右侧算式结果
+
 

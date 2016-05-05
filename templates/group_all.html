@@ -37,6 +37,15 @@ $(function() {
 })
 </script>
 
+<script>/*去除&nbsp;*/
+$(function(){ 
+    $('.group-informatio-blank').each(function() {
+      var $this = $(this);
+      $this.html($this.html().replace(/&nbsp;/g, ''));
+    })
+}); 
+</script>
+
 <script>/*板块固定滚动,板块内width要定长*/
 $.fn.smartFloat = function() { 
     var position = function(element) { 
@@ -104,16 +113,19 @@ $(function(){
  {{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
 </span>
  <span class='group-informatio-blank'>
-回复数:{{item.comment_set.count}}
+回复数:{{item.id|Topic_comment}}
 </span>
 
 
-{%  if item.comment_set.count %}
+{%  if item.id|Topic_comment %}
  <span class='group-informatio-blank'>
 最新回复:
 {{item.lastcommentime.user}}
 </span>
+
+ <span class='group-informatio-blank'>
 {{item.lastcommentime.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month|time_blank_n}}前
+</span>
 {% endif %}
 
 
@@ -156,7 +168,7 @@ $(function(){
  {{item.title}}
  </a>
   <div class='group-information'>
- ({{item.topicount}}则话题)
+ ({{item.id|group_topic_count}}则话题)
   </div><!--   <div class='group-information'> -->
  </div> <!-- <div class="project-content"> -->
  </div><!-- <div class="rightitle"> -->

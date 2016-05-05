@@ -212,7 +212,6 @@ font-size: 16px;
 .btn-dp-right {
 	color: #bbb;
 	cursor: pointer;
-	width: 88px;
 	}
 
 .icon-dp{
@@ -244,6 +243,7 @@ font-size: 16px;
 	background-repeat: no-repeat;
 	vertical-align: text-bottom;
 	background-position: -270px -171px;
+	margin-left: 8px;
 }
 
 

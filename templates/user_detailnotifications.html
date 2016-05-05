@@ -1,22 +1,47 @@
 {% extends "base_1.html" %}
 {% block HeadDoc %}
+{% load time_filter %}
 <link href="/static/css/user_detailnotifications.css" rel="stylesheet">
 <script src="/static/js/topic_detail.js"></script>
 <link href="/static/css/userinfopub.css" rel="stylesheet">
-<script>/*ajax我的评论*/
-$(function() {
-  $(".presentation2").click(function() {
-    $.ajax({
-        url: "{% url 'userdashboard_comment' %}",
-        type: "get",
-        success: function(data) {
-            $(".dashboard").html(data.test);
-        },
-        error: function(data) { 
-            alert("Got an error dude");
-        }
-    });
 
+<script>/*删除信息*/
+$(function() {
+ $("body").on("click", '.icon-delete', function(){
+  instanceid = $(this).parent().parent().attr("id");
+  $.cookie("instanceid", instanceid);  
+  $('#myModal1').modal('show')
+  })
+})
+</script>
+
+<script>/*确认删除*/
+$(function() {
+ $("body").on("click", '.confirmdelete', function(){
+  instanceid = $.cookie('instanceid')
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', 
+          instancetype: 'Notification',
+          instanceid: instanceid,
+          },
+          });
+    $.ajax({
+        url: "{% url 'deleteinfo' %}",
+        type: "post",
+        dataType: 'json',
+        success: function(data) {
+          $('#'+instanceid).remove();
+          $.removeCookie('instanceid');
+          },
+          error: function(data) { 
+          $.removeCookie('instanceid');
+              $.messager.popup("发生错误请重新操作");
+              $(".modal.msg-popup .modal-body").css({
+                  'color': '#a94442',
+                  "background-color":"#f2dede",
+                  });
+               },
+          });
   })
 })
 </script>
@@ -24,6 +49,24 @@ $(function() {
 
 
  {% block content %}
+
+<!-- Modal1 -->
+<div class="modal" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">删除确认</h4>
+      </div>
+      <div class="modal-body">
+        <h5>你确认要删除吗</h5>
+        <button type="button" class="btn btn-default btn-success myModalbtn confirmdelete" data-dismiss="modal">确定</button>
+        <button type="button" class="btn btn-default myModalbtn" data-dismiss="modal">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
  <div class="container">
 <div class="container-user">
 
@@ -49,10 +92,10 @@ $(function() {
 {% if host %}
     <div class="dashboard">
       {% for item in notifications %}
-      <div class = 'commentlist'>
+      <div class = 'commentlist' id='{{item.id}}'>
       <a href="{{item.sender_object.get_absolute_url}}">{{item.sender_object.username}}</a>在评论中@了你:
       <div class='targetcomment'>
-        {{item.text|safe}}
+        {{item.text|AtWhoUser|safe}}
         </div>
       <div class = 'commentinfo'>
         {{item.timestamp}}
@@ -65,6 +108,7 @@ $(function() {
         </a>
         {% endif %}
       </span>
+      <i class="icon-delete pull-right"></i>
       </div><!-- <div class = 'commentinfo'> -->
       </div><!-- <div class = 'commentlist'> -->
       {% endfor %}

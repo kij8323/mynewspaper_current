@@ -2,6 +2,7 @@
 {% block HeadDoc %}
 <link href="/static/css/register.css" rel="stylesheet">
 <script src="/static/js/register.js"></script>
+<!-- 刷新验证码 -->
 <script>
 $(function() {
   $("#freshcaptcha").click(function() {
@@ -133,7 +134,7 @@ $(function() {
 })
 </script>
 
-<script>/*当所有cuserrorlist的css的display为none时，可以提交表单*/
+<script>/*当所有cuserrorlist的css的display为none时，才可以提交表单*/
 $(document).ready(function(){
   $("div.container-loggin form").submit(function(e){
     var username = $("#id_username").val()

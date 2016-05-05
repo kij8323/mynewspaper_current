@@ -111,8 +111,8 @@ $(function(){
           <span class="writer"><a href="{{item.article.writer.get_absolute_url}}">{{item.article.user}}{{item.article.writer}}</a></span> 
           <span class="posttime">{{item.article.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前</span> 
 
-<i class="icon-reply"></i><span>{{item.article.comment_set.count}}  </span>   
-<i class="icon-collection"></i><span>{{item.article.collection_set.count}} </span> 
+<i class="icon-reply"></i><span>{{item.article.id|Article_comment}}  </span>   
+<i class="icon-collection"></i><span>{{item.article.id|Article_collection}} </span> 
 
           <p class="associatetitle" style='padding-left: 0px;'>{{item.article.associatetitle}}</p>
           </div> 

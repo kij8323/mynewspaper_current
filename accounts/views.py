@@ -22,6 +22,7 @@ from topic.models import CollectionTopic, Topic
 from article.models import Collection, Article
 from comment.models import Comment
 from notifications.models import Notification
+from article.tasks import readersin, add, readersout, instancedelete, instancesave
 #登录页面
 def loggin(request):
 	form = LoginForm(request.GET or None)
@@ -29,10 +30,8 @@ def loggin(request):
 	action_url = reverse("loggin")
 	if form.is_valid():
 		human = True
-		print 'human = True'
 		username = form.cleaned_data['username']
 		password = form.cleaned_data['password']
-		print username, password
 		user = authenticate(username=username, password=password)
 		if user is not None:
 			login(request, user)
@@ -52,6 +51,7 @@ def loggin(request):
 	return render(request, 'loggin.html',  context)
 
 
+#登出，不用
 def userlogout(request):
 	logout(request)
 	if request.session.get('lastpage', False):
@@ -74,7 +74,12 @@ def register(request):
 		new_user.email = email
 		new_user.set_password(password) #RIGHT
 		new_user.save()
-		print username, password
+		#注册成功后直接登录
+		user = authenticate(username=username, password=password)
+		if user:
+			login(request, user)
+		else:
+			return redirect(reverse('register'))
 		#return render(request,'base_1.html')
 		return redirect(reverse('home'))
 	context = {
@@ -83,15 +88,10 @@ def register(request):
 		"submit_btn": "注册",
 		}
 	return render(request, 'register.html',  context)
-	#return redirect("home")
 
-# def logout_view(request):
-#     logout(request)
-#     return redirect(reverse('home'))
 
-#ajax，验证码刷新
+#ajax，在注册和登录页面验证码刷新
 def captchaview(request):
-	print 'ajaxxxxxxxxxxxxxxxxxxxxxxx'
 	if request.is_ajax():
 		captchakey = CaptchaStore.generate_key()
 		acptchaimg = captcha_image_url(captchakey)
@@ -105,11 +105,9 @@ def captchaview(request):
 		raise Http404
 
 
-#ajax，验证用户名是否已被注册,post
+#ajax，在注册页面验证用户名是否已被注册
 def accountsview(request):
 	if request.is_ajax() and request.method == 'POST':
-		print 'accountsview'
-		print request.POST.get('username')
 		username = request.POST.get('username')
         try:
 			exists = MyUser.objects.get(username=username)
@@ -130,7 +128,7 @@ def accountsview(request):
 	else:
 		raise Http404
 
-#我的信息
+#我的主页
 def userdashboardinformations(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -212,7 +210,7 @@ def userdashboardcomments(request, user_id):
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_detailcomments.html',  context)
 
-#我的信息
+#我的消息，@我
 def userdashboardnotifications(request, user_id):	
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -245,7 +243,7 @@ def userdashboardnotifications(request, user_id):
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_detailnotifications.html',  context)
 
-#我的信息-私信
+#我的消息-私信
 def privcynotifications(request, user_id):
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -412,7 +410,7 @@ def userdashboardarticle(request, user_id):
 		raise Http404("MyUser does not exist")
 	return render(request, 'user_userdashboardarticle.html',  context)
 
-#我的文章-话题
+#我的话题
 def userdashboardarticletopic(request, user_id):
 	try:
 		user = MyUser.objects.get(pk=user_id)
@@ -446,7 +444,7 @@ def userdashboardarticletopic(request, user_id):
 	return render(request, 'user_userdashboardarticletopic.html',  context)
 
 
-#ajax删除信息
+#ajax删除我的的评论，我的收藏....
 def deleteinfo(request):
 	try:
 		instancetable = {
@@ -459,8 +457,8 @@ def deleteinfo(request):
 		instanceid = request.POST.get('instanceid')
 		instancetype = request.POST.get('instancetype')
 		instace = instancetable.get(instancetype).objects.get(pk=instanceid)
-		instace.delete()
-		print 'deleteinfo'
+		#instace.delete()
+		instancedelete.delay(instace)
 		data = {
 			"test": 'test',
 		}
@@ -469,37 +467,13 @@ def deleteinfo(request):
 		traceback.print_exc()
 	return HttpResponse(json_data, content_type='application/json')
 
-def userdashboard_comment(request):	
-	print 'userdashboard_comment(request)'
-	if request.is_ajax():
-		print 'userdashboard_comment(request)'
-		data = {
-			"test": 'test',
-		}
-		json_data = json.dumps(data)
-		return HttpResponse(json_data, content_type='application/json')
-	else:
-		raise Http404
 
+
+#测试用函数
 def test(request):	
-	if request.method == 'POST':
-		#x = request.POST['img']
-		image = request.FILES['img']
-		user = MyUser.objects.get(pk=26)
-		user.icon = image
-		user.save() 
-		#form = ImageUploadForm( request.POST, request.FILES )  
-		#print "testtestImageUploadForm"
-		#if form.is_valid():
-			# print "testtest"
-			# user = MyUser.objects.get(pk=26)
-			# user.icon = form.cleaned_data['image']  
-			# print "testtest"
-			# print user.icon 
-			# user.save() 
-			# return redirect("test")
-	# form = ImageUploadForm()
-	# context = {
-	# 	"form": form,
-	# 	}
-	return render(request, 'test.html')
+	test = Article.objects.all()
+	print test.count()
+	context = {
+		'test':test,
+		}
+	return render(request, 'test.html', context)

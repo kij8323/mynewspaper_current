@@ -178,9 +178,14 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	margin-left: 15px;
 }
 
-.writer, .associatetitle {
+.associatetitle {
 	padding-left: 15px;
 }
+
+.writer {
+
+}
+
 .usericon{
 	width: 25px;
 	height: 25px;

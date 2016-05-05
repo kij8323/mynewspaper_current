@@ -1,5 +1,13 @@
  {% block HeadDoc %}
 {% load time_filter %}
+<script>/*去除&nbsp;*/
+$(function(){ 
+    $('.posttime').each(function() {
+      var $this = $(this);
+      $this.html($this.html().replace(/&nbsp;/g, ''));
+    })
+}); 
+</script>
 {% endblock %}
 {% for item in articlequery %}
 
@@ -13,8 +21,8 @@
           <span class="writer"><a href="{{item.writer.get_absolute_url}}">{{item.user}}{{item.writer}}</a></span> 
           <span class="posttime">{{item.timestamp|timesince|time_chinese_weeks|time_chinese_week|time_chinese_minus|time_chinese_minu|time_chinese_days|time_chinese_day|time_chinese_hours|time_chinese_hour|timeblank|comma|time_chinese_months|time_chinese_month }}前</span> 
 
-<i class="icon-reply"></i><span>{{item.comment_set.count}}  </span>   
-<i class="icon-collection"></i><span>{{item.collection_set.count}} </span> 
+<i class="icon-reply"></i><span>{{item.id|Article_comment}}  </span>   
+<i class="icon-collection"></i><span>{{item.id|Article_collection}} </span> 
 
           <p class="associatetitle" style='padding-left: 0px;'>{{item.associatetitle}}</p>
           </div> 

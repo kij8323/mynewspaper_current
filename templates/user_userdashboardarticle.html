@@ -1,4 +1,5 @@
 {% extends "base_1.html" %}
+{% load time_filter %}
 {% block HeadDoc %}
 <link href="/static/css/user_userdashboardarticle.css" rel="stylesheet">
 <script src="/static/js/topic_detail.js"></script>
@@ -45,8 +46,8 @@
         </a>
 
     <div class = 'commentinfo'>
-      <i class="icon-reply"></i>{{item.comment_set.count}}
-      <i class="icon-collection"></i>{{item.collection_set.count}}
+      <i class="icon-reply"></i>{{item.id|Article_comment}}
+      <i class="icon-collection"></i>{{item.id|Article_collection}}
   </div>
 
       <div class = 'commentinfo'>

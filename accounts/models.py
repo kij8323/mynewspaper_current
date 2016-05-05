@@ -43,6 +43,7 @@ class MyUserManager(BaseUserManager):
 
 #注册用户数据库
 class MyUser(AbstractBaseUser):
+	id = models.AutoField(primary_key=True, db_index=True)
 	username = models.CharField(
 	    max_length=255,
 	    unique=True,

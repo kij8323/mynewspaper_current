@@ -1,0 +1,240 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+<link href="/static/css/register.css" rel="stylesheet">
+<script src="/static/js/register.js"></script>
+<!-- 刷新验证码 -->
+<script>
+$(function() {
+  $("#freshcaptcha").click(function() {
+    $.ajax({
+        url: "{% url 'captchaview' %}",
+        type: "get",
+        success: function(data) {
+            $(".captcha").attr("src",data.acptchaimg);
+            $("#id_captcha_0").val(data.captchakey);
+        },
+        error: function(data) { 
+            alert("Got an error dude");
+        }
+    });
+
+  })
+})
+</script>
+
+<script>/*注册显示信息函数*/
+function showinfo(param) {
+     $(param).css("margin-right","-330px");
+      $(param).css("margin-left","330px");
+      $(param).css("margin-bottom","-32px");
+      $(param).fadeIn("slow");
+} 
+</script>
+
+<script>/*ajax判断用户名是否已被注册*/
+$(function() {
+/*  var csrf_token = $(#formsignin).data('csrf');*/
+  $("#id_username").bind('input propertychange',function() {
+    var username = $(this).val()
+    if (username!=""){
+    $.ajaxSetup({
+    data: {csrfmiddlewaretoken: '{{ csrf_token }}', username: username },
+});
+    $.ajax({
+        url: "{% url 'accountsview' %}",
+        type: "post",
+        dataType: 'json',
+        success: function(data) {
+          if (data.register){
+            $("#usernamenook").css("display", "none");
+            $("#usernamenilleg").css("display", "none");
+            $("#usernamenlength").css("display", "none");
+            $("#usernamerequired").css("display", "none");
+            showinfo('#usernameok')
+          }
+          else{
+            $("#usernameok").css("display", "none");
+            $("#usernamenilleg").css("display", "none");
+            $("#usernamenlength").css("display", "none");
+            $("#usernamerequired").css("display", "none");
+            showinfo('#usernamenook')
+          }
+          if (username.indexOf(" ")!=-1){
+              $("#usernamenook").css("display", "none");
+              $("#usernameok").css("display", "none");
+              $("#usernamenlength").css("display", "none");
+              $("#usernamerequired").css("display", "none");
+              showinfo('#usernamenilleg')
+          }
+          if (username.length >= 20){
+              $("#usernamenook").css("display", "none");
+              $("#usernameok").css("display", "none");
+              $("#usernamenilleg").css("display", "none");
+              $("#usernamerequired").css("display", "none");
+              showinfo('#usernamenlength')
+          }
+        },
+        error: function(data) { 
+          alert("Got an error dude");
+          }
+  });
+    }
+  })
+})
+</script>
+
+<!-- $('#username').bind('input propertychange', function() -->
+<script>/*Email地址格式是否正确！*/
+$(function() {
+  $("#id_email").bind('input propertychange',function() {
+    var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    var emailadd = $(this).val()
+    if (filter.test(emailadd)){
+      $("#emailaddnook").css("display", "none");
+      $("#emailrequired").css("display", "none");
+    }
+    else{
+      $("#emailrequired").css("display", "none");
+      showinfo('#emailaddnook')
+    }
+  })
+})
+</script>
+
+<script>/*密码长度至少6位*/
+$(function() {
+  $("#id_password1").bind('input propertychange',function() {
+    var password1 = $(this).val()
+    if ( password1.length >= 6 ){
+      $("#password1nook").css("display", "none");
+      $("#password1required").css("display", "none");
+    }
+    else{
+      $("#password1required").css("display", "none");
+      showinfo('#password1nook')
+    }
+  })
+})
+</script>
+
+<script>/*两次密码输入不同！*/
+$(function() {
+  $("#id_password2").bind('input propertychange',function() {
+    var password2 = $(this).val()
+    var password1 = $("#id_password1").val()
+    if ( password2 == password1 ){
+      $("#password2required").css("display", "none");
+      $("#password2nook").css("display", "none");
+    }
+    else{
+      $("#password2required").css("display", "none");
+      showinfo('#password2nook')
+    }
+  })
+})
+</script>
+
+<script>/*当所有cuserrorlist的css的display为none时，可以提交表单*/
+$(document).ready(function(){
+  $("div.container-loggin form").submit(function(e){
+    var username = $("#id_username").val()
+    var email = $("#id_email").val()
+    var password1 = $("#id_password1").val()
+    var password2 = $("#id_password2").val()
+    var errorlist
+    $(".cuserrorlist").each(function(){
+    if ($(this).css('display') == 'block'){
+      errorlist = true
+    }
+    });
+    if (username == "")
+    {
+      $("#usernamenook").css("display", "none");
+      $("#usernamenilleg").css("display", "none");
+      $("#usernamenlength").css("display", "none");
+      $("#usernamerequired").css("display", "none");
+      showinfo('#usernamerequired')
+    return false;
+    }
+    else if (email == "")
+    {
+      $("#emailaddnook").css("display", "none");
+      $("#emailrequired").css("display", "none");
+      showinfo('#emailrequired')
+    return false;
+    }
+    else if (password1 == "")
+    {
+      $("#password1nook").css("display", "none");
+      $("#password1required").css("display", "none");
+      showinfo('#password1required')
+    return false;
+    }
+    else if (password2 == "")
+    {
+      $("#password2required").css("display", "none");
+      $("#password2nook").css("display", "none");
+      showinfo('#password2required')
+    return false;
+    }
+    else if (errorlist)
+    {
+    return false;
+    }
+    else
+    {
+    return true;
+    }
+  });
+});
+</script>
+
+{% endblock %}
+
+ {% block content %}
+ <div class="container">
+  <div class="container-loggin">
+  <form class="form-signin" id='formsignin' role="form" method='POST' action='{{ action_url }}'>
+  {% csrf_token %}
+  <img class='headimag' src="/static/images/logotree/logo_7.jpg">
+  <div class="form-label">
+ <!--  <div id='test'></div> -->
+  <div id="usernameok" class="successlist">恭喜，该用户名可注册！</div>
+  <div id="usernamenook" class="cuserrorlist">该用户名已被注册!</div>
+  <div id="usernamenilleg" class="cuserrorlist">用户名不能包含空格!</div>
+  <div id="usernamenlength" class="cuserrorlist">用户名长度不能超过20个字符!</div>
+  <div id="usernamerequired" class="cuserrorlist">请输入用户名！</div>
+<label for="id_username">Username:</label><input class="form-control" id="id_username" name="username" placeholder="用户名" type="text">
+
+  <div id="emailaddnook" class="cuserrorlist">Email地址格式不正确！</div>
+  <div id="emailrequired" class="cuserrorlist">请输入邮箱地址！</div>
+<label for="id_email">Email:</label><input class="form-control" id="id_email" name="email" maxlength="30"  placeholder="邮箱地址" type="text">
+
+
+<div id="password1nook" class="cuserrorlist">密码长度至少6位！</div>
+<div id="password1required" class="cuserrorlist">请输入密码！</div>
+<label for="id_password1">Password1:</label><input class="form-control" id="id_password1" name="password1" placeholder="请输入6位以上密码" type="password">
+
+<div id="password2nook" class="cuserrorlist">两次密码输入不同！</div>
+<div id="password2required" class="cuserrorlist">请确认密码！</div>
+<label for="id_password2">Password2:</label><input class="form-control" id="id_password2" name="password2" placeholder="请再次输入密码" type="password">
+ 
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}" 
+      {% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  {{form}}
+  </div>
+  <input class='btn btn-lg btn-success btn-block' type='submit' value='{{ submit_btn }}'/>
+
+  <span>已有帐号 <a href="">直接登录</a></span>
+  </form>
+  </div>
+  </div>
+ {% endblock %}
+ 

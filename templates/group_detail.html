@@ -106,11 +106,11 @@ $(function(){
 
 </span>
  <span class='group-informatio-blank'>
-回复数:{{item.comment_set.count}}
+回复数:{{item.id|Topic_comment}}
 </span>
 
 
-{%  if item.comment_set.count %}
+{%  if item.id|Topic_comment %}
  <span class='group-informatio-blank'>
 最新回复:
 {{item.lastcommentime.user}}
@@ -168,7 +168,7 @@ $(function(){
  {{item.title}}
  </a>
   <div class='group-information'>
- ({{item.topicount}}则话题)
+ ({{item.id|group_topic_count}}则话题)
   </div><!--   <div class='group-information'> -->
  </div> <!-- <div class="project-content"> -->
  </div><!-- <div class="rightitle"> -->
