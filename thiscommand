@@ -15,6 +15,10 @@ username:shen
 password:123456
 python manage.py collectstatic
 
+
+ECS:ssh root@123.56.31.34
+password: shenanpinG2008
+管理终端连接密码： 634343
 python manage.py runserver 8080 ###启动django自带服务器
 sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate ###更新搜索栏索引
 sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf  ###启动搜索栏后台服务
@@ -197,6 +201,11 @@ I was able to get this working by refactoring so that the tasks were not class m
 继续把网站上与数字有关的，全部做一层redis
 
 
+管理终端连接密码： 634343
+
+
+警告! 管理终端连接密码只出现一次，您以后每次管理终端登录时都需要输入该密码，请做好记录存档工作。
+请注意：如果您未安装Flash插件或版本过低，“复制密码”功能将无法正常使用，请手动复制。
 
 
 缓存的readers 增加1
@@ -226,4 +235,7 @@ show index from topic_topic;
 验证码
 请输入右侧算式结果
 
+文章
 
+域名备案 购买服务器
+热文

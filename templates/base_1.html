@@ -111,8 +111,8 @@ $(document).ready(function(){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="categorybutton"><a href="#">资讯<span class="caret"></span></a></li>
-            <li><a href="{% url 'group_all' %}">话题</a></li>
+            <li class="categorybutton subcate"><a href="#">资讯<span class="caret"></span></a></li>
+            <li class="subcate"><a href="{% url 'group_all' %}">话题</a></li>
           </ul>
 <div id='index_search'>
 <form class="navbar-form navbar-left" role="search" action="{% url 'index_search' %}" method="get">
@@ -138,8 +138,8 @@ $(document).ready(function(){
 
 
         {% else %}
-            <li><a href="{% url 'loggin' %}">登录</a></li>
-            <li><a href="{% url 'register' %}">注册 <span class="sr-only">(current)</span></a></li>
+            <li class="subcate"><a href="{% url 'loggin' %}">登录</a></li>
+            <li class="subcate"><a href="{% url 'register' %}">注册 <span class="sr-only">(current)</span></a></li>
         {% endif %} 
             <li class="active"><a href="{% url 'article_post' %}">投稿</a></li>
           </ul>

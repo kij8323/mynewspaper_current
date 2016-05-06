@@ -20,7 +20,7 @@ from django.core.cache import cache
 from article.tasks import readersin, add, readersout, instancedelete, instancesave
 
 from django.conf import settings
-ARTICLE_DETAIL_RIGHTSIDERANK_TIMERANGE = 7 #article_detail页面右边栏按readers排序文章的时间范围
+ARTICLE_DETAIL_RIGHTSIDERANK_TIMERANGE = 10 #article_detail页面右边栏按readers排序文章的时间范围
 ARTICLE_DETAIL_REALATIONARTICLE_COUNT = 3  #article_detail页面底部相关文章数量
 ARTICLE_DETAIL_HOTCOMMENT_READERSRANGE = 3 #最热回复的门限制
 
