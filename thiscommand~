@@ -1,3 +1,9 @@
+sudo apt-get install python-dev
+$sudo apt-get install python-pip
+$sudo pip install pip --upgrade
+sudo apt-get install libpcre3 libpcre3-dev #用来编译后面的uwsgi
+sudo apt-get install zlib1g-dev
+
 virtualenv paperproject
 cd ~/Documents/paperproject
 source ./bin/activate
@@ -24,10 +30,13 @@ sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/t
 sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf  ###启动搜索栏后台服务
 cd /home/shen/Downloads/redis-3.0.7/src
 ./redis-server ###启动redis-server
-python manage.py celery worker --loglevel=info    ###启动celery
+python manage.py celery worker --loglevel=info  -Q celery  ###启动celery
+
+multi
+
 
 cd /home/shen/Documents/paperproject/mynewspaper/article #备注：在virtualenv 内安装的需要在virtualenv 内启动celery-server
-celery -A celeryconf worker --loglevel=info
+celery -A tasks worker --loglevel=info
 
 
 python manage.py makemigrations article
@@ -226,16 +235,47 @@ I was able to get this working by refactoring so that the tasks were not class m
 mysql查看索引命令：
 show index from topic_topic;
 
+Django==1.8
+MySQL-python==1.2.5
+Pillow==3.0.0
+amqp==1.4.9
+anyjson==0.3.3
+argparse==1.2.1
+billiard==3.3.0.23
+celery==3.1.23
+celery-with-redis==3.0
+distribute==0.6.24
+django-celery==3.1.17
+django-ckeditor==5.0.3
+django-redis==4.4.1
+django-simple-captcha==0.5.1
+kombu==3.0.35
+pytz==2016.4
+redis==2.10.5
+six==1.10.0
+wsgiref==0.1.2
 
-更改验证码形式
 
-
-
-注释并优化notifications
-验证码
-请输入右侧算式结果
-
-文章
 
 域名备案 购买服务器
-热文
+
+
+uwsgi --http :8000 --module mynewspaper.wsgi --enable-threads
+发布部署：
+$sudo apt-get install nginx-full
+pip install uwsgi
+python manage.py collectstatic
+sudo /etc/init.d/nginx start
+cat /etc/nginx/uwsgi_params
+
+sudo ln -s /home/shen/Documents/paperproject/mynewspaper/mysite_nginx.conf /etc/nginx/sites-enabled/
+
+uwsgi --socket mynewspaper.sock --module mynewspaper.wsgi --chmod-socket=666
+
+uwsgi --ini mynewspaper.ini
+
+http://127.0.0.1:8000/static/media/images/173926909192.jpg
+
+学习 Fabric  目的：部署
+每次上传新的图片后，都需要执行python manage.py collectstatic， nginx才能找到新的static文件
+

@@ -26,9 +26,9 @@ print BASE_DIR
 SECRET_KEY = '!#r2*ilc^es(zl5d0bkvsy5!br-w*7w$-sm*57*8q5^m(ko$+*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 AUTH_USER_MODEL = 'accounts.MyUser'
 
 # Application definition
@@ -132,7 +132,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static", "static_root")
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
 
 
 TEMPLATE_DIRS = (

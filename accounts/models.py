@@ -68,7 +68,7 @@ class MyUser(AbstractBaseUser):
 					verbose_name='Is Paid Member')
 	is_active = models.BooleanField(default=True)
 	is_admin = models.BooleanField(default=False)
-	icon = models.ImageField(upload_to='images', null=True, blank=True, default='images/78avatarbig.jpg')
+	icon = models.ImageField(upload_to='images/', null=True, blank=True, default='images/78avatarbig.jpg')
 	#特殊查询功能
 	objects = MyUserManager()
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
