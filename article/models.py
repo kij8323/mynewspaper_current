@@ -99,13 +99,17 @@ class Collection(models.Model):
 @receiver(post_save, sender=Article)
 def categoryofarticle(sender, **kwargs):
     article = kwargs.pop("instance")
-    thisrelationtag = Relation.objects.filter(article=article)
+    try: 
+    	thisrelationtag = Relation.objects.get(article=article)
+    except:
+    	thisrelationtag = False
     if thisrelationtag: #如果文章已经被分类直接返回
     	return;
     else:	#如果文章未分类则直接分类
 		category = Category.objects.get(id = 3)
 		relation = Relation(article= article, category = category)
 		relation.save()
+		os.system('echo yes | python /home/shen/Documents/paperproject/mynewspaper/manage.py collectstatic')
 		cachekey = "writer_articlecount_" + str(article.writer.id)
 		if cache.get(cachekey):
 			cache.incr(cachekey)

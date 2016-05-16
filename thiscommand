@@ -19,7 +19,7 @@ delete from notifications_notification
 python manage.py migrate
 username:shen
 password:123456
-python manage.py collectstatic
+echo yes | python /home/shen/Documents/paperproject/mynewspaper/manage.py collectstatic 
 
 
 ECS:ssh root@123.56.31.34
@@ -278,4 +278,11 @@ http://127.0.0.1:8000/static/media/images/173926909192.jpg
 
 学习 Fabric  目的：部署
 每次上传新的图片后，都需要执行python manage.py collectstatic， nginx才能找到新的static文件
+
+富文本框上传部署问题
+
+topic上传图片后，需要运行python manage.py collectstatic命令
+
+现代科技
+
 

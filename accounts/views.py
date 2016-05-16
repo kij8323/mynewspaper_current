@@ -23,6 +23,7 @@ from article.models import Collection, Article
 from comment.models import Comment
 from notifications.models import Notification
 from article.tasks import readersin, add, readersout, instancedelete, instancesave
+import os
 #登录页面
 def loggin(request):
 	form = LoginForm(request.GET or None)
@@ -144,6 +145,7 @@ def userdashboardinformations(request, user_id):
 			image = request.FILES['img']
 			user.icon = image
 			user.save() 
+			os.system('echo yes | python /home/shen/Documents/paperproject/mynewspaper/manage.py collectstatic')
 			return redirect(action_url)
 		if request.method == 'POST' and request.POST.get('emailaddress', False):
 			emailaddress = request.POST.get('emailaddress')
