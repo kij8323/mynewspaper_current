@@ -72,7 +72,7 @@ git init
 git add .
 git commit -m 'code changed '
 git remote add project_local https://github.com/kij8323/mynewspaper_current.git
-git push add project_local master -f
+git push  -u project_local master -f
 shenanping2008@Hotmail.com
 012ssskkk
 
