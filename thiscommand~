@@ -71,8 +71,8 @@ touch README
 git init
 git add .
 git commit -m 'code changed '
-git remote add paper1 https://github.com/kij8323/mynewspaper_current.git
-git push paper1 master -f
+git remote add project_local https://github.com/kij8323/mynewspaper_current.git
+git push add project_local master -f
 shenanping2008@Hotmail.com
 012ssskkk
 
@@ -80,8 +80,8 @@ shenanping2008@Hotmail.com
 git init
 git add .
 git commit -m 'code changed '
-git remote add origin  https://github.com/kij8323/somefile.git
-git push -u origin master
+git remote add somefile https://github.com/kij8323/somefile.git
+git push -u somefile master
 shenanping2008@Hotmail.com
 012ssskkk
 
