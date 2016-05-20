@@ -1,5 +1,89 @@
 ssh root@123.56.31.34
 shenanpinG2008
 
+django管理员：admin
+password:shenanpinG2008
+
 sudo apt-get update
 /usr/bin/python  #查看python版本
+sudo apt-get install python-dev
+sudo apt-get install python-pip
+sudo apt-get install libpcre3 libpcre3-dev
+sudo apt-get install zlib1g-dev
+sudo apt-get install libjpeg8-dev
+sudo apt-get install mysql-server
+apt-get install mysql-client
+sudo apt-get install libmysqlclient-dev
+apt-get install redis-server
+pip install Django==1.8
+pip install MySQL-python==1.2.5
+pip install Pillow==3.0.0
+pip install amqp==1.4.9##############不安装######################
+pip install anyjson==0.3.3###############不安装######################
+pip install billiard==3.3.0.23##############不安装######################
+pip install celery==3.1.23
+pip install celery-with-redis==3.0
+pip install distribute==0.6.24 #######################不安装######################
+pip install django-celery==3.1.17 
+pip install django-ckeditor==5.0.3
+pip install django-redis==4.4.1
+pip install django-simple-captcha==0.5.1
+pip install kombu==3.0.35###############不安装######################
+pip install pytz==2016.4#############不安装######################
+pip install redis==2.10.5
+pip install six==1.10.0##############不安装######################
+pip install wsgiref==0.1.2###########不安装######################
+pip install uwsgi
+sudo apt-get install nginx
+apt-get install git
+mkdir /home/shen/Documents/paperproject####建立路径
+cd /home/shen/Documents/paperproject
+git clone https://github.com/kij8323/mynewspaper_current.git
+mv mynewspaper_current mynewspaper
+sudo apt-get install libtool* ###########安装coreseek
+sudo apt-get install automake
+sudo apt-get install libpq5
+sudo apt-get install unixodbc
+mkdir /home/shen/Downloads
+cd /home/shen/Downloads
+wget http://www.coreseek.cn/uploads/csft/4.0/coreseek-4.1-beta.tar.gz
+tar xzvf coreseek-4.1-beta.tar.gz
+cd coreseek-4.1-beta/mmseg-3.2.14
+./bootstrap 
+./configure --prefix=/usr/local/mmseg3
+make && make install
+cd csft-4.1/ 
+sh buildconf.sh 
+./configure --prefix=/usr/local/coreseek  --without-unixodbc --with-mmseg --with-mmseg-includes=/usr/local/mmseg3/include/mmseg/ --with-mmseg-libs=/usr/local/mmseg3/lib/ --with-mysql
+make && make install
+
+cp /home/shen/Downloads/coreseek-4.1-beta/testpack/api/sphinxapi.py /usr/local/lib/python2.7/dist-packages #把api包放到lib中，使工程能import
+
+cd /home/shen/Documents/paperproject/mynewspaper
+
+
+ 
+
+cd /usr/local/lib/python2.7/dist-packages ####pip 在系统中的位置
+
+python manage.py collectstatic
+
+python manage.py runserver 8080 ###启动django自带服务器
+sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate ###更新搜索栏索引
+sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf  ###启动搜索栏后台服务
+cd /home/shen/Downloads/redis-3.0.7/src
+./redis-server ###启动redis-server
+export C_FORCE_ROOT="true"
+python manage.py celery worker --loglevel=info  -Q celery  ###启动celery
+uwsgi --ini mynewspaper.ini
+
+http://123.56.31.34/article/64/
+
+git init
+git add .
+git commit -m 'code changed '
+git remote add project_deploy https://github.com/kij8323/mynewspaper.git
+git push project_deploy master -f
+shenanping2008@Hotmail.com
+012ssskkk
+

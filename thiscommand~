@@ -5,7 +5,7 @@ sudo apt-get install libpcre3 libpcre3-dev #用来编译后面的uwsgi
 sudo apt-get install zlib1g-dev
 
 virtualenv paperproject
-cd ~/Documents/paperproject
+cd /home/shen/Documents/paperproject
 source ./bin/activate
 pip install Django==1.8
 
@@ -77,6 +77,15 @@ shenanping2008@Hotmail.com
 012ssskkk
 
 
+git init
+git add .
+git commit -m 'code changed '
+git remote add origin  https://github.com/kij8323/somefile.git
+git push -u origin master
+shenanping2008@Hotmail.com
+012ssskkk
+
+
 从远端下载到本地
 git clone https://github.com/kij8323/mynewspaper.git
 
@@ -112,7 +121,7 @@ sudo ./configure
 sudo make
 sudo make install
 
-
+lsof -i :port_number
 sudo kill 5938  #####杀死进程
 ps -e  ####查看进程
 
@@ -240,6 +249,7 @@ MySQL-python==1.2.5
 Pillow==3.0.0
 amqp==1.4.9
 anyjson==0.3.3
+######################################33
 argparse==1.2.1
 billiard==3.3.0.23
 celery==3.1.23
@@ -284,5 +294,19 @@ http://127.0.0.1:8000/static/media/images/173926909192.jpg
 topic上传图片后，需要运行python manage.py collectstatic命令
 
 现代科技
+ 
+
+:%s/T val = ExprEval ( this->m_pArg, tMatch );/T val = this->ExprEval ( this->m_pArg, tMatch );/g
+coreseek已安装完成，待验证
+配置ngnix和django
+
+mysqldump -u root -p -d newspaper > createtab.sql  ##复制数据库表结构
+
+source /home/shen/Downloads/somefile/createtab.sql
+
+处理分享按钮
+
+
+
 
 

@@ -154,6 +154,8 @@ def topic_detail(request, topic_id):
 	else:
 		page = 1;
 	request.session['lastpage'] = request.get_full_path()
+	#分享链接的地址
+	sharelink = request.get_host()+request.get_full_path()
 	context = {
 		'topic':topic,
 		'user':user,
@@ -169,6 +171,7 @@ def topic_detail(request, topic_id):
 		"ifhotcomment": ifhotcomment,
 		'page': page,
 		'collection': collection,
+		'sharelink': sharelink,
 	}
 	#print "topic_detail"
 	return render(request, 'topic_detail.html',  context)
