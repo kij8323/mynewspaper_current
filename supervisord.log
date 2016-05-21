@@ -1,0 +1,1181 @@
+2016-05-21 10:45:39,726 INFO RPC interface 'supervisor' initialized
+2016-05-21 10:45:39,728 INFO supervisord started with pid 20839
+2016-05-21 10:45:40,731 INFO spawned: 'autoreload' with pid 20848
+2016-05-21 10:45:41,733 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 10:48:10,083 WARN received SIGINT indicating exit request
+2016-05-21 10:48:10,093 DEBG killing autoreload (pid 20848) with signal SIGTERM
+2016-05-21 10:48:10,103 INFO waiting for autoreload to die
+2016-05-21 10:48:10,106 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 185696236 for <Subprocess at 185593644 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 10:48:10,125 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 10:48:10,126 DEBG received SIGCLD indicating a child quit
+2016-05-21 10:55:25,257 INFO RPC interface 'supervisor' initialized
+2016-05-21 10:55:25,263 INFO supervisord started with pid 21048
+2016-05-21 10:55:26,267 INFO spawned: 'autoreload' with pid 21056
+2016-05-21 10:55:26,282 INFO spawned: 'webserver' with pid 21057
+2016-05-21 10:55:27,293 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 10:55:27,297 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 10:55:36,414 WARN received SIGINT indicating exit request
+2016-05-21 10:55:36,426 DEBG killing webserver (pid 21057) with signal SIGTERM
+2016-05-21 10:55:36,455 INFO waiting for autoreload, webserver to die
+2016-05-21 10:55:36,463 DEBG fd 10 closed, stopped monitoring <POutputDispatcher at 163512940 for <Subprocess at 163443052 with name webserver in state STOPPING> (stdout)>
+2016-05-21 10:55:36,483 INFO stopped: webserver (terminated by SIGTERM)
+2016-05-21 10:55:36,504 DEBG received SIGCLD indicating a child quit
+2016-05-21 10:55:36,511 DEBG killing autoreload (pid 21056) with signal SIGTERM
+2016-05-21 10:55:36,526 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 163512876 for <Subprocess at 163442988 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 10:55:36,539 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 10:55:36,540 DEBG received SIGCLD indicating a child quit
+2016-05-21 10:56:15,229 INFO RPC interface 'supervisor' initialized
+2016-05-21 10:56:15,232 INFO supervisord started with pid 21080
+2016-05-21 10:56:16,237 INFO spawned: 'autoreload' with pid 21088
+2016-05-21 10:56:16,240 INFO spawned: 'webserver' with pid 21089
+2016-05-21 10:56:17,250 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 10:56:17,251 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 10:56:31,621 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-02-11 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:33,362 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:33]"GET /article/54/ HTTP/1.1" 200 24566
+
+2016-05-21 10:56:38,321 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/bootstrap-3.3.4-dist/css/bootstrap.min.css HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,335 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/css/base_1.css HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,342 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/bootstrap-3.3.4-dist/js/ie-emulation-modes-warning.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,352 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/js/jquery-1.11.3.min.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,468 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/js/jquery.cookie.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,479 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/bootstrap-3.3.4-dist/js/bootstrap.min.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,623 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/css/article_detail.css HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,637 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/js/jquery.bootstrap.min.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,672 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/bootstrap-3.3.4-dist/js/ie10-viewport-bug-workaround.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,679 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/js/home.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,783 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/js/article_detail.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:38,828 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:38]"GET /static/ckeditor/ckeditor/ckeditor.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,081 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/ckeditor/ckeditor-init.js HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,198 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/images/Abstract%20Tree.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,209 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/u36503539402861515076fm21gp0_PFJ4JYY.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,216 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/Falling_Apples_Mac_HD_Desktop_Wallpaper_MhESewl.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,244 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/uploads/2016/05/16/abstract-tree.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,294 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/139-150R5154J4_TvcBbVW.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,411 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 10:56:39,420 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/125350903579_e0xvGcT.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,460 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/103182.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,468 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/5WsquLs.png HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,505 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/1450158490822251_8wcfxIK.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:39,521 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:39]"GET /static/media/images/1338962652337_K6A5xyS.jpg HTTP/1.1" 304 0
+
+2016-05-21 10:56:41,702 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:41]"GET /static/bootstrap-3.3.4-dist/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 0
+
+2016-05-21 10:56:42,300 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:42]"GET /static/ckeditor/ckeditor/config.js?t=F7OI HTTP/1.1" 304 0
+
+2016-05-21 10:56:44,394 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:44]"GET /static/ckeditor/ckeditor/skins/moono/editor.css?t=F7OI HTTP/1.1" 304 0
+
+2016-05-21 10:56:44,443 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:44]"GET /static/ckeditor/ckeditor/lang/zh-cn.js?t=F7OI HTTP/1.1" 304 0
+
+2016-05-21 10:56:44,694 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:44]"GET /static/ckeditor/ckeditor/styles.js?t=F7OI HTTP/1.1" 304 0
+
+2016-05-21 10:56:45,810 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:45]"GET /static/ckeditor/ckeditor/contents.css?t=F7OI HTTP/1.1" 304 0
+
+2016-05-21 10:56:47,232 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:47,249 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-04-26 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:47,280 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:47,283 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:47,287 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Comment.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 10:56:48,166 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:48]"GET / HTTP/1.1" 200 26761
+
+2016-05-21 10:56:49,608 DEBG 'webserver' stdout output:
+[21/May/2016 10:56:49]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 11:00:52,213 WARN received SIGINT indicating exit request
+2016-05-21 11:00:52,218 DEBG killing webserver (pid 21089) with signal SIGTERM
+2016-05-21 11:00:52,237 INFO waiting for autoreload, webserver to die
+2016-05-21 11:00:52,239 DEBG fd 10 closed, stopped monitoring <POutputDispatcher at 160076396 for <Subprocess at 160006508 with name webserver in state STOPPING> (stdout)>
+2016-05-21 11:00:52,240 INFO stopped: webserver (terminated by SIGTERM)
+2016-05-21 11:00:52,241 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:00:52,241 DEBG killing autoreload (pid 21088) with signal SIGTERM
+2016-05-21 11:00:52,256 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 160076332 for <Subprocess at 160006444 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 11:00:52,293 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 11:00:52,297 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:01:51,704 INFO RPC interface 'supervisor' initialized
+2016-05-21 11:01:51,705 INFO supervisord started with pid 21437
+2016-05-21 11:01:52,710 INFO spawned: 'autoreload' with pid 21445
+2016-05-21 11:01:52,714 INFO spawned: 'celery' with pid 21446
+2016-05-21 11:01:52,744 INFO spawned: 'webserver' with pid 21447
+2016-05-21 11:01:53,770 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:01:53,772 INFO success: celery entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:01:53,772 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:01:55,010 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/core/management/base.py:259: RemovedInDjango19Warning: "requires_model_validation" is deprecated in favor of "requires_system_checks".
+  RemovedInDjango19Warning)
+
+
+2016-05-21 11:01:55,407 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+
+2016-05-21 11:01:55,409 DEBG 'celery' stdout output:
+[2016-05-21 11:01:55,407: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+
+2016-05-21 11:01:55,659 DEBG 'celery' stdout output:
+[2016-05-21 11:01:55,659: INFO/MainProcess] Connected to redis://localhost:6379/0
+
+2016-05-21 11:01:55,717 DEBG 'celery' stdout output:
+[2016-05-21 11:01:55,717: INFO/MainProcess] mingle: searching for neighbors
+
+2016-05-21 11:01:56,808 DEBG 'celery' stdout output:
+[2016-05-21 11:01:56,808: INFO/MainProcess] mingle: all alone
+
+2016-05-21 11:01:56,890 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:01:56,892 DEBG 'celery' stdout output:
+[2016-05-21 11:01:56,889: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:01:56,895 DEBG 'celery' stdout output:
+[2016-05-21 11:01:56,894: WARNING/MainProcess] celery@shen-VirtualBox ready.
+
+2016-05-21 11:02:04,895 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:05,151 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-04-26 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:05,159 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:05,166 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:05,176 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Comment.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:07,135 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:07]"GET / HTTP/1.1" 200 26761
+
+2016-05-21 11:02:08,545 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/css/base_1.css HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,582 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/bootstrap-3.3.4-dist/js/bootstrap.min.js HTTP/1.1" 304 0
+[21/May/2016 11:02:08]"GET /static/bootstrap-3.3.4-dist/js/ie-emulation-modes-warning.js HTTP/1.1" 304 0
+[21/May/2016 11:02:08]"GET /static/bootstrap-3.3.4-dist/css/bootstrap.min.css HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,589 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/js/jquery-1.11.3.min.js HTTP/1.1" 304 0
+[21/May/2016 11:02:08]"GET /static/js/jquery.cookie.js HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,914 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/css/home.css HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,938 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/bootstrap-3.3.4-dist/js/ie10-viewport-bug-workaround.js HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,950 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/js/home.js HTTP/1.1" 304 0
+
+2016-05-21 11:02:08,955 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:08]"GET /static/js/jquery.bootstrap.min.js HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,022 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/js/topic_detail.js HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,328 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/images/Abstract%20Tree.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,571 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/images/139-150R5154J4_TvcBbVW.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,581 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/images/Falling_Apples_Mac_HD_Desktop_Wallpaper_MhESewl.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,589 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/images/103182.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,592 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/images/u36503539402861515076fm21gp0_PFJ4JYY.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,614 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/images/125350903579_e0xvGcT.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:09,623 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:09]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 11:02:10,161 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:10]"GET /static/media/images/5WsquLs.png HTTP/1.1" 304 0
+
+2016-05-21 11:02:10,279 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:10]"GET /static/media/images/1460628528987.png HTTP/1.1" 304 0
+
+2016-05-21 11:02:10,288 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:10]"GET /static/media/images/ce7172a563ccffdad81cc76c48a10735.jpg HTTP/1.1" 304 0
+
+2016-05-21 11:02:12,425 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:12]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 11:02:12,832 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:12]"GET /static/bootstrap-3.3.4-dist/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 0
+
+2016-05-21 11:02:13,158 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:13]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 11:02:23,295 DEBG 'celery' stdout output:
+[2016-05-21 11:02:23,293: INFO/MainProcess] Received task: article.tasks.readersin[6e89a2c0-f27f-4d28-b63d-1240e9203ba6]
+
+2016-05-21 11:02:23,305 DEBG 'webserver' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-02-11 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:02:23,713 DEBG 'celery' stdout output:
+[2016-05-21 11:02:23,713: INFO/MainProcess] Task article.tasks.readersin[6e89a2c0-f27f-4d28-b63d-1240e9203ba6] succeeded in 0.412423980015s: 'readers +1 success!'
+
+2016-05-21 11:02:23,950 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:23]"GET /article/56/ HTTP/1.1" 200 24501
+
+2016-05-21 11:02:24,955 DEBG 'webserver' stdout output:
+[21/May/2016 11:02:24]"GET /static/media/ HTTP/1.1" 404 1724
+
+2016-05-21 11:02:42,321 WARN received SIGINT indicating exit request
+2016-05-21 11:02:42,326 DEBG killing webserver (pid 21447) with signal SIGTERM
+2016-05-21 11:02:42,373 INFO waiting for autoreload, celery, webserver to die
+2016-05-21 11:02:42,374 DEBG fd 13 closed, stopped monitoring <POutputDispatcher at 182117676 for <Subprocess at 182043532 with name webserver in state STOPPING> (stdout)>
+2016-05-21 11:02:42,375 INFO stopped: webserver (terminated by SIGTERM)
+2016-05-21 11:02:42,377 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:02:42,379 DEBG killing celery (pid 21446) with signal SIGTERM
+2016-05-21 11:02:42,392 DEBG 'celery' stdout output:
+
+worker: Warm shutdown (MainProcess)
+
+2016-05-21 11:02:43,428 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+ 
+ -------------- celery@shen-VirtualBox v3.1.23 (Cipater)
+---- **** ----- 
+--- * ***  * -- Linux-3.13.0-32-generic-i686-with-Ubuntu-12.04-precise
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         default:0x9a0112c (djcelery.loaders.DjangoLoader)
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- 
+--- ***** ----- [queues]
+ -------------- .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . article.tasks.add
+  . article.tasks.instancedelete
+  . article.tasks.instancesave
+  . article.tasks.readersin
+  . article.tasks.readersout
+
+
+2016-05-21 11:02:44,009 DEBG fd 10 closed, stopped monitoring <POutputDispatcher at 182117516 for <Subprocess at 182043468 with name celery in state STOPPING> (stdout)>
+2016-05-21 11:02:44,010 INFO stopped: celery (exit status 0)
+2016-05-21 11:02:44,010 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:02:44,010 DEBG killing autoreload (pid 21445) with signal SIGTERM
+2016-05-21 11:02:44,014 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 182117452 for <Subprocess at 182043404 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 11:02:44,031 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 11:02:44,032 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:08:58,605 INFO RPC interface 'supervisor' initialized
+2016-05-21 11:08:58,606 INFO supervisord started with pid 21687
+2016-05-21 11:08:59,608 INFO spawned: 'autoreload' with pid 21695
+2016-05-21 11:08:59,614 INFO spawned: 'celery' with pid 21696
+2016-05-21 11:08:59,631 INFO spawned: 'uwsgi' with pid 21697
+2016-05-21 11:08:59,827 DEBG 'uwsgi' stdout output:
+[uWSGI] getting INI configuration from mynewspaper.ini
+
+2016-05-21 11:08:59,836 DEBG 'uwsgi' stdout output:
+*** Starting uWSGI 2.0.12 (32bit) on [Sat May 21 11:08:59 2016] ***
+compiled with version: 4.6.3 on 07 May 2016 01:56:15
+os: Linux-3.13.0-32-generic #57~precise1-Ubuntu SMP Tue Jul 15 03:50:54 UTC 2014
+nodename: shen-VirtualBox
+machine: i686
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/shen/Documents/paperproject/mynewspaper
+detected binary path: /home/shen/Documents/paperproject/bin/uwsgi
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+your processes number limit is 7864
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+
+2016-05-21 11:08:59,840 DEBG 'uwsgi' stdout output:
+uwsgi socket 0 bound to UNIX address /home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock fd 3
+
+2016-05-21 11:08:59,866 DEBG 'uwsgi' stdout output:
+Python version: 2.7.3 (default, Jun 22 2015, 19:59:27)  [GCC 4.6.3]
+Set PythonHome to /home/shen/Documents/paperproject
+
+2016-05-21 11:08:59,996 DEBG 'uwsgi' stdout output:
+Python main interpreter initialized at 0x8abadb8
+
+2016-05-21 11:09:00,020 DEBG 'uwsgi' stdout output:
+python threads support enabled
+
+2016-05-21 11:09:00,020 DEBG 'uwsgi' stdout output:
+your server socket listen backlog is limited to 100 connections
+
+2016-05-21 11:09:00,020 DEBG 'uwsgi' stdout output:
+your mercy for graceful operations on workers is 60 seconds
+
+2016-05-21 11:09:00,024 DEBG 'uwsgi' stdout output:
+mapped 703868 bytes (687 KB) for 10 cores
+
+2016-05-21 11:09:00,040 DEBG 'uwsgi' stdout output:
+*** Operational MODE: preforking ***
+
+2016-05-21 11:09:01,042 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:01,042 INFO success: celery entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:01,045 INFO success: uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:01,655 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+
+2016-05-21 11:09:02,233 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/core/management/base.py:259: RemovedInDjango19Warning: "requires_model_validation" is deprecated in favor of "requires_system_checks".
+  RemovedInDjango19Warning)
+
+
+2016-05-21 11:09:02,648 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+
+2016-05-21 11:09:02,649 DEBG 'celery' stdout output:
+[2016-05-21 11:09:02,647: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+
+2016-05-21 11:09:02,811 DEBG 'uwsgi' stdout output:
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x8abadb8 pid: 21697 (default app)
+
+2016-05-21 11:09:02,817 DEBG 'uwsgi' stdout output:
+*** uWSGI is running in multiple interpreter mode ***
+
+2016-05-21 11:09:02,818 DEBG 'uwsgi' stdout output:
+spawned uWSGI master process (pid: 21697)
+
+2016-05-21 11:09:02,830 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 1 (pid: 21719, cores: 1)
+
+2016-05-21 11:09:02,831 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 2 (pid: 21720, cores: 1)
+
+2016-05-21 11:09:02,835 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 3 (pid: 21721, cores: 1)
+
+2016-05-21 11:09:02,857 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 4 (pid: 21722, cores: 1)
+
+2016-05-21 11:09:02,886 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 5 (pid: 21723, cores: 1)
+
+2016-05-21 11:09:02,892 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 6 (pid: 21724, cores: 1)
+
+2016-05-21 11:09:02,907 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 7 (pid: 21725, cores: 1)
+
+2016-05-21 11:09:02,921 DEBG 'celery' stdout output:
+[2016-05-21 11:09:02,875: INFO/MainProcess] Connected to redis://localhost:6379/0
+
+2016-05-21 11:09:02,946 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 8 (pid: 21726, cores: 1)
+
+2016-05-21 11:09:02,952 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 9 (pid: 21727, cores: 1)
+
+2016-05-21 11:09:02,989 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 10 (pid: 21728, cores: 1)
+
+2016-05-21 11:09:03,061 DEBG 'celery' stdout output:
+[2016-05-21 11:09:03,053: INFO/MainProcess] mingle: searching for neighbors
+
+2016-05-21 11:09:04,104 DEBG 'celery' stdout output:
+[2016-05-21 11:09:04,103: INFO/MainProcess] mingle: all alone
+
+2016-05-21 11:09:04,125 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:09:04,128 DEBG 'celery' stdout output:
+[2016-05-21 11:09:04,123: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:09:04,131 DEBG 'celery' stdout output:
+[2016-05-21 11:09:04,130: WARNING/MainProcess] celery@shen-VirtualBox ready.
+
+2016-05-21 11:09:13,043 WARN received SIGINT indicating exit request
+2016-05-21 11:09:13,045 DEBG killing uwsgi (pid 21697) with signal SIGTERM
+2016-05-21 11:09:13,052 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:13,078 DEBG 'uwsgi' stdout output:
+...brutally killing workers...
+
+2016-05-21 11:09:16,128 DEBG 'uwsgi' stdout output:
+worker 1 buried after 3 seconds
+worker 2 buried after 3 seconds
+worker 3 buried after 3 seconds
+worker 4 buried after 3 seconds
+worker 5 buried after 3 seconds
+worker 6 buried after 3 seconds
+worker 7 buried after 3 seconds
+worker 8 buried after 3 seconds
+worker 9 buried after 3 seconds
+worker 10 buried after 3 seconds
+
+2016-05-21 11:09:16,138 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:16,139 DEBG 'uwsgi' stdout output:
+binary reloading uWSGI...
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (/home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock)
+running /home/shen/Documents/paperproject/bin/uwsgi
+
+2016-05-21 11:09:16,256 DEBG 'uwsgi' stdout output:
+[uWSGI] getting INI configuration from mynewspaper.ini
+
+2016-05-21 11:09:16,276 DEBG 'uwsgi' stdout output:
+*** Starting uWSGI 2.0.12 (32bit) on [Sat May 21 11:09:16 2016] ***
+
+2016-05-21 11:09:16,277 DEBG 'uwsgi' stdout output:
+compiled with version: 4.6.3 on 07 May 2016 01:56:15
+
+2016-05-21 11:09:16,280 DEBG 'uwsgi' stdout output:
+os: Linux-3.13.0-32-generic #57~precise1-Ubuntu SMP Tue Jul 15 03:50:54 UTC 2014
+
+2016-05-21 11:09:16,288 DEBG 'uwsgi' stdout output:
+nodename: shen-VirtualBox
+machine: i686
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/shen/Documents/paperproject/mynewspaper
+detected binary path: /home/shen/Documents/paperproject/bin/uwsgi
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+your processes number limit is 7864
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+
+2016-05-21 11:09:16,313 DEBG 'uwsgi' stdout output:
+uwsgi socket 0 inherited UNIX address /home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock fd 3
+
+2016-05-21 11:09:16,316 DEBG 'uwsgi' stdout output:
+Python version: 2.7.3 (default, Jun 22 2015, 19:59:27)  [GCC 4.6.3]
+
+2016-05-21 11:09:16,316 DEBG 'uwsgi' stdout output:
+Set PythonHome to /home/shen/Documents/paperproject
+
+2016-05-21 11:09:16,532 DEBG 'uwsgi' stdout output:
+Python main interpreter initialized at 0x8f26cd0
+
+2016-05-21 11:09:16,533 DEBG 'uwsgi' stdout output:
+python threads support enabled
+
+2016-05-21 11:09:16,534 DEBG 'uwsgi' stdout output:
+your server socket listen backlog is limited to 100 connections
+
+2016-05-21 11:09:16,536 DEBG 'uwsgi' stdout output:
+your mercy for graceful operations on workers is 60 seconds
+
+2016-05-21 11:09:16,540 DEBG 'uwsgi' stdout output:
+mapped 703868 bytes (687 KB) for 10 cores
+
+2016-05-21 11:09:16,541 DEBG 'uwsgi' stdout output:
+*** Operational MODE: preforking ***
+
+2016-05-21 11:09:18,177 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+
+2016-05-21 11:09:19,095 DEBG 'uwsgi' stdout output:
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x8f26cd0 pid: 21697 (default app)
+
+2016-05-21 11:09:19,106 DEBG 'uwsgi' stdout output:
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 21697)
+
+2016-05-21 11:09:19,119 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 1 (pid: 21748, cores: 1)
+spawned uWSGI worker 2 (pid: 21749, cores: 1)
+spawned uWSGI worker 3 (pid: 21750, cores: 1)
+
+2016-05-21 11:09:19,125 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 4 (pid: 21751, cores: 1)
+spawned uWSGI worker 5 (pid: 21752, cores: 1)
+
+2016-05-21 11:09:19,135 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 6 (pid: 21753, cores: 1)
+
+2016-05-21 11:09:19,136 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:19,144 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 7 (pid: 21754, cores: 1)
+
+2016-05-21 11:09:19,150 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 8 (pid: 21755, cores: 1)
+
+2016-05-21 11:09:19,159 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 9 (pid: 21757, cores: 1)
+
+2016-05-21 11:09:19,172 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 10 (pid: 21758, cores: 1)
+
+2016-05-21 11:09:22,178 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:23,181 WARN killing 'uwsgi' (21697) with SIGKILL
+2016-05-21 11:09:23,181 DEBG killing uwsgi (pid 21697) with signal SIGKILL
+2016-05-21 11:09:23,185 DEBG 'uwsgi' stdout output:
+Sat May 21 11:09:23 2016 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:09:23,229 DEBG 'uwsgi' stdout output:
+Sat May 21 11:09:23 2016 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 6 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 7 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 8 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 9 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:09:23 2016 - uWSGI worker 10 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:09:23,234 DEBG fd 13 closed, stopped monitoring <POutputDispatcher at 171152652 for <Subprocess at 171078508 with name uwsgi in state STOPPING> (stdout)>
+2016-05-21 11:09:23,242 INFO stopped: uwsgi (terminated by SIGKILL)
+2016-05-21 11:09:23,253 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:09:23,255 DEBG killing celery (pid 21696) with signal SIGTERM
+2016-05-21 11:09:23,321 DEBG 'celery' stdout output:
+
+worker: Warm shutdown (MainProcess)
+
+2016-05-21 11:09:24,394 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+ 
+ -------------- celery@shen-VirtualBox v3.1.23 (Cipater)
+---- **** ----- 
+--- * ***  * -- Linux-3.13.0-32-generic-i686-with-Ubuntu-12.04-precise
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         default:0xa54312c (djcelery.loaders.DjangoLoader)
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- 
+--- ***** ----- [queues]
+ -------------- .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . article.tasks.add
+  . article.tasks.instancedelete
+  . article.tasks.instancesave
+  . article.tasks.readersin
+  . article.tasks.readersout
+
+
+2016-05-21 11:09:24,952 DEBG fd 10 closed, stopped monitoring <POutputDispatcher at 171152492 for <Subprocess at 171078444 with name celery in state STOPPING> (stdout)>
+2016-05-21 11:09:24,953 INFO stopped: celery (exit status 0)
+2016-05-21 11:09:24,953 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:09:24,954 DEBG killing autoreload (pid 21695) with signal SIGTERM
+2016-05-21 11:09:24,957 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 171152428 for <Subprocess at 171078380 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 11:09:24,981 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 11:09:24,982 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:09:30,006 INFO RPC interface 'supervisor' initialized
+2016-05-21 11:09:30,008 INFO supervisord started with pid 21761
+2016-05-21 11:09:31,011 INFO spawned: 'autoreload' with pid 21769
+2016-05-21 11:09:31,016 INFO spawned: 'celery' with pid 21770
+2016-05-21 11:09:31,033 INFO spawned: 'uwsgi' with pid 21771
+2016-05-21 11:09:31,172 DEBG 'uwsgi' stdout output:
+[uWSGI] getting INI configuration from mynewspaper.ini
+
+2016-05-21 11:09:31,185 DEBG 'uwsgi' stdout output:
+*** Starting uWSGI 2.0.12 (32bit) on [Sat May 21 11:09:31 2016] ***
+
+2016-05-21 11:09:31,187 DEBG 'uwsgi' stdout output:
+compiled with version: 4.6.3 on 07 May 2016 01:56:15
+
+2016-05-21 11:09:31,187 DEBG 'uwsgi' stdout output:
+os: Linux-3.13.0-32-generic #57~precise1-Ubuntu SMP Tue Jul 15 03:50:54 UTC 2014
+nodename: shen-VirtualBox
+machine: i686
+clock source: unix
+pcre jit disabled
+detected number of CPU cores: 1
+current working directory: /home/shen/Documents/paperproject/mynewspaper
+detected binary path: /home/shen/Documents/paperproject/bin/uwsgi
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+your processes number limit is 7864
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+
+2016-05-21 11:09:31,190 DEBG 'uwsgi' stdout output:
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+
+2016-05-21 11:09:31,210 DEBG 'uwsgi' stdout output:
+uwsgi socket 0 bound to UNIX address /home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock fd 3
+
+2016-05-21 11:09:31,221 DEBG 'uwsgi' stdout output:
+Python version: 2.7.3 (default, Jun 22 2015, 19:59:27)  [GCC 4.6.3]
+Set PythonHome to /home/shen/Documents/paperproject
+
+2016-05-21 11:09:31,303 DEBG 'uwsgi' stdout output:
+Python main interpreter initialized at 0x9883db8
+
+2016-05-21 11:09:31,322 DEBG 'uwsgi' stdout output:
+python threads support enabled
+
+2016-05-21 11:09:31,323 DEBG 'uwsgi' stdout output:
+your server socket listen backlog is limited to 100 connections
+
+2016-05-21 11:09:31,323 DEBG 'uwsgi' stdout output:
+your mercy for graceful operations on workers is 60 seconds
+
+2016-05-21 11:09:31,326 DEBG 'uwsgi' stdout output:
+mapped 703868 bytes (687 KB) for 10 cores
+
+2016-05-21 11:09:31,338 DEBG 'uwsgi' stdout output:
+*** Operational MODE: preforking ***
+
+2016-05-21 11:09:32,345 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:32,346 INFO success: celery entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:32,346 INFO success: uwsgi entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 11:09:33,024 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+
+2016-05-21 11:09:33,449 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/core/management/base.py:259: RemovedInDjango19Warning: "requires_model_validation" is deprecated in favor of "requires_system_checks".
+  RemovedInDjango19Warning)
+
+
+2016-05-21 11:09:33,781 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+[2016-05-21 11:09:33,780: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/celery/apps/worker.py:161: CDeprecationWarning: 
+Starting from version 3.2 Celery will refuse to accept pickle by default.
+
+The pickle serializer is a security concern as it may give attackers
+the ability to execute any command.  It's important to secure
+your broker from unauthorized access when using pickle, so we think
+that enabling pickle should require a deliberate action and not be
+the default choice.
+
+If you depend on pickle then you should set a setting to disable this
+warning and to be sure that everything will continue working
+when you upgrade to Celery 3.2::
+
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+
+You must only enable the serializers that you will actually use.
+
+
+  warnings.warn(CDeprecationWarning(W_PICKLE_DEPRECATED))
+
+
+2016-05-21 11:09:33,921 DEBG 'celery' stdout output:
+[2016-05-21 11:09:33,921: INFO/MainProcess] Connected to redis://localhost:6379/0
+
+2016-05-21 11:09:33,971 DEBG 'celery' stdout output:
+[2016-05-21 11:09:33,971: INFO/MainProcess] mingle: searching for neighbors
+
+2016-05-21 11:09:34,023 DEBG 'uwsgi' stdout output:
+WSGI app 0 (mountpoint='') ready in 3 seconds on interpreter 0x9883db8 pid: 21771 (default app)
+
+2016-05-21 11:09:34,026 DEBG 'uwsgi' stdout output:
+*** uWSGI is running in multiple interpreter mode ***
+
+2016-05-21 11:09:34,027 DEBG 'uwsgi' stdout output:
+spawned uWSGI master process (pid: 21771)
+
+2016-05-21 11:09:34,029 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 1 (pid: 21794, cores: 1)
+
+2016-05-21 11:09:34,033 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 2 (pid: 21795, cores: 1)
+
+2016-05-21 11:09:34,042 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 3 (pid: 21796, cores: 1)
+
+2016-05-21 11:09:34,050 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 4 (pid: 21797, cores: 1)
+
+2016-05-21 11:09:34,075 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 5 (pid: 21798, cores: 1)
+
+2016-05-21 11:09:34,078 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 6 (pid: 21799, cores: 1)
+
+2016-05-21 11:09:34,080 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 7 (pid: 21800, cores: 1)
+
+2016-05-21 11:09:34,082 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 8 (pid: 21801, cores: 1)
+
+2016-05-21 11:09:34,089 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 9 (pid: 21802, cores: 1)
+
+2016-05-21 11:09:34,106 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 10 (pid: 21803, cores: 1)
+
+2016-05-21 11:09:34,999 DEBG 'celery' stdout output:
+[2016-05-21 11:09:34,999: INFO/MainProcess] mingle: all alone
+
+2016-05-21 11:09:35,042 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:09:35,044 DEBG 'celery' stdout output:
+[2016-05-21 11:09:35,041: WARNING/MainProcess] /home/shen/Documents/paperproject/local/lib/python2.7/site-packages/djcelery/loaders.py:136: UserWarning: Using settings.DEBUG leads to a memory leak, never use this setting in production environments!
+  warn('Using settings.DEBUG leads to a memory leak, never '
+
+
+2016-05-21 11:09:35,049 DEBG 'celery' stdout output:
+[2016-05-21 11:09:35,048: WARNING/MainProcess] celery@shen-VirtualBox ready.
+
+2016-05-21 11:09:43,399 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:09:43,471 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-04-26 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:09:43,475 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Topic.timestamp received a naive datetime (2016-05-06 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:09:43,487 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Article.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:09:43,492 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/local/lib/python2.7/site-packages/django/db/models/fields/__init__.py:1414: RuntimeWarning: DateTimeField Comment.timestamp received a naive datetime (2016-04-21 00:00:00) while time zone support is active.
+  RuntimeWarning)
+
+
+2016-05-21 11:09:44,550 DEBG 'uwsgi' stdout output:
+[pid: 21802|app: 0|req: 1/1] 127.0.0.1 () {40 vars in 1166 bytes} [Sat May 21 11:09:43 2016] GET / => generated 26751 bytes in 1375 msecs (HTTP/1.1 200) 4 headers in 224 bytes (1 switches on core 0)
+
+2016-05-21 11:09:50,027 WARN received SIGINT indicating exit request
+2016-05-21 11:09:50,029 DEBG killing uwsgi (pid 21771) with signal SIGTERM
+2016-05-21 11:09:50,032 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:50,040 DEBG 'uwsgi' stdout output:
+...brutally killing workers...
+
+2016-05-21 11:09:52,125 DEBG 'uwsgi' stdout output:
+worker 2 buried after 2 seconds
+worker 10 buried after 2 seconds
+
+2016-05-21 11:09:53,079 DEBG 'uwsgi' stdout output:
+worker 1 buried after 3 seconds
+worker 3 buried after 3 seconds
+worker 4 buried after 3 seconds
+worker 5 buried after 3 seconds
+worker 6 buried after 3 seconds
+worker 7 buried after 3 seconds
+worker 8 buried after 3 seconds
+worker 9 buried after 3 seconds
+
+2016-05-21 11:09:53,082 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:53,084 DEBG 'uwsgi' stdout output:
+binary reloading uWSGI...
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 3 mapped to socket 0 (/home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock)
+running /home/shen/Documents/paperproject/bin/uwsgi
+
+2016-05-21 11:09:53,148 DEBG 'uwsgi' stdout output:
+[uWSGI] getting INI configuration from mynewspaper.ini
+
+2016-05-21 11:09:53,178 DEBG 'uwsgi' stdout output:
+*** Starting uWSGI 2.0.12 (32bit) on [Sat May 21 11:09:53 2016] ***
+
+2016-05-21 11:09:53,178 DEBG 'uwsgi' stdout output:
+compiled with version: 4.6.3 on 07 May 2016 01:56:15
+
+2016-05-21 11:09:53,178 DEBG 'uwsgi' stdout output:
+os: Linux-3.13.0-32-generic #57~precise1-Ubuntu SMP Tue Jul 15 03:50:54 UTC 2014
+
+2016-05-21 11:09:53,179 DEBG 'uwsgi' stdout output:
+nodename: shen-VirtualBox
+
+2016-05-21 11:09:53,179 DEBG 'uwsgi' stdout output:
+machine: i686
+
+2016-05-21 11:09:53,179 DEBG 'uwsgi' stdout output:
+clock source: unix
+
+2016-05-21 11:09:53,179 DEBG 'uwsgi' stdout output:
+pcre jit disabled
+
+2016-05-21 11:09:53,182 DEBG 'uwsgi' stdout output:
+detected number of CPU cores: 1
+
+2016-05-21 11:09:53,182 DEBG 'uwsgi' stdout output:
+current working directory: /home/shen/Documents/paperproject/mynewspaper
+
+2016-05-21 11:09:53,188 DEBG 'uwsgi' stdout output:
+detected binary path: /home/shen/Documents/paperproject/bin/uwsgi
+chdir() to /home/shen/Documents/paperproject/mynewspaper
+your processes number limit is 7864
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+
+2016-05-21 11:09:53,205 DEBG 'uwsgi' stdout output:
+uwsgi socket 0 inherited UNIX address /home/shen/Documents/paperproject/mynewspaper/mynewspaper.sock fd 3
+
+2016-05-21 11:09:53,210 DEBG 'uwsgi' stdout output:
+Python version: 2.7.3 (default, Jun 22 2015, 19:59:27)  [GCC 4.6.3]
+
+2016-05-21 11:09:53,210 DEBG 'uwsgi' stdout output:
+Set PythonHome to /home/shen/Documents/paperproject
+
+2016-05-21 11:09:53,351 DEBG 'uwsgi' stdout output:
+Python main interpreter initialized at 0x9304cd0
+
+2016-05-21 11:09:53,352 DEBG 'uwsgi' stdout output:
+python threads support enabled
+
+2016-05-21 11:09:53,352 DEBG 'uwsgi' stdout output:
+your server socket listen backlog is limited to 100 connections
+
+2016-05-21 11:09:53,353 DEBG 'uwsgi' stdout output:
+your mercy for graceful operations on workers is 60 seconds
+
+2016-05-21 11:09:53,354 DEBG 'uwsgi' stdout output:
+mapped 703868 bytes (687 KB) for 10 cores
+
+2016-05-21 11:09:53,361 DEBG 'uwsgi' stdout output:
+*** Operational MODE: preforking ***
+
+2016-05-21 11:09:54,536 DEBG 'uwsgi' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+
+2016-05-21 11:09:55,284 DEBG 'uwsgi' stdout output:
+WSGI app 0 (mountpoint='') ready in 2 seconds on interpreter 0x9304cd0 pid: 21771 (default app)
+
+2016-05-21 11:09:55,286 DEBG 'uwsgi' stdout output:
+*** uWSGI is running in multiple interpreter mode ***
+
+2016-05-21 11:09:55,286 DEBG 'uwsgi' stdout output:
+gracefully (RE)spawned uWSGI master process (pid: 21771)
+
+2016-05-21 11:09:55,287 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 1 (pid: 21822, cores: 1)
+
+2016-05-21 11:09:55,288 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 2 (pid: 21823, cores: 1)
+
+2016-05-21 11:09:55,289 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 3 (pid: 21824, cores: 1)
+
+2016-05-21 11:09:55,289 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 4 (pid: 21825, cores: 1)
+
+2016-05-21 11:09:55,290 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 5 (pid: 21826, cores: 1)
+
+2016-05-21 11:09:55,291 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 6 (pid: 21827, cores: 1)
+
+2016-05-21 11:09:55,292 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 7 (pid: 21828, cores: 1)
+
+2016-05-21 11:09:55,293 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 8 (pid: 21829, cores: 1)
+
+2016-05-21 11:09:55,294 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 9 (pid: 21830, cores: 1)
+
+2016-05-21 11:09:55,315 DEBG 'uwsgi' stdout output:
+spawned uWSGI worker 10 (pid: 21831, cores: 1)
+
+2016-05-21 11:09:56,319 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:09:59,324 INFO waiting for autoreload, celery, uwsgi to die
+2016-05-21 11:10:00,326 WARN killing 'uwsgi' (21771) with SIGKILL
+2016-05-21 11:10:00,326 DEBG killing uwsgi (pid 21771) with signal SIGKILL
+2016-05-21 11:10:00,330 DEBG 'uwsgi' stdout output:
+Sat May 21 11:10:00 2016 - uWSGI worker 1 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:10:00,337 DEBG 'uwsgi' stdout output:
+Sat May 21 11:10:00 2016 - uWSGI worker 2 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:10:00,344 DEBG 'uwsgi' stdout output:
+Sat May 21 11:10:00 2016 - uWSGI worker 3 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:10:00,395 DEBG 'uwsgi' stdout output:
+Sat May 21 11:10:00 2016 - uWSGI worker 4 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 5 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 6 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 7 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 8 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 9 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+Sat May 21 11:10:00 2016 - uWSGI worker 10 screams: UAAAAAAH my master disconnected: i will kill myself !!!
+
+2016-05-21 11:10:00,399 INFO stopped: uwsgi (terminated by SIGKILL)
+2016-05-21 11:10:00,410 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:10:00,418 DEBG killing celery (pid 21770) with signal SIGTERM
+2016-05-21 11:10:00,430 DEBG 'celery' stdout output:
+
+worker: Warm shutdown (MainProcess)
+
+2016-05-21 11:10:01,529 DEBG 'celery' stdout output:
+/home/shen/Documents/paperproject/mynewspaper
+ 
+ -------------- celery@shen-VirtualBox v3.1.23 (Cipater)
+---- **** ----- 
+--- * ***  * -- Linux-3.13.0-32-generic-i686-with-Ubuntu-12.04-precise
+-- * - **** --- 
+- ** ---------- [config]
+- ** ---------- .> app:         default:0x92e712c (djcelery.loaders.DjangoLoader)
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- 
+--- ***** ----- [queues]
+ -------------- .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . article.tasks.add
+  . article.tasks.instancedelete
+  . article.tasks.instancesave
+  . article.tasks.readersin
+  . article.tasks.readersout
+
+
+2016-05-21 11:10:02,084 DEBG fd 10 closed, stopped monitoring <POutputDispatcher at 154608748 for <Subprocess at 154534700 with name celery in state STOPPING> (stdout)>
+2016-05-21 11:10:02,085 INFO stopped: celery (exit status 0)
+2016-05-21 11:10:02,085 DEBG received SIGCLD indicating a child quit
+2016-05-21 11:10:02,085 DEBG killing autoreload (pid 21769) with signal SIGTERM
+2016-05-21 11:10:02,088 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 154608684 for <Subprocess at 154534636 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 11:10:02,107 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 11:10:02,109 DEBG received SIGCLD indicating a child quit
+2016-05-21 12:07:19,935 INFO RPC interface 'supervisor' initialized
+2016-05-21 12:07:19,938 INFO supervisord started with pid 22522
+2016-05-21 12:07:20,941 INFO spawned: 'autoreload' with pid 22530
+2016-05-21 12:07:20,942 INFO spawnerr: can't find command './home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:21,947 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 12:07:21,948 INFO spawnerr: can't find command './home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:23,950 INFO spawnerr: can't find command './home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:26,956 INFO spawnerr: can't find command './home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:26,957 INFO gave up: redis-server entered FATAL state, too many start retries too quickly
+2016-05-21 12:07:30,646 WARN received SIGINT indicating exit request
+2016-05-21 12:07:30,646 INFO waiting for autoreload to die
+2016-05-21 12:07:31,648 DEBG killing autoreload (pid 22530) with signal SIGTERM
+2016-05-21 12:07:31,653 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 159515084 for <Subprocess at 159449292 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 12:07:31,670 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 12:07:31,671 DEBG received SIGCLD indicating a child quit
+2016-05-21 12:07:43,244 INFO RPC interface 'supervisor' initialized
+2016-05-21 12:07:43,245 INFO supervisord started with pid 22554
+2016-05-21 12:07:44,249 INFO spawned: 'autoreload' with pid 22562
+2016-05-21 12:07:44,250 INFO spawnerr: can't find command '/home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:45,253 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 12:07:45,254 INFO spawnerr: can't find command '/home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:47,257 INFO spawnerr: can't find command '/home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:50,262 INFO spawnerr: can't find command '/home/shen/Downloads/redis-3.0.7/srcredis-server'
+2016-05-21 12:07:50,262 INFO gave up: redis-server entered FATAL state, too many start retries too quickly
+2016-05-21 12:07:52,547 WARN received SIGINT indicating exit request
+2016-05-21 12:07:52,549 INFO waiting for autoreload to die
+2016-05-21 12:07:53,550 DEBG killing autoreload (pid 22562) with signal SIGTERM
+2016-05-21 12:07:53,555 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 158921164 for <Subprocess at 158855372 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 12:07:53,575 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 12:07:53,576 DEBG received SIGCLD indicating a child quit
+2016-05-21 12:11:11,223 INFO RPC interface 'supervisor' initialized
+2016-05-21 12:11:11,224 INFO supervisord started with pid 22663
+2016-05-21 12:11:12,229 INFO spawned: 'autoreload' with pid 22671
+2016-05-21 12:11:12,243 INFO spawnerr: can't find command 'cd'
+2016-05-21 12:11:13,245 INFO success: autoreload entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2016-05-21 12:11:13,246 INFO spawnerr: can't find command 'cd'
+2016-05-21 12:11:15,065 WARN received SIGINT indicating exit request
+2016-05-21 12:11:15,065 INFO waiting for autoreload to die
+2016-05-21 12:11:16,067 DEBG killing autoreload (pid 22671) with signal SIGTERM
+2016-05-21 12:11:16,070 DEBG fd 7 closed, stopped monitoring <POutputDispatcher at 178266572 for <Subprocess at 178200780 with name autoreload in state STOPPING> (stdout)>
+2016-05-21 12:11:16,077 INFO stopped: autoreload (terminated by SIGTERM)
+2016-05-21 12:11:16,077 DEBG received SIGCLD indicating a child quit

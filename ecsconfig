@@ -77,7 +77,13 @@ export C_FORCE_ROOT="true"
 python manage.py celery worker --loglevel=info  -Q celery  ###启动celery
 uwsgi --ini mynewspaper.ini
 
+pip install supervisor
+pip install django-supervisor
+
 http://123.56.31.34/article/64/
+
+export C_FORCE_ROOT="true"
+python manage.py supervisor
 
 git init
 git add .
@@ -86,4 +92,14 @@ git remote add project_deploy https://github.com/kij8323/mynewspaper.git
 git push project_deploy master -f
 shenanping2008@Hotmail.com
 012ssskkk
+
+
+重启服务器后：
+cd /home/shen/Documents/paperproject/mynewspaper
+sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate
+sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf
+python manage.py collectstatic
+python manage.py supervisor shutdown
+export C_FORCE_ROOT="true"
+python manage.py supervisor
 

@@ -1,0 +1,8 @@
+[program:celery]
+command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
+
+[program:uwsgi]
+command={{ PYTHON }} manage.py runserver 8080
+
+
+
