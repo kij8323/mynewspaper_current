@@ -239,7 +239,9 @@ def topicomment(request):
 			for item in userlist:
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				test1 = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+'&nbsp;'
 				text = text.replace('@'+item+' ', test);
+				text = text.replace('@'+item+'&nbsp;', test1);
 			# c = Comment(user=user, topic=topic, text=text)
 			# c.save()
 			data = {

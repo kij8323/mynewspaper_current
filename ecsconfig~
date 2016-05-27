@@ -3,7 +3,7 @@ shenanpinG2008
 
 django管理员：admin
 password:shenanpinG2008
-
+newpassword:saP123456
 sudo apt-get update
 /usr/bin/python  #查看python版本
 sudo apt-get install python-dev
@@ -96,10 +96,13 @@ shenanping2008@Hotmail.com
 
 重启服务器后：
 cd /home/shen/Documents/paperproject/mynewspaper
-sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate
 sudo /usr/local/coreseek/bin/searchd -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf
-python manage.py collectstatic
+sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/testpack/etc/csft_mysql.conf --all  --rotate
+echo y > python manage.py collectstatic
 python manage.py supervisor shutdown
 export C_FORCE_ROOT="true"
 python manage.py supervisor
+uwsgi --ini /home/shen/Documents/paperproject/mynewspaper/mynewspaper.ini
+sudo /usr/local/bin/uwsgi  --emperor /etc/uwsgi/vassals --uid root --gid root ##root为用户名
+/usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid root --gid root --daemonize /var/log/uwsgi-emperor.log
 

@@ -46,8 +46,7 @@ def article_detail(request, article_id):
 	# article.save()
 	#阅读数+1,将readers+1的操作放到celery中，加快网页的加载时间
 	readersin.delay(article)
-	#右边栏文章按readers排序
-	hotarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_DETAIL_RIGHTSIDERANK_TIMERANGE)).order_by('-readers')[:5]
+	
 
 	#缓存的readers 增加1
 	cachekey = "article_readers_" + str(article_id)
@@ -91,12 +90,15 @@ def article_detail(request, article_id):
 	#文章属于哪些类别
 	thisrelationtag = Relation.objects.filter(article=article)
 	print thisrelationtag[0].category
+	#右边栏文章统一类的按readers排序
+	hotarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_DETAIL_RIGHTSIDERANK_TIMERANGE)).filter(category=thisrelationtag[0].category).exclude(id = article.id).order_by('-readers')[:5]
 	#统一类的按timestamp排序文章
 	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[0].category).exclude(article = article).order_by('-timestamp')
-	if thisrelationtagarticle.count()==0:#如果类别中除了自己就没有其他的文章了，就需要从另外的列别中查找文章
-		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article).order_by('-timestamp')
-	if thisrelationtagarticle.count()==0:
-		thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article).order_by('-timestamp')
+	print thisrelationtagarticle.count()
+	# if thisrelationtagarticle.count()==0:#如果类别中除了自己就没有其他的文章了，就需要从另外的列别中查找文章
+	# 	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[1].category).exclude(article = article).order_by('-timestamp')
+	# if thisrelationtagarticle.count()==0:
+	# 	thisrelationtagarticle = Relation.objects.filter(category=thisrelationtag[2].category).exclude(article = article).order_by('-timestamp')
 	#文章被多少人收藏过
 	#usercollectioncount = Collection.objects.filter(article=article).count()
 	context = {
@@ -160,10 +162,11 @@ def articlecomment(request):
 							, targetopic = None)
 			#给被@的用户增加链接
 			for item in userlist:
-				print 'for item in userlist:'
 				atwhouser = MyUser.objects.get(username = item)
 				test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+				test1 = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+'&nbsp;'
 				text = text.replace('@'+item+' ', test);
+				text = text.replace('@'+item+'&nbsp;', test1);
 			data = {
 			"user": user.username,
 			"text": text,

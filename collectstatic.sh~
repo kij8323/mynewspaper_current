@@ -1,0 +1,2 @@
+ #!/bin/bash
+echo yes | python /home/shen/Documents/paperproject/mynewspaper/manage.py collectstatic

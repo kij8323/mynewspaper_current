@@ -15,9 +15,9 @@ from django.core.cache import cache
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 ARTICLE_MAINPAGE_TIMERANGE = 15 #首页显示新闻数量
-ARTICLE_MAINPAGE_COVER_TIMERANGE = 15	#首页封面文章的发表时间范围
-TOPIC_MAINPAGE_COVER_TIMERANGE = 25 #争议话题的发表时间范围
-TOPIC_MAINPAGE_TIMERANGE = 15 #热门话题的时间范围
+ARTICLE_MAINPAGE_COVER_TIMERANGE = 35	#首页封面文章的发表时间范围
+TOPIC_MAINPAGE_COVER_TIMERANGE = 35 #争议话题的发表时间范围
+TOPIC_MAINPAGE_TIMERANGE = 35 #热门话题的时间范围
 ARTICLE_MAINPAGE_HOT_TIMERANGE = 30 #一周新闻排行的时间范围
 COMMENT_MAINPAGE_TIMERANGE = 30 #精彩点评的时间范围
 
@@ -75,7 +75,8 @@ def index_search(request):
 
 #首页
 def home(request):
-	coverarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_MAINPAGE_COVER_TIMERANGE)).filter(cover = True).order_by("-id")[0:3]
+	#coverarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_MAINPAGE_COVER_TIMERANGE)).filter(cover = True).order_by("-id")[0:3]
+	coverarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_MAINPAGE_COVER_TIMERANGE)).order_by("-readers")[0:3]
 	covertopic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=TOPIC_MAINPAGE_COVER_TIMERANGE)).filter(cover = True).order_by("-id")[0:1]
 	queryset = Article.objects.all().order_by('-id')[0:ARTICLE_MAINPAGE_TIMERANGE]
 	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=TOPIC_MAINPAGE_TIMERANGE)).order_by("-readers")[0:5]

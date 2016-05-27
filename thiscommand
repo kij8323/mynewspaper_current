@@ -318,11 +318,42 @@ command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
 command={{ PYTHON }} manage.py runserver 8080
 
 
-var jiathis_config = {
-    imageUrl:"{{article.get_image_url}}",
-    title:"{{article.title}}",
-    summary:"{{article.title}}",
-}
 
 
+智能家居
+智能穿戴
+机器人
+市场新闻
+
+瞎聊
+科技时事
+金融投资
+创业交流
+体育
+我要
+
+sudo sh /home/deploy.sh
+
+
+sudo ln -s /home/shen/Documents/paperproject/mynewspaper/mynewspaper.ini /etc/uwsgi/vassals/
+sudo uwsgi --emperor /etc/uwsgi/vassals --uid www-data --gid www-data
+
+[program:redis-server]
+command=redis-server
+
+[program:celery]
+command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
+
+
+
+[program:uwsgi]
+command=uwsgi --ini mynewspaper.ini
+
+
+原创
+我们
+梧桐观点
+联系我们
+小兵
+违者将承担法律责任！
 

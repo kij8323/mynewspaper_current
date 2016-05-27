@@ -191,7 +191,9 @@ def AtWhoUser(value):
     for item in userlist:
         atwhouser = MyUser.objects.get(username = item)
         test = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+' '
+        test1 = "@<a href='" +'/user/'+str(atwhouser.id)+'/informations/'+"'>"+atwhouser.username+"</a>"+'&nbsp;'
         value = value.replace('@'+item+' ', test);
+        value = value.replace('@'+item+'&nbsp;', test1);
     return value
 
 
