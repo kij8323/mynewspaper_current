@@ -140,7 +140,7 @@ def topic_detail(request, topic_id):
 	readersin.delay(topic)
 	#缓存的readers 增加1
 	cachekey = "topic_readers_" + str(topic_id)
-	if cache.get(cachekey):
+	if cache.get(cachekey) != None:
 		cache.incr(cachekey)
 	else:
 		cache.set(cachekey, topic.readers, settings.CACHE_EXPIRETIME)
@@ -196,7 +196,7 @@ def newtopic(request):
 			group.topicount += 1
 			group.save()
 			cachekey = "group_topic_count_" + str(group.id)
-			if cache.get(cachekey):
+			if cache.get(cachekey) != None:
 				cache.incr(cachekey)
 			else:
 				group = Group.objects.get(id=group.id)
@@ -230,7 +230,7 @@ def topicomment(request):
 			topic.updated = timezone.now()
 			topic.save()
 			cachekey = "topic_comment_" + str(topicid)
-			if cache.get(cachekey):
+			if cache.get(cachekey) != None:
 				cache.incr(cachekey)
 			else:
 				cache.set(cachekey, topic.comment_set.count(), settings.CACHE_EXPIRETIME)
@@ -277,7 +277,7 @@ def topcommentcomment(request):
 			topic.updated = timezone.now()
 			topic.save()
 			cachekey = "topic_comment_" + str(topicid)
-			if cache.get(cachekey):
+			if cache.get(cachekey) != None:
 				cache.incr(cachekey)
 			else:
 				cache.set(cachekey, topic.comment_set.count(), settings.CACHE_EXPIRETIME)

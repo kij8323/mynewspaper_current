@@ -357,3 +357,6 @@ command=uwsgi --ini mynewspaper.ini
 小兵
 违者将承担法律责任！
 
+未读
+用户未读消息数
+

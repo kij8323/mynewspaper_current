@@ -24,6 +24,8 @@ from comment.models import Comment
 from notifications.models import Notification
 from article.tasks import readersin, add, readersout, instancedelete, instancesave
 import os
+from django.core.cache import cache
+from django.conf import settings
 #登录页面
 def loggin(request):
 	form = LoginForm(request.GET or None)
@@ -163,6 +165,12 @@ def userdashboardinformations(request, user_id):
 			try:
 				# c = Comment(user=user, is_privcycomment=True, text=text)
 				notify.send(sender=sender, target_object=None, recipient = user, verb="_@_", text=text)
+				cachekey = "user_unread_count" + str(user.id)
+				if cache.get(cachekey) != None:
+					cache.incr(cachekey)
+				else:
+					unread = Notification.objects.filter(recipient = self.recipient).filter(read = False).count()
+					cache.set(cachekey,  unread, settings.CACHE_EXPIRETIME)	
 			except:
 				traceback.print_exc()
 			return redirect(action_url)
