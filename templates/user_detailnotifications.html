@@ -94,10 +94,10 @@ $(function() {
       {% for item in notifications %}
       <div class = 'commentlist' id='{{item.id}}'>
       <a href="{{item.sender_object.get_absolute_url}}">{{item.sender_object.username}}</a>在评论中@了你: 
-      
+
       {% if item.read %}
       {% else %}
-      <i class="pull-right"><span class="badge backgroundcolor">未读</span></i>
+      <i class="pull-right"><span class="badge">未读</span></i>
       {{ item.setread }}
       {% endif %}
 

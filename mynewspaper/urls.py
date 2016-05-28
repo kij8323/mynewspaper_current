@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^user/loggin/', 'accounts.views.loggin', name='loggin'),#登录
     url(r'^user/userlogout/', 'accounts.views.userlogout', name='userlogout'),#用户登出，不用
     url(r'^user/register/', 'accounts.views.register', name='register'),#用户注册
+    url(r'^user/inbox/', 'accounts.views.inbox', name='inbox'),#消息数ajax
   
 
     url(r'^captcha/', include('captcha.urls')),  #验证码设置

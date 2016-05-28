@@ -478,6 +478,22 @@ def deleteinfo(request):
 	return HttpResponse(json_data, content_type='application/json')
 
 
+def inbox(request):
+	if request.is_ajax():
+		cachekey = "user_unread_count" + str(request.user.id)
+		if cache.get(cachekey) != None:
+			unread = cache.get(cachekey)
+		else:
+			unread = Notification.objects.filter(recipient = request.user).filter(read = False).count()
+			cache.set(cachekey,  unread, settings.CACHE_EXPIRETIME)
+		data = {
+			"unread": unread,
+		}
+		json_data = json.dumps(data)
+		return HttpResponse(json_data, content_type='application/json')
+	else:
+		raise Http404
+
 
 #测试用函数
 def test(request):	

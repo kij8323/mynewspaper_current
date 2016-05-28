@@ -97,10 +97,10 @@ $(function() {
 
       {% if item.read %}
       {% else %}
-      <i class="pull-right"><span class="badge backgroundcolor">未读</span></i>
+      <i class="pull-right"><span class="badge">未读</span></i>
       {{ item.setread }}
       {% endif %}
-      
+
       <div class='targetcomment'>
         {{item.text|safe}}
         </div>
