@@ -16,8 +16,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 ARTICLE_MAINPAGE_TIMERANGE = 15 #首页显示新闻数量
 ARTICLE_MAINPAGE_COVER_TIMERANGE = 35	#首页封面文章的发表时间范围
-TOPIC_MAINPAGE_COVER_TIMERANGE = 35 #争议话题的发表时间范围
-TOPIC_MAINPAGE_TIMERANGE = 35 #热门话题的时间范围
+TOPIC_MAINPAGE_COVER_TIMERANGE = 45 #争议话题的发表时间范围
+TOPIC_MAINPAGE_TIMERANGE = 45 #热门话题的时间范围
 ARTICLE_MAINPAGE_HOT_TIMERANGE = 30 #一周新闻排行的时间范围
 COMMENT_MAINPAGE_TIMERANGE = 30 #精彩点评的时间范围
 

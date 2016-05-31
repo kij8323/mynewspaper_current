@@ -153,6 +153,8 @@ CKEDITOR_CONFIGS = {
     },
 }
 
+CKEDITOR_BROWSE_SHOW_DIRS = False
+
 import djcelery
 djcelery.setup_loader()
 BROKER_URL = 'redis://localhost:6379/0'

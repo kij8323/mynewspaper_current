@@ -349,6 +349,15 @@ command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
 [program:uwsgi]
 command=uwsgi --ini mynewspaper.ini
 
+:%s/col-xs/col-sm/g #vi替换
+:%s/消息  /消息/g 
 
-消息  <span class="badge">{{ user.id|user_unread_count }}</span>
+
+原创不易，可用支付宝扫描上方二维码打赏以资鼓励，您的鼓励是作者最大的动力！
+
+<script>/*板块固定滚动,板块内width要定长*/
+$.fn.smartFloat = function() { 
+分享到
+
+
 

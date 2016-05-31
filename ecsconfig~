@@ -106,9 +106,7 @@ uwsgi --ini /home/shen/Documents/paperproject/mynewspaper/mynewspaper.ini
 sudo /usr/local/bin/uwsgi  --emperor /etc/uwsgi/vassals --uid root --gid root ##root为用户名
 /usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid root --gid root --daemonize /var/log/uwsgi-emperor.log
 
-:%s/if cache.get(cachekey):/if cache.get(cachekey) != None:/g
 
-
-消息  <span class="badge">{{ user.id|user_unread_count }}</span>
+/usr/local/lib/python2.7/dist-packages #服务器上pip安装包的位置
 
 
