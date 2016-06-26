@@ -1,17 +1,8 @@
-.navbar, .navbar-default, .navbar-static-to{
+.navbar, .navbar-default, .navbar-fixed-top{
 	margin-bottom: 0px;
 	background-color: #FFFFFF;
 
 }
-.container, .navbar, .footer{
-	/*width: 90% !important;*/
-	/* width: 1200px !important;*/
-
-	/*min-width: 1226px!important;*/
-/*	position: relative;
-	min-width: 1000px!important;*/
-}
-
 
 
 .navbar-default .navbar-nav>li>a {
@@ -35,46 +26,20 @@ background-color: #449d44;
 body {
 color: #333;
 font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
+padding-top: 70px;
 }
 
-.navbar, .navbar-default, .navbar-static-top{
+/*.navbar{
 	margin-bottom: 30px;
 }
-
-div{
+*/
+/*div{
 	word-break:break-all;
 }
-
-
-
-
-
-
-/*.search-tag a{
-	color: #449d44;
-	display: inline-block;
-	width: 100%;
-	height: 100%;
-	line-height: 33px;
-}
-
-.search-tag a:link{
-	text-decoration: none;
-}
-
-
-.search-tag{
-	float: left;
-	margin: 0 10px 10px 0;
-	background-color: #CCF4D9;
-	padding: 0 10px;
-	cursor: pointer;	
-	color: #333;
-	font-family: Arial,"Microsoft yahei","Hiragino Sans GB","冬青黑体简体中文 w3","Microsoft Yahei","Hiragino Sans GB","冬青黑体简体中文 w3",STXihei,"华文细黑","微软雅黑",SimSun,"宋体",Heiti,"黑体",sans-serif;
-}*/
+*/
 
 .navbar-brand{
-	padding: 0px;
+	padding-top: 0px;
 }
 
 .input-group .form-control{
@@ -91,8 +56,13 @@ div{
 .basewebicon{
 	width: 51px;
 	height: 51px;
-	margin-right: 18px;
+	/*margin-right: 18px;*/
 }
+
+.navbar-right{
+	margin-right: 0px;
+}
+
 .category{
 	height: 70px;
 	width: 100%;
@@ -265,6 +235,6 @@ vertical-align:middle
 
 .badge{
 	margin-left: 7px;
-	background-color: #F13F47;
+	/*background-color: #F13F47;*/
 	vertical-align: text-top;
 }

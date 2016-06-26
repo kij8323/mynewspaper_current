@@ -64,6 +64,7 @@ ALTER TABLE comment_comment CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_c
 ALTER TABLE notifications_notification  CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE topic_group   CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 ALTER TABLE topic_topic   CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER TABLE company_company   CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 python manage.py startapp notifications
 
@@ -309,13 +310,17 @@ source /home/shen/Downloads/somefile/createtab.sql
 将部署好的工程上传到mynewspaper
 
 [program:redis-server]
-command=./home/shen/Downloads/redis-3.0.7/srcredis-server
+command=./home/shen/Downloads/redis-3.0.7/src/redis-server
 
 [program:celery]
-command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
+command={{ PYTHON }} python manage.py celery worker --loglevel=info  -Q celery
 
 [program:uwsgi]
-command={{ PYTHON }} manage.py runserver 8080
+command={{ PYTHON }} python manage.py runserver 8080
+
+python manage.py startapp company
+
+
 
 
 
@@ -328,9 +333,47 @@ command={{ PYTHON }} manage.py runserver 8080
 瞎聊
 科技时事
 金融投资
+公司
+联系方式
+建立者
+审核通过
+公司未来
+相似产品
+公司头像
+主要
+
 创业交流
 体育
 我要
+
+加入我们
+
+产品经理
+研发工程师（后端）
+研发工程师（前端）
+美术工程师（美工）
+梧桐
+发现梧桐关心的行业新闻
+外出采访
+撰写产品行业的观察与思考
+
+对新科技产品有强烈的好奇心和探索欲
+文字表达能力好，有逻辑性
+有研发经验或者理工科背景优先
+梧桐产品后端
+负责梧桐微信公众号、微博以及其它第三方平台帐号运作
+本科以上学历，有相关工作经验
+经常浏览相关行业网站、论坛以及第三方平台
+追求
+python优先
+
+
+相关工作经验
+对以上职位有意向者请发送简历至shenanping2008@Hotmail.com
+编辑
+运营
+客户经理
+
 
 sudo sh /home/deploy.sh
 
@@ -348,16 +391,18 @@ command={{ PYTHON }} manage.py celery worker --loglevel=info  -Q celery
 
 [program:uwsgi]
 command=uwsgi --ini mynewspaper.ini
-
-:%s/col-xs/col-sm/g #vi替换
-:%s/消息  /消息/g 
+资讯
 
 
-原创不易，可用支付宝扫描上方二维码打赏以资鼓励，您的鼓励是作者最大的动力！
+创业板
+我们会以最快的速度审核并采访您的公司
+公司名称下一步
+请输入
 
-<script>/*板块固定滚动,板块内width要定长*/
-$.fn.smartFloat = function() { 
-分享到
-
-
+所在地
+请选择
+所属行业
+。深圳
+其他
+其它
 

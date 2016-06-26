@@ -19,6 +19,7 @@
     <script src="/static/bootstrap-3.3.4-dist/js/bootstrap.min.js"></script>
     <script src="/static/js/jquery.bootstrap.min.js"></script>
     <script src="/static/bootstrap-3.3.4-dist/js/ie10-viewport-bug-workaround.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/smallscreen.css"  media="screen and (max-width: 768px)">
     {% load time_filter %}
   <script src="/static/js/home.js"></script>
 <!-- 显示咨询栏下拉菜单 -->
@@ -57,14 +58,19 @@ $(document).ready(function(){
         url: "{% url 'inbox' %}",
         type: "post",
         success: function(data) {
+          if (data.unread == 0){
+            $(".badge").css('background-color','#449d44')
+          }
+          else
+          {
+            $(".badge").css('background-color','#F13F47')
+          }
           $(".inboxcount").html(data.unread)
         },
           error: function(data) { 
-            alert('no')
+           /* alert('no')*/
         },
       });
-
-
       $(".dropdown-toggle").dropdown('toggle');
   });
   $(".userinfobutton").mouseleave(function(){
@@ -115,7 +121,8 @@ $(document).ready(function(){
   <body>
 
     <!-- Static navbar -->
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
+    <!-- <nav class="navbar navbar-default navbar-static-top"> -->
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -128,8 +135,9 @@ $(document).ready(function(){
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="categorybutton subcate"><a href="#">资讯<span class="caret"></span></a></li>
-            <li class="subcate"><a href="{% url 'group_all' %}">话题</a></li>
+            <li class="categorybutton subcate hidden-xs"><a href="javascript:;">资讯<span class="caret"></span></a></li>
+            <li class="subcate hidden-xs"><a href="{% url 'group_all' %}">创业板</a></li>
+            <li class="subcate hidden-xs"><a href="{% url 'group_all' %}">话题</a></li>
           </ul>
 <div id='index_search'>
 <form class="navbar-form navbar-left" role="search" action="{% url 'index_search' %}" method="get">
@@ -144,7 +152,7 @@ $(document).ready(function(){
 </div>
           <ul class="nav navbar-nav navbar-right">
         {% if user.is_authenticated %}
-        <li class='userinfobutton'><a  href="{{user.get_absolute_url}}"><span><img  class="img-circle baseusericon" src='{{user.get_image_url}}'></span>{{user.username}}</a><span class="dropdown-toggle" data-toggle="dropdown"></span>  <ul class="dropdown-menu" aria-labelledby="dLabel">
+        <li class='userinfobutton hidden-xs'><a  href="{{user.get_absolute_url}}"><span><img  class="img-circle baseusericon" src='{{user.get_image_url}}'></span>{{user.username}}</a><span class="dropdown-toggle" data-toggle="dropdown"></span>  <ul class="dropdown-menu hidden-xs" aria-labelledby="dLabel">
                 <li><a href="{% url 'user_detailnotifications' user.id %}">消息<span class="badge inboxcount">{{ user.id|user_unread_count }}</span></a></li>
                 <li><a href="{% url 'user_detailcollections' user.id %}">我的收藏</a></li>
                 <li><a href="{% url 'user_userdashboardarticletopic' user.id %}">我的话题</a></li>
@@ -155,10 +163,10 @@ $(document).ready(function(){
 
 
         {% else %}
-            <li class="subcate"><a href="{% url 'loggin' %}">登录</a></li>
-            <li class="subcate"><a href="{% url 'register' %}">注册 <span class="sr-only">(current)</span></a></li>
+            <li class="subcate hidden-xs"><a href="{% url 'loggin' %}">登录</a></li>
+            <li class="subcate hidden-xs"><a href="{% url 'register' %}">注册 <span class="sr-only">(current)</span></a></li>
         {% endif %} 
-            <li class="active"><a href="{% url 'article_post' %}">投稿</a></li>
+            <li class="active hidden-xs"><a href="{% url 'article_post' %}">投稿</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -166,8 +174,7 @@ $(document).ready(function(){
     <div class='category'>
       <div class="categoryline ">
       <span class="categoryblock">
-      <!-- <a href="{% url 'category_detail' 7 %}">热点</a> -->
-      <a href="{% url 'category_detail' 4 %}"><!-- 虚拟现实 -->VR</a>
+      <a href="{% url 'category_detail' 4 %}">VR</a>
       <a href="{% url 'category_detail' 2 %}">手机</a>
       <a href="{% url 'category_detail' 3 %}">智能硬件</a>
       <a href="{% url 'category_detail' 6 %}">财经</a>
@@ -193,7 +200,7 @@ $(document).ready(function(){
 
             <a href="{% url 'aboutus' %}" target="_blank">关于我们</a>
             <a href="{% url 'contactus' %}" target="_blank">联系我们</a>
-
+             <a href="{% url 'joinus' %}" target="_blank">加入我们</a>
 <!--            <a href="http://www.jiathis.com/send/?webid=tsina&url=http://www.urlurl.com&title=梧桐观点">
           <i class="foot-weiboshare">
           </i>

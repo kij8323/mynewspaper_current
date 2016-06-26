@@ -101,7 +101,7 @@ sudo /usr/local/coreseek/bin/indexer -c /home/shen/Downloads/coreseek-4.1-beta/t
 echo yes | python /home/shen/Documents/paperproject/mynewspaper/manage.py collectstatic
 python manage.py supervisor shutdown
 export C_FORCE_ROOT="true"
-python manage.py supervisor
+python /home/shen/Documents/paperproject/mynewspaper/manage.py supervisor
 uwsgi --ini /home/shen/Documents/paperproject/mynewspaper/mynewspaper.ini
 sudo /usr/local/bin/uwsgi  --emperor /etc/uwsgi/vassals --uid root --gid root ##root为用户名
 /usr/local/bin/uwsgi --emperor /etc/uwsgi/vassals --uid root --gid root --daemonize /var/log/uwsgi-emperor.log
@@ -109,4 +109,5 @@ sudo /usr/local/bin/uwsgi  --emperor /etc/uwsgi/vassals --uid root --gid root ##
 
 /usr/local/lib/python2.7/dist-packages #服务器上pip安装包的位置
 
+curl -H 'Content-Type:text/plain' --data-binary @urls.txt "http://data.zz.baidu.com/urls?site=www.wutongnews.com&token=NdEYRR4x9ypP1QOO" #主动推送
 

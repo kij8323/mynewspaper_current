@@ -8,9 +8,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-
+    url(r'^weixinyanzheng/', 'mainpage.views.weixinyanzheng', name='weixinyanzheng'),#微信验证
     url(r'^$', 'mainpage.views.home', name='home'),#主页
     url(r'^aboutus/', 'mainpage.views.aboutus', name='aboutus'),#关于我们
+    url(r'^joinus/', 'mainpage.views.joinus', name='joinus'),#加入我们
     url(r'^contactus/', 'mainpage.views.contactus', name='contactus'),#联系我们
     url(r'^home/morearticlehome/$', 'mainpage.views.morearticlehome', name='morearticlehome'),#首页更多文章按钮ajax
     url(r'^home/articlepagehome/$', 'mainpage.views.articlepagehome', name='articlepagehome'),#首页更多文章加载页面
@@ -68,5 +69,9 @@ urlpatterns = [
     url(r'^article/commentdislike/$', 'article.views.commentdislike', name='commentdislike'),#文章页评论点衰
     url(r'^article/article_post/$', 'article.views.article_post', name='article_post'),#首页投稿
 
+    url(r'^company/(?P<company_id>[0-9]+)/$', 'company.views.company_detail', name='company_detail'),#公司页
+    url(r'^company/list/$', 'company.views.company_list', name='company_list'),#公司页
+    url(r'^company/built1/$', 'company.views.company_built1', name='company_built1'),#公司页
+    url(r'^company/built2/$', 'company.views.company_built2', name='company_built2'),#公司页
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

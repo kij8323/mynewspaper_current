@@ -136,10 +136,12 @@ def Article_collection(value):
 def group_topic_count(value): 
     cachekey = "group_topic_count_" + str(value)
     if cache.get(cachekey) != None:
+        print cache.get(cachekey)
         return cache.get(cachekey)
     else:
         group = Group.objects.get(id=value)
         cache.set(cachekey,  group.topicount, 1209600)
+        print '2'
         return cache.get(cachekey)
 
 #缓存文章的作者文章总数

@@ -292,10 +292,16 @@ $.fn.imgsizeFunction = function() {
 </script>
 
 <script>
+$.fn.contentimgsizeFunction = function() { 
+  return  $(this).css('height','100%');
+}
+</script>
+
+<script>
 $(function(){ 
   $('.rightimg a img').imgsizeFunction();
   $('#relationartical img').imgsizeFunction();
-  $('.article-content-wrap img').imgsizeFunction();
+  $('.article-content-wrap img').contentimgsizeFunction();
 }); 
 </script>
 
@@ -303,7 +309,7 @@ $(function(){
 $(window).resize(function(){
   $('.rightimg a img').imgsizeFunction();
   $('#relationartical img').imgsizeFunction();
-  $('.article-content-wrap img').imgsizeFunction();
+  $('.article-content-wrap img').contentimgsizeFunction();
 });
 </script>
 
@@ -404,11 +410,11 @@ $(window).resize(function(){
 
 
 <div id="catetag">
-  <div class="pull-left ">
+  <div class="pull-left hidden-xs">
   <h5 style='font-weight:bold;'>类别&nbsp:&nbsp&nbsp</h5>
   </div>
   {% for item in thisrelationtag %}
-  <div class="search-tag img-rounded">
+  <div class="search-tag img-rounded hidden-xs">
   <a href="{{item.category.get_absolute_url}}">
   {{item.category.title}}
   </a>
@@ -421,8 +427,8 @@ $(window).resize(function(){
 
 
 <div class="comment-form">
-     <span class="span-mark-author">发表评论</span>
-      <div class="author-info">
+     <span class="span-mark-author hidden-xs">发表评论</span>
+      <div class="author-info hidden-xs">
       {% if user.is_authenticated %}
         {{user}}:
       {% else %}
@@ -430,7 +436,7 @@ $(window).resize(function(){
       {% endif %} 
       </div>
 <!--         <form class="form-comment" role="form" method='POST' autocomplete="off" action='{{ action_url }}'> -->
-    <div class="form-comment">
+    <div class="form-comment hidden-xs">
 
 {% if user.is_authenticated %}
     <textarea name="editor1" id="editor1" rows="10" cols="80">
@@ -474,7 +480,7 @@ $(window).resize(function(){
 
     <div class="comment">
 
-      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
+      <span><img  class="img-circle commentusericon hidden-xs" src='{{item.user.get_image_url}}'></span>
       
       <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
       
@@ -497,7 +503,7 @@ $(window).resize(function(){
                 <span class='commentuserdislike{{item.id}}'>{{item.id|comment_dislike_count}}</span>
                 </div>
 
-              <div class="btn-dp">
+              <div class="btn-dp hidden-xs">
                 <i class="icon-dp"></i>
                 我要点评
                 </div>
@@ -527,7 +533,7 @@ $(window).resize(function(){
 
     <div class="comment">
 
-      <span><img  class="img-circle commentusericon" src='{{item.user.get_image_url}}'></span>&nbsp&nbsp
+      <span><img  class="img-circle commentusericon hidden-xs" src='{{item.user.get_image_url}}'></span>
       
       <span class="author-name"><a href="{{item.user.get_absolute_url}}">{{item.user}}</a></span>
       
@@ -552,7 +558,7 @@ $(window).resize(function(){
                 <span class='commentuserdislike{{item.id}}'>{{item.id|comment_dislike_count}}</span>
                 </div>
 
-              <div class="btn-dp">
+              <div class="btn-dp hidden-xs">
                 <i class="icon-dp"></i>
                 我要点评
                 </div>
@@ -592,8 +598,8 @@ $(window).resize(function(){
     </div><!-- class="comment-form" -->
 
 <div id='relationartical'>
-  <span class="span-mark-author pull-left">相关文章</span>
-  <div class="relationblock">
+  <span class="span-mark-author pull-left hidden-xs">相关文章</span>
+  <div class="relationblock hidden-xs">
   {% for item in thisrelationtagarticle %}
   <div class="col-sm-4">
   <a href="{{item.article.get_absolute_url}}">
@@ -615,7 +621,7 @@ $(window).resize(function(){
      </div>
 
 
-<div class="col-sm-3">
+<div class="col-sm-3 hidden-xs">
 
 
 <div id='userpro'>

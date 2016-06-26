@@ -16,7 +16,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 ARTICLE_MAINPAGE_TIMERANGE = 15 #首页显示新闻数量
 ARTICLE_MAINPAGE_COVER_TIMERANGE = 35	#首页封面文章的发表时间范围
-TOPIC_MAINPAGE_COVER_TIMERANGE = 45 #争议话题的发表时间范围
+TOPIC_MAINPAGE_COVER_TIMERANGE = 65 #争议话题的发表时间范围
 TOPIC_MAINPAGE_TIMERANGE = 45 #热门话题的时间范围
 ARTICLE_MAINPAGE_HOT_TIMERANGE = 30 #一周新闻排行的时间范围
 COMMENT_MAINPAGE_TIMERANGE = 30 #精彩点评的时间范围
@@ -76,7 +76,7 @@ def index_search(request):
 #首页
 def home(request):
 	#coverarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_MAINPAGE_COVER_TIMERANGE)).filter(cover = True).order_by("-id")[0:3]
-	coverarticle = Article.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=ARTICLE_MAINPAGE_COVER_TIMERANGE)).order_by("-readers")[0:3]
+	coverarticle = Article.objects.all().filter(original = True).order_by("-id")[0:3]
 	covertopic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=TOPIC_MAINPAGE_COVER_TIMERANGE)).filter(cover = True).order_by("-id")[0:1]
 	queryset = Article.objects.all().order_by('-id')[0:ARTICLE_MAINPAGE_TIMERANGE]
 	topic = Topic.objects.all().filter(timestamp__gte=datetime.date.today() - timedelta(days=TOPIC_MAINPAGE_TIMERANGE)).order_by("-readers")[0:5]
@@ -101,6 +101,11 @@ def aboutus(request):
 #联系我们页
 def contactus(request):
 	return render(request, 'contactus.html')
+
+#加入我们页
+def joinus(request):
+	return render(request, 'joinus.html')
+
 
 #加载更多文按钮
 def morearticlehome(request):
@@ -133,3 +138,44 @@ def articlepagehome(request):
 		"articlequery": articlequery,
 	}
 	return render(request, 'articlepagehome.html',  context)
+
+
+
+
+
+import hashlib
+import json
+from django.utils.encoding import smart_str
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+# from auto_reply.views import auto_reply_main # 修改这里
+# from lxml import etree
+
+WEIXIN_TOKEN = 'wutongnews'
+#微信验证
+@csrf_exempt
+def weixinyanzheng(request):
+    """
+    所有的消息都会先进入这个函数进行处理，函数包含两个功能，
+    微信接入验证是GET方法，
+    微信正常的收发消息是用POST方法。
+    """
+    if request.method == "GET":
+        signature = request.GET.get("signature", None)
+        timestamp = request.GET.get("timestamp", None)
+        nonce = request.GET.get("nonce", None)
+        echostr = request.GET.get("echostr", None)
+        token = WEIXIN_TOKEN
+        tmp_list = [token, timestamp, nonce]
+        tmp_list.sort()
+        tmp_str = "%s%s%s" % tuple(tmp_list)
+        tmp_str = hashlib.sha1(tmp_str).hexdigest()
+        if tmp_str == signature:
+            return HttpResponse(echostr)
+        else:
+            return HttpResponse("weixin  index")
+    # else:
+    #     xml_str = smart_str(request.body)
+    #     request_xml = etree.fromstring(xml_str)
+    #     response_xml = auto_reply_main(request_xml)# 修改这里
+    #     return HttpResponse(response_xml)

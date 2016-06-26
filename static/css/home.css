@@ -1,3 +1,28 @@
+.carousel-fade .carousel-inner .item {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
 
 .original-mark {
 position: absolute;
@@ -16,7 +41,7 @@ background-color:#5cb85c;
 
 .container-home{
 	/*width: 90%;*/
-	margin-top: 30px;
+	/*margin-top: 30px;*/
 }
 
 .carousel-control{
@@ -43,6 +68,7 @@ padding-bottom: 30px;
 	margin-bottom: 30px;
 	padding-left: 0px;
 	padding-right: 0px;
+	z-index: 1;
 }
 
 .item, .item  a img{
@@ -163,7 +189,21 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	font-size: 18px;
 	color: #333;
 	margin-top: 5px;
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
+	text-overflow: ellipsis;display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }
+
+.associatetitle{
+	text-overflow: -o-ellipsis-lastline;
+	overflow: hidden;
+	text-overflow: ellipsis;display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+}
+
 
 .rightwordblock p, .rightwordblock span{
 	font-size: 14px;
@@ -188,7 +228,6 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 
 .leftimgblock a img{
 	width: 90%
-
 }
 
 
@@ -324,7 +363,7 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	padding: 0px;
 }
 
-.nicecomment>tbody>tr>td>a>span{
+.nicecomment>tbody>tr>td>a{
 	/*padding: 12px;*/
 	margin-left: 0px;
 	color: #9e9e9e;
@@ -341,15 +380,8 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 	height: 100%;
 }
 
-/*.advertisment2 a img{
-	width: 100%;
-	height: 100%;
-}
-*/
-/*
-.hotnews{
-	border: 1px solid #9e9e9e;
-}*/
+
+
 .nicecommentblock, .hotopicblock, .hotnewsblock{
 	background-color: #fafafa;
 	padding-top: 12px; 
@@ -358,4 +390,17 @@ a:hover/*, .rightblock a:visited, .rightblock a:hover, .rightblock a:active*/{
 
 .weixingongzhong{
 	text-align: center;
+}
+
+.weixingongzhong img{
+	width: 215px;
+
+}
+
+td p{
+	padding-left: 12px;
+}
+
+.table>tbody>tr>td>a:hover{
+	color: #3ca5f6;
 }
