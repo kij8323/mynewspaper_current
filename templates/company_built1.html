@@ -45,7 +45,8 @@ $(document).ready(function(){
  	</div>
 
  	<div class='form-content'>
-<form class="creat-form"  action="{% url 'company_built1' %}" method="get">
+<form class="creat-form"  action="{% url 'company_built1' %}" method="post">
+	{% csrf_token %}
 	<div class='input-row'>
 		<div id="company_titleilleg" class="cuserrorlist">请输入公司名称</div>
 	<div class="sidebar">

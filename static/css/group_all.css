@@ -7,9 +7,7 @@
 	font-size: 24px;
 }
 
-li a{
-	color: #bbb;
-}
+
 
 ul{
 	padding: 0;
@@ -65,9 +63,22 @@ ul{
 	border-bottom: 1px solid #f0f0f0;
 }
 
+.group-list a{
+	color: #444;
+	font-size: 14px;
+}
+
+.group-information{
+	margin: 0px 0 0 0;
+	font-size: 14px;
+	color: #999;
+	line-height: 24px;
+	margin-top: 6px;
+}
+
 .group-list-block{
 	border-top: 1px solid #f0f0f0;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 1.42857143;
 	margin-top: 55px;
 }
@@ -82,12 +93,7 @@ ul{
 	font-size: 18px;
 }
 
-.group-information{
-	margin: 0px 0 0 0;
-	font-size: 14px;
-	color: #999;
-	line-height: 24px;
-}
+
 
 .group-information a, .group-founder a{
 	color: #337ab7;
@@ -212,6 +218,7 @@ h4 b{
 	outline:none;
 	margin-top: 50px;
 }
+
 
 
 a{

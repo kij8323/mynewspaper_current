@@ -394,15 +394,16 @@ command=uwsgi --ini mynewspaper.ini
 资讯
 
 
-创业板
-我们会以最快的速度审核并采访您的公司
-公司名称下一步
-请输入
+company_associatetitle_content
+company_product_content
+完整详尽的公司信息，有助于读者快速清晰地了解公司
 
-所在地
-请选择
-所属行业
-。深圳
-其他
+描述您的竞争对手与相似产品
 其它
+宣传画
+上传产品介绍图1
+
+竞争对手
+
+团队介绍
 

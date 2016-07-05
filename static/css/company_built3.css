@@ -154,7 +154,9 @@ max-width: 457px;
 position: relative;
 float: left;
 vertical-align: middle;
+margin-top: 10px;
 }
+
 
 textarea {
 line-height: 20px;
@@ -167,6 +169,6 @@ width: 457px;
 color: #666;
 }
 
-#company_productilleg, #company_associatetitleilleg, #company_clientilleg{
-	margin-left: 600px;
+#company_team_content, #company_associatetitle_content, #company_product_content, #company_client_content, #company_sameproduct_content, #company_qita_content{
+	display: none;
 }

@@ -163,3 +163,6 @@ BROKER_URL = 'redis://localhost:6379/0'
 CACHE_EXPIRETIME = 1209600 #redis缓存过期时间
 
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' #验证码样式，数学
+
+
+LOGIN_URL = '/user/loggin/'

@@ -8,18 +8,55 @@
 <script>/*当所有cuserrorlist的css的display为none时，才可以提交表单*/
 $(document).ready(function(){
   $(".form-content form").submit(function(e){
-  	var company_title = $("#company_title").val()
   	var company_location = $("#company_location").val()
-  	if (company_title == "" || company_title.length >= 50 )
+  	var company_industry = $("#company_industry").val()
+    var company_associatetitle = $("#company_associatetitle").val()
+    var company_product = $("#company_product").val()
+    var company_client = $("#company_client").val()
+  	if (company_location == ""  || company_location.length >= 100 )
     {
-      $("#company_locationilleg").css("display", "none");
-      $("#company_titleilleg").fadeIn("slow");
+      $("#company_industryilleg").css("display", "none");
+      $("#company_associatetitleilleg").css("display", "none");
+      $("#company_productilleg").css("display", "none");
+      $("#company_clientilleg").css("display", "none");
+      $("#company_locationilleg").fadeIn("slow");
+      /*$("#company_location").css("border-color","red") ;*/
     return false;
     }
-  	else if (company_location == "" || company_location.length >= 200 )
+  	else if (company_industry == "" || company_industry.length >= 100 )
     {
-      $("#company_titleilleg").css("display", "none");
-      $("#company_locationilleg").fadeIn("slow");
+      $("#company_locationilleg").css("display", "none");
+      $("#company_associatetitleilleg").css("display", "none");
+      $("#company_productilleg").css("display", "none");
+      $("#company_clientilleg").css("display", "none");
+      $("#company_industryilleg").fadeIn("slow");
+    return false;
+    }
+    else if (company_associatetitle == ""  || company_associatetitle.length >= 120 )
+    {
+      $("#company_locationilleg").css("display", "none");
+      $("#company_industryilleg").css("display", "none");
+      $("#company_productilleg").css("display", "none");
+      $("#company_clientilleg").css("display", "none");
+      $("#company_associatetitleilleg").fadeIn("slow");
+    return false;
+    }
+    else if (company_product == ""  || company_product.length >= 1990  )
+    {
+      $("#company_locationilleg").css("display", "none");
+      $("#company_industryilleg").css("display", "none");
+      $("#company_clientilleg").css("display", "none");
+      $("#company_associatetitleilleg").css("display", "none");
+      $("#company_productilleg").fadeIn("slow");
+    return false;
+    }
+    else if (company_client == ""  || company_client.length >= 1990  )
+    {
+      $("#company_locationilleg").css("display", "none");
+      $("#company_industryilleg").css("display", "none");
+      $("#company_associatetitleilleg").css("display", "none");
+      $("#company_productilleg").css("display", "none");
+      $("#company_clientilleg").fadeIn("slow");
     return false;
     }
     else
@@ -88,7 +125,8 @@ $(document).ready(function(){
  	</div>
 
  	<div class='form-content'>
-<form class="creat-form"  action="{% url 'company_built2' %}" method="get">
+<form class="creat-form"  action="{% url 'company_built2' %}" method="post">
+    {% csrf_token %}
   <div class="ff-form-title">
     <span class='span-mark-author'>
     基本信息
@@ -99,7 +137,6 @@ $(document).ready(function(){
 	<label class='firm_logo'>公司Logo</label>
 	</div>
 	<div class='content'>
-<!-- <img class="img-circle" src="/static/media/images/companylogo.png" data-target="#myModal1"> -->
 	<button  type="button" class="btn btn-success btn_logo" data-toggle="modal" data-target="#myModal1">
 <img class="firm_logo_icon" src="{{company.get_image_url}}"  data-target="#myModal1">
 </button>
@@ -113,7 +150,7 @@ $(document).ready(function(){
 	<label>所在地</label>
 	</div>
 	<div class='content'>
-	<select name="company_location" ng-model="company.form.address1" ng-options="c.id as c.name for c in addr1Options" input-focus="" ng-change="addr1Change()" required="" class="ng-pristine ng-invalid ng-invalid-required ng-touched"><option value="" class="">请选择</option><option value="0" label="北京市">北京市</option><option value="1" label="上海市">上海市</option><option value="2" label="天津市">天津市</option><option value="3" label="重庆市">重庆市</option><option value="4" label="深圳市">深圳市</option><option value="5" label="其它">其它</option><option value="6" label="四川省">四川省</option><option value="7" label="广东省">广东省</option></select>
+	<select name="company_location"  id="company_location" input-focus=""   ><option value="" class="">请选择</option><option value="0" label="北京市">北京市</option><option value="1" label="上海市">上海市</option><option value="2" label="天津市">天津市</option><option value="3" label="重庆市">重庆市</option><option value="4" label="深圳市">深圳市</option><option value="5" label="四川省">四川省</option><option value="6" label="广东省">广东省</option><option value="7" label="其它">其它</option></select>
 	</div>
 	</div>	
 
@@ -123,12 +160,53 @@ $(document).ready(function(){
   <label>所属行业</label>
   </div>
   <div class='content'>
-  <select name="company_industry" ng-options="c.value as c.desc for c in industryOptions" ng-model="company.form.industry" ng-change="industryChange()" required="" input-focus="" class="ng-pristine ng-invalid ng-invalid-required ng-touched"><option value="" class="">请选择</option><option value="0" label="电子商务">电子商务</option><option value="1" label="社交网络">社交网络</option><option value="2" label="智能硬件">智能硬件</option><option value="3" label="媒体门户">媒体门户</option><option value="4" label="工具软件">工具软件</option><option value="5" label="消费生活">消费生活</option><option value="6" label="金融">金融</option><option value="7" label="医疗健康">医疗健康</option><option value="8" label="企业服务">企业服务</option><option value="9" label="旅游户外">旅游户外</option><option value="10" label="房产家居">房产家居</option><option value="11" label="数字娱乐">数字娱乐</option><option value="12" label="在线教育">在线教育</option><option value="13" label="汽车交通">汽车交通</option><option value="14" label="其它">其它</option><option value="15" label="物流">物流</option></select>
+  <select name="company_industry" id="company_industry" input-focus="" ><option value="" class="">请选择</option><option value="0" label="智能家居">智能家居</option><option value="1" label="可穿戴设备">可穿戴设备</option><option value="2" label="智能健康">智能健康</option><option value="3" label="智能配件">智能配件</option><option value="4" label="智能母婴设备">智能母婴设备</option><option value="5" label="机器人">机器人</option><option value="6" label="无人机">无人机</option><option value="7" label="手机平板">手机平板</option><option value="8" label="VR/AR">VR/AR</option><option value="9" label="智能交通">智能交通</option><option value="10" label="其它">其它</option></select>
   </div>
   </div>  
 
+  <div class="ff-form-title">
+    <span class='span-mark-author'>
+    公司介绍
+    </span>
+  </div>
 
-  <input class='center-block btn  btn-success ' type='submit' value='下一步'/>
+  <div class='input-row'>
+    <div id="company_associatetitleilleg" class="cuserrorlist">一句话简介不能为空</div>
+  <div class="sidebar">
+  <label>一句话简介</label>
+  </div>
+  <div class='content'>
+    <div class="text-input">
+    <textarea   rows="2" cols="40" maxlength="30" minlength="5" id='company_associatetitle' name="company_associatetitle" placeholder="如：梧桐观点,做有深度的科技新闻"  type="text"></textarea>
+       </div>
+  </div>
+  </div>  
+
+    <div class='input-row'>
+    <div id="company_productilleg" class="cuserrorlist">产品介绍</div>
+  <div class="sidebar">
+  <label>产品介绍</label>
+  </div>
+  <div class='content'>
+    <div class="text-input">
+    <textarea   rows="8" cols="40" maxlength="200" minlength="5" id='company_product' name="company_product" placeholder="介绍一下公司的主营业务和产品模式，写明产品优势，突显亮点"  type="text"></textarea>
+       </div>
+  </div>
+  </div>  
+
+    <div class='input-row'>
+    <div id="company_clientilleg" class="cuserrorlist">目标用户不能为空</div>
+  <div class="sidebar">
+  <label>目标用户</label>
+  </div>
+  <div class='content'>
+    <div class="text-input">
+    <textarea   rows="8" cols="40" maxlength="200" minlength="5" id='company_client' name="company_client" placeholder="说说市场规模及目标用户，服务的人群，典型的用户是什么样的"  type="text"></textarea>
+       </div>
+  </div>
+  </div>  
+
+  <input class='center-block btn  btn-success ' type='submit' value='完成'/>
 
 </form>
  	</div>

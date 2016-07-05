@@ -1,0 +1,99 @@
+{% extends "base_1.html" %}
+{% block HeadDoc %}
+<link href="/static/css/company_detail.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+<div class='background-img'>
+	<div class="main-wrap">
+		<div class="l-sidebar"><img src="{{company.get_image_url}}"></div>
+		<div class="main">
+			<div class="name-info">
+				<span class="name ">{{ company.title }}</span>
+				<span class="year">{{ company.timestamp|date:"Y" }}</span>
+				<div class="brief">{{ company.associatetitle|safe }}</div>
+				<div class="tags">
+					<span class="i-tag">{{ company.industry }}</span>
+				</div>
+				<div class="links">
+					<div class="address"><span class="glyphicon glyphicon-map-marker"></span> {{ company.location }} </div>
+					<a href="{{company.weburl}}" target="_blank" class="website"><span class="glyphicon glyphicon-link"></span> {{company.weburl}}</a>
+				</div>
+			</div>
+		</div>
+	</div><!-- <div class="main-wrap"> -->
+</div><!-- <div class='background-img'> -->
+
+<div class="ff-container row">
+	<h4 class="ff-title">公司介绍</h4>
+
+
+<div class="firm-product col-xs-4">
+	<div class='ff-container-title'>
+	<span class="glyphicon glyphicon-king" aria-hidden="true"></span>
+		我们的产品
+	</div>
+
+	<div class='ff-container-content'>
+		{{company.product|safe}}
+	</div>
+</div>
+
+<div class="firm-client col-xs-4">
+	<div class='ff-container-title'>
+	<span class="glyphicon glyphicon-pawn" aria-hidden="true"></span>
+		我们的用户
+	</div>
+
+	<div class='ff-container-content'>
+		{{company.client|safe}}
+	</div>
+</div>
+
+
+<div class="col-xs-4">
+	<div class='ff-container-title'>
+	<span class="glyphicon glyphicon-knight" aria-hidden="true"></span>
+		竞争对手
+	</div>
+
+	<div class='ff-container-content'>
+		{{company.sameproduct|safe}}
+	</div>
+</div>
+
+
+<div class="clearfix"></div>
+
+<div class="col-xs-4">
+	<div class='ff-container-title'>
+	<span class="glyphicon glyphicon-bishop" aria-hidden="true"></span>
+		其它
+	</div>
+
+	<div class='ff-container-content'>
+		{{company.qita|safe}}
+	</div>
+</div>
+
+</div><!-- <div class="ff-container"> -->
+
+<div class="ff-imgshow row">
+
+<div class="firm-img col-xs-4">
+	<img src="{{company.get_image1_url}}">
+</div>
+
+<div class="firm-img col-xs-4">
+	<img src="{{company.get_image2_url}}">
+</div>
+
+<div class="firm-img col-xs-4">
+	<img src="{{company.get_image3_url}}">
+</div>
+
+</div><!-- <div class="ff-imgshow row"> -->
+
+</div><!-- <div class='container'> -->
+{% endblock %}
